@@ -1,0 +1,44 @@
+# Ignore large PowerPoint presentations and PDFs
+*.pptx
+*.pdf
+
+# Ignore non-related images in root
+constitution_theme.png
+constitutional_remedy.png
+cultural_divider.png
+education_culture.png
+equality_article_14_15.png
+equality_article_16_17_18.png
+exploitation_divider.png
+freedom_divider.png
+freedom_movement_residence.png
+freedom_profession.png
+freedom_theme.png
+justice_equality.png
+protection_theme.png
+religion_divider.png
+religion_harmony.png
+remedies_divider.png
+six_rights_overview.png
+
+# Ignore system/agent cache folders
+.gemini/
+.claude/
+.temp_ag_kit/
+temp_seo_check/
+temp_ux_check/
+
+# Web build caches and node_modules
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+dist/
+**/dist/
+build/
+**/build/
+.turbo/
+**/.turbo/
+
+# Ignore videos >100MB
+*.mp4

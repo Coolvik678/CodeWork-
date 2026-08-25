@@ -1,0 +1,18 @@
+{
+  "health": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"success\": true,\n  \"data\": {\n    \"status\": \"ok\",\n    \"authenticated\": true,\n    \"notebook_url\": \"not configured\",\n    \"active_sessions\": 0,\n    \"max_sessions\": 10,\n    \"session_timeout\": 900,\n    \"total_messages\": 0,\n    \"headless\": true,\n    \"auto_login_enabled\": false,\n    \"stealth_enabled\": true\n  }\n}"
+      }
+    ]
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"success\": true,\n  \"data\": {\n    \"notebooks\": []\n  }\n}"
+      }
+    ]
+  }
+}

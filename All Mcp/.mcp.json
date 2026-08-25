@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "notebooklm": {
+      "command": "python",
+      "args": [
+        "-m",
+        "notebooklm_mcp.server"
+      ]
+    },
+    "roblox-studio": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\myovi\\OneDrive\\Desktop\\every ai work\\robloxstudio-mcp\\packages\\robloxstudio-mcp\\dist\\index.js"
+      ]
+    }
+  }
+}

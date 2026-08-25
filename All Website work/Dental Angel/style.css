@@ -1,0 +1,856 @@
+/* =========================================================================
+   DENTAL ANGEL CLINIC | V2 PREMIUM REFINEMENTS
+   ========================================================================= */
+
+:root {
+  /* Palette */
+  --color-white: #FFFFFF;
+  --color-bg-light: #F8FAFC; /* Softer, cooler light gray */
+  --color-silver: #E2E8F0;
+  --color-silver-dark: #64748B;
+  
+  --color-primary: #0D9488; /* Soft Teal/Cyan - Angel Blue */
+  --color-primary-dark: #0F766E; /* Deep Teal for contrast */
+  --color-accent: #D97706; /* Soft Gold */
+  
+  --color-text-main: #0F172A; /* Slate 900 */
+  --color-text-muted: #475569;
+
+  /* Typography */
+  --font-base: 'Inter', -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  
+  /* Geometry & Depth */
+  --radius-soft: 16px; /* Premium soft curves */
+  --border-thin: 1px solid rgba(15, 23, 42, 0.05); /* Subtle Borders */
+  --shadow-soft: 0 20px 40px -10px rgba(15, 23, 42, 0.08); /* Professional Blur/Depth */
+  --shadow-hover: 0 30px 60px -15px rgba(15, 23, 42, 0.12);
+
+  /* Spacing */
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
+
+  /* Transitions */
+  --spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================================================
+   RESET & BASE
+   ========================================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-base);
+  color: var(--color-text-main);
+  background-color: var(--color-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* =========================================================================
+   TYPOGRAPHY
+   ========================================================================= */
+h1, h2, h3 {
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* =========================================================================
+   MICRO-ANIMATIONS & REVEALS
+   ========================================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.15s; }
+.delay-2 { transition-delay: 0.3s; }
+
+/* =========================================================================
+   BUTTONS (PREMIUM)
+   ========================================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 50px; /* Pill shape */
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  background-color: var(--color-primary-dark); /* Deep Teal */
+  color: var(--color-white);
+  box-shadow: 0 8px 20px rgba(15, 118, 110, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-text-main);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.2);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text-main);
+  border: 1px solid var(--color-text-main);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-text-main);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+.btn-large {
+  padding: 1rem 2.25rem;
+  font-size: 1rem;
+}
+
+/* Floating Action Button with Pulse */
+.fab-wrapper {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fab-whatsapp {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s var(--spring);
+  padding: 14px;
+  z-index: 2;
+}
+
+.fab-whatsapp:hover {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* The Pulsing Notification Ring */
+.fab-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background-color: rgba(37, 211, 102, 0.4);
+  border-radius: 50%;
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  z-index: 1;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+/* =========================================================================
+   HEADER (Semi-transparent backdrop filter)
+   ========================================================================= */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.85); /* Slightly more transparent */
+  backdrop-filter: blur(12px); /* Stronger blur so content below doesn't distract */
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: var(--border-thin);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem var(--space-md);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  color: var(--color-primary-dark);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav-links a {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  transition: color 0.3s var(--ease);
+}
+
+.nav-links a:hover {
+  color: var(--color-primary-dark);
+}
+
+@media (max-width: 768px) {
+  .nav-links, .header-cta {
+    display: none;
+  }
+}
+
+/* =========================================================================
+   HERO: GLASSMORPHISM & ELEGANCE
+   ========================================================================= */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  padding-top: 100px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* Give text slightly more room */
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: var(--space-md);
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+/* A soft, organic background shape instead of a hard split screen */
+.hero-bg-accent {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 60%;
+  height: 90%;
+  background: radial-gradient(circle at center, rgba(13, 148, 136, 0.08) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(40px);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+/* V2 Enhancements: Glassmorphism effect */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-lg);
+}
+
+.hero-title {
+  font-size: clamp(3rem, 5.5vw, 6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text-main);
+}
+
+.title-accent {
+  color: var(--color-primary-dark);
+  font-style: italic; /* Elegance */
+}
+
+.hero-body {
+  margin-top: var(--space-md);
+  max-width: 500px;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-visual {
+  position: relative;
+  height: min(75vh, 650px);
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* V2.1: Soft-edge feather mask */
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+}
+
+.soft-shadow {
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-visual-badge {
+  position: absolute;
+  bottom: 2rem;
+  left: -2rem; /* Overlap effect */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 50px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  box-shadow: var(--shadow-soft);
+  z-index: 10;
+}
+
+.badge-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(13, 148, 136, 0.5);
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 120px;
+  }
+  .hero-content {
+    align-items: center;
+  }
+  .hero-visual {
+    height: 400px;
+    margin-top: var(--space-md);
+  }
+  .hero-visual-badge {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* =========================================================================
+   CLINIC GALLERY
+   ========================================================================= */
+.gallery {
+  padding: var(--space-lg) var(--space-md);
+  background-color: var(--color-white);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  /* V2.1: 20px rounded corners */
+  border-radius: 20px;
+  transition: transform 0.4s var(--spring), box-shadow 0.4s var(--ease);
+}
+
+.gallery-img:hover {
+  /* V2.1: Subtle lift effect on hover */
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -12px rgba(13, 148, 136, 0.25);
+  z-index: 2;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================================
+   SERVICES: INTERACTIVE & SPACIOUS
+   ========================================================================= */
+.services {
+  padding: var(--space-xl) var(--space-md);
+  background-color: var(--color-bg-light);
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.section-header h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 1rem;
+}
+
+.section-header p {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 3rem; /* Increased padding / white space */
+}
+
+/* Interactive Procedure Cards */
+.service-card {
+  padding: var(--space-lg);
+  background-color: var(--color-white);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.4s var(--spring);
+  position: relative;
+  overflow: hidden;
+  border: var(--border-thin);
+}
+
+.service-number {
+  font-size: 1.5rem;
+  color: var(--color-silver-dark);
+  margin-bottom: var(--space-md);
+  opacity: 0.5;
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary-dark);
+}
+
+.service-card p {
+  color: var(--color-text-muted);
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+.service-benefit {
+  margin-top: 1.5rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s var(--spring);
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(13, 148, 136, 0.3); /* Soft teal border on hover */
+}
+
+.service-card:hover p {
+  opacity: 0.2; /* Fade out description to focus on benefit */
+  transform: translateY(-5px);
+}
+
+.service-card:hover .service-benefit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================================
+   ABOUT DR. VAMA
+   ========================================================================= */
+.about {
+  padding: var(--space-xl) 0;
+  background-color: var(--color-white); 
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: var(--space-lg);
+}
+
+.about-visual {
+  position: relative;
+  padding: var(--space-lg);
+}
+
+.about-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  /* V2.1: Elegant arched crop and Angel Blue glowing border */
+  border-radius: 50% 50% 0 0;
+  border: 4px solid var(--color-primary);
+  box-shadow: 0 0 40px rgba(13, 148, 136, 0.5);
+}
+
+.accent-block {
+  position: absolute;
+  bottom: 0;
+  right: 2rem;
+  width: 70%;
+  height: 70%;
+  background-color: var(--color-bg-light);
+  border-radius: var(--radius-soft);
+  z-index: 1;
+}
+
+.about-content {
+  padding: var(--space-lg);
+}
+
+.about-content .section-title {
+  font-size: clamp(3rem, 5vw, 4rem);
+  color: var(--color-text-main);
+}
+
+.about-content .section-subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+  color: var(--color-primary);
+  letter-spacing: 0.1em;
+}
+
+.about-text {
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+}
+
+.about-text strong {
+  color: var(--color-text-main);
+  font-weight: 600;
+}
+
+.stats-row {
+  display: flex;
+  gap: 3rem;
+  padding-top: var(--space-md);
+  border-top: var(--border-thin);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 3rem;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.star-icon {
+  font-size: 1.5rem;
+  vertical-align: super;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .accent-block {
+    display: none;
+  }
+}
+
+/* =========================================================================
+   REVIEWS: GOOGLE STYLE
+   ========================================================================= */
+.reviews {
+  padding: var(--space-xl) var(--space-md);
+  background-color: var(--color-bg-light);
+  overflow: hidden;
+}
+
+.reviews-slider {
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  padding: var(--space-md) 0;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.reviews-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.google-card {
+  min-width: 400px;
+  background-color: var(--color-white);
+  padding: var(--space-md);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  scroll-snap-align: start;
+  border: var(--border-thin);
+}
+
+.google-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.reviewer-avatar {
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-primary); /* Default color, could randomize */
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.review-author {
+  font-weight: 600;
+  color: var(--color-text-main);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge-verified {
+  font-size: 0.7rem;
+  color: var(--color-silver-dark);
+  font-weight: 400;
+  background-color: var(--color-silver);
+  padding: 0.1rem 0.4rem;
+  border-radius: 12px;
+}
+
+.review-stars {
+  color: #FBBC05; /* Google Star Yellow */
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+
+.g-logo {
+  width: 24px;
+  height: 24px;
+}
+
+.review-text {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .google-card {
+    min-width: 300px;
+  }
+}
+
+/* =========================================================================
+   CONTACT
+   ========================================================================= */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 70vh;
+}
+
+.contact-info {
+  padding: var(--space-xl) var(--space-lg);
+  background-color: var(--color-text-main);
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-info h2 {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: var(--color-white);
+  margin-bottom: var(--space-lg);
+}
+
+.info-block {
+  margin-bottom: var(--space-md);
+}
+
+.info-block h3 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  color: var(--color-silver-dark);
+  margin-bottom: 0.5rem;
+}
+
+.info-block p, .phone-link {
+  font-size: 1.15rem;
+  color: var(--color-silver);
+}
+
+.phone-link {
+  display: inline-block;
+  font-size: 1.75rem;
+  color: var(--color-white);
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s var(--ease);
+}
+
+.phone-link:hover {
+  color: var(--color-accent);
+}
+
+.contact-map {
+  background-color: var(--color-silver);
+}
+
+.map-frame {
+  /* Ensuring light mode aesthetic */
+  filter: grayscale(100%) contrast(90%) opacity(0.8);
+  transition: filter 0.3s ease;
+}
+
+.map-frame:hover {
+  filter: grayscale(50%) contrast(100%) opacity(1);
+}
+
+@media (max-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .contact-map {
+    height: 400px;
+  }
+}
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.footer {
+  background-color: #020617; /* Very dark slate */
+  color: var(--color-silver-dark);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.footer-brand {
+  color: var(--color-white);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  font-size: 1.15rem;
+}
+
+.footer-legal {
+  font-size: 0.75rem;
+}

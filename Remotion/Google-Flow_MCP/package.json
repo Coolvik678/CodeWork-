@@ -1,0 +1,54 @@
+{
+  "name": "google-flow_mcp",
+  "version": "1.0.1",
+  "description": "MCP server for Google Flow (labs.google/fx/tools/flow) via browser automation",
+  "keywords": [
+    "Image",
+    "generation",
+    "Video",
+    "generation",
+    "browser",
+    "automation"
+  ],
+  "homepage": "https://github.com/Mitanshp5/Google-Flow_MCP#readme",
+  "bugs": {
+    "url": "https://github.com/Mitanshp5/Google-Flow_MCP/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mitanshp5/Google-Flow_MCP.git"
+  },
+  "license": "MIT",
+  "author": "Mitansh Prajapati",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "google-flow-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "config/flow.config.example.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "prepublishOnly": "npm run build",
+    "start": "node dist/index.js",
+    "start-browser": "node scripts/run.js start-browser",
+    "start-mcp": "node scripts/run.js start-mcp",
+    "register": "node scripts/run.js register",
+    "test": "node scripts/run.js test-flow-image"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.9.0",
+    "playwright": "^1.51.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

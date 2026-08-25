@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "notebooklm": {
+      "command": "python",
+      "args": [
+        "-m",
+        "notebooklm_mcp.server"
+      ]
+    },
+    "remotion": {
+      "command": "node",
+      "args": [
+        "c:/Users/myovi/OneDrive/Desktop/Artificial Intelligence/Remotion/remotion_mcp/dist/index.js"
+      ]
+    }
+  }
+}

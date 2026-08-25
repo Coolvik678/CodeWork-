@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebCloud Client Outreach Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0B0F19;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #111827;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #374151;
+      border-radius: 3px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #4B5563;
+    }
+  </style>
+</head>
+<body class="text-slate-100 min-h-screen pb-16">
+
+  <!-- Header Section -->
+  <header class="border-b border-slate-800 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 max-w-7xl">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[#0F766E]/10 text-[#0F766E] flex items-center justify-center border border-[#0F766E]/20 shadow-inner text-xl">
+          ☁️
+        </div>
+        <div>
+          <h1 class="font-extrabold text-lg text-white leading-tight tracking-tight">WebCloud</h1>
+          <p class="text-[10px] font-bold text-[#0F766E] tracking-widest uppercase">WhatsApp Outreach Command Center</p>
+        </div>
+      </div>
+      
+      <!-- Progress Bar Info -->
+      <div class="flex items-center gap-4 bg-slate-950/80 px-4 py-2 rounded-2xl border border-slate-800">
+        <div class="text-right">
+          <span class="text-xs text-slate-400 font-semibold block">Campaign Progress</span>
+          <span class="text-sm font-extrabold text-white" id="progressText">0 / 0 Leads Done</span>
+        </div>
+        <div class="w-24 bg-slate-800 h-2.5 rounded-full overflow-hidden">
+          <div id="progressBar" class="bg-gradient-to-r from-[#0F766E] to-[#B8975F] h-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Dashboard Layout -->
+  <main class="container mx-auto px-6 mt-8 max-w-7xl space-y-8">
+    
+    <!-- Upper Section: Message Config & Leads Input -->
+    <div class="grid lg:grid-cols-12 gap-8">
+      
+      <!-- Dynamic Messages configuration -->
+      <div class="lg:col-span-6 bg-slate-900/40 rounded-3xl p-6 border border-slate-800/80 space-y-4 shadow-xl">
+        <h3 class="font-extrabold text-base text-white border-b border-slate-800 pb-2 flex items-center gap-2">
+          ⚙️ Customized Message Templates
+        </h3>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex justify-between">
+              <span>Message 1 (Intro Campaign)</span>
+              <span class="text-[#0F766E] text-[10px] lowercase font-normal">Sent first</span>
+            </label>
+            <textarea
+              id="message1Text"
+              rows="3"
+              class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 focus:outline-none focus:border-[#0F766E] transition-colors"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex justify-between">
+              <span>Message 2 (Value Proposition)</span>
+              <span class="text-[#B8975F] text-[10px] lowercase font-normal font-heading">Sent separately</span>
+            </label>
+            <textarea
+              id="message2Text"
+              rows="2"
+              class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 focus:outline-none focus:border-[#0F766E] transition-colors"
+            ></textarea>
+          </div>
+          
+          <p class="text-[10px] text-slate-500 leading-normal">
+            ℹ️ Changes to these templates immediately update the WhatsApp buttons below. Clicking send opens standard WhatsApp redirect links, letting you choose to open in WhatsApp Desktop App, Web, or Mobile.
+          </p>
+        </div>
+      </div>
+
+      <!-- Outreach Leads Input Panel (Tabbed: Quick Add / Bulk Import) -->
+      <div class="lg:col-span-6 bg-slate-900/40 rounded-3xl p-6 border border-slate-800/80 shadow-xl flex flex-col justify-between">
+        <div>
+          <!-- Tab Headers -->
+          <div class="flex border-b border-slate-800 pb-3 mb-4 gap-4">
+            <button 
+              id="btnTabQuick"
+              onclick="switchInputTab('quick')" 
+              class="text-sm font-extrabold text-white pb-1 border-b-2 border-[#0F766E] cursor-pointer focus:outline-none"
+            >
+              ⚡ Quick Direct Add
+            </button>
+            <button 
+              id="btnTabBulk"
+              onclick="switchInputTab('bulk')" 
+              class="text-sm font-bold text-slate-400 pb-1 border-b-2 border-transparent hover:text-slate-200 cursor-pointer focus:outline-none"
+            >
+              📥 Bulk Import / Google Docs
+            </button>
+          </div>
+
+          <!-- TAB 1: QUICK ADD -->
+          <div id="tabContentQuick" class="space-y-4">
+            <p class="text-xs text-slate-400 font-medium">
+              Copy-paste or type any phone number below. It will instantly appear at the top of your list so you can message them directly. No phone contact saving required.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+              <div class="sm:col-span-7">
+                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Phone Number</label>
+                <input 
+                  type="text" 
+                  id="quickPhone" 
+                  placeholder="e.g. 9076888172" 
+                  onkeydown="if(event.key === 'Enter') addQuickLead()"
+                  class="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#0F766E] transition-colors"
+                />
+              </div>
+              <div class="sm:col-span-5">
+                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Business Name (Optional)</label>
+                <input 
+                  type="text" 
+                  id="quickName" 
+                  placeholder="e.g. Lotus Dental" 
+                  onkeydown="if(event.key === 'Enter') addQuickLead()"
+                  class="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#0F766E] transition-colors"
+                />
+              </div>
+            </div>
+            <button 
+              onclick="addQuickLead()"
+              class="w-full py-3 rounded-xl bg-[#0F766E] hover:bg-[#0D5C55] text-white font-extrabold text-xs transition-all shadow-md cursor-pointer flex items-center justify-center gap-2 border-b-2 border-[#B8975F]"
+            >
+              🚀 Prepend to List & Focus
+            </button>
+          </div>
+
+          <!-- TAB 2: BULK IMPORT -->
+          <div id="tabContentBulk" class="space-y-4 hidden">
+            <p class="text-xs text-slate-400 font-medium">
+              Paste from Google Docs/Sheets. Format: <code class="text-emerald-400">Business Name, Phone or Google URL</code>
+            </p>
+            <textarea
+              id="leadsInput"
+              rows="3"
+              placeholder="e.g.&#10;Lotus Dental Care, 9009050501&#10;Indore Dental Clinic, https://maps.app.goo.gl/WG3H85yBkr4neGrb9"
+              class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 focus:outline-none focus:border-[#0F766E] transition-colors"
+            ></textarea>
+            
+            <!-- File Uploader -->
+            <div>
+              <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                Upload Exported File (.txt, .csv)
+              </label>
+              <div class="relative flex items-center justify-center border-2 border-dashed border-slate-800 hover:border-[#0F766E]/50 rounded-xl p-4 transition-colors bg-slate-950/50">
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept=".txt,.csv"
+                  class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  onchange="handleFileUpload(event)"
+                />
+                <div class="text-center">
+                  <span class="text-xs text-slate-400 font-semibold block" id="fileUploadLabel">
+                    Drag & Drop lead file here, or click to browse
+                  </span>
+                  <span class="text-[10px] text-slate-500">Supports files exported from Google Docs/Sheets</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Buttons of right column (dynamic display depending on tab) -->
+        <div id="bulkActionButtons" class="flex flex-wrap gap-3 pt-3 border-t border-slate-800 mt-4 hidden">
+          <button
+            onclick="loadSampleLeads()"
+            class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition-colors cursor-pointer"
+          >
+            📋 Load Sample Leads
+          </button>
+          
+          <button
+            onclick="importLeads()"
+            class="px-5 py-2.5 rounded-xl bg-[#0F766E] hover:bg-[#0D5C55] text-white font-extrabold text-xs transition-all shadow-md cursor-pointer ml-auto border-b-2 border-[#B8975F]"
+          >
+            🚀 Initialize Outreach list
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Lower Section: Outreach Lead Table -->
+    <div class="bg-slate-900/40 rounded-3xl border border-slate-800/80 shadow-xl overflow-hidden">
+      
+      <!-- Table Title Bar -->
+      <div class="p-6 border-b border-slate-800/80 bg-slate-900/20 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h3 class="font-extrabold text-base text-white">Campaign Lead Matrix</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Manage contacts, search profiles, and trigger automated WhatsApp chats.</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <input 
+            type="text" 
+            id="searchInput" 
+            oninput="renderTable()"
+            placeholder="🔍 Search business name..." 
+            class="bg-slate-950 border border-slate-800 px-3.5 py-2 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-[#0F766E] w-48 transition-colors"
+          />
+          <button
+            onclick="clearAllLeads()"
+            class="px-3.5 py-2 rounded-xl bg-red-950/40 hover:bg-red-950/60 border border-red-900/50 text-red-400 font-bold text-xs transition-all cursor-pointer"
+          >
+            🗑️ Clear Campaign
+          </button>
+          <button
+            onclick="exportCSV()"
+            class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition-all cursor-pointer"
+          >
+            📤 Export CSV Data
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Table custom scroll wrapper -->
+      <div class="overflow-x-auto custom-scroll">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-slate-800 bg-slate-950/40 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+              <th class="py-4 px-6">Status</th>
+              <th class="py-4 px-6">Business Details</th>
+              <th class="py-4 px-6">Source Info</th>
+              <th class="py-4 px-6 text-center">Trigger Intro Message</th>
+              <th class="py-4 px-6 text-center">Trigger Offer Message</th>
+              <th class="py-4 px-6 text-center">Msg 1 Done</th>
+              <th class="py-4 px-6 text-center">Msg 2 Done</th>
+            </tr>
+          </thead>
+          <tbody id="leadsTableBody" class="divide-y divide-slate-800/50 text-xs">
+            <!-- Rows injected dynamically -->
+            <tr>
+              <td colspan="7" class="py-12 text-center text-slate-500 font-medium">
+                No active campaign leads loaded. Please paste leads or load sample data above.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Default message templates
+    const DEFAULT_MSG_1 = `Hello Sir, we have made a professional website for your business?\nWould you like to check it out?\n\nOne of our creation : https://drchavhanmultispecialitydentalclinic.com/`;
+    const DEFAULT_MSG_2 = `We create incredibly beautiful websites at prices much cheaper than current market rates.`;
+
+    let leads = [];
+
+    // Initialize application values
+    window.onload = () => {
+      // Load messages from localStorage or use defaults
+      const savedMsg1 = localStorage.getItem("outreach_msg1");
+      const savedMsg2 = localStorage.getItem("outreach_msg2");
+      
+      document.getElementById("message1Text").value = savedMsg1 !== null ? savedMsg1 : DEFAULT_MSG_1;
+      document.getElementById("message2Text").value = savedMsg2 !== null ? savedMsg2 : DEFAULT_MSG_2;
+
+      // Load leads from localStorage
+      const savedLeads = localStorage.getItem("outreach_leads");
+      if (savedLeads) {
+        leads = JSON.parse(savedLeads);
+        renderTable();
+        updateProgress();
+      }
+
+      // Add auto-saving listeners to message textareas
+      document.getElementById("message1Text").addEventListener("input", (e) => {
+        localStorage.setItem("outreach_msg1", e.target.value);
+        renderTable();
+      });
+      document.getElementById("message2Text").addEventListener("input", (e) => {
+        localStorage.setItem("outreach_msg2", e.target.value);
+        renderTable();
+      });
+    };
+
+    // Tab Switcher
+    function switchInputTab(tab) {
+      const tabQuick = document.getElementById("tabContentQuick");
+      const tabBulk = document.getElementById("tabContentBulk");
+      const btnTabQuick = document.getElementById("btnTabQuick");
+      const btnTabBulk = document.getElementById("btnTabBulk");
+      const bulkActions = document.getElementById("bulkActionButtons");
+
+      if (tab === "quick") {
+        tabQuick.classList.remove("hidden");
+        tabBulk.classList.add("hidden");
+        btnTabQuick.className = "text-sm font-extrabold text-white pb-1 border-b-2 border-[#0F766E] cursor-pointer focus:outline-none";
+        btnTabBulk.className = "text-sm font-bold text-slate-400 pb-1 border-b-2 border-transparent hover:text-slate-200 cursor-pointer focus:outline-none";
+        bulkActions.classList.add("hidden");
+      } else {
+        tabQuick.classList.add("hidden");
+        tabBulk.classList.remove("hidden");
+        btnTabQuick.className = "text-sm font-bold text-slate-400 pb-1 border-b-2 border-transparent hover:text-slate-200 cursor-pointer focus:outline-none";
+        btnTabBulk.className = "text-sm font-extrabold text-white pb-1 border-b-2 border-[#0F766E] cursor-pointer focus:outline-none";
+        bulkActions.classList.remove("hidden");
+      }
+    }
+
+    // Quick add single phone lead
+    function addQuickLead() {
+      const phoneInp = document.getElementById("quickPhone");
+      const nameInp = document.getElementById("quickName");
+
+      let rawPhone = phoneInp.value.trim();
+      let rawName = nameInp.value.trim();
+
+      if (!rawPhone) {
+        alert("Please enter a phone number.");
+        return;
+      }
+
+      let cleanPhone = rawPhone.replace(/[^0-9+]/g, "");
+      if (cleanPhone.length === 10) {
+        cleanPhone = "+91" + cleanPhone;
+      }
+
+      if (!rawName) {
+        rawName = "Quick Contact #" + (leads.length + 1);
+      }
+
+      const newLead = {
+        id: Date.now() + Math.random().toString(36).substr(2, 9),
+        name: rawName,
+        phone: cleanPhone,
+        url: "",
+        msg1Sent: false,
+        msg2Sent: false
+      };
+
+      // Prepend so it appears right at the top
+      leads.unshift(newLead);
+      saveLeads();
+      renderTable();
+      updateProgress();
+
+      // Clear input and focus back on phone field
+      phoneInp.value = "";
+      nameInp.value = "";
+      phoneInp.focus();
+    }
+
+    // Load sample outreach leads
+    function loadSampleLeads() {
+      const sample = `Lotus Dental Care, 9009050501\nChavhan Dental Clinic, 8975889746\nIndore Implant Center, https://maps.app.goo.gl/WG3H85yBkr4neGrb9\nMadhya Pradesh Family Dentistry, https://g.co/kgs/abcdef\nSiddhant Hotel & Cafe, 9076888172`;
+      document.getElementById("leadsInput").value = sample;
+    }
+
+    // List of cities/states to filter out from business names
+    const CITIES_TO_CLEAN = [
+      "indore", "madhya pradesh", "mp", "pune", "maharashtra", "mumbai", 
+      "delhi", "bengaluru", "bangalore", "aundh", "sindh society", "india"
+    ];
+
+    // Clean business names from city names
+    function cleanBusinessName(name) {
+      if (!name) return "";
+      let cleaned = name;
+      
+      CITIES_TO_CLEAN.forEach(city => {
+        const regex = new RegExp(`\\b${city}\\b`, 'gi');
+        cleaned = cleaned.replace(regex, '');
+      });
+
+      // Remove trailing/leading punctuation, commas, dashes, and extra spaces
+      cleaned = cleaned.replace(/^[,\-\s]+|[,\-\s]+$/g, '');
+      cleaned = cleaned.replace(/\s+/g, ' ');
+      
+      return cleaned.trim() || name.trim();
+    }
+
+    // Handle File Upload from exported Google Doc (.txt or .csv)
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      document.getElementById("fileUploadLabel").innerText = `Loading: ${file.name}`;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const text = e.target.result;
+        document.getElementById("leadsInput").value = text;
+        document.getElementById("fileUploadLabel").innerText = `Uploaded: ${file.name} (${file.size} bytes)`;
+      };
+      reader.readAsText(file);
+    }
+
+    // Import leads from textarea (supports 100s of lines)
+    function importLeads() {
+      const rawText = document.getElementById("leadsInput").value.trim();
+      if (!rawText) {
+        alert("Please paste leads or upload a lead file first.");
+        return;
+      }
+
+      const lines = rawText.split("\n");
+      const newLeads = [];
+      let skippedCount = 0;
+
+      lines.forEach((line) => {
+        const trimmedLine = line.trim();
+        if (!trimmedLine || trimmedLine.startsWith("#")) return;
+
+        let name = "";
+        let contactOrUrl = "";
+
+        // Smart delimiter checks: comma, tab, or multiple spaces
+        if (trimmedLine.includes(",")) {
+          const parts = trimmedLine.split(",");
+          name = parts[0]?.trim();
+          contactOrUrl = parts.slice(1).join(",").trim();
+        } else if (trimmedLine.includes("\t")) {
+          const parts = trimmedLine.split("\t");
+          name = parts[0]?.trim();
+          contactOrUrl = parts.slice(1).join("\t").trim();
+        } else {
+          // If no clean delimiter, take first few words as name and the rest as contact
+          const words = trimmedLine.split(/\s+/);
+          if (words.length > 1) {
+            const lastWord = words[words.length - 1];
+            if (lastWord.startsWith("http") || /^\d+$/.test(lastWord.replace(/[^0-9]/g, ""))) {
+              contactOrUrl = lastWord;
+              name = words.slice(0, words.length - 1).join(" ");
+            } else {
+              name = trimmedLine;
+            }
+          } else {
+            name = trimmedLine;
+          }
+        }
+
+        // Clean city names from business name
+        name = cleanBusinessName(name);
+
+        let phone = "";
+        let url = "";
+
+        if (contactOrUrl.startsWith("http://") || contactOrUrl.startsWith("https://") || contactOrUrl.includes("maps.") || contactOrUrl.includes("g.co/") || contactOrUrl.includes("google.com")) {
+          url = contactOrUrl;
+        } else {
+          phone = contactOrUrl.replace(/[^0-9+]/g, "");
+          if (phone.length === 10) {
+            phone = "+91" + phone;
+          }
+        }
+
+        // DEDUPLICATION: Cancel out/ignore if this lead already exists in state
+        const isDuplicate = leads.some(l => 
+          (l.name.toLowerCase() === name.toLowerCase()) || 
+          (phone && l.phone === phone) || 
+          (url && l.url === url)
+        ) || newLeads.some(l => 
+          (l.name.toLowerCase() === name.toLowerCase()) || 
+          (phone && l.phone === phone) || 
+          (url && l.url === url)
+        );
+
+        if (isDuplicate) {
+          skippedCount++;
+          return; // Skip duplicate lead
+        }
+
+        newLeads.push({
+          id: Date.now() + Math.random().toString(36).substr(2, 9),
+          name: name,
+          phone: phone,
+          url: url,
+          msg1Sent: false,
+          msg2Sent: false
+        });
+      });
+
+      if (newLeads.length > 0) {
+        leads = [...leads, ...newLeads];
+        saveLeads();
+        renderTable();
+        updateProgress();
+      }
+
+      if (skippedCount > 0) {
+        alert(`Successfully imported ${newLeads.length} leads. Skipped ${skippedCount} duplicate leads.`);
+      } else {
+        alert(`Successfully imported ${newLeads.length} leads.`);
+      }
+      
+      document.getElementById("leadsInput").value = "";
+      document.getElementById("fileInput").value = "";
+      document.getElementById("fileUploadLabel").innerText = "Drag & Drop lead file here, or click to browse";
+    }
+
+    // Save leads to localStorage
+    function saveLeads() {
+      localStorage.setItem("outreach_leads", JSON.stringify(leads));
+    }
+
+    // Update progress numbers and bar
+    function updateProgress() {
+      const total = leads.length;
+      if (total === 0) {
+        document.getElementById("progressText").innerText = "0 / 0 Leads Done";
+        document.getElementById("progressBar").style.width = "0%";
+        return;
+      }
+
+      const completed = leads.filter(l => l.msg1Sent && l.msg2Sent).length;
+      const pct = Math.round((completed / total) * 100);
+
+      document.getElementById("progressText").innerText = `${completed} / ${total} Leads Done`;
+      document.getElementById("progressBar").style.width = `${pct}%`;
+    }
+
+    // Update phone number inline for Google Business Profiles
+    function updatePhoneInline(id, val) {
+      const lead = leads.find(l => l.id === id);
+      if (lead) {
+        let cleanPhone = val.replace(/[^0-9+]/g, "");
+        if (cleanPhone.length === 10) {
+          cleanPhone = "+91" + cleanPhone;
+        }
+        lead.phone = cleanPhone;
+        saveLeads();
+        renderTable();
+        updateProgress();
+      }
+    }
+
+    // Clear all leads
+    function clearAllLeads() {
+      if (confirm("Are you sure you want to delete all leads in the current campaign?")) {
+        leads = [];
+        saveLeads();
+        renderTable();
+        updateProgress();
+      }
+    }
+
+    // Toggle message completion status
+    function toggleSent(id, type) {
+      const lead = leads.find(l => l.id === id);
+      if (lead) {
+        if (type === 1) {
+          lead.msg1Sent = !lead.msg1Sent;
+        } else if (type === 2) {
+          lead.msg2Sent = !lead.msg2Sent;
+        }
+        saveLeads();
+        updateProgress();
+      }
+    }
+
+    // Open standard api.whatsapp.com send link and auto-check completed status
+    function openWhatsApp(id, phone, type) {
+      if (!phone) return;
+      const textElement = type === 1 ? "message1Text" : "message2Text";
+      const message = document.getElementById(textElement).value;
+      const encoded = encodeURIComponent(message);
+      
+      const apiPhone = phone.replace("+", "");
+      // Uses api.whatsapp.com/send so it triggers native local apps before falling back to browser web logins
+      window.open(`https://api.whatsapp.com/send?phone=${apiPhone}&text=${encoded}`, "_blank");
+
+      // Auto-toggle sent checkmark
+      const lead = leads.find(l => l.id === id);
+      if (lead) {
+        if (type === 1) {
+          lead.msg1Sent = true;
+        } else if (type === 2) {
+          lead.msg2Sent = true;
+        }
+        saveLeads();
+        renderTable();
+        updateProgress();
+      }
+    }
+
+    // Export CSV Data
+    function exportCSV() {
+      if (leads.length === 0) {
+        alert("No leads available to export.");
+        return;
+      }
+
+      let csvContent = "data:text/csv;charset=utf-8,Business Name,Phone Number,Google URL,Msg 1 Sent,Msg 2 Sent\n";
+      leads.forEach(l => {
+        csvContent += `"${l.name.replace(/"/g, '""')}","${l.phone}","${l.url}",${l.msg1Sent},${l.msg2Sent}\n`;
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "outreach_campaign_leads.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Render lead matrix table rows
+    function renderTable() {
+      const tbody = document.getElementById("leadsTableBody");
+      tbody.innerHTML = "";
+
+      const query = document.getElementById("searchInput")?.value.toLowerCase().trim() || "";
+      const filteredLeads = leads.filter(lead => {
+        return lead.name.toLowerCase().includes(query) || 
+               lead.phone.includes(query) || 
+               (lead.url && lead.url.toLowerCase().includes(query));
+      });
+
+      if (filteredLeads.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="py-12 text-center text-slate-500 font-medium">
+              ${leads.length === 0 ? "No active campaign leads loaded. Please paste leads or load sample data above." : "No matching leads found."}
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      filteredLeads.forEach((lead) => {
+        const tr = document.createElement("tr");
+        tr.className = "border-b border-slate-800/40 hover:bg-slate-900/10 transition-colors";
+
+        // Column 1: Status Badge
+        let statusHtml = "";
+        if (lead.phone) {
+          statusHtml = `<span class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold border border-emerald-500/20">Ready</span>`;
+        } else {
+          statusHtml = `<span class="px-2 py-1 rounded-full bg-amber-500/10 text-amber-400 text-[10px] font-bold border border-amber-500/20">Needs Google Check</span>`;
+        }
+
+        // Column 2: Lead Details
+        const nameHtml = `<div class="font-bold text-slate-100">${lead.name}</div>`;
+
+        // Column 3: Source details or inline GBP selector
+        let sourceHtml = "";
+        if (lead.phone) {
+          sourceHtml = `<span class="text-slate-400 font-mono">${lead.phone}</span>`;
+        } else if (lead.url) {
+          sourceHtml = `
+            <div class="space-y-2">
+              <a href="${lead.url}" target="_blank" class="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 font-semibold underline">
+                🔍 Open Google Profile
+              </a>
+              <div class="flex items-center gap-1.5">
+                <input 
+                  type="text" 
+                  placeholder="Paste Phone Number" 
+                  id="inp-${lead.id}" 
+                  class="bg-slate-950 border border-slate-800 px-2 py-1 rounded-md text-[11px] text-slate-200 focus:outline-none w-32"
+                />
+                <button 
+                  onclick="updatePhoneInline('${lead.id}', document.getElementById('inp-${lead.id}').value)"
+                  class="px-2 py-1 rounded-md bg-[#B8975F] text-slate-950 font-bold text-[10px] hover:bg-amber-500 transition-colors cursor-pointer"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          `;
+        }
+
+        // Column 4 & 5: Message Buttons
+        let action1Html = "";
+        let action2Html = "";
+        if (lead.phone) {
+          action1Html = `
+            <button 
+              onclick="openWhatsApp('${lead.id}', '${lead.phone}', 1)"
+              class="w-full px-4 py-2 rounded-xl bg-emerald-600/15 hover:bg-emerald-600 border border-emerald-600/30 hover:border-emerald-600 text-emerald-400 hover:text-white font-bold text-xs transition-all cursor-pointer flex items-center justify-center gap-1.5"
+            >
+              💬 Send Intro (Msg 1)
+            </button>
+          `;
+          action2Html = `
+            <button 
+              onclick="openWhatsApp('${lead.id}', '${lead.phone}', 2)"
+              class="w-full px-4 py-2 rounded-xl bg-[#B8975F]/10 hover:bg-[#B8975F] border border-[#B8975F]/20 hover:border-[#B8975F] text-[#B8975F] hover:text-slate-950 font-bold text-xs transition-all cursor-pointer flex items-center justify-center gap-1.5"
+            >
+              🏷️ Send Offer (Msg 2)
+            </button>
+          `;
+        } else {
+          action1Html = `<span class="text-slate-600 italic">Locked</span>`;
+          action2Html = `<span class="text-slate-600 italic">Locked</span>`;
+        }
+
+        // Column 6 & 7: Checkboxes
+        const check1Html = `
+          <input 
+            type="checkbox" 
+            ${lead.msg1Sent ? "checked" : ""} 
+            onclick="toggleSent('${lead.id}', 1)"
+            class="w-4.5 h-4.5 bg-slate-950 border border-slate-800 rounded-md checked:bg-[#0F766E] focus:outline-none cursor-pointer"
+          />
+        `;
+        const check2Html = `
+          <input 
+            type="checkbox" 
+            ${lead.msg2Sent ? "checked" : ""} 
+            onclick="toggleSent('${lead.id}', 2)"
+            class="w-4.5 h-4.5 bg-slate-950 border border-slate-800 rounded-md checked:bg-[#B8975F] focus:outline-none cursor-pointer"
+          />
+        `;
+
+        tr.innerHTML = `
+          <td class="py-4 px-6">${statusHtml}</td>
+          <td class="py-4 px-6 font-medium">${nameHtml}</td>
+          <td class="py-4 px-6">${sourceHtml}</td>
+          <td class="py-4 px-6 text-center">${action1Html}</td>
+          <td class="py-4 px-6 text-center">${action2Html}</td>
+          <td class="py-4 px-6 text-center">${check1Html}</td>
+          <td class="py-4 px-6 text-center">${check2Html}</td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    }
+  </script>
+</body>
+</html>

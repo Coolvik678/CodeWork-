@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferrero Rocher | Experience the Golden Moments</title>
+    <meta name="description" content="Discover the exquisite world of Ferrero Rocher. Premium chocolate confections crafted with passion and golden perfection.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <svg class="preloader-ring" viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" /></svg>
+            <span class="preloader-logo">FR</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#home" class="logo">
+                    <span class="logo-sub">Est. 1982</span>
+                    <span class="logo-text">Ferrero Rocher</span>
+                </a>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="#home"   class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="#products" class="nav-link">Collection</a></li>
+                    <li class="nav-item"><a href="#about"  class="nav-link">Heritage</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+
+                <div class="hamburger" id="hamburger" aria-label="Toggle navigation" role="button">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-overlay"></div>
+        <!-- Floating particles -->
+        <div class="hero-particles" id="heroParticles"></div>
+
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-eyebrow reveal-up delay-1">Premium Confections Since 1982</span>
+                <h1 class="hero-title">
+                    <span class="hero-line reveal-up delay-2">Experience the</span>
+                    <span class="hero-line highlight reveal-up delay-3">Golden Moments</span>
+                </h1>
+                <p class="hero-subtitle reveal-up delay-4">
+                    Indulge in the exquisite taste of premium chocolate confections,<br>
+                    crafted with passion and wrapped in golden perfection.
+                </p>
+                <div class="hero-buttons reveal-up delay-5">
+                    <a href="#products" class="btn btn-primary">
+                        <span>Explore Collection</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#about" class="btn btn-ghost">Our Heritage</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator" id="scrollIndicator">
+            <div class="scroll-line"></div>
+            <span class="scroll-text">Scroll</span>
+        </div>
+    </section>
+
+    <!-- Marquee band -->
+    <div class="marquee-band">
+        <div class="marquee-track">
+            <span>Crafted with Passion</span>
+            <span class="marquee-dot">✦</span>
+            <span>Golden Perfection</span>
+            <span class="marquee-dot">✦</span>
+            <span>Premium Quality</span>
+            <span class="marquee-dot">✦</span>
+            <span>Est. 1982 · Alba, Italy</span>
+            <span class="marquee-dot">✦</span>
+            <span>Crafted with Passion</span>
+            <span class="marquee-dot">✦</span>
+            <span>Golden Perfection</span>
+            <span class="marquee-dot">✦</span>
+            <span>Premium Quality</span>
+            <span class="marquee-dot">✦</span>
+            <span>Est. 1982 · Alba, Italy</span>
+            <span class="marquee-dot">✦</span>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow reveal-up">Our Collection</span>
+                <h2 class="section-title reveal-up">Exquisite Creations</h2>
+                <div class="section-divider reveal-up">
+                    <span class="divider-line"></span>
+                    <svg class="divider-icon" viewBox="0 0 24 24"><path d="M12 2l2.9 6.2L22 9.2l-5 4.9 1.2 6.9L12 17.8l-6.2 3.2L7 14.1 2 9.2l7.1-1z" fill="currentColor"/></svg>
+                    <span class="divider-line"></span>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card reveal-up" data-delay="0">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/869006/pexels-photo-869006.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ferrero Rocher Classic">
+                        <div class="product-overlay">
+                            <a href="#" class="discover-link">Discover <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="product-tag">Iconic</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ferrero Rocher Classic</h3>
+                        <p class="product-description">The iconic original with whole hazelnut in smooth chocolate and crispy wafer.</p>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card reveal-up" data-delay="100">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/1036148/pexels-photo-1036148.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ferrero Rocher White">
+                        <div class="product-overlay">
+                            <a href="#" class="discover-link">Discover <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="product-tag">Elegant</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ferrero Rocher White</h3>
+                        <p class="product-description">Elegant white chocolate with almond and a delicate, creamy filling.</p>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card reveal-up" data-delay="200">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/65882/chocolate-dark-coffee-confiserie-65882.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ferrero Collection">
+                        <div class="product-overlay">
+                            <a href="#" class="discover-link">Discover <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="product-tag">Assorted</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ferrero Collection</h3>
+                        <p class="product-description">An assorted collection of our finest creations for every taste.</p>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card reveal-up" data-delay="0">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/13012674/pexels-photo-13012674.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ferrero Rondnoir">
+                        <div class="product-overlay">
+                            <a href="#" class="discover-link">Discover <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="product-tag">Dark</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ferrero Rondnoir</h3>
+                        <p class="product-description">Rich dark chocolate with a smooth black pearl center.</p>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card reveal-up" data-delay="100">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/4110350/pexels-photo-4110350.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Raffaello">
+                        <div class="product-overlay">
+                            <a href="#" class="discover-link">Discover <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="product-tag">Tropical</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Raffaello</h3>
+                        <p class="product-description">Delicate coconut cream with an almond center, pure tropical indulgence.</p>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card reveal-up" data-delay="200">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/691147/pexels-photo-691147.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ferrero Golden Gallery">
+                        <div class="product-overlay">
+                            <a href="#" class="discover-link">Discover <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="product-tag">Prestige</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Ferrero Golden Gallery</h3>
+                        <p class="product-description">Our most luxurious collection for life's most precious moments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-bg-texture"></div>
+        <div class="container">
+            <div class="about-wrapper">
+                <div class="about-image reveal-left">
+                    <div class="image-frame">
+                        <img src="https://images.unsplash.com/photo-1614088685112-0a760b71a3c8?q=80&w=1000&auto=format&fit=crop" alt="Ferrero Rocher Heritage">
+                    </div>
+                    <div class="experience-badge">
+                        <span class="years">40+</span>
+                        <span class="text">Years of<br>Excellence</span>
+                    </div>
+                    <!-- Decorative frame lines -->
+                    <div class="frame-deco frame-deco-tl"></div>
+                    <div class="frame-deco frame-deco-br"></div>
+                </div>
+
+                <div class="about-content reveal-right">
+                    <span class="section-eyebrow">Our Heritage</span>
+                    <h2 class="section-title">A Legacy of<br><em>Golden Perfection</em></h2>
+                    <div class="section-divider left">
+                        <span class="divider-line"></span>
+                    </div>
+                    <p class="about-text">
+                        Founded in the picturesque town of <strong>Alba, Italy</strong>, Ferrero Rocher has been synonymous with luxury chocolate since 1982. Our journey began with a simple vision: to create a chocolate that would transform everyday moments into <em>golden memories</em>.
+                    </p>
+                    <p class="about-text">
+                        Each Ferrero Rocher is a masterpiece of craftsmanship — a whole hazelnut encased in smooth chocolate and crisp wafer, wrapped in golden foil. We source only the finest ingredients from sustainable farms worldwide.
+                    </p>
+
+                    <div class="timeline">
+                        <div class="timeline-item reveal-up">
+                            <span class="year">1982</span>
+                            <div class="timeline-content">
+                                <strong>Born in Alba, Italy</strong>
+                                <p>Ferrero Rocher created and launched to the world</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item reveal-up">
+                            <span class="year">1990s</span>
+                            <div class="timeline-content">
+                                <strong>Global Expansion</strong>
+                                <p>Reaching chocolate lovers in 40+ countries</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item reveal-up">
+                            <span class="year">Today</span>
+                            <div class="timeline-content">
+                                <strong>World's Favourite Premium Chocolate</strong>
+                                <p>50 million golden moments created daily</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn btn-primary">
+                        <span>Get in Touch</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-inner">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item reveal-up" data-delay="0">
+                        <span class="stat-number" data-count="40">0</span>
+                        <span class="stat-suffix">+</span>
+                        <span class="stat-label">Years of Excellence</span>
+                    </div>
+                    <div class="stat-item reveal-up" data-delay="100">
+                        <span class="stat-number" data-count="140">0</span>
+                        <span class="stat-suffix">+</span>
+                        <span class="stat-label">Countries Worldwide</span>
+                    </div>
+                    <div class="stat-item reveal-up" data-delay="200">
+                        <span class="stat-number" data-count="50">0</span>
+                        <span class="stat-suffix">M+</span>
+                        <span class="stat-label">Daily Indulgences</span>
+                    </div>
+                    <div class="stat-item reveal-up" data-delay="300">
+                        <span class="stat-number" data-count="100">0</span>
+                        <span class="stat-suffix">%</span>
+                        <span class="stat-label">Premium Quality</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info reveal-left">
+                    <span class="section-eyebrow">Connect With Us</span>
+                    <h2 class="section-title">Get in Touch</h2>
+                    <div class="section-divider left"><span class="divider-line"></span></div>
+                    <p class="contact-description">
+                        We'd love to hear from you. Whether you have a question about our products, need assistance, or simply want to share your golden moment.
+                    </p>
+
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-text">
+                                <span class="label">Address</span>
+                                <p>Piazza Pietro Ferrero 1, Alba, Italy</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-text">
+                                <span class="label">Email</span>
+                                <p>contact@ferrero-rocher.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="contact-text">
+                                <span class="label">Phone</span>
+                                <p>+39 0173 9791</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper reveal-right">
+                    <form class="contact-form" id="contactForm" novalidate>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                            <span class="error-message" id="nameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                            <span class="error-message" id="emailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell us about your inquiry..." required></textarea>
+                            <span class="error-message" id="messageError"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                            <span class="btn-text">Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        <div class="form-success" id="formSuccess">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Thank you! We'll be in touch soon.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <span class="footer-logo">Ferrero Rocher</span>
+                        <p class="footer-tagline">Experience the Golden Moments. Premium chocolate confections crafted with passion since 1982.</p>
+                        <div class="footer-social">
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>Explore</h4>
+                            <ul>
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#products">Collection</a></li>
+                                <li><a href="#about">Heritage</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Products</h4>
+                            <ul>
+                                <li><a href="#">Ferrero Rocher</a></li>
+                                <li><a href="#">Raffaello</a></li>
+                                <li><a href="#">Rondnoir</a></li>
+                                <li><a href="#">Gift Ideas</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Golden Updates</h4>
+                            <p class="newsletter-text">Subscribe for exclusive offers and golden moments.</p>
+                            <form class="newsletter-form" id="newsletterForm">
+                                <input type="email" placeholder="Your email address" required>
+                                <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="copyright">&copy; 2025 Ferrero Rocher. All rights reserved. Crafted with passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

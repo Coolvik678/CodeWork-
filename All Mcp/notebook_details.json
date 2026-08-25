@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"success\": true,\n  \"data\": {\n    \"notebook\": {\n      \"id\": \"notebook-lm-source-extraction\",\n      \"url\": \"https://notebooklm.google.com/notebook/29ab1485-9947-4783-a96a-c56920aefd21\",\n      \"name\": \"Notebook LM Source Extraction\",\n      \"description\": \"Contains ~60 sources for Claude Code, Gemini CLI, Antigravity, Remotion\",\n      \"topics\": [\n        \"remotion\",\n        \"claude code\",\n        \"gemini cli\",\n        \"antigravity\",\n        \"plot code\",\n        \"cross-cutting\"\n      ],\n      \"content_types\": [\n        \"documentation\",\n        \"examples\"\n      ],\n      \"use_cases\": [\n        \"Learning about Notebook LM Source Extraction\",\n        \"Implementing features with Notebook LM Source Extraction\"\n      ],\n      \"added_at\": \"2026-03-14T06:31:20.900Z\",\n      \"last_used\": \"2026-03-14T06:31:20.900Z\",\n      \"use_count\": 0,\n      \"tags\": []\n    }\n  }\n}"
+    }
+  ]
+}

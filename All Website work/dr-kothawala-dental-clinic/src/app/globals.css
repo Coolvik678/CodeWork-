@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #05070a;
+    --foreground: #ffffff;
+    --primary-gold: #d4af37;
+    --primary-gold-bright: #f5d77f;
+    --primary-gold-dark: #997a15;
+    --obsidian-black: #05070a;
+    --surface-glass-dark: rgba(10, 13, 20, 0.9);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, .font-serif-display {
+    font-family: 'Instrument Serif', Georgia, serif;
+  }
+}
+
+/* Material Design Opacity Hierarchy */
+.text-high-emphasis {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.text-medium-emphasis {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Liquid Metallic Gold Glassmorphism */
+.glass-card-gold {
+  background: var(--surface-glass-dark);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.12);
+}
+
+.gold-glow {
+  box-shadow: 0 0 35px rgba(212, 175, 55, 0.25);
+}
+
+.gold-text-gradient {
+  background: linear-gradient(135deg, #d4af37 0%, #f5d77f 50%, #ffdf73 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes gold-shine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

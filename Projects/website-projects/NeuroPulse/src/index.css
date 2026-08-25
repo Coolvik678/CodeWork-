@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Space+Grotesk:wght@300..700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-void text-gray-300 font-sans antialiased overflow-x-hidden;
+  }
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-size: 50px 50px;
+  @apply bg-grid-pattern opacity-10;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-void-light;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-plasma-purple/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-plasma-blue/50;
+}
+
+/* Micro-interaction globally for buttons */
+button.magnetic-btn {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+button.magnetic-btn:hover {
+  transform: scale(1.03);
+}
+
+button.magnetic-btn:active {
+  transform: scale(0.95);
+}

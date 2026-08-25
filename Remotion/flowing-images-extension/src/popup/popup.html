@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flowing Images — Google Flow Automator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-icon">⚡</div>
+        <div class="title-group">
+          <h1>Flowing Images <span class="version">v1.0.0</span></h1>
+          <p class="subtitle">Bulk Automator & Downloader</p>
+        </div>
+      </div>
+      <div class="badge-unlimited">FREE & UNLIMITED</div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="nav-btn active" data-tab="control">⚡ Control</button>
+      <button class="nav-btn" data-tab="queue">📋 Queue</button>
+      <button class="nav-btn" data-tab="gallery">🖼️ Gallery</button>
+      <button class="nav-btn" data-tab="library">🏷️ Library</button>
+      <button class="nav-btn" data-tab="settings">⚙️ Settings</button>
+    </nav>
+
+    <!-- TAB 1: CONTROL -->
+    <main id="tab-control" class="tab-content active">
+      
+      <!-- Mode & Speed -->
+      <div class="section-card">
+        <label class="section-label">MODE</label>
+        <div class="pill-group">
+          <button class="pill-btn active" id="btn-mode-image">🖼️ Image</button>
+          <button class="pill-btn" id="btn-mode-video">📹 Video</button>
+        </div>
+
+        <label class="section-label mt-3">SPEED</label>
+        <div class="pill-group">
+          <button class="pill-btn" data-speed="fast">⚡ Fast (3s)</button>
+          <button class="pill-btn active" data-speed="balanced">⚖️ Balanced (6s)</button>
+          <button class="pill-btn" data-speed="slow">⏳ Slow (15s)</button>
+        </div>
+      </div>
+
+      <!-- Model & Aspect Ratio -->
+      <div class="section-card">
+        <label class="section-label">MODEL</label>
+        <select id="select-model" class="custom-select">
+          <option value="Nano Banana 2">🍌 Nano Banana 2</option>
+          <option value="Veo 3.1">🎬 Veo 3.1 Video</option>
+          <option value="Imagen 3">🎨 Imagen 3 HD</option>
+        </select>
+
+        <label class="section-label mt-3">ASPECT RATIO</label>
+        <div class="grid-buttons ratio-grid">
+          <button class="ratio-btn active" data-ratio="16:9">📺 16:9</button>
+          <button class="ratio-btn" data-ratio="4:3">📷 4:3</button>
+          <button class="ratio-btn" data-ratio="1:1">⬛ 1:1</button>
+          <button class="ratio-btn" data-ratio="3:4">📱 3:4</button>
+          <button class="ratio-btn" data-ratio="9:16">📲 9:16</button>
+        </div>
+
+        <label class="section-label mt-3">IMAGES PER PROMPT</label>
+        <div class="pill-group">
+          <button class="pill-btn active" data-count="1">x1</button>
+          <button class="pill-btn" data-count="2">x2</button>
+          <button class="pill-btn" data-count="3">x3</button>
+          <button class="pill-btn" data-count="4">x4</button>
+        </div>
+      </div>
+
+      <!-- Reference Images -->
+      <div class="section-card">
+        <label class="section-label">REFERENCE IMAGES (UP TO 10)</label>
+        <div class="ref-buttons-row">
+          <button class="ref-btn" id="btn-ref-shared">🖼️ Add References <span class="subtext">Same for all prompts</span></button>
+          <button class="ref-btn" id="btn-ref-different">🔀 Different for Each <span class="subtext">1:1 match</span></button>
+        </div>
+        <div class="toggle-row mt-2">
+          <span>Chain references (Pass output to next)</span>
+          <label class="switch">
+            <input type="checkbox" id="chk-chain-references">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Prompts Area -->
+      <div class="section-card">
+        <div class="prompt-header">
+          <label class="section-label">PROMPTS (ONE PER LINE)</label>
+          <span class="prompt-count" id="prompt-count-badge">0 prompts</span>
+        </div>
+        <div class="prompt-input-wrapper">
+          <textarea id="prompt-textarea" placeholder="Paste your prompt manifest here...&#10;Scene headers and [00:00] timestamps are automatically cleaned!"></textarea>
+          <div class="prompt-toolbar">
+            <label class="icon-btn-label" title="Import TXT file">
+              📁 Import TXT
+              <input type="file" id="file-import-prompts" accept=".txt,.csv" style="display:none;">
+            </label>
+            <button class="icon-btn" id="btn-clear-prompts">🧹 Clear</button>
+            <button class="btn-submit" id="btn-start-queue">➡️ Start</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- TAB 2: QUEUE -->
+    <main id="tab-queue" class="tab-content">
+      <div class="section-card">
+        <div class="queue-status-bar">
+          <span id="queue-status-text">Status: Idle</span>
+          <div class="queue-controls">
+            <button class="sm-btn" id="btn-pause-queue">⏸️ Pause</button>
+            <button class="sm-btn" id="btn-resume-queue">▶️ Resume</button>
+            <button class="sm-btn danger" id="btn-stop-queue">⏹️ Stop</button>
+          </div>
+        </div>
+        <div class="progress-bar-container mt-2">
+          <div class="progress-bar-fill" id="queue-progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="section-card mt-2">
+        <label class="section-label">PROMPT QUEUE</label>
+        <div class="queue-list" id="queue-items-container">
+          <p class="empty-state">No active queue. Paste prompts in Control tab and click Start!</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- TAB 3: GALLERY -->
+    <main id="tab-gallery" class="tab-content">
+      <div class="section-card">
+        <div class="gallery-toolbar">
+          <label class="section-label">GENERATED ASSETS</label>
+          <div>
+            <button class="sm-btn" id="btn-clear-gallery">Clear</button>
+          </div>
+        </div>
+        <div class="gallery-grid" id="gallery-grid-container">
+          <p class="empty-state">No generated images yet. Generated files will appear here!</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- TAB 4: LIBRARY (TAGS) -->
+    <main id="tab-library" class="tab-content">
+      <div class="section-card">
+        <label class="section-label">AUTO-TAG REFERENCE LIBRARY</label>
+        <p class="help-text">Upload reference images and tag them (e.g. <code>hero</code>). Use <code>#hero</code> in your prompt list to auto-attach!</p>
+        <div class="add-tag-box mt-2">
+          <input type="text" id="input-tag-name" placeholder="Tag name (e.g. hero)">
+          <input type="file" id="file-tag-image" accept="image/*">
+          <button class="sm-btn" id="btn-add-tag">Add Tag</button>
+        </div>
+        <div class="library-tags-list mt-3" id="library-tags-container">
+          <p class="empty-state">No tagged references added yet.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- TAB 5: SETTINGS -->
+    <main id="tab-settings" class="tab-content">
+      <div class="section-card">
+        <label class="section-label">DOWNLOAD & NAMING SETTINGS</label>
+        
+        <div class="setting-item mt-2">
+          <label>Save Folder</label>
+          <input type="text" id="setting-save-folder" class="custom-input" value="flowing_images">
+        </div>
+
+        <div class="toggle-row mt-2">
+          <span>Auto-download images</span>
+          <label class="switch">
+            <input type="checkbox" id="setting-auto-download-img" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item mt-2">
+          <label>Image Quality</label>
+          <select id="setting-image-quality" class="custom-select">
+            <option value="standard">Standard HD</option>
+            <option value="2k">2K High Res</option>
+            <option value="4k">4K Ultra HD</option>
+          </select>
+        </div>
+
+        <div class="setting-item mt-2">
+          <label>File Naming Scheme</label>
+          <select id="setting-naming-scheme" class="custom-select">
+            <option value="001">001, 002, 003 (Sequential)</option>
+            <option value="prompt">Prompt-based (001_why_were...)</option>
+            <option value="custom">Custom Prefix (flowing_001)</option>
+          </select>
+        </div>
+
+        <div class="setting-item mt-2">
+          <label>Start Number</label>
+          <input type="number" id="setting-start-number" class="custom-input" value="1" min="1">
+        </div>
+      </div>
+
+      <div class="section-card mt-2">
+        <label class="section-label">TROUBLESHOOTING</label>
+        <button class="btn-secondary w-100" id="btn-fix-activity">🛠️ Fix "Unusual Activity" & Reset Rate Limits</button>
+      </div>
+    </main>
+
+    <!-- Footer Logs Bar -->
+    <footer class="footer-log">
+      <div class="log-status" id="footer-log-text">Ready. Open Google Flow and click Start.</div>
+    </footer>
+
+  </div>
+
+  <script src="../utils/auto_tagger.js"></script>
+  <script src="../utils/file_namer.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

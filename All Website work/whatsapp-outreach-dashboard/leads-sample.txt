@@ -1,0 +1,12 @@
+# WhatsApp Outreach Lead Template
+# Use one of the formats below:
+# Format 1: Business Name, Phone Number
+# Format 2: Business Name, Google Business Profile Link
+
+Lotus Dental Care, 9009050501
+Chavhan Dental Clinic, 8975889746
+Indore Implant Center, https://maps.app.goo.gl/WG3H85yBkr4neGrb9
+Madhya Pradesh Family Dentistry, https://g.co/kgs/abcdef
+Siddhant Hotel & Cafe, 9076888172
+Palace Dental Surgery, 9876543210
+Central Orthodontics Indore, https://maps.google.com/?cid=123456789

@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise for Father's Day</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A beautiful interactive scrapbook page for Father's Day. Scratch to reveal special surprise awards for Papa, Bade Papa, and Chachu.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="A Special Surprise for Father's Day">
+    <meta property="og:description" content="A beautiful interactive scrapbook page for Father's Day. Scratch to reveal special surprise awards for Papa, Bade Papa, and Chachu.">
+    
+    <!-- Google Fonts for elegant calligraphy and modern text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================
+           1. DESIGN TOKENS & RESET
+           ========================================== */
+        :root {
+            --gold-light: #ffe875;
+            --gold-primary: #f5b000;
+            --gold-dark: #b8860b;
+            --gold-deep: #855800;
+            --charcoal: #1a1a1a;
+            --white-glass: rgba(255, 255, 255, 0.16);
+            --border-glass: rgba(255, 255, 255, 0.35);
+            --text-primary: #1a1a1a;
+            --text-secondary: #555555;
+            --polaroid-bg: #ffffff;
+            --scrapbook-bg: #fffdf5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212; /* Rich dark backdrop for desktop */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* ==========================================
+           1.5 THE PHONE FRAME CONTAINER
+           ========================================== */
+        .phone-frame {
+            position: relative;
+            width: 100%;
+            max-width: 440px; /* Golden standard mobile phone width */
+            height: 100%; /* Fill parent */
+            height: 100dvh; /* Dynamic viewport height to prevent keyboard/address bar issues */
+            margin: 0 auto;
+            background: radial-gradient(circle at center, #fffbeb 0%, #fef3c7 40%, #fcd34d 100%);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45), 0 0 0 10px rgba(255, 255, 255, 0.05); /* Sleek container shadow */
+            overflow: hidden;
+            border-radius: 36px; /* Smooth phone rounded corners on desktop */
+            border: 4px solid #1a1a1a; /* Subtle phone frame border */
+            z-index: 10;
+        }
+
+        /* Responsive adjustments to fit standard full screen on actual mobile devices */
+        @media (max-width: 480px) {
+            .phone-frame {
+                max-width: 100%;
+                height: 100%;
+                height: 100dvh;
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+            }
+        }
+
+        /* ==========================================
+           2. THE COVER PAGE (GIFT WRAP)
+           ========================================== */
+        #cover-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffd000 0%, #ffaa00 50%, #e67e00 100%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* Ribbon Grid - Split Ribbons for unwrapping */
+        .ribbon-vertical-top, .ribbon-vertical-bottom {
+            position: absolute;
+            left: calc(50% - 30px);
+            width: 60px;
+            background: linear-gradient(to right, #242424 0%, #3e3e3e 50%, #151515 100%);
+            box-shadow: inset 0 0 8px rgba(255,255,255,0.1), 0 0 15px rgba(0,0,0,0.4);
+            border-left: 3px solid var(--gold-primary);
+            border-right: 3px solid var(--gold-primary);
+            z-index: 2;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .ribbon-vertical-top {
+            top: 0;
+            height: 50%;
+            transform-origin: top center;
+        }
+        .ribbon-vertical-bottom {
+            bottom: 0;
+            height: 50%;
+            transform-origin: bottom center;
+        }
+
+        .ribbon-horizontal-left, .ribbon-horizontal-right {
+            position: absolute;
+            top: calc(50% - 30px);
+            height: 60px;
+            background: linear-gradient(to bottom, #242424 0%, #3e3e3e 50%, #151515 100%);
+            box-shadow: inset 0 0 8px rgba(255,255,255,0.1), 0 0 15px rgba(0,0,0,0.4);
+            border-top: 3px solid var(--gold-primary);
+            border-bottom: 3px solid var(--gold-primary);
+            z-index: 2;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .ribbon-horizontal-left {
+            left: 0;
+            width: 50%;
+            transform-origin: left center;
+        }
+        .ribbon-horizontal-right {
+            right: 0;
+            width: 50%;
+            transform-origin: right center;
+        }
+
+        /* 3D-looking CSS Bow */
+        .bow-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            z-index: 10;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .bow-container:hover {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .bow-tail {
+            position: absolute;
+            top: 55%;
+            width: 40px;
+            height: 140px;
+            background: linear-gradient(to bottom, var(--gold-primary) 0%, var(--gold-dark) 100%);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.25);
+            z-index: -1;
+            transform-origin: top center;
+        }
+        .tail-left {
+            left: 35%;
+            transform: rotate(28deg);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 86%, 0% 100%);
+        }
+        .tail-right {
+            right: 35%;
+            transform: rotate(-28deg);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 86%, 0% 100%);
+        }
+
+        .bow-loop {
+            position: absolute;
+            width: 140px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+            border-radius: 50%;
+            box-shadow: 
+                inset -3px -3px 8px rgba(0,0,0,0.4), 
+                inset 3px 3px 8px rgba(255,255,255,0.4),
+                0 8px 15px rgba(0,0,0,0.25);
+        }
+        .loop-1 { transform: rotate(0deg); }
+        .loop-2 { transform: rotate(45deg); }
+        .loop-3 { transform: rotate(90deg); }
+        .loop-4 { transform: rotate(135deg); }
+        .loop-5 { transform: rotate(22.5deg) scale(0.85); }
+        .loop-6 { transform: rotate(67.5deg) scale(0.85); }
+        .loop-7 { transform: rotate(112.5deg) scale(0.85); }
+        .loop-8 { transform: rotate(157.5deg) scale(0.85); }
+
+        .bow-knot {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, var(--gold-light) 15%, var(--gold-primary) 55%, var(--gold-deep) 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 6px 15px rgba(0,0,0,0.35),
+                inset -3px -3px 8px rgba(0,0,0,0.4);
+            z-index: 5;
+        }
+
+        .cover-text {
+            position: absolute;
+            top: 15%;
+            text-align: center;
+            color: var(--charcoal);
+            z-index: 5;
+            padding: 0 20px;
+            pointer-events: none;
+            transition: opacity 0.5s ease-out;
+        }
+        .cover-text h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8rem;
+            margin: 0;
+            line-height: 1.1;
+            color: #1a1a1a;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.06);
+        }
+        .cover-text p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            opacity: 0.85;
+        }
+
+        .click-badge {
+            position: absolute;
+            bottom: 15%;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            background: var(--charcoal);
+            color: var(--gold-light);
+            padding: 10px 24px;
+            border-radius: 30px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            animation: bouncePrompt 2s ease-in-out infinite;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        @keyframes bouncePrompt {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Active Unwrap Transition */
+        #cover-page.unwrapped {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #cover-page.unwrapped .ribbon-vertical-top {
+            transform: translateY(-100%);
+        }
+        #cover-page.unwrapped .ribbon-vertical-bottom {
+            transform: translateY(100%);
+        }
+        #cover-page.unwrapped .ribbon-horizontal-left {
+            transform: translateX(-100%);
+        }
+        #cover-page.unwrapped .ribbon-horizontal-right {
+            transform: translateX(100%);
+        }
+        #cover-page.unwrapped .bow-container {
+            transform: scale(2.5) rotate(360deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+        #cover-page.unwrapped .cover-text,
+        #cover-page.unwrapped .click-badge {
+            opacity: 0;
+        }
+
+        /* ==========================================
+           3. SINGLE EPIC POPPING EMOJI
+           ========================================== */
+        .epic-emoji {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 15rem;
+            z-index: 1200;
+            pointer-events: none;
+            opacity: 0;
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.25));
+        }
+
+        .epic-emoji.animate {
+            animation: epicPop 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes epicPop {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(-45deg);
+                opacity: 0;
+            }
+            30% {
+                transform: translate(-50%, -50%) scale(1.3) rotate(15deg);
+                opacity: 1;
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+                filter: blur(0);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(0.6) translateY(-250px);
+                opacity: 0;
+                filter: blur(8px);
+            }
+        }
+
+        /* ==========================================
+           4. THE REVEAL PAGE & STORYBOOK
+           ========================================== */
+        #reveal-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #fffbeb 0%, #fef3c7 40%, #fcd34d 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 20px 15px; /* Compact padding for phone frame */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 10;
+        }
+
+        #reveal-page.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 100;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-header {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .main-header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: var(--charcoal);
+            line-height: 1.1;
+        }
+
+        .main-header p.subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* Slider / Card Deck viewport */
+        .story-slider {
+            position: relative;
+            width: 100%;
+            height: 410px; /* Highly compact to prevent vertical cut-offs on mobile */
+            margin-bottom: 12px;
+            perspective: 1200px;
+        }
+
+        /* ==========================================
+           5. SCRAPBOOK CARD STYLING (Textless & Spacious)
+           ========================================== */
+        .card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--scrapbook-bg);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            box-shadow: 0 12px 30px rgba(184, 134, 11, 0.2);
+            border-radius: 20px;
+            padding: 20px 15px 15px 15px; /* Compact padding */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centering the items inside the card */
+            
+            /* Slide Transitions with Spring bounce effect */
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(100%) rotate(10deg) scale(0.85);
+            transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Slide position states */
+        .card.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0) rotate(0deg) scale(1);
+            z-index: 5;
+        }
+
+        .card.prev {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-100%) rotate(-10deg) scale(0.85);
+            z-index: 1;
+        }
+
+        /* 3D Polaroid Flip Card Container (Centered and Expanded) */
+        .polaroid-container {
+            perspective: 1000px;
+            width: 140px; /* Mobile first dimensions (compact) */
+            height: 165px;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .polaroid-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .polaroid-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Faces of Polaroid Card */
+        .polaroid-front, .polaroid-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            background: var(--polaroid-bg);
+            padding: 14px 14px 32px 14px;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.14);
+            border: 1px solid rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Polaroid Back Frame rotation */
+        .polaroid-back {
+            transform: rotateY(180deg);
+            background: #faf8f0;
+            padding: 20px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-papa .polaroid-card { transform: rotate(-2.5deg); }
+        .card-papa .polaroid-card.flipped { transform: rotateY(180deg) rotate(-2.5deg); }
+        
+        .card-bade-papa .polaroid-card { transform: rotate(3deg); }
+        .card-bade-papa .polaroid-card.flipped { transform: rotateY(180deg) rotate(3deg); }
+        
+        .card-chachu .polaroid-card { transform: rotate(-3deg); }
+        .card-chachu .polaroid-card.flipped { transform: rotateY(180deg) rotate(-3deg); }
+
+        /* Washi Tape on top of Polaroid */
+        .washi-tape {
+            position: absolute;
+            top: -16px;
+            left: 20%;
+            width: 60%;
+            height: 26px;
+            background: rgba(245, 176, 0, 0.45);
+            border-left: 2px dashed var(--scrapbook-bg);
+            border-right: 2px dashed var(--scrapbook-bg);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            transform: rotate(-1.5deg);
+            z-index: 10;
+        }
+
+        /* Golden paperclip accent in card corner */
+        .paperclip-accent {
+            position: absolute;
+            top: -12px;
+            right: 35px;
+            width: 32px;
+            height: 52px;
+            z-index: 15;
+            transform: rotate(20deg);
+            pointer-events: none;
+        }
+
+        /* Hand drawn star doodles */
+        .star-doodle {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            opacity: 0.25;
+            pointer-events: none;
+        }
+        .doodle-1 { top: 20px; left: 20px; transform: rotate(-15deg); }
+        .doodle-2 { bottom: 20px; right: 20px; transform: rotate(25deg); }
+
+        /* Photo Styles */
+        .polaroid-front img {
+            width: 100%;
+            height: 85%;
+            object-fit: cover;
+            border: 1px solid rgba(0,0,0,0.08);
+            background-color: #ffffff;
+        }
+        
+        .polaroid-caption {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.25rem;
+            color: #777;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .polaroid-back-note {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.3rem;
+            line-height: 1.3;
+            color: var(--gold-dark);
+            text-shadow: 0 1px 1px rgba(0,0,0,0.02);
+        }
+
+        .crop-bade-papa {
+            object-position: 78% 20%;
+        }
+
+        .crop-chachu {
+            object-position: center top;
+        }
+
+        .placeholder-svg-wrapper {
+            width: 100%;
+            height: 85%;
+            background: radial-gradient(circle, #fffdf5 0%, #f7ebd0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .placeholder-svg {
+            width: 65%;
+            height: 65%;
+        }
+
+        .card h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.1rem; /* Compact font size for mobile-first layout */
+            color: var(--charcoal);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            line-height: 1;
+        }
+
+        /* ==========================================
+           6. SURPRISE GOLDEN SCRATCH CARD
+           ========================================== */
+        .scratch-card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 4px;
+            width: 120px;
+            position: relative;
+            flex-shrink: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .scratch-wrapper {
+            position: relative;
+            width: 95px; /* Compact wrapper size for mobile-first layout */
+            height: 95px;
+            border-radius: 50%;
+            background: #fffbeb;
+            border: 3px double var(--gold-primary);
+            box-shadow: 0 6px 15px rgba(184, 134, 11, 0.15);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            touch-action: none; /* Prevent scroll/drag conflicts on mobile */
+        }
+
+        .scratch-reveal {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            background: radial-gradient(circle, #fffdf8 0%, #fff6e0 100%);
+        }
+
+        .reveal-badge-svg {
+            width: 85%;
+            height: 85%;
+            filter: drop-shadow(0 4px 8px rgba(184, 134, 11, 0.25));
+        }
+
+        .scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            z-index: 2;
+            transition: opacity 0.5s ease-out;
+            cursor: crosshair;
+            touch-action: none; /* Prevent scroll/drag conflicts on mobile */
+            -webkit-user-drag: none;
+        }
+
+        .scratch-canvas.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .scratch-hint {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            opacity: 0.85;
+            transition: color 0.3s ease;
+            text-align: center;
+        }
+
+        .scratch-card-container.scratched .scratch-hint {
+            color: var(--gold-dark);
+            animation: pulseSuccess 2s infinite;
+        }
+
+        @keyframes pulseSuccess {
+            0%, 100% { transform: scale(1); opacity: 0.85; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        /* Wax Seal Accent position spacing */
+        .wax-seal-container {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            width: 65px;
+            height: 65px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .wax-seal {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: center;
+        }
+        .wax-seal-container:hover .wax-seal {
+            transform: scale(1.12) rotate(4deg);
+        }
+
+        .wax-seal-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .seal-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: -10px;
+            background: var(--charcoal);
+            color: var(--gold-light);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .seal-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 28px;
+            border: 6px solid transparent;
+            border-top-color: var(--charcoal);
+        }
+
+        .wax-seal-container.active .seal-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating gold badge */
+        .floating-badge {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--gold-light) 0%, var(--gold-primary) 100%);
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            animation: floatBadge 3s ease-in-out infinite;
+            z-index: 10;
+        }
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(10deg); }
+        }
+
+        /* ==========================================
+           7. NAVIGATION CONTROLS
+           ========================================== */
+        .control-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 380px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease-out 1s; /* Fade in after unwrap */
+            z-index: 100;
+        }
+        #reveal-page.visible .control-bar {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-btn {
+            background: var(--charcoal);
+            color: var(--gold-light);
+            border: 2px solid var(--gold-primary);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.22);
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .nav-btn:hover {
+            background: var(--gold-primary);
+            color: var(--charcoal);
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(245, 176, 0, 0.45);
+        }
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+        .nav-btn.disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Progress Dots */
+        .slide-indicator {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .slide-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(26, 26, 26, 0.3);
+            transition: all 0.4s ease;
+        }
+        .slide-dot.active {
+            background: var(--charcoal);
+            transform: scale(1.35);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+
+        .click-hint {
+            margin-top: 12px;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            opacity: 0.55;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        #reveal-page.visible .click-hint {
+            animation: pulseHint 3s infinite;
+        }
+        @keyframes pulseHint {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.85; }
+        }
+
+        /* ==========================================
+           8. FLOATING CANVAS LAYERS
+           ========================================== */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1100;
+            pointer-events: none;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* ==========================================
+           9. RESPONSIVE MEDIA QUERIES
+           ========================================== */
+        /* Scale up layout on taller and wider viewports (like desktop mockups or tablets) */
+        @media (min-width: 480px) and (min-height: 700px) {
+            .story-slider {
+                height: 480px;
+                margin-bottom: 20px;
+            }
+            .card {
+                padding: 30px 20px 20px 20px;
+            }
+            .polaroid-container {
+                width: 160px;
+                height: 190px;
+                margin-bottom: 15px;
+            }
+            .card h2 {
+                font-size: 2.6rem;
+                margin-bottom: 12px;
+            }
+            .scratch-card-container {
+                width: 130px;
+                margin-bottom: 10px;
+            }
+            .scratch-wrapper {
+                width: 110px;
+                height: 110px;
+            }
+        }
+
+        /* Mobile specific spacing and text adjustments to prevent vertical cutoff */
+        @media (max-width: 480px) {
+            #reveal-page {
+                padding: 15px 12px;
+            }
+            .main-header {
+                margin-bottom: 12px;
+            }
+            .main-header h1 {
+                font-size: 2.4rem;
+            }
+            .main-header p.subtitle {
+                font-size: 0.72rem;
+                letter-spacing: 1px;
+            }
+            .control-bar {
+                max-width: 320px;
+            }
+            .nav-btn {
+                width: 46px;
+                height: 46px;
+                font-size: 1.1rem;
+            }
+            .slide-indicator {
+                gap: 8px;
+            }
+            .slide-dot {
+                width: 8px;
+                height: 8px;
+            }
+            .click-hint {
+                margin-top: 8px;
+                font-size: 0.7rem;
+            }
+            .cover-text h2 {
+                font-size: 2.6rem;
+            }
+            .click-badge {
+                font-size: 0.85rem;
+                padding: 8px 18px;
+            }
+            .floating-badge {
+                top: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .wax-seal-container {
+                bottom: 15px;
+                right: 15px;
+                width: 48px;
+                height: 48px;
+            }
+            .seal-tooltip {
+                bottom: 58px;
+            }
+        }
+
+        /* prefers-reduced-motion accessibility support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-delay: 0s !important;
+                animation-duration: 0s !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0s !important;
+                scroll-behavior: auto !important;
+            }
+            .epic-emoji.animate,
+            .wax-seal-container:hover .wax-seal,
+            .scratch-canvas.fade-out {
+                animation: none !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================================
+         CANVAS LAYERS (Ambient Sparks & Ribbon Confetti Blast)
+         ======================================================== -->
+    <canvas id="bg-canvas"></canvas>
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Phone Frame Container -->
+    <div class="phone-frame">
+        <!-- Single High-impact popping emoji node -->
+        <div id="epic-pop-emoji" class="epic-emoji">👑</div>
+
+        <!-- ========================================================
+             1. COVER PAGE (The digital gift wrap box layout)
+             ======================================================== -->
+        <div id="cover-page" onclick="unwrapGift()">
+        <div class="ribbon-horizontal-left"></div>
+        <div class="ribbon-horizontal-right"></div>
+        <div class="ribbon-vertical-top"></div>
+        <div class="ribbon-vertical-bottom"></div>
+        
+        <div class="cover-text">
+            <h2>A Special Surprise</h2>
+            <p>for the Best Dads...</p>
+        </div>
+
+        <div class="bow-container" id="unwrap-trigger">
+            <div class="bow-tail tail-left"></div>
+            <div class="bow-tail tail-right"></div>
+            <div class="bow-loop loop-1"></div>
+            <div class="bow-loop loop-2"></div>
+            <div class="bow-loop loop-3"></div>
+            <div class="bow-loop loop-4"></div>
+            <div class="bow-loop loop-5"></div>
+            <div class="bow-loop loop-6"></div>
+            <div class="bow-loop loop-7"></div>
+            <div class="bow-loop loop-8"></div>
+            <div class="bow-knot"></div>
+        </div>
+
+        <div class="click-badge">Click to Unwrap!</div>
+    </div>
+
+    <!-- ========================================================
+         2. REVEAL PAGE (Storybook Viewport)
+         ======================================================= -->
+    <div id="reveal-page">
+        <div class="main-container">
+            <header class="main-header">
+                <h1>Happy Father's Day</h1>
+                <p class="subtitle">Our Pillars of Strength, Wisdom, &amp; Laughter</p>
+            </header>
+            
+            <div class="story-slider">
+                
+                <!-- CARD 1: PAPA -->
+                <div class="card card-papa active">
+                    <div class="floating-badge">👑</div>
+
+                    <!-- Golden Paperclip SVG -->
+                    <svg class="paperclip-accent" viewBox="0 0 32 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10,40 L10,16 C10,9.3 14.9,4 21,4 C27,4 32,9.3 32,16 L32,36 C32,44.8 25.3,52 17,52 C8.7,52 2,44.8 2,36 L2,18" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <!-- Hand Drawn Star Doodles -->
+                    <svg class="star-doodle doodle-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12,0 L14.8,8.5 L24,8.5 L16.6,13.8 L19.4,22.3 L12,17 L4.6,22.3 L7.4,13.8 L0,8.5 L9.2,8.5 Z" fill="#d4af37"/>
+                    </svg>
+                    <svg class="star-doodle doodle-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12,0 L14.8,8.5 L24,8.5 L16.6,13.8 L19.4,22.3 L12,17 L4.6,22.3 L7.4,13.8 L0,8.5 L9.2,8.5 Z" fill="#d4af37"/>
+                    </svg>
+
+                    <!-- Interactive 3D Flip Polaroid Frame -->
+                    <div class="polaroid-container" onclick="handlePolaroidClick(this)">
+                        <div class="polaroid-card">
+                            <div class="polaroid-front">
+                                <div class="washi-tape"></div>
+                                <img src="papa.jpg" alt="Papa">
+                                <div class="polaroid-caption">💛</div>
+                            </div>
+                            <div class="polaroid-back">
+                                <svg viewBox="0 0 100 100" class="polaroid-back-svg" style="width: 80px; height: 80px;">
+                                    <defs>
+                                        <linearGradient id="gold-foil-papa" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#ffe875" />
+                                            <stop offset="50%" stop-color="#f5b000" />
+                                            <stop offset="100%" stop-color="#b8860b" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path d="M 50 80 C 50 80, 20 55, 20 35 C 20 22, 32 12, 45 20 C 50 23, 50 23, 55 20 C 68 12, 80 22, 80 35 C 80 55, 50 80, 50 80 Z" fill="url(#gold-foil-papa)" stroke="#fff" stroke-width="2" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h2>Papa</h2>
+
+                    <!-- Surprise Golden Scratch Card -->
+                    <div class="scratch-card-container" data-badge="papa">
+                        <div class="scratch-wrapper">
+                            <div class="scratch-reveal">
+                                <svg viewBox="0 0 100 100" class="reveal-badge-svg">
+                                    <defs>
+                                        <linearGradient id="gold-reveal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#ffe875" />
+                                            <stop offset="50%" stop-color="#f5b000" />
+                                            <stop offset="100%" stop-color="#b8860b" />
+                                        </linearGradient>
+                                        <linearGradient id="metal-base" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" stop-color="#555" />
+                                            <stop offset="100%" stop-color="#111" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path d="M22,50 C18,30 35,15 48,22 M78,50 C82,30 65,15 52,22 M25,65 C18,78 35,88 48,82 M75,65 C82,78 65,88 52,82" stroke="url(#gold-reveal-grad)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.6"/>
+                                    <path d="M 32 25 L 68 25 C 68 25, 68 52, 50 62 C 32 52, 32 25, 32 25 Z" fill="url(#gold-reveal-grad)" stroke="#fff" stroke-width="1.5" />
+                                    <path d="M 45 61 L 45 76 L 55 76 L 55 61 Z" fill="url(#gold-reveal-grad)" />
+                                    <rect x="36" y="76" width="28" height="8" rx="2" fill="url(#metal-base)" stroke="url(#gold-reveal-grad)" stroke-width="1" />
+                                    <path d="M 32 30 C 20 30, 20 45, 32 48" stroke="url(#gold-reveal-grad)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                                    <path d="M 68 30 C 80 30, 80 45, 68 48" stroke="url(#gold-reveal-grad)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                                    <text x="50" y="44" fill="#1a1a1a" font-family="Poppins" font-size="12" font-weight="900" text-anchor="middle">#1</text>
+                                    <text x="50" y="52" fill="#5c4308" font-family="Poppins" font-size="5" font-weight="700" text-anchor="middle" letter-spacing="0.5">DAD</text>
+                                </svg>
+                            </div>
+                            <canvas class="scratch-canvas" width="160" height="160"></canvas>
+                        </div>
+                        <div class="scratch-hint">Scratch to Reveal Surprise!</div>
+                    </div>
+                    
+                    <!-- Gold Wax Seal Stamp -->
+                    <div class="wax-seal-container" onclick="handleWaxSealClick(this)">
+                        <div class="wax-seal">
+                            <svg class="wax-seal-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="gold-seal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#ffe875" />
+                                        <stop offset="50%" stop-color="#f5b000" />
+                                        <stop offset="100%" stop-color="#b8860b" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M 50 10 C 65 8, 85 15, 88 32 C 90 45, 95 65, 85 80 C 75 90, 55 88, 40 92 C 25 95, 10 82, 8 65 C 5 50, 10 30, 20 18 C 30 10, 42 12, 50 10" fill="url(#gold-seal-grad)" />
+                                <circle cx="50" cy="50" r="29" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.4" />
+                                <path d="M 50 63 C 50 63, 33 48, 33 39 C 33 33, 38 28, 44 28 C 47.5 28, 50 31, 50 31 C 50 31, 52.5 28, 56 28 C 62 28, 67 33, 67 39 C 67 48, 50 63, 50 63 Z" fill="#ffffff" opacity="0.8" />
+                            </svg>
+                        </div>
+                        <div class="seal-tooltip">Pillar of Strength 🛡️</div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: BADE PAPA -->
+                <div class="card card-bade-papa">
+                    <div class="floating-badge">⭐</div>
+
+                    <!-- Golden Paperclip SVG -->
+                    <svg class="paperclip-accent" viewBox="0 0 32 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10,40 L10,16 C10,9.3 14.9,4 21,4 C27,4 32,9.3 32,16 L32,36 C32,44.8 25.3,52 17,52 C8.7,52 2,44.8 2,36 L2,18" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <!-- Hand Drawn Star Doodles -->
+                    <svg class="star-doodle doodle-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12,0 L14.8,8.5 L24,8.5 L16.6,13.8 L19.4,22.3 L12,17 L4.6,22.3 L7.4,13.8 L0,8.5 L9.2,8.5 Z" fill="#d4af37"/>
+                    </svg>
+                    <svg class="star-doodle doodle-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12,0 L14.8,8.5 L24,8.5 L16.6,13.8 L19.4,22.3 L12,17 L4.6,22.3 L7.4,13.8 L0,8.5 L9.2,8.5 Z" fill="#d4af37"/>
+                    </svg>
+
+                    <!-- Interactive 3D Flip Polaroid Frame -->
+                    <div class="polaroid-container" onclick="handlePolaroidClick(this)">
+                        <div class="polaroid-card">
+                            <div class="polaroid-front">
+                                <div class="washi-tape"></div>
+                                <img class="crop-bade-papa" src="bade-papa.jpg" alt="Bade Papa">
+                                <div class="polaroid-caption">💛</div>
+                            </div>
+                            <div class="polaroid-back">
+                                <svg viewBox="0 0 100 100" class="polaroid-back-svg" style="width: 80px; height: 80px;">
+                                    <defs>
+                                        <linearGradient id="gold-foil-bade" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#ffe875" />
+                                            <stop offset="50%" stop-color="#f5b000" />
+                                            <stop offset="100%" stop-color="#b8860b" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path d="M 50 10 L 62 38 L 90 50 L 62 62 L 50 90 L 38 62 L 10 50 L 38 38 Z" fill="url(#gold-foil-bade)" stroke="#fff" stroke-width="2" />
+                                    <circle cx="50" cy="50" r="8" fill="#fff" opacity="0.7" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h2>Bade Papa</h2>
+
+                    <!-- Surprise Golden Scratch Card -->
+                    <div class="scratch-card-container" data-badge="bade">
+                        <div class="scratch-wrapper">
+                            <div class="scratch-reveal">
+                                <svg viewBox="0 0 100 100" class="reveal-badge-svg">
+                                    <circle cx="50" cy="50" r="42" stroke="url(#gold-reveal-grad)" stroke-width="1.5" stroke-dasharray="4 3" fill="none" opacity="0.6"/>
+                                    <path d="M 50 18 Q 72 18 72 45 C 72 65, 50 82, 50 82 C 50 82, 28 65, 28 45 Q 28 18 50 18 Z" fill="url(#gold-reveal-grad)" stroke="#fff" stroke-width="1.5" />
+                                    <path d="M 50 72 L 50 48 M 50 58 L 42 50 M 50 54 L 58 48" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
+                                    <circle cx="50" cy="42" r="7" fill="#fff" opacity="0.8" />
+                                    <circle cx="41" cy="47" r="5" fill="#fff" opacity="0.8" />
+                                    <circle cx="59" cy="45" r="5" fill="#fff" opacity="0.8" />
+                                    <path d="M 50 42 L 50 44" stroke="#1a1a1a" stroke-width="1.5" />
+                                    <path d="M 50 24 L 52 30 L 58 30 L 53 34 L 55 40 L 50 36 L 45 40 L 47 34 L 42 30 L 48 30 Z" fill="#ffffff" />
+                                </svg>
+                            </div>
+                            <canvas class="scratch-canvas" width="160" height="160"></canvas>
+                        </div>
+                        <div class="scratch-hint">Scratch to Reveal Surprise!</div>
+                    </div>
+                    
+                    <!-- Gold Wax Seal Stamp -->
+                    <div class="wax-seal-container" onclick="handleWaxSealClick(this)">
+                        <div class="wax-seal">
+                            <svg class="wax-seal-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 50 10 C 65 8, 85 15, 88 32 C 90 45, 95 65, 85 80 C 75 90, 55 88, 40 92 C 25 95, 10 82, 8 65 C 5 50, 10 30, 20 18 C 30 10, 42 12, 50 10" fill="url(#gold-seal-grad)" />
+                                <circle cx="50" cy="50" r="29" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.4" />
+                                <path d="M 50 63 C 50 63, 33 48, 33 39 C 33 33, 38 28, 44 28 C 47.5 28, 50 31, 50 31 C 50 31, 52.5 28, 56 28 C 62 28, 67 33, 67 39 C 67 48, 50 63, 50 63 Z" fill="#ffffff" opacity="0.8" />
+                            </svg>
+                        </div>
+                        <div class="seal-tooltip">Grand Guardian 🌿</div>
+                    </div>
+                </div>
+
+                <!-- CARD 3: CHACHU -->
+                <div class="card card-chachu">
+                    <div class="floating-badge">🚀</div>
+
+                    <!-- Golden Paperclip SVG -->
+                    <svg class="paperclip-accent" viewBox="0 0 32 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10,40 L10,16 C10,9.3 14.9,4 21,4 C27,4 32,9.3 32,16 L32,36 C32,44.8 25.3,52 17,52 C8.7,52 2,44.8 2,36 L2,18" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <!-- Hand Drawn Star Doodles -->
+                    <svg class="star-doodle doodle-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12,0 L14.8,8.5 L24,8.5 L16.6,13.8 L19.4,22.3 L12,17 L4.6,22.3 L7.4,13.8 L0,8.5 L9.2,8.5 Z" fill="#d4af37"/>
+                    </svg>
+                    <svg class="star-doodle doodle-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12,0 L14.8,8.5 L24,8.5 L16.6,13.8 L19.4,22.3 L12,17 L4.6,22.3 L7.4,13.8 L0,8.5 L9.2,8.5 Z" fill="#d4af37"/>
+                    </svg>
+
+                    <!-- Interactive 3D Flip Polaroid Frame -->
+                    <div class="polaroid-container" onclick="handlePolaroidClick(this)">
+                        <div class="polaroid-card">
+                            <div class="polaroid-front">
+                                <div class="washi-tape"></div>
+                                <img class="crop-chachu" src="chachu.png" alt="Chachu">
+                                <div class="polaroid-caption">💛</div>
+                            </div>
+                            <div class="polaroid-back">
+                                <svg viewBox="0 0 100 100" class="polaroid-back-svg" style="width: 80px; height: 80px;">
+                                    <defs>
+                                        <linearGradient id="gold-foil-chachu" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#ffe875" />
+                                            <stop offset="50%" stop-color="#f5b000" />
+                                            <stop offset="100%" stop-color="#b8860b" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="50" cy="50" r="35" fill="url(#gold-foil-chachu)" stroke="#fff" stroke-width="2" />
+                                    <circle cx="38" cy="42" r="5" fill="#1a1a1a" />
+                                    <circle cx="62" cy="42" r="5" fill="#1a1a1a" />
+                                    <path d="M 32 58 Q 50 78 68 58" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round" fill="none" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h2>Chachu</h2>
+
+                    <!-- Surprise Golden Scratch Card -->
+                    <div class="scratch-card-container" data-badge="chachu">
+                        <div class="scratch-wrapper">
+                            <div class="scratch-reveal">
+                                <svg viewBox="0 0 100 100" class="reveal-badge-svg">
+                                    <circle cx="50" cy="50" r="42" stroke="url(#gold-reveal-grad)" stroke-width="1" fill="none" opacity="0.4" />
+                                    <g transform="translate(50, 50)">
+                                        <path d="M 0 -35 L 8 -10 L 30 -22 L 13 4 L 30 22 L 8 10 L 0 35 L -8 10 L -30 22 L -13 4 L -30 -22 L -8 -10 Z" fill="url(#gold-reveal-grad)" stroke="#fff" stroke-width="1.5" />
+                                        <circle cx="0" cy="-35" r="3" fill="url(#gold-reveal-grad)" stroke="#fff" stroke-width="1" />
+                                        <circle cx="30" cy="-22" r="3" fill="url(#gold-reveal-grad)" stroke="#fff" stroke-width="1" />
+                                        <circle cx="30" cy="22" r="3" fill="url(#gold-reveal-grad)" stroke="#fff" stroke-width="1" />
+                                        <circle cx="0" cy="35" r="3" fill="url(#gold-reveal-grad)" stroke="#fff" stroke-width="1" />
+                                        <circle cx="-30" cy="22" r="3" fill="url(#gold-reveal-grad)" stroke="#fff" stroke-width="1" />
+                                        <circle cx="-30" cy="-22" r="3" fill="url(#gold-reveal-grad)" stroke="#fff" stroke-width="1" />
+                                    </g>
+                                    <circle cx="50" cy="50" r="22" fill="#fff" stroke="url(#gold-reveal-grad)" stroke-width="2" />
+                                    <g transform="translate(32, 44) scale(0.75)">
+                                        <circle cx="15" cy="12" r="7" fill="#1a1a1a" />
+                                        <circle cx="33" cy="12" r="7" fill="#1a1a1a" />
+                                        <line x1="22" y1="12" x2="26" y2="12" stroke="#1a1a1a" stroke-width="2.5" />
+                                        <path d="M 8 12 Q 10 3 15 3" stroke="#1a1a1a" stroke-width="1.5" fill="none" />
+                                        <path d="M 40 12 Q 38 3 33 3" stroke="#1a1a1a" stroke-width="1.5" fill="none" />
+                                    </g>
+                                    <path d="M 44 58 Q 50 64 56 58" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" fill="none" />
+                                    <text x="50" y="38" fill="#5c4308" font-family="Poppins" font-size="5" font-weight="900" text-anchor="middle">CHACHU</text>
+                                </svg>
+                            </div>
+                            <canvas class="scratch-canvas" width="160" height="160"></canvas>
+                        </div>
+                        <div class="scratch-hint">Scratch to Reveal Surprise!</div>
+                    </div>
+                    
+                    <!-- Gold Wax Seal Stamp -->
+                    <div class="wax-seal-container" onclick="handleWaxSealClick(this)">
+                        <div class="wax-seal">
+                            <svg class="wax-seal-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 50 10 C 65 8, 85 15, 88 32 C 90 45, 95 65, 85 80 C 75 90, 55 88, 40 92 C 25 95, 10 82, 8 65 C 5 50, 10 30, 20 18 C 30 10, 42 12, 50 10" fill="url(#gold-seal-grad)" />
+                                <circle cx="50" cy="50" r="29" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.4" />
+                                <path d="M 50 63 C 50 63, 33 48, 33 39 C 33 33, 38 28, 44 28 C 47.5 28, 50 31, 50 31 C 50 31, 52.5 28, 56 28 C 62 28, 67 33, 67 39 C 67 48, 50 63, 50 63 Z" fill="#ffffff" opacity="0.8" />
+                            </svg>
+                        </div>
+                        <div class="seal-tooltip">Best Chachu in the World! ❤️</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Control indicators -->
+            <div class="control-bar">
+                <button class="nav-btn disabled" id="prev-btn" onclick="prevSlide()">←</button>
+                <div class="slide-indicator">
+                    <span class="slide-dot active"></span>
+                    <span class="slide-dot"></span>
+                    <span class="slide-dot"></span>
+                </div>
+                <button class="nav-btn" id="next-btn" onclick="nextSlide()">→</button>
+            </div>
+            
+            <div class="click-hint">Tap photo to flip | Scratch gold circle to reveal badge</div>
+        </div>
+    </div>
+</div>
+
+    <!-- ========================================================
+         9. INTERACTIVE SCRIPTS & ENGINES
+         ======================================================= -->
+    <script>
+        let isOpened = false;
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        // Initialize scratch cards on DOM load
+        document.addEventListener("DOMContentLoaded", () => {
+            initScratchCards();
+        });
+
+        /* ==========================================
+           A. SURPRISE GOLDEN SCRATCH CARD ENGINE
+           ========================================== */
+        function initScratchCards() {
+            const canvases = document.querySelectorAll('.scratch-canvas');
+            canvases.forEach(canvas => {
+                const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                const width = canvas.width;
+                const height = canvas.height;
+
+                // Paint metallic gold gradient with brushed texture
+                function drawFoil() {
+                    ctx.save();
+                    const grad = ctx.createRadialGradient(width/2, height/2, width/6, width/2, height/2, width/2);
+                    grad.addColorStop(0, '#ffe875'); // gold-light
+                    grad.addColorStop(0.5, '#f5b000'); // gold-primary
+                    grad.addColorStop(1, '#b8860b'); // gold-dark
+                    ctx.fillStyle = grad;
+                    ctx.fillRect(0, 0, width, height);
+
+                    // Brushed gold noise dots (light and dark)
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+                    for (let i = 0; i < 150; i++) {
+                        const rx = Math.random() * width;
+                        const ry = Math.random() * height;
+                        const rsize = Math.random() * 1.5 + 0.5;
+                        ctx.beginPath();
+                        ctx.arc(rx, ry, rsize, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                    for (let i = 0; i < 100; i++) {
+                        const rx = Math.random() * width;
+                        const ry = Math.random() * height;
+                        const rsize = Math.random() * 1.2 + 0.5;
+                        ctx.beginPath();
+                        ctx.arc(rx, ry, rsize, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+
+                    // Border decorations
+                    ctx.strokeStyle = 'rgba(133, 88, 0, 0.35)';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(width/2, height/2, width/2 - 3, 0, Math.PI * 2);
+                    ctx.stroke();
+
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+                    ctx.lineWidth = 1;
+                    ctx.setLineDash([4, 4]);
+                    ctx.beginPath();
+                    ctx.arc(width/2, height/2, width/2 - 8, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+                drawFoil();
+
+                let isDrawing = false;
+                let lastX = 0;
+                let lastY = 0;
+                let rect = null;
+                let strokeCount = 0;
+
+                function getMousePos(e) {
+                    if (!rect) rect = canvas.getBoundingClientRect();
+                    let clientX, clientY;
+                    if (e.touches && e.touches[0]) {
+                        clientX = e.touches[0].clientX;
+                        clientY = e.touches[0].clientY;
+                    } else {
+                        clientX = e.clientX;
+                        clientY = e.clientY;
+                    }
+                    return {
+                        x: ((clientX - rect.left) / rect.width) * width,
+                        y: ((clientY - rect.top) / rect.height) * height
+                    };
+                }
+
+                function scratch(x, y) {
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.lineWidth = 24;
+                    ctx.lineCap = 'round';
+                    ctx.lineJoin = 'round';
+
+                    ctx.beginPath();
+                    if (isDrawing && (lastX !== 0 || lastY !== 0)) {
+                        ctx.moveTo(lastX, lastY);
+                        ctx.lineTo(x, y);
+                        ctx.stroke();
+                    } else {
+                        ctx.arc(x, y, 12, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+
+                    lastX = x;
+                    lastY = y;
+                    strokeCount++;
+
+                    if (strokeCount % 15 === 0) {
+                        checkProgress();
+                    }
+                }
+
+                function handleDown(e) {
+                    if (e.cancelable) e.preventDefault();
+                    rect = canvas.getBoundingClientRect();
+                    isDrawing = true;
+                    const pos = getMousePos(e);
+                    lastX = pos.x;
+                    lastY = pos.y;
+                    scratch(pos.x, pos.y);
+                }
+
+                function handleMove(e) {
+                    if (!isDrawing) return;
+                    if (e.cancelable) e.preventDefault();
+                    const pos = getMousePos(e);
+                    scratch(pos.x, pos.y);
+                }
+
+                function handleUp() {
+                    if (!isDrawing) return;
+                    isDrawing = false;
+                    lastX = 0;
+                    lastY = 0;
+                    rect = null;
+                    checkProgress();
+                }
+
+                canvas.addEventListener('mousedown', handleDown);
+                canvas.addEventListener('mousemove', handleMove);
+                window.addEventListener('mouseup', handleUp);
+
+                canvas.addEventListener('touchstart', handleDown, { passive: false });
+                canvas.addEventListener('touchmove', handleMove, { passive: false });
+                canvas.addEventListener('touchend', handleUp, { passive: false });
+
+                function checkProgress() {
+                    try {
+                        const imgData = ctx.getImageData(0, 0, width, height);
+                        const pixels = imgData.data;
+                        let cleared = 0;
+                        for (let i = 3; i < pixels.length; i += 16) {
+                            if (pixels[i] === 0) cleared++;
+                        }
+                        const totalSamples = pixels.length / 16;
+                        const percent = (cleared / totalSamples) * 100;
+
+                        if (percent > 45) {
+                            canvas.classList.add('fade-out');
+                            const container = canvas.closest('.scratch-card-container');
+                            if (container && !container.classList.contains('scratched')) {
+                                container.classList.add('scratched');
+                                const hint = container.querySelector('.scratch-hint');
+                                if (hint) {
+                                    const badge = container.getAttribute('data-badge');
+                                    if (badge === 'papa') hint.textContent = "🏆 World's Best Dad!";
+                                    else if (badge === 'bade') hint.textContent = "🛡️ Grand Guardian!";
+                                    else if (badge === 'chachu') hint.textContent = "🕶️ Best Chachu in the World!";
+                                }
+                            }
+                            cleanup();
+                        }
+                    } catch (e) {
+                        console.warn("Scratch check skipped:", e);
+                    }
+                }
+
+                function cleanup() {
+                    canvas.removeEventListener('mousedown', handleDown);
+                    canvas.removeEventListener('mousemove', handleMove);
+                    window.removeEventListener('mouseup', handleUp);
+                    canvas.removeEventListener('touchstart', handleDown);
+                    canvas.removeEventListener('touchmove', handleMove);
+                    canvas.removeEventListener('touchend', handleUp);
+                }
+            });
+        }
+
+        /* ==========================================
+           B. UNWRAP GIFT CONTROLLER
+           ========================================== */
+        function unwrapGift() {
+            if (isOpened) return;
+            isOpened = true;
+
+            // Slide Cover out
+            const cover = document.getElementById("cover-page");
+            cover.classList.add("unwrapped");
+
+            // Display Reveal page
+            const mainPage = document.getElementById("reveal-page");
+            mainPage.classList.add("visible");
+
+            // Confetti Blast
+            spawnConfettiBlast();
+            
+            // Trigger single large epic popping emoji
+            const epicPop = document.getElementById("epic-pop-emoji");
+            epicPop.classList.add("animate");
+
+            // Hide cover node
+            setTimeout(() => {
+                cover.style.display = "none";
+            }, 1300);
+        }
+
+        /* ==========================================
+           C. STORYBOOK INTERACTIVE EVENTS
+           ========================================== */
+        function handlePolaroidClick(container) {
+            const card = container.querySelector(".polaroid-card");
+            card.classList.toggle("flipped");
+        }
+
+        function handleWaxSealClick(container) {
+            document.querySelectorAll(".wax-seal-container").forEach(el => {
+                if (el !== container) el.classList.remove("active");
+            });
+            container.classList.toggle("active");
+        }
+
+        // Close tooltips when clicking anywhere else
+        document.addEventListener("click", function(e) {
+            if (!e.target.closest(".wax-seal-container")) {
+                document.querySelectorAll(".wax-seal-container").forEach(el => {
+                    el.classList.remove("active");
+                });
+            }
+        });
+
+        /* ==========================================
+           D. STORYBOOK SLIDER LOGIC
+           ========================================== */
+        const cards = document.querySelectorAll(".card");
+        const dots = document.querySelectorAll(".slide-dot");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+
+        function updateSliderPosition() {
+            cards.forEach((card, index) => {
+                const polaroid = card.querySelector(".polaroid-card");
+                if (polaroid) polaroid.classList.remove("flipped");
+                
+                card.className = "card";
+                
+                if (index === currentSlide) {
+                    card.classList.add("active");
+                } else if (index < currentSlide) {
+                    card.classList.add("prev");
+                }
+            });
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle("active", index === currentSlide);
+            });
+
+            prevBtn.classList.toggle("disabled", currentSlide === 0);
+            nextBtn.classList.toggle("disabled", currentSlide === totalSlides - 1);
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSliderPosition();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSliderPosition();
+            }
+        }
+
+        /* ==========================================
+           F. PHYSICS PARTICLES ENGINE (confetti / sparks only)
+           ========================================== */
+        const confettiCanvas = document.getElementById("confetti-canvas");
+        const confettiCtx = confettiCanvas.getContext("2d");
+        
+        const bgCanvas = document.getElementById("bg-canvas");
+        const bgCtx = bgCanvas.getContext("2d");
+
+        let confettiParticles = [];
+        let ambientSparks = [];
+        
+        function resizeAllCanvases() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resizeAllCanvases);
+        resizeAllCanvases();
+
+        // Rectangular Gold Confetti
+        class Confetti {
+            constructor() {
+                this.x = confettiCanvas.width / 2;
+                this.y = confettiCanvas.height / 2;
+                
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 16 + 10;
+                
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed - (Math.random() * 8 + 5);
+                
+                this.width = Math.random() * 8 + 6;
+                this.height = Math.random() * 12 + 8;
+                
+                const colors = ["#ffd700", "#ffe875", "#f5b000", "#b8860b", "#fff7d1", "#e3b134"];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                this.gravity = 0.22;
+                this.drag = 0.975;
+                
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = Math.random() * 8 - 4;
+                
+                this.opacity = 1;
+                this.decay = Math.random() * 0.012 + 0.006;
+            }
+
+            update() {
+                this.vx *= this.drag;
+                this.vy *= this.drag;
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                this.rotation += this.rotationSpeed;
+                this.opacity -= this.decay;
+            }
+
+            draw() {
+                confettiCtx.save();
+                confettiCtx.translate(this.x, this.y);
+                confettiCtx.rotate(this.rotation * Math.PI / 180);
+                confettiCtx.globalAlpha = this.opacity;
+                confettiCtx.fillStyle = this.color;
+                
+                confettiCtx.beginPath();
+                confettiCtx.rect(-this.width / 2, -this.height / 2, this.width, this.height);
+                confettiCtx.fill();
+                confettiCtx.restore();
+            }
+        }
+
+        // Floating ambient sparks
+        class Spark {
+            constructor() {
+                this.x = Math.random() * bgCanvas.width;
+                this.y = bgCanvas.height + Math.random() * 50;
+                this.size = Math.random() * 3 + 1;
+                this.vy = -(Math.random() * 1.2 + 0.4);
+                this.vx = Math.random() * 1 - 0.5;
+                this.opacity = Math.random() * 0.4 + 0.3;
+                this.fadeRate = Math.random() * 0.002 + 0.001;
+            }
+
+            update() {
+                this.y += this.vy;
+                this.x += this.vx;
+                this.opacity -= this.fadeRate;
+            }
+
+            draw() {
+                bgCtx.save();
+                bgCtx.globalAlpha = this.opacity;
+                bgCtx.fillStyle = "#ffd700";
+                bgCtx.shadowBlur = 8;
+                bgCtx.shadowColor = "#ffd700";
+                bgCtx.beginPath();
+                bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                bgCtx.fill();
+                bgCtx.restore();
+            }
+        }
+
+        // Initial Wrap Blast
+        function spawnConfettiBlast() {
+            for (let i = 0; i < 150; i++) {
+                confettiParticles.push(new Confetti());
+            }
+        }
+
+        /* ==========================================
+           G. THE GRAPHICS RENDERING LOOP
+           ========================================== */
+        function tickEngine() {
+            // Clear & draw confetti canvas
+            confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            for (let i = confettiParticles.length - 1; i >= 0; i--) {
+                const p = confettiParticles[i];
+                p.update();
+                p.draw();
+                if (p.opacity <= 0 || p.y > confettiCanvas.height + 50) {
+                    confettiParticles.splice(i, 1);
+                }
+            }
+
+            // Clear & draw ambient gold sparkles
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            if (isOpened) {
+                if (Math.random() < 0.15 && ambientSparks.length < 80) {
+                    ambientSparks.push(new Spark());
+                }
+                
+                for (let i = ambientSparks.length - 1; i >= 0; i--) {
+                    const spark = ambientSparks[i];
+                    spark.update();
+                    spark.draw();
+                    
+                    if (spark.opacity <= 0 || spark.y < -10) {
+                        ambientSparks.splice(i, 1);
+                    }
+                }
+            }
+
+            requestAnimationFrame(tickEngine);
+        }
+
+        // Boot graphics loop
+        requestAnimationFrame(tickEngine);
+    </script>
+</body>
+</html>

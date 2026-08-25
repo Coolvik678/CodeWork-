@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sage-50: #F4F7F5;
+  --color-sage-100: #E8EFEA;
+  --color-sage-200: #D1DFD6;
+  --color-sage-600: #4E6E58;
+  --color-sage-700: #3D5745;
+  --color-sage-800: #2E4234;
+  --color-sage-900: #1E2B22;
+  
+  --color-gold-400: #CBB184;
+  --color-gold-500: #B8975F;
+  --color-gold-600: #9E7F4B;
+  
+  --color-soft-blue: #F0F4F8;
+  --color-soft-white: #FAFBF9;
+  --color-clinical-dark: #121A16;
+
+  --font-serif: var(--font-playfair), serif;
+  --font-sans: var(--font-inter), sans-serif;
+  
+  --radius-clinical-lg: 24px;
+  --radius-clinical-md: 16px;
+}
+
+:root {
+  --background: #FAFBF9;
+  --foreground: #121A16;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Custom scroll reveal styling */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll.active {
+  opacity: 1;
+  transform: translateY(0);
+}

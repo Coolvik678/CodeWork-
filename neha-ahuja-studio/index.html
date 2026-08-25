@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neha Ahuja Studio | Luxury Bridal & Beauty</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Global Noise Texture -->
+    <div class="noise-overlay"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-trail"></div>
+
+    <!-- Navigation -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>Neha Ahuja</h1>
+                <span>STUDIO · SAGAR</span>
+            </div>
+            <nav class="desktop-nav">
+                <a href="#pedigree">Our Pedigree</a>
+                <a href="#services">Expertise</a>
+                <a href="#lookbook">Lookbook</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#booking">Contact</a>
+            </nav>
+            <div class="nav-right">
+                <a href="#booking" class="btn-pill">Book a Consultation</a>
+                <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay">
+        <nav class="mobile-nav">
+            <a href="#pedigree">Our Pedigree</a>
+            <a href="#services">Expertise</a>
+            <a href="#lookbook">Lookbook</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#booking">Contact</a>
+        </nav>
+    </div>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+            <!-- SECTION 01: HERO -->
+            <!-- Removed the generic 'reveal' class and added specific hero-intro animation classes -->
+            <section class="hero" id="hero">
+                <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+                <div class="hero-overlay"></div>
+                
+                <div class="hero-content hero-fade-in">
+                    <p class="pre-headline"><span class="line"></span> SAGAR'S PREMIER BRIDAL & BEAUTY STUDIO</p>
+                    <h1 class="main-headline">You Deserve to <br>Feel <em>Extraordinary</em>.</h1>
+                    <p class="sub-headline">Transformations crafted for your most precious moments —<br>from bridal mornings to everyday radiance.</p>
+                    
+                    <div class="hero-actions">
+                        <a href="#booking" class="btn-primary magnetic-btn">Book Your Transformation</a>
+                        <a href="#lookbook" class="btn-ghost magnetic-btn">View Our Lookbook &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="scroll-indicator hero-fade-in-delayed">
+                    <span>Scroll to Discover</span>
+                    <div class="chevron"></div>
+                </div>
+            </section>
+
+            <!-- SECTION 02: THE PEDIGREE -->
+            <section class="pedigree" id="pedigree">
+                <div class="container two-col">
+                    <div class="col-image reveal-up">
+                        <div class="img-reveal-wrapper portrait-slot">
+                            <div class="img-reveal-overlay"></div>
+                            <img src="images/3.jpg" alt="Makeup Artist">
+                        </div>
+                    </div>
+                    <div class="col-text reveal-up">
+                        <p class="section-label">OUR PEDIGREE</p>
+                        <h2 class="section-title">Trained by the Industry's Finest.<br><em>Brought Home to Sagar.</em></h2>
+                        <p class="body-copy">At Neha Ahuja Studio, every transformation is guided by Saisha Ahuja Badlani — a certified makeup artist whose training spans the most respected names in India's beauty industry. Her craft isn't self-taught intuition; it's a mastery built through direct mentorship from the very best.</p>
+                        
+                        <div class="cert-grid mt-8">
+                            <div class="cert-card">
+                                <span class="cert-icon">✨</span>
+                                <h3>Jiya Sosa</h3>
+                                <p>Bridal Makeup Artistry</p>
+                            </div>
+                            <div class="cert-card">
+                                <span class="cert-icon">🌸</span>
+                                <h3>Jasmine Beauty Care</h3>
+                                <p>Advanced Beauty Techniques</p>
+                            </div>
+                            <div class="cert-card">
+                                <span class="cert-icon">✂️</span>
+                                <h3>Amit Hair & Makeup</h3>
+                                <p>Hair Styling Mastery</p>
+                            </div>
+                            <div class="cert-card">
+                                <span class="cert-icon">💄</span>
+                                <h3>Akshata Gohil</h3>
+                                <p>Professional Makeup Academy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 03: SERVICES -->
+            <section class="services" id="services">
+                <div class="container text-center reveal-up">
+                    <p class="section-label">OUR EXPERTISE</p>
+                    <h2 class="section-title">A Symphony of <em>Beauty Services</em></h2>
+                    <p class="sub-copy" style="margin: 0 auto;">From radiant bridal glows to precision haircuts and relaxing spa treatments, we offer a full suite of services designed to pamper and perfect.</p>
+                    
+                    <div class="service-tabs">
+                        <button class="tab-btn active" data-target="bridal">Bridal & Event</button>
+                        <button class="tab-btn" data-target="makeup">Makeup & Face</button>
+                        <button class="tab-btn" data-target="hair">Hair Studio</button>
+                        <button class="tab-btn" data-target="skin">Skin & Spa</button>
+                    </div>
+
+                    <!-- Wrapper added to prevent layout jumps by utilizing CSS Grid -->
+                    <div class="tab-content-wrapper">
+                        <div class="tab-content active" id="bridal">
+                            <div class="service-grid">
+                                <div class="service-card">
+                                    <h3>Signature Bridal Makeup</h3>
+                                    <p>Flawless HD/Kryolan makeup, elegant hair styling, and perfect saree draping for your big day.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h3>Engagement Styling</h3>
+                                    <p>A balanced, radiant look that bridges the gap between natural beauty and bridal glam.</p>
+                                </div>
+                                <div class="service-card">
+                                    <h3>Rajwadi Mehndi Art</h3>
+                                    <p>Intricate, traditional bridal henna applied with premium organic cones.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-content" id="makeup">
+                            <div class="service-grid">
+                                <div class="service-card"><h3>Party Makeup</h3><p>Elegant makeup for guests and attendees.</p></div>
+                                <div class="service-card"><h3>HD Makeup</h3><p>Flawless finish for high-definition photography.</p></div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="hair">
+                            <div class="service-grid">
+                                <div class="service-card"><h3>Advanced Hair Styling</h3><p>Voluminous curls, sleek straight, or elegant updos.</p></div>
+                                <div class="service-card"><h3>Keratin Treatment</h3><p>Smooth, frizz-free hair restoration.</p></div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="skin">
+                            <div class="service-grid">
+                                <div class="service-card"><h3>Luxury Facial</h3><p>Deep cleansing and glowing treatments.</p></div>
+                                <div class="service-card"><h3>Full Body Spa</h3><p>Relaxing and rejuvenating full body therapy.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 04: LOOKBOOK (Removed as requested) -->
+            <!--
+            <section class="lookbook" id="lookbook">
+            ...
+            </section>
+            -->
+
+            <!-- SECTION 05: TESTIMONIALS -->
+            <section class="social-proof" id="testimonials">
+                <div class="container two-col">
+                    <div class="col-left reveal-up">
+                        <p class="section-label">CLIENT LOVE</p>
+                        <h2 class="section-title">Words from <br><em>Our Brides</em></h2>
+                        <div class="testimonial-carousel">
+                            <div class="test-slide active">
+                                <div class="quote-icon">“</div>
+                                <p class="quote-text">Highly skilled makeup artist. Her work was truly flawless! Easy to communicate with and very responsive. Would recommend without hesitation!</p>
+                                <div class="reviewer-profile mt-8">
+                                    <img src="images/4.jpg" alt="Naman" class="reviewer-avatar">
+                                    <div class="reviewer-info">
+                                        <p class="reviewer-name">Naman</p>
+                                        <p class="reviewer-title">Event Client</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="test-slide">
+                                <div class="quote-icon">“</div>
+                                <p class="quote-text">Neha Ahuja offers a luxurious vibe with experienced staff and clean equipment. Multi-services with quick confirmation — a complete studio experience.</p>
+                                <div class="reviewer-profile mt-8">
+                                    <img src="images/5.jpg" alt="Aditi" class="reviewer-avatar">
+                                    <div class="reviewer-info">
+                                        <p class="reviewer-name">Aditi</p>
+                                        <p class="reviewer-title">Bridal Client</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="test-slide">
+                                <div class="quote-icon">“</div>
+                                <p class="quote-text">An absolutely amazing experience! The makeup lasted all day without needing touch-ups. I have never felt so beautiful.</p>
+                                <div class="reviewer-profile mt-8">
+                                    <img src="images/2.jpg" alt="Sneha" class="reviewer-avatar">
+                                    <div class="reviewer-info">
+                                        <p class="reviewer-name">Sneha</p>
+                                        <p class="reviewer-title">Party Client</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="carousel-nav">
+                                <button class="nav-dot active" data-index="0" aria-label="View Testimonial 1"></button>
+                                <button class="nav-dot" data-index="1" aria-label="View Testimonial 2"></button>
+                                <button class="nav-dot" data-index="2" aria-label="View Testimonial 3"></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-right reveal-up">
+                        <div class="testimonial-collage">
+                            <img src="images/1.jpg" alt="Client 1" class="collage-img img-1">
+                            <img src="images/4.jpg" alt="Client 2" class="collage-img img-2">
+                            <img src="images/5.jpg" alt="Client 3" class="collage-img img-3">
+                            <img src="images/2.jpg" alt="Client 4" class="collage-img img-4">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 06: BOOKING -->
+            <section class="booking" id="booking">
+                <div class="container reveal-up">
+                    <div class="booking-wrapper">
+                        <div class="booking-info">
+                            <p class="section-label">GET IN TOUCH</p>
+                            <h2 class="section-title">Book Your <em>Session</em></h2>
+                            <p class="body-copy">Ready to feel extraordinary? Let us know what you need, and we'll craft the perfect beauty experience for you.</p>
+                            
+                            <div class="contact-details mt-8">
+                                <p><strong>📍 Visit Us</strong><br>Near Gyatri Stores, Civil Lines, Sagar – 470001, MP</p>
+                                <p class="mt-4"><strong>📞 Call & WhatsApp</strong><br><a href="https://api.whatsapp.com/send?phone=917339952918" target="_blank" class="contact-phone-link">+91 73399 52918</a></p>
+                                <p class="mt-4"><strong>🕐 Hours</strong><br>Monday – Sunday: 10:00 AM – 10:00 PM</p>
+                            </div>
+                            
+                            <a href="https://api.whatsapp.com/send?phone=917339952918" class="btn-whatsapp mt-8" target="_blank">Chat on WhatsApp</a>
+                        </div>
+                        
+                        <form class="booking-form" id="booking-form">
+                            <!-- Floating Label Fields -->
+                            <div class="floating-label-group">
+                                <input type="text" class="floating-input" id="book-name" required placeholder=" ">
+                                <label class="floating-label" for="book-name">Your Full Name</label>
+                            </div>
+
+                            <div class="floating-label-group">
+                                <input type="tel" class="floating-input" id="book-phone" required placeholder=" ">
+                                <label class="floating-label" for="book-phone">WhatsApp Number</label>
+                            </div>
+
+                            <div class="floating-label-group">
+                                <select class="floating-input" id="book-service" required>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="Bridal">Bridal & Event Makeup</option>
+                                    <option value="Hair">Hair Styling / Treatment</option>
+                                    <option value="Skin">Facial & Skin Care</option>
+                                    <option value="Other">Other Query</option>
+                                </select>
+                                <label class="floating-label" for="book-service">Service Needed</label>
+                            </div>
+
+                            <div class="floating-label-group">
+                                <input type="date" class="floating-input" id="book-date" placeholder=" ">
+                                <label class="floating-label" for="book-date" style="top: 14px; font-size: 12px; color: var(--text-secondary); font-weight: 500;">Preferred Date</label>
+                            </div>
+
+                            <button type="submit" class="btn-primary full-width" style="margin-top: 16px;">Send Booking Request</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container text-center">
+            <h2 class="footer-logo">Neha Ahuja</h2>
+            <p class="footer-tagline">Sagar's Premier Beauty Studio</p>
+            <div class="footer-links mt-4">
+                <a href="#pedigree">Our Pedigree</a>
+                <a href="#services">Services</a>
+                <a href="#lookbook">Lookbook</a>
+                <a href="#booking">Contact</a>
+            </div>
+            <p class="copyright mt-8">&copy; 2025 Neha Ahuja Studio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

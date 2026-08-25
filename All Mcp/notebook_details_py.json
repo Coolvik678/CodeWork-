@@ -1,0 +1,13 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"status\":\"error\",\"error\":\"Authentication expired. Run 'notebooklm-mcp-auth' in your terminal to re-authenticate.\"}"
+    }
+  ],
+  "structuredContent": {
+    "status": "error",
+    "error": "Authentication expired. Run 'notebooklm-mcp-auth' in your terminal to re-authenticate."
+  },
+  "isError": false
+}

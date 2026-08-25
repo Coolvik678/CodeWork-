@@ -1,0 +1,310 @@
+[
+  {
+    "id": "01",
+    "imageFile": "video1/01_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 0,
+    "durationInFrames": 262,
+    "label": "Scene 1"
+  },
+  {
+    "id": "02",
+    "imageFile": "video1/02_[STYLE-_2D_vector_stick_f (1).jpg",
+    "startFrame": 262,
+    "durationInFrames": 262,
+    "label": "Scene 2"
+  },
+  {
+    "id": "03",
+    "imageFile": "video1/03_[STYLE-_2D_vector_stick_f (1).jpg",
+    "startFrame": 524,
+    "durationInFrames": 261,
+    "label": "Scene 3"
+  },
+  {
+    "id": "04",
+    "imageFile": "video1/04_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 785,
+    "durationInFrames": 262,
+    "label": "Scene 4"
+  },
+  {
+    "id": "05",
+    "imageFile": "video1/05_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 1047,
+    "durationInFrames": 262,
+    "label": "Scene 5"
+  },
+  {
+    "id": "06",
+    "imageFile": "video1/06_[STYLE-_2D_vector_stick_f (1).jpg",
+    "startFrame": 1309,
+    "durationInFrames": 262,
+    "label": "Scene 6"
+  },
+  {
+    "id": "07",
+    "imageFile": "video1/07_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 1571,
+    "durationInFrames": 262,
+    "label": "Scene 7"
+  },
+  {
+    "id": "08",
+    "imageFile": "video1/08_[STYLE-_2D_vector_stick_f (1).jpg",
+    "startFrame": 1833,
+    "durationInFrames": 262,
+    "label": "Scene 8"
+  },
+  {
+    "id": "09",
+    "imageFile": "video1/09_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 2095,
+    "durationInFrames": 261,
+    "label": "Scene 9"
+  },
+  {
+    "id": "10",
+    "imageFile": "video1/10_[STYLE-_2D_vector_stick_f (2).jpg",
+    "startFrame": 2356,
+    "durationInFrames": 262,
+    "label": "Scene 10"
+  },
+  {
+    "id": "11",
+    "imageFile": "video1/11_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 2618,
+    "durationInFrames": 262,
+    "label": "Scene 11"
+  },
+  {
+    "id": "12",
+    "imageFile": "video1/12_[STYLE-_2D_vector_stick_f (1).jpg",
+    "startFrame": 2880,
+    "durationInFrames": 262,
+    "label": "Scene 12"
+  },
+  {
+    "id": "13",
+    "imageFile": "video1/13_[STYLE-_2D_vector_stick_f (1).jpg",
+    "startFrame": 3142,
+    "durationInFrames": 262,
+    "label": "Scene 13"
+  },
+  {
+    "id": "14",
+    "imageFile": "video1/14_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 3404,
+    "durationInFrames": 261,
+    "label": "Scene 14"
+  },
+  {
+    "id": "15",
+    "imageFile": "video1/15_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 3665,
+    "durationInFrames": 262,
+    "label": "Scene 15"
+  },
+  {
+    "id": "16",
+    "imageFile": "video1/16_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 3927,
+    "durationInFrames": 262,
+    "label": "Scene 16"
+  },
+  {
+    "id": "17",
+    "imageFile": "video1/17_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 4189,
+    "durationInFrames": 262,
+    "label": "Scene 17"
+  },
+  {
+    "id": "18",
+    "imageFile": "video1/18_[STYLE-_2D_vector_stick_f (1).jpg",
+    "startFrame": 4451,
+    "durationInFrames": 262,
+    "label": "Scene 18"
+  },
+  {
+    "id": "19",
+    "imageFile": "video1/19_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 4713,
+    "durationInFrames": 262,
+    "label": "Scene 19"
+  },
+  {
+    "id": "20",
+    "imageFile": "video1/20_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 4975,
+    "durationInFrames": 261,
+    "label": "Scene 20"
+  },
+  {
+    "id": "21",
+    "imageFile": "video1/21_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 5236,
+    "durationInFrames": 262,
+    "label": "Scene 21"
+  },
+  {
+    "id": "22",
+    "imageFile": "video1/22_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 5498,
+    "durationInFrames": 262,
+    "label": "Scene 22"
+  },
+  {
+    "id": "23",
+    "imageFile": "video1/24_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 5760,
+    "durationInFrames": 262,
+    "label": "Scene 23"
+  },
+  {
+    "id": "24",
+    "imageFile": "video1/25_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 6022,
+    "durationInFrames": 262,
+    "label": "Scene 24"
+  },
+  {
+    "id": "25",
+    "imageFile": "video1/26_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 6284,
+    "durationInFrames": 261,
+    "label": "Scene 25"
+  },
+  {
+    "id": "26",
+    "imageFile": "video1/27_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 6545,
+    "durationInFrames": 262,
+    "label": "Scene 26"
+  },
+  {
+    "id": "27",
+    "imageFile": "video1/28_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 6807,
+    "durationInFrames": 262,
+    "label": "Scene 27"
+  },
+  {
+    "id": "28",
+    "imageFile": "video1/29_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 7069,
+    "durationInFrames": 262,
+    "label": "Scene 28"
+  },
+  {
+    "id": "29",
+    "imageFile": "video1/30_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 7331,
+    "durationInFrames": 262,
+    "label": "Scene 29"
+  },
+  {
+    "id": "30",
+    "imageFile": "video1/31_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 7593,
+    "durationInFrames": 262,
+    "label": "Scene 30"
+  },
+  {
+    "id": "31",
+    "imageFile": "video1/32_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 7855,
+    "durationInFrames": 261,
+    "label": "Scene 31"
+  },
+  {
+    "id": "32",
+    "imageFile": "video1/33_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 8116,
+    "durationInFrames": 262,
+    "label": "Scene 32"
+  },
+  {
+    "id": "33",
+    "imageFile": "video1/34_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 8378,
+    "durationInFrames": 262,
+    "label": "Scene 33"
+  },
+  {
+    "id": "34",
+    "imageFile": "video1/35_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 8640,
+    "durationInFrames": 262,
+    "label": "Scene 34"
+  },
+  {
+    "id": "35",
+    "imageFile": "video1/36_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 8902,
+    "durationInFrames": 262,
+    "label": "Scene 35"
+  },
+  {
+    "id": "36",
+    "imageFile": "video1/37_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 9164,
+    "durationInFrames": 261,
+    "label": "Scene 36"
+  },
+  {
+    "id": "37",
+    "imageFile": "video1/38_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 9425,
+    "durationInFrames": 262,
+    "label": "Scene 37"
+  },
+  {
+    "id": "38",
+    "imageFile": "video1/39_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 9687,
+    "durationInFrames": 262,
+    "label": "Scene 38"
+  },
+  {
+    "id": "39",
+    "imageFile": "video1/40_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 9949,
+    "durationInFrames": 262,
+    "label": "Scene 39"
+  },
+  {
+    "id": "40",
+    "imageFile": "video1/41_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 10211,
+    "durationInFrames": 262,
+    "label": "Scene 40"
+  },
+  {
+    "id": "41",
+    "imageFile": "video1/42_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 10473,
+    "durationInFrames": 262,
+    "label": "Scene 41"
+  },
+  {
+    "id": "42",
+    "imageFile": "video1/43_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 10735,
+    "durationInFrames": 261,
+    "label": "Scene 42"
+  },
+  {
+    "id": "43",
+    "imageFile": "video1/44_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 10996,
+    "durationInFrames": 262,
+    "label": "Scene 43"
+  },
+  {
+    "id": "44",
+    "imageFile": "video1/45_[STYLE-_2D_vector_stick_f.jpg",
+    "startFrame": 11258,
+    "durationInFrames": 262,
+    "label": "Scene 44"
+  }
+]

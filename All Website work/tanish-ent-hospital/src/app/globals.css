@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-medical-navy: #0F2C59;
+  --color-medical-blue: #E5E0FF;
+  --color-medical-gold: #D4AF37;
+  --color-medical-teal: #0D9488;
+  --color-medical-mint: #10B981;
+  --color-medical-light: #F6F8FD;
+  
+  --font-serif: "Playfair Display", Georgia, serif;
+  
+  --radius-clinical-sm: 6px;
+  --radius-clinical-md: 12px;
+  --radius-clinical-lg: 24px;
+}
+
+body {
+  background-color: var(--color-medical-light);
+  color: #1e293b;
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #0f2c5940;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0f2c5980;
+}

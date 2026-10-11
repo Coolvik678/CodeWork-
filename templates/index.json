@@ -1,0 +1,45 @@
+{
+  "sections": {
+    "zenkart_marquee": {
+      "type": "zenkart-marquee",
+      "settings": {}
+    },
+    "zenkart_showcase": {
+      "type": "zenkart-showcase",
+      "settings": {}
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "All Zenkart Essentials",
+        "heading_size": "h2",
+        "description": "Premium curated tools for your kitchen and spiritual peace.",
+        "show_description": true,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 4,
+        "columns_desktop": 2,
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": false,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    }
+  },
+  "order": [
+    "zenkart_marquee",
+    "zenkart_showcase",
+    "featured_collection"
+  ]
+}

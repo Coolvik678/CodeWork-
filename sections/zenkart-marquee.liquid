@@ -1,0 +1,65 @@
+<!-- sections/zenkart-marquee.liquid -->
+<div class="zenkart-ticker" aria-label="Store highlights">
+  <div class="zenkart-ticker-track">
+    <div class="zenkart-ticker-item"><span>✨</span> 100% Verified Quality Guaranteed</div>
+    <div class="zenkart-ticker-item"><span>⚡</span> Free Fast Tracked Shipping Across India</div>
+    <div class="zenkart-ticker-item"><span>🔒</span> 256-Bit SSL Encrypted Instant Checkout</div>
+    <div class="zenkart-ticker-item"><span>🔁</span> 7-Day Easy Replacement Guarantee</div>
+    <div class="zenkart-ticker-item"><span>⭐</span> Rated 4.9/5 by 12,000+ Happy Customers</div>
+    <!-- Loop clone -->
+    <div class="zenkart-ticker-item"><span>✨</span> 100% Verified Quality Guaranteed</div>
+    <div class="zenkart-ticker-item"><span>⚡</span> Free Fast Tracked Shipping Across India</div>
+    <div class="zenkart-ticker-item"><span>🔒</span> 256-Bit SSL Encrypted Instant Checkout</div>
+    <div class="zenkart-ticker-item"><span>🔁</span> 7-Day Easy Replacement Guarantee</div>
+    <div class="zenkart-ticker-item"><span>⭐</span> Rated 4.9/5 by 12,000+ Happy Customers</div>
+  </div>
+</div>
+
+<style>
+  .zenkart-ticker {
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(90deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+    color: #F8FAFC;
+    padding: 11px 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: flex;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .zenkart-ticker-track {
+    display: inline-flex;
+    animation: zk-marquee 25s linear infinite;
+    gap: 3rem;
+    padding-left: 3rem;
+  }
+  .zenkart-ticker-track:hover {
+    animation-play-state: paused;
+  }
+  .zenkart-ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  @keyframes zk-marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Zenkart Ticker Marquee",
+  "tag": "section",
+  "class": "section-marquee",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Zenkart Ticker Marquee"
+    }
+  ]
+}
+{% endschema %}

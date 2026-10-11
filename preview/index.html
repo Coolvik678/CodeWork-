@@ -3,52 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zenkart &mdash; Thoughtfully Made Essentials</title>
+  <title>Zenkart &mdash; Everyday Living & Devotional Essentials</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FFFFFF;
-      --bg-subtle: #F9FAFB;
-      --text: #111827;
-      --text-muted: #6B7280;
-      --border: #E5E7EB;
-      --accent: #111827;
-      --accent-hover: #374151;
+      --bg-page: #FAF8F5;
+      --bg-white: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --text-main: #18181B;
+      --text-muted: #52525B;
+      --border-color: #E4E4E7;
+      --purple: #5B21B6;
+      --purple-hover: #4C1D95;
       --green: #15803D;
-      --tag-bg: #F3F4F6;
+      --green-light: #DCFCE7;
+      --radius: 12px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* TOP ANNOUNCEMENT BAR */
-    .announcement-bar {
-      background: #F3F4F6;
-      border-bottom: 1px solid var(--border);
-      color: #374151;
-      font-size: 0.8125rem;
-      font-weight: 500;
+    /* TOP ANNOUNCEMENT */
+    .top-bar {
+      background: var(--purple);
+      color: #FFFFFF;
       text-align: center;
-      padding: 9px 16px;
-      letter-spacing: 0.01em;
+      padding: 10px 16px;
+      font-size: 0.825rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
     }
 
-    /* HEADER & NAVIGATION */
-    .site-header {
-      border-bottom: 1px solid var(--border);
-      background: var(--bg);
+    /* HEADER */
+    .site-nav {
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border-color);
       position: sticky;
       top: 0;
       z-index: 50;
     }
-    .header-inner {
+    .nav-container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 1.25rem 2rem;
@@ -56,579 +57,615 @@
       align-items: center;
       justify-content: space-between;
     }
-    .brand-logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text);
+    .nav-brand {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--purple);
       text-decoration: none;
+      letter-spacing: -0.02em;
     }
-    .main-nav {
+    .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2.25rem;
       list-style: none;
     }
-    .main-nav a {
+    .nav-links a {
       text-decoration: none;
       color: var(--text-muted);
-      font-size: 0.875rem;
-      font-weight: 500;
+      font-size: 0.9rem;
+      font-weight: 600;
       transition: color 0.15s ease;
     }
-    .main-nav a:hover {
-      color: var(--text);
+    .nav-links a:hover {
+      color: var(--purple);
     }
-    .cart-link {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--text);
-      text-decoration: none;
-      border: 1px solid var(--border);
-      padding: 7px 16px;
+    .nav-action-btn {
+      background: var(--purple);
+      color: #FFFFFF;
+      padding: 9px 18px;
       border-radius: 6px;
-      transition: all 0.15s ease;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: background 0.15s ease;
     }
-    .cart-link:hover {
-      background: var(--bg-subtle);
+    .nav-action-btn:hover {
+      background: var(--purple-hover);
     }
 
-    /* HERO SECTION */
-    .hero-section {
-      border-bottom: 1px solid var(--border);
-      background: var(--bg-subtle);
-      padding: 5rem 2rem;
-    }
-    .hero-container {
+    /* HERO: FULL-BLEED ACTION BANNER */
+    .hero-action-section {
       max-width: 1200px;
-      margin: 0 auto;
-      max-width: 760px;
-      text-align: center;
+      margin: 2rem auto 4rem;
+      padding: 0 1.5rem;
     }
-    .hero-kicker {
-      font-size: 0.8125rem;
-      font-weight: 600;
+    .hero-action-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      box-shadow: 0 8px 30px -10px rgba(0,0,0,0.06);
+    }
+    @media (max-width: 900px) {
+      .hero-action-card {
+        grid-template-columns: 1fr;
+      }
+    }
+    .hero-action-img {
+      width: 100%;
+      height: 100%;
+      min-height: 460px;
+      max-height: 520px;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-content {
+      padding: 3.5rem 3rem;
+    }
+    @media (max-width: 900px) {
+      .hero-content {
+        padding: 2.5rem 1.75rem;
+      }
+    }
+    .hero-tagline {
+      font-size: 0.825rem;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
+      color: var(--purple);
+      margin-bottom: 0.75rem;
     }
-    .hero-title {
-      font-size: clamp(2.25rem, 4vw, 3.25rem);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      color: var(--text);
+    .hero-heading {
+      font-size: clamp(2rem, 3.2vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
       margin-bottom: 1.25rem;
     }
-    .hero-description {
-      font-size: 1.125rem;
+    .hero-paragraph {
+      font-size: 1.05rem;
       color: var(--text-muted);
       line-height: 1.6;
-      margin-bottom: 2.25rem;
+      margin-bottom: 2rem;
     }
-    .hero-buttons {
+    .hero-cta-row {
       display: flex;
-      justify-content: center;
       gap: 1rem;
       flex-wrap: wrap;
     }
-    .btn-primary {
-      background: var(--text);
+    .btn-solid-purple {
+      background: var(--purple);
       color: #FFFFFF;
-      font-size: 0.9375rem;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 6px;
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
       text-decoration: none;
       transition: background 0.15s ease;
     }
-    .btn-primary:hover {
-      background: var(--accent-hover);
+    .btn-solid-purple:hover {
+      background: var(--purple-hover);
     }
-    .btn-secondary {
-      background: #FFFFFF;
-      color: var(--text);
-      font-size: 0.9375rem;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 6px;
+    .btn-outline {
+      background: transparent;
+      color: var(--text-main);
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
       text-decoration: none;
-      border: 1px solid var(--border);
-      transition: background 0.15s ease;
+      border: 1px solid var(--border-color);
+      transition: all 0.15s ease;
     }
-    .btn-secondary:hover {
-      background: var(--bg-subtle);
+    .btn-outline:hover {
+      background: var(--bg-page);
+      border-color: var(--text-main);
     }
 
-    /* PRODUCT SHOWCASE SECTIONS */
-    .product-section {
-      padding: 5rem 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .product-container {
+    /* SECTION HEADING */
+    .section-label-bar {
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 0 auto 2rem;
+      padding: 0 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+    .section-category {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--purple);
+    }
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    /* PRODUCT CARD ROW */
+    .product-row {
+      max-width: 1200px;
+      margin: 0 auto 5rem;
+      padding: 0 1.5rem;
+    }
+    .product-box {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 3rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 3.5rem;
       align-items: center;
+      box-shadow: 0 6px 24px -8px rgba(0,0,0,0.05);
     }
-    @media (max-width: 860px) {
-      .product-container {
+    @media (max-width: 900px) {
+      .product-box {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        padding: 2rem;
+        gap: 2rem;
       }
     }
-    .product-media {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2.5rem;
+    .product-gallery {
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
       text-align: center;
     }
-    .main-photo {
+    .product-main-view {
       width: 100%;
-      height: 420px;
+      height: 380px;
       object-fit: contain;
     }
-    .thumbnails-list {
+    .thumb-strip {
       display: flex;
       gap: 0.75rem;
       justify-content: center;
       margin-top: 1.5rem;
     }
-    .thumb-item {
-      width: 64px;
-      height: 64px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
+    .thumb-node {
+      width: 62px;
+      height: 62px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
       object-fit: cover;
       background: #FFFFFF;
       cursor: pointer;
       transition: border-color 0.15s ease;
     }
-    .thumb-item.active, .thumb-item:hover {
-      border-color: var(--text);
+    .thumb-node.active, .thumb-node:hover {
+      border-color: var(--purple);
     }
 
-    .product-info {
+    .product-content {
       display: flex;
       flex-direction: column;
     }
-    .category-label {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
+    .product-item-title {
+      font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+      font-weight: 800;
+      line-height: 1.22;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
     }
-    .product-name {
-      font-size: clamp(1.75rem, 2.5vw, 2.25rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-    .pricing-row {
+    .price-row {
       display: flex;
       align-items: baseline;
       gap: 12px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
-    .current-price {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--text);
+    .sale-price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-main);
     }
     .compare-price {
-      font-size: 1.125rem;
-      color: var(--text-muted);
+      font-size: 1.15rem;
+      color: #A1A1AA;
       text-decoration: line-through;
     }
-    .savings-badge {
-      font-size: 0.8125rem;
-      font-weight: 600;
+    .save-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--green-light);
       color: var(--green);
-      background: #DCFCE7;
       padding: 3px 8px;
       border-radius: 4px;
     }
-    .product-body-text {
-      color: #4B5563;
+    .product-copy {
+      color: var(--text-muted);
       font-size: 1rem;
       line-height: 1.6;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.5rem;
     }
-    .spec-list {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+    .spec-table {
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
       padding: 1.25rem 0;
       margin-bottom: 2rem;
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.6rem;
     }
-    .spec-list li {
-      font-size: 0.9375rem;
-      color: #374151;
+    .spec-table li {
       display: flex;
       justify-content: space-between;
+      font-size: 0.925rem;
     }
-    .spec-list li span:first-child {
-      color: var(--text-muted);
-    }
-    .spec-list li span:last-child {
-      font-weight: 600;
-      color: var(--text);
-    }
-    .cta-button {
-      background: var(--text);
-      color: #FFFFFF;
+    .spec-table li span:first-child { color: var(--text-muted); }
+    .spec-table li span:last-child { font-weight: 700; color: var(--text-main); }
+
+    .btn-buy {
+      display: block;
       text-align: center;
+      background: var(--purple);
+      color: #FFFFFF;
       padding: 15px 28px;
+      border-radius: 8px;
       font-size: 1rem;
-      font-weight: 600;
-      border-radius: 6px;
+      font-weight: 700;
       text-decoration: none;
       transition: background 0.15s ease;
     }
-    .cta-button:hover {
-      background: var(--accent-hover);
+    .btn-buy:hover {
+      background: var(--purple-hover);
+    }
+    .btn-buy-green {
+      background: var(--green);
+    }
+    .btn-buy-green:hover {
+      background: #14532D;
     }
 
-    /* GUARANTEES / ASSURANCE */
-    .assurance-section {
-      padding: 4.5rem 2rem;
-      background: var(--bg-subtle);
-      border-bottom: 1px solid var(--border);
-    }
-    .assurance-container {
+    /* ACTION BANNER 2: DEVOTIONAL */
+    .action-strip-section {
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 0 auto 5rem;
+      padding: 0 1.5rem;
     }
-    .section-headline {
-      text-align: center;
-      margin-bottom: 3rem;
+    .action-strip-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      align-items: center;
+      box-shadow: 0 8px 30px -10px rgba(0,0,0,0.06);
     }
-    .section-headline h2 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 0.5rem;
+    @media (max-width: 900px) {
+      .action-strip-card {
+        grid-template-columns: 1fr;
+      }
     }
-    .section-headline p {
-      color: var(--text-muted);
-      font-size: 1rem;
+
+    /* GUARANTEES */
+    .guarantee-block {
+      max-width: 1200px;
+      margin: 0 auto 5rem;
+      padding: 0 1.5rem;
     }
-    .assurance-grid {
+    .guarantee-grid {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 3rem;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
+      gap: 2.5rem;
     }
-    .assurance-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem;
+    .g-item strong {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.35rem;
     }
-    .assurance-card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-    .assurance-card p {
-      font-size: 0.875rem;
+    .g-item p {
+      font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.5;
     }
 
-    /* REVIEWS SECTION */
-    .reviews-section {
-      padding: 4.5rem 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .reviews-container {
+    /* REVIEWS */
+    .reviews-block {
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 0 auto 5rem;
+      padding: 0 1.5rem;
     }
     .reviews-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2rem;
     }
-    .review-card {
-      background: #FFFFFF;
-      border: 1px solid var(--border);
-      border-radius: 8px;
+    .review-item {
+      background: var(--bg-white);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
       padding: 2rem;
     }
-    .stars-text {
-      color: #D97706;
-      font-size: 1rem;
+    .review-score {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--green);
       margin-bottom: 0.75rem;
     }
     .review-quote {
-      font-size: 0.9375rem;
-      color: #374151;
+      font-size: 0.95rem;
+      color: var(--text-main);
       line-height: 1.6;
       margin-bottom: 1.25rem;
     }
-    .reviewer-name {
+    .reviewer-tag {
       font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--text);
+      font-weight: 700;
+      color: var(--text-main);
     }
-    .reviewer-meta {
-      font-size: 0.8125rem;
+    .reviewer-location {
+      font-size: 0.8rem;
       color: var(--text-muted);
     }
 
     /* FOOTER */
-    .site-footer {
-      padding: 3.5rem 2rem 2.5rem;
-      background: #FFFFFF;
-      border-top: 1px solid var(--border);
+    .main-footer {
+      background: var(--bg-white);
+      border-top: 1px solid var(--border-color);
+      padding: 3.5rem 1.5rem 2.5rem;
+      text-align: center;
     }
-    .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+    .footer-brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
     }
     .footer-copy {
       font-size: 0.875rem;
       color: var(--text-muted);
     }
-    .footer-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .footer-links a {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-    .footer-links a:hover {
-      color: var(--text);
-    }
   </style>
 </head>
 <body>
 
-  <!-- ANNOUNCEMENT BAR (Clean & Sober) -->
-  <div class="announcement-bar">
-    Free standard delivery on all orders across India &bull; 7-day replacement warranty
+  <!-- TOP ANNOUNCEMENT -->
+  <div class="top-bar">
+    Free Tracked Delivery Across India &bull; Cash on Delivery Available &bull; 7-Day Replacement
   </div>
 
   <!-- NAVIGATION -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="#" class="brand-logo">Zenkart</a>
-      <nav>
-        <ul class="main-nav">
-          <li><a href="#puri-press">Kitchen</a></li>
-          <li><a href="#jaap-counter">Meditation</a></li>
-          <li><a href="#guarantees">Guarantees</a></li>
-          <li><a href="#reviews">Reviews</a></li>
-        </ul>
-      </nav>
-      <a href="#puri-press" class="cart-link">View Catalog</a>
+  <nav class="site-nav">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">ZENKART</a>
+      <ul class="nav-links">
+        <li><a href="#puri-section">Kitchen Line</a></li>
+        <li><a href="#jaap-section">Spiritual Line</a></li>
+        <li><a href="#guarantee-section">Guarantees</a></li>
+        <li><a href="#reviews-section">Reviews</a></li>
+      </ul>
+      <a href="#puri-section" class="nav-action-btn">Shop Products</a>
+    </div>
+  </nav>
+
+  <!-- HERO: FULL-BLEED REAL ACTION PICTURE -->
+  <header class="hero-action-section">
+    <div class="hero-action-card">
+      <img src="assets/puri-action.jpg" alt="Puri Press Maker in Action" class="hero-action-img">
+      <div class="hero-content">
+        <p class="hero-tagline">Crafted for Daily Indian Living</p>
+        <h1 class="hero-heading">Uniform, paper-thin puris in seconds.</h1>
+        <p class="hero-paragraph">
+          Engineered with precision stainless steel plates and a balanced mechanical press. Eliminates wrist fatigue and delivers round, symmetrical puris, khakhras, and papads with zero rolling effort.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#puri-section" class="btn-solid-purple">Explore Puri Press (&8377;599)</a>
+          <a href="#jaap-section" class="btn-outline">View Jaap Counter</a>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero-section">
-    <div class="hero-container">
-      <p class="hero-kicker">Curated Indian Essentials</p>
-      <h1 class="hero-title">Functional tools, crafted for daily use.</h1>
-      <p class="hero-description">
-        We produce durable, practical household and devotional items designed to make daily routines straightforward and dependable.
-      </p>
-      <div class="hero-buttons">
-        <a href="#puri-press" class="btn-primary">Puri & Khakhra Press</a>
-        <a href="#jaap-counter" class="btn-secondary">Digital Jaap Counter</a>
+  <!-- PRODUCT 1: PURI & ROTI PRESS -->
+  <section class="product-row" id="puri-section">
+    <div class="section-label-bar">
+      <span class="section-category">The Kitchen Collection</span>
+      <h2 class="section-title">Heavy-Duty Stainless Steel Puri & Khakhra Press</h2>
+    </div>
+
+    <div class="product-box">
+      <div class="product-gallery">
+        <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/LmD5ThCJqhhV0G8aZYgAwa7CatuNdCpw3hcjDhoy.jpg?v=1791707350" alt="Puri Press Machine" class="product-main-view" id="puri-main">
+        <div class="thumb-strip">
+          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/LmD5ThCJqhhV0G8aZYgAwa7CatuNdCpw3hcjDhoy.jpg?v=1791707350" class="thumb-node active" onclick="swap('puri-main', this)">
+          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/8ZE5opeDmkJthK1BUOPpzCSZujXcaEktgWrfOfci.jpg?v=1791707350" class="thumb-node" onclick="swap('puri-main', this)">
+          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/aveTZEqDa1kVdDzh9YJoqnXCZsn44HTUoY2VY6qH.jpg?v=1791707351" class="thumb-node" onclick="swap('puri-main', this)">
+          <img src="assets/puri-action.jpg" class="thumb-node" onclick="swap('puri-main', this)">
+        </div>
+      </div>
+
+      <div class="product-content">
+        <h3 class="product-item-title">Manual Round Puri, Papad & Khakhra Presser</h3>
+        <div class="price-row">
+          <span class="sale-price">&#8377;599</span>
+          <span class="compare-price">&#8377;999</span>
+          <span class="save-tag">Save 40%</span>
+        </div>
+        <p class="product-copy">
+          Designed specifically for home kitchens. Heavy-gauge stainless steel plates distribute pressing force evenly across your dough ball, producing consistent thinness without tearing or sticking.
+        </p>
+        <ul class="spec-table">
+          <li><span>Plate Diameter</span> <span>23 Centimeters</span></li>
+          <li><span>Net Weight</span> <span>834 Grams (Heavy, Stable Base)</span></li>
+          <li><span>Body Construction</span> <span>Food-Grade Stainless Steel Alloy</span></li>
+          <li><span>Grip Design</span> <span>Textured Anti-Slip Lever</span></li>
+          <li><span>Warranty</span> <span>7-Day Direct Replacement</span></li>
+        </ul>
+        <a href="https://jbn7jn-pj.myshopify.com/products/7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium" target="_blank" class="btn-buy">
+          Order Puri Press &mdash; &#8377;599
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- PRODUCT 1: PURI & ROTI PRESS -->
-  <section class="product-section" id="puri-press">
-    <div class="product-container">
-      <div class="product-media">
-        <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/LmD5ThCJqhhV0G8aZYgAwa7CatuNdCpw3hcjDhoy.jpg?v=1791707350" alt="Puri Press Maker" class="main-photo" id="photo-puri">
-        <div class="thumbnails-list">
-          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/LmD5ThCJqhhV0G8aZYgAwa7CatuNdCpw3hcjDhoy.jpg?v=1791707350" class="thumb-item active" onclick="setPhoto('photo-puri', this)">
-          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/8ZE5opeDmkJthK1BUOPpzCSZujXcaEktgWrfOfci.jpg?v=1791707350" class="thumb-item" onclick="setPhoto('photo-puri', this)">
-          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/aveTZEqDa1kVdDzh9YJoqnXCZsn44HTUoY2VY6qH.jpg?v=1791707351" class="thumb-item" onclick="setPhoto('photo-puri', this)">
-          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/EvJbPoPBNhGZpITSO3XFtN9PvMwEvBlwmczUem85.jpg?v=1791707351" class="thumb-item" onclick="setPhoto('photo-puri', this)">
-        </div>
-      </div>
-
-      <div class="product-info">
-        <span class="category-label">Kitchen Tools</span>
-        <h2 class="product-name">Stainless Steel Puri & Khakhra Press</h2>
-        
-        <div class="pricing-row">
-          <span class="current-price">&#8377;599</span>
-          <span class="compare-price">&#8377;999</span>
-          <span class="savings-badge">Save 40%</span>
-        </div>
-
-        <p class="product-body-text">
-          A solid, manual press designed for flattening dough evenly in seconds. Constructed from heavy-gauge stainless steel with a balanced mechanical lever, it produces uniform thickness for puris, khakhras, and papads without the strain of manual rolling pins.
+  <!-- ACTION BANNER 2: DEVOTIONAL IN ACTION -->
+  <section class="action-strip-section" id="jaap-section">
+    <div class="action-strip-card">
+      <div class="hero-content">
+        <p class="hero-tagline">Quiet Devotion & Mindfulness</p>
+        <h2 class="hero-heading">Focus on prayer, without losing your tally.</h2>
+        <p class="hero-paragraph">
+          A handheld wooden digital counter with a silent scroll wheel, built-in compass for prayer alignment, and a traditional silk tassel. Contoured for effortless single-hand use during morning or evening chants.
         </p>
-
-        <ul class="spec-list">
-          <li><span>Plate Diameter</span> <span>23 cm</span></li>
-          <li><span>Net Weight</span> <span>834 grams</span></li>
-          <li><span>Material</span> <span>Food-Grade Stainless Steel</span></li>
-          <li><span>Operation</span> <span>Manual Lever</span></li>
-          <li><span>Warranty</span> <span>7-Day Replacement</span></li>
-        </ul>
-
-        <a href="https://jbn7jn-pj.myshopify.com/products/7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium" target="_blank" class="cta-button">
-          Order for &#8377;599
-        </a>
+        <a href="#jaap-product" class="btn-solid-purple" style="background: var(--green);">Explore Jaap Counter (&8377;499)</a>
       </div>
+      <img src="assets/jaap-action.jpg" alt="Jaap Counter in Hand" class="hero-action-img">
     </div>
   </section>
 
   <!-- PRODUCT 2: WOODEN DIGITAL JAAP COUNTER -->
-  <section class="product-section" id="jaap-counter">
-    <div class="product-container">
-      <div class="product-media">
-        <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/6uBFXzCzDtrNhGqsIh94CPd33FfxVCSfyaUBFnJX.jpg?v=1791707182" alt="Digital Jaap Counter" class="main-photo" id="photo-jaap">
-        <div class="thumbnails-list">
-          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/6uBFXzCzDtrNhGqsIh94CPd33FfxVCSfyaUBFnJX.jpg?v=1791707182" class="thumb-item active" onclick="setPhoto('photo-jaap', this)">
-          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/e22vJLBwaVQ2vsotCKOalG33Jlh28ZcnlV9LXPo7.jpg?v=1791707182" class="thumb-item" onclick="setPhoto('photo-jaap', this)">
-          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/PGuCXsynC4V6dtpgW3W3WBmj32n0uw53wfHeafqK.jpg?v=1791707182" class="thumb-item" onclick="setPhoto('photo-jaap', this)">
-          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/Helg1QpJWXHMc8JKAQSL2FABMTdKbOjigo9mUQzr.jpg?v=1791707182" class="thumb-item" onclick="setPhoto('photo-jaap', this)">
+  <section class="product-row" id="jaap-product">
+    <div class="section-label-bar">
+      <span class="section-category" style="color: var(--green);">The Spiritual Collection</span>
+      <h2 class="section-title">Wooden Digital Mantra Jaap Counter With Compass</h2>
+    </div>
+
+    <div class="product-box">
+      <div class="product-gallery">
+        <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/6uBFXzCzDtrNhGqsIh94CPd33FfxVCSfyaUBFnJX.jpg?v=1791707182" alt="Digital Jaap Counter" class="product-main-view" id="jaap-main">
+        <div class="thumb-strip">
+          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/6uBFXzCzDtrNhGqsIh94CPd33FfxVCSfyaUBFnJX.jpg?v=1791707182" class="thumb-node active" onclick="swap('jaap-main', this)">
+          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/e22vJLBwaVQ2vsotCKOalG33Jlh28ZcnlV9LXPo7.jpg?v=1791707182" class="thumb-node" onclick="swap('jaap-main', this)">
+          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/PGuCXsynC4V6dtpgW3W3WBmj32n0uw53wfHeafqK.jpg?v=1791707182" class="thumb-node" onclick="swap('jaap-main', this)">
+          <img src="assets/jaap-action.jpg" class="thumb-node" onclick="swap('jaap-main', this)">
         </div>
       </div>
 
-      <div class="product-info">
-        <span class="category-label">Devotional & Meditation</span>
-        <h2 class="product-name">Wooden Digital Mantra Jaap Counter</h2>
-        
-        <div class="pricing-row">
-          <span class="current-price">&#8377;499</span>
+      <div class="product-content">
+        <h3 class="product-item-title">Handheld Digital Mantra Jaap & Tasbih Machine</h3>
+        <div class="price-row">
+          <span class="sale-price">&#8377;499</span>
           <span class="compare-price">&#8377;799</span>
-          <span class="savings-badge">Save 38%</span>
+          <span class="save-tag">Save 38%</span>
         </div>
-
-        <p class="product-body-text">
-          A handheld electronic counter with a smooth scroll wheel and built-in compass. Designed for quiet concentration during daily prayer and meditation. The natural wood-finish casing is ergonomically contoured for comfortable use over long sessions.
+        <p class="product-copy">
+          Designed for devotees, elders, and mindfulness practice. Features a high-contrast LCD screen, a silent roller that turns smoothly with thumb pressure, and a direction compass to locate prayer alignment wherever you travel.
         </p>
-
-        <ul class="spec-list">
-          <li><span>Display</span> <span>5-Digit LCD Screen</span></li>
-          <li><span>Features</span> <span>Reset Button, Built-In Compass</span></li>
-          <li><span>Finish</span> <span>Wood Grain with Silk Tassel</span></li>
-          <li><span>Power</span> <span>Battery Included (Installed)</span></li>
-          <li><span>Warranty</span> <span>7-Day Replacement</span></li>
+        <ul class="spec-table">
+          <li><span>Display</span> <span>5-Digit Digital LCD Screen</span></li>
+          <li><span>Count Range</span> <span>1 to 99,999 Chants (One-Tap Reset)</span></li>
+          <li><span>Built-In Compass</span> <span>Precision Direction Finder</span></li>
+          <li><span>Body Material</span> <span>Ergonomic Composite with Wood Finish</span></li>
+          <li><span>Battery</span> <span>Pre-Installed Long-Life Cell</span></li>
         </ul>
-
-        <a href="https://jbn7jn-pj.myshopify.com/products/wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc" target="_blank" class="cta-button">
-          Order for &#8377;499
+        <a href="https://jbn7jn-pj.myshopify.com/products/wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc" target="_blank" class="btn-buy btn-buy-green">
+          Order Jaap Counter &mdash; &#8377;499
         </a>
       </div>
     </div>
   </section>
 
-  <!-- STORE ASSURANCE -->
-  <section class="assurance-section" id="guarantees">
-    <div class="assurance-container">
-      <div class="section-headline">
-        <h2>Customer Commitments</h2>
-        <p>Simple, reliable service on every order.</p>
-      </div>
+  <!-- ASSURANCE / GUARANTEES -->
+  <section class="guarantee-block" id="guarantee-section">
+    <div class="section-label-bar" style="text-align: center; border: none; margin-bottom: 2rem;">
+      <span class="section-category">Service Standards</span>
+      <h2 class="section-title">Our Commitments to You</h2>
+    </div>
 
-      <div class="assurance-grid">
-        <div class="assurance-card">
-          <h3>Tracked Delivery</h3>
-          <p>Orders are dispatched within 24 hours with SMS and WhatsApp tracking across all Indian pincodes.</p>
-        </div>
-        <div class="assurance-card">
-          <h3>Cash on Delivery</h3>
-          <p>Pay when your package arrives at your door, or use UPI and cards at checkout.</p>
-        </div>
-        <div class="assurance-card">
-          <h3>7-Day Replacement</h3>
-          <p>If your product arrives damaged or defective, we provide an immediate direct replacement.</p>
-        </div>
-        <div class="assurance-card">
-          <h3>Quality Inspected</h3>
-          <p>Every product is hand-inspected for build quality and packaging integrity before shipment.</p>
-        </div>
+    <div class="guarantee-grid">
+      <div class="g-item">
+        <strong>Free Tracked Express Shipping</strong>
+        <p>Dispatched within 24 hours. Full SMS tracking provided across all pincodes in India.</p>
+      </div>
+      <div class="g-item">
+        <strong>Cash on Delivery Accepted</strong>
+        <p>Pay when the parcel reaches your doorstep, or pay online with secure UPI and Cards.</p>
+      </div>
+      <div class="g-item">
+        <strong>7-Day Replacement Warranty</strong>
+        <p>If an item arrives damaged or defective, we provide an immediate direct replacement.</p>
+      </div>
+      <div class="g-item">
+        <strong>100% Quality Inspected</strong>
+        <p>Each unit is individually tested, weighed, and securely packed before dispatch.</p>
       </div>
     </div>
   </section>
 
-  <!-- VERIFIED CUSTOMER REVIEWS -->
-  <section class="reviews-section" id="reviews">
-    <div class="reviews-container">
-      <div class="section-headline">
-        <h2>Verified Customer Feedback</h2>
-        <p>Real reviews from customers across India.</p>
+  <!-- CUSTOMER REVIEWS -->
+  <section class="reviews-block" id="reviews-section">
+    <div class="section-label-bar" style="border: none; margin-bottom: 2rem;">
+      <span class="section-category">Buyer Feedback</span>
+      <h2 class="section-title">Verified Customer Reviews</h2>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-item">
+        <div class="review-score">Rating: 5.0 / 5.0</div>
+        <p class="review-quote">
+          "The stainless steel puri press is sturdy and doesn't wobble on the kitchen slab. Applying a little oil on the plates ensures the dough releases cleanly. Saves significant time in the morning."
+        </p>
+        <p class="reviewer-tag">Pooja Varma</p>
+        <p class="reviewer-location">Ahmedabad, Gujarat &bull; Verified Purchase</p>
       </div>
 
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="stars-text">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-quote">
-            "The stainless steel puri press is sturdy and doesn't wobble on the kitchen slab. Applying a little oil on the plates ensures the dough releases cleanly. Saves significant time in the morning."
-          </p>
-          <p class="reviewer-name">Pooja Varma</p>
-          <p class="reviewer-meta">Ahmedabad, Gujarat &bull; Verified Purchase</p>
-        </div>
+      <div class="review-item">
+        <div class="review-score">Rating: 5.0 / 5.0</div>
+        <p class="review-quote">
+          "Bought this for my mother for her daily jaap. The display is clear to read, and the scroll action is completely silent. The wood texture feels respectful and pleasant in hand."
+        </p>
+        <p class="reviewer-tag">Rajesh Patel</p>
+        <p class="reviewer-location">Surat, Gujarat &bull; Verified Purchase</p>
+      </div>
 
-        <div class="review-card">
-          <div class="stars-text">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-quote">
-            "Bought this for my mother for her daily jaap. The display is clear to read, and the scroll action is completely silent. The wood texture feels respectful and pleasant in hand."
-          </p>
-          <p class="reviewer-name">Rajesh Patel</p>
-          <p class="reviewer-meta">Surat, Gujarat &bull; Verified Purchase</p>
-        </div>
-
-        <div class="review-card">
-          <div class="stars-text">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="review-quote">
-            "Product arrived securely packed in heavy bubble wrap. Good finish, honest pricing, and arrived in three days. Highly satisfied with the overall experience."
-          </p>
-          <p class="reviewer-name">Suresh K.</p>
-          <p class="reviewer-meta">Pune, Maharashtra &bull; Verified Purchase</p>
-        </div>
+      <div class="review-item">
+        <div class="review-score">Rating: 5.0 / 5.0</div>
+        <p class="review-quote">
+          "Product arrived securely packed in heavy bubble wrap. Good finish, honest pricing, and arrived in three days. Highly satisfied with the overall experience."
+        </p>
+        <p class="reviewer-tag">Suresh K.</p>
+        <p class="reviewer-location">Pune, Maharashtra &bull; Verified Purchase</p>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <p class="footer-copy">&copy; 2026 Zenkart. Functional household & devotional goods.</p>
-      <ul class="footer-links">
-        <li><a href="#puri-press">Kitchen</a></li>
-        <li><a href="#jaap-counter">Meditation</a></li>
-        <li><a href="#guarantees">Guarantees</a></li>
-      </ul>
-    </div>
+  <footer class="main-footer">
+    <div class="footer-brand">ZENKART</div>
+    <p class="footer-copy">&copy; 2026 Zenkart Store. Reliable household and devotional products.</p>
   </footer>
 
   <script>
-    function setPhoto(photoId, thumbEl) {
-      document.getElementById(photoId).src = thumbEl.src;
+    function swap(mainId, thumbEl) {
+      document.getElementById(mainId).src = thumbEl.src;
       const parent = thumbEl.parentElement;
-      parent.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
+      parent.querySelectorAll('.thumb-node').forEach(el => el.classList.remove('active'));
       thumbEl.classList.add('active');
     }
   </script>

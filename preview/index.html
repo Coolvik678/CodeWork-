@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenkart &ndash; Premium Living & Spiritual Essentials</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --zk-dark: #0B0F19;
+      --zk-card-bg: #FFFFFF;
+      --zk-accent: #6366F1;
+      --zk-accent-hover: #4F46E5;
+      --zk-accent-glow: rgba(99, 102, 241, 0.35);
+      --zk-emerald: #10B981;
+      --zk-amber: #F59E0B;
+      --zk-slate: #64748B;
+      --zk-border: #E2E8F0;
+      --zk-bg: #F8FAFC;
+      --zk-radius: 16px;
+      --zk-transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--zk-bg);
+      color: var(--zk-dark);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 1. TOP MARQUEE TICKER */
+    .zk-marquee {
+      background: #090D16;
+      color: #F1F5F9;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .zk-marquee-track {
+      display: inline-flex;
+      gap: 3rem;
+      animation: zkMarqueeAnim 22s linear infinite;
+    }
+    @keyframes zkMarqueeAnim {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .zk-marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* 2. NAVIGATION */
+    .zk-nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--zk-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .zk-nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .zk-logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--zk-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .zk-logo span { color: var(--zk-accent); }
+    .zk-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .zk-menu a {
+      text-decoration: none;
+      color: #334155;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: var(--zk-transition);
+    }
+    .zk-menu a:hover { color: var(--zk-accent); }
+    .zk-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .zk-cart-pill {
+      background: var(--zk-dark);
+      color: #FFF;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--zk-transition);
+    }
+    .zk-cart-pill:hover { background: var(--zk-accent); }
+
+    /* 3. HERO SHOWCASE HEADER */
+    .zk-hero {
+      max-width: 1280px;
+      margin: 2rem auto 0;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .zk-badge-hero {
+      display: inline-block;
+      background: #EEF2FF;
+      color: var(--zk-accent);
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    .zk-hero h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--zk-dark);
+      margin-bottom: 1rem;
+    }
+    .zk-hero p {
+      max-width: 680px;
+      margin: 0 auto 3rem;
+      color: var(--zk-slate);
+      font-size: 1.05rem;
+    }
+
+    /* 4. MAIN DUAL SHOWCASE CAROUSEL */
+    .zk-showcase-box {
+      max-width: 1280px;
+      margin: 0 auto 4rem;
+      padding: 0 1.5rem;
+    }
+    .zk-slide-card {
+      display: none;
+      background: #FFF;
+      border: 1px solid var(--zk-border);
+      border-radius: 24px;
+      box-shadow: 0 20px 40px -15px rgba(11, 15, 25, 0.08);
+      overflow: hidden;
+      animation: zkFade 0.4s ease-out;
+    }
+    .zk-slide-card.active { display: block; }
+    @keyframes zkFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .zk-slide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 3.5rem;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .zk-slide-grid {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        gap: 2rem;
+      }
+    }
+    .zk-photo-stage {
+      position: relative;
+      background: #F1F5F9;
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid #E2E8F0;
+    }
+    .zk-pill-tag {
+      position: absolute;
+      top: 1.25rem;
+      left: 1.25rem;
+      background: #EF4444;
+      color: #FFF;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .zk-pill-gold { background: #D97706; }
+    .zk-featured-img {
+      max-width: 100%;
+      height: 380px;
+      object-fit: contain;
+      transition: transform 0.5s ease;
+    }
+    .zk-photo-stage:hover .zk-featured-img {
+      transform: scale(1.06) translateY(-4px);
+    }
+    .zk-thumbs {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .zk-thumb {
+      width: 64px;
+      height: 64px;
+      border-radius: 10px;
+      border: 1px solid var(--zk-border);
+      object-fit: cover;
+      background: #FFF;
+      cursor: pointer;
+      transition: var(--zk-transition);
+    }
+    .zk-thumb:hover { border-color: var(--zk-accent); transform: translateY(-2px); }
+
+    .zk-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .zk-rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 0.8rem;
+    }
+    .zk-stars { color: var(--zk-amber); font-size: 1.1rem; }
+    .zk-count { color: var(--zk-slate); font-size: 0.85rem; font-weight: 700; }
+    .zk-title {
+      font-size: clamp(1.8rem, 3vw, 2.3rem);
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--zk-dark);
+      margin-bottom: 1rem;
+    }
+    .zk-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 1.25rem;
+    }
+    .zk-price {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--zk-dark);
+    }
+    .zk-compare {
+      font-size: 1.2rem;
+      color: #94A3B8;
+      text-decoration: line-through;
+    }
+    .zk-save-badge {
+      background: #DCFCE7;
+      color: #166534;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .zk-desc {
+      color: #475569;
+      font-size: 0.98rem;
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .zk-perks {
+      list-style: none;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .zk-perks li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #334155;
+    }
+    .zk-check {
+      width: 20px;
+      height: 20px;
+      background: #DCFCE7;
+      color: #166534;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+    .zk-btn-order {
+      display: inline-block;
+      background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
+      color: #FFF;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 16px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 8px 24px var(--zk-accent-glow);
+      transition: var(--zk-transition);
+    }
+    .zk-btn-order:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
+    }
+
+    /* CONTROLS */
+    .zk-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .zk-ctrl-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--zk-border);
+      background: #FFF;
+      color: var(--zk-dark);
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--zk-transition);
+    }
+    .zk-ctrl-btn:hover { background: var(--zk-dark); color: #FFF; }
+    .zk-tabs-pills {
+      display: flex;
+      gap: 8px;
+    }
+    .zk-pill-tab {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--zk-border);
+      background: #FFF;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--zk-transition);
+    }
+    .zk-pill-tab.active {
+      background: var(--zk-accent);
+      color: #FFF;
+      border-color: var(--zk-accent);
+    }
+
+    /* 5. TRUST GUARANTEES */
+    .zk-trust-strip {
+      max-width: 1280px;
+      margin: 0 auto 5rem;
+      padding: 0 1.5rem;
+    }
+    .zk-trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      background: #FFF;
+      border: 1px solid var(--zk-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+    }
+    .zk-trust-col {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .zk-trust-icon { font-size: 2.2rem; }
+    .zk-trust-col strong { display: block; font-size: 0.98rem; color: var(--zk-dark); }
+    .zk-trust-col span { font-size: 0.85rem; color: var(--zk-slate); }
+  </style>
+</head>
+<body>
+
+  <!-- MARQUEE TICKER -->
+  <div class="zk-marquee">
+    <div class="zk-marquee-track">
+      <div class="zk-marquee-item"><span>⚡</span> Free Fast Tracked Shipping Across India</div>
+      <div class="zk-marquee-item"><span>🛡️</span> 100% Quality Inspected Before Dispatch</div>
+      <div class="zk-marquee-item"><span>🔒</span> 256-Bit SSL Encrypted Instant UPI Checkout</div>
+      <div class="zk-marquee-item"><span>🔁</span> 7-Day Easy Replacement Guarantee</div>
+      <div class="zk-marquee-item"><span>⭐</span> Rated 4.9/5 by 12,000+ Happy Households</div>
+      <!-- Loop duplicate -->
+      <div class="zk-marquee-item"><span>⚡</span> Free Fast Tracked Shipping Across India</div>
+      <div class="zk-marquee-item"><span>🛡️</span> 100% Quality Inspected Before Dispatch</div>
+      <div class="zk-marquee-item"><span>🔒</span> 256-Bit SSL Encrypted Instant UPI Checkout</div>
+      <div class="zk-marquee-item"><span>🔁</span> 7-Day Easy Replacement Guarantee</div>
+      <div class="zk-marquee-item"><span>⭐</span> Rated 4.9/5 by 12,000+ Happy Households</div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="zk-nav">
+    <div class="zk-nav-inner">
+      <a href="#" class="zk-logo">ZEN<span>KART</span></a>
+      <ul class="zk-menu">
+        <li><a href="#showcase">Products</a></li>
+        <li><a href="#puri">Kitchen Line</a></li>
+        <li><a href="#jaap">Spiritual Line</a></li>
+        <li><a href="#guarantee">Our Guarantee</a></li>
+      </ul>
+      <div class="zk-nav-actions">
+        <a href="#showcase" class="zk-cart-pill">🛒 Cart (2 Items)</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO HEADER -->
+  <section class="zk-hero">
+    <span class="zk-badge-hero">⚡ Handpicked Quality Essentials</span>
+    <h1>Engineered For Everyday Living</h1>
+    <p>Discover Zenkart's highest rated daily essentials. Handcrafted quality, premium tactile finishes, and guaranteed performance delivered to your door.</p>
+  </section>
+
+  <!-- DUAL PRODUCT SHOWCASE SLIDER -->
+  <section class="zk-showcase-box" id="showcase">
+    <!-- PRODUCT 1: PURI & ROTI PRESS -->
+    <div class="zk-slide-card active" id="slide-0">
+      <div class="zk-slide-grid">
+        <div class="zk-photo-stage">
+          <span class="zk-pill-tag">🔥 Kitchen Bestseller</span>
+          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/LmD5ThCJqhhV0G8aZYgAwa7CatuNdCpw3hcjDhoy.jpg?v=1791707350" alt="Puri Press Maker" class="zk-featured-img" id="puri-main-img">
+          <div class="zk-thumbs">
+            <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/LmD5ThCJqhhV0G8aZYgAwa7CatuNdCpw3hcjDhoy.jpg?v=1791707350" class="zk-thumb" onclick="swapImg('puri-main-img', this.src)">
+            <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/8ZE5opeDmkJthK1BUOPpzCSZujXcaEktgWrfOfci.jpg?v=1791707350" class="zk-thumb" onclick="swapImg('puri-main-img', this.src)">
+            <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/aveTZEqDa1kVdDzh9YJoqnXCZsn44HTUoY2VY6qH.jpg?v=1791707351" class="zk-thumb" onclick="swapImg('puri-main-img', this.src)">
+            <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/EvJbPoPBNhGZpITSO3XFtN9PvMwEvBlwmczUem85.jpg?v=1791707351" class="zk-thumb" onclick="swapImg('puri-main-img', this.src)">
+          </div>
+        </div>
+        <div class="zk-details">
+          <div class="zk-rating">
+            <span class="zk-stars">★★★★★</span>
+            <span class="zk-count">4.9 / 5.0 (1,420 Reviews)</span>
+          </div>
+          <h2 class="zk-title">Heavy-Duty Stainless Steel Puri & Roti Press Maker</h2>
+          <div class="zk-price-row">
+            <span class="zk-price">₹599.00</span>
+            <span class="zk-compare">₹999.00</span>
+            <span class="zk-save-badge">SAVE 40%</span>
+          </div>
+          <p class="zk-desc">
+            Make uniformly round puris, crisp khakhras, and papads in 3 seconds flat. Built with high-grade stainless steel plates, anti-slip textured handle grip, and effortless lever action that saves hours of rolling pin effort.
+          </p>
+          <ul class="zk-perks">
+            <li><span class="zk-check">✓</span> <strong>23cm Large Press Diameter:</strong> Perfect circle symmetry and uniform thinness every press.</li>
+            <li><span class="zk-check">✓</span> <strong>Zero Wrist Fatigue:</strong> High-leverage handle presses dough with minimal effort.</li>
+            <li><span class="zk-check">✓</span> <strong>Solid 834g Weight:</strong> Heavy-gauge body stays rock-solid on your counter.</li>
+            <li><span class="zk-check">✓</span> <strong>Food-Grade Stainless Steel:</strong> Rust-resistant and easy wipe-clean maintenance.</li>
+          </ul>
+          <a href="https://jbn7jn-pj.myshopify.com/products/7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium" target="_blank" class="zk-btn-order">
+            Order Puri Press — ₹599.00 →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT 2: WOODEN DIGITAL JAAP COUNTER -->
+    <div class="zk-slide-card" id="slide-1">
+      <div class="zk-slide-grid">
+        <div class="zk-photo-stage">
+          <span class="zk-pill-tag zk-pill-gold">✨ Spiritual Choice</span>
+          <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/6uBFXzCzDtrNhGqsIh94CPd33FfxVCSfyaUBFnJX.jpg?v=1791707182" alt="Wooden Digital Jaap Counter" class="zk-featured-img" id="jaap-main-img">
+          <div class="zk-thumbs">
+            <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/6uBFXzCzDtrNhGqsIh94CPd33FfxVCSfyaUBFnJX.jpg?v=1791707182" class="zk-thumb" onclick="swapImg('jaap-main-img', this.src)">
+            <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/e22vJLBwaVQ2vsotCKOalG33Jlh28ZcnlV9LXPo7.jpg?v=1791707182" class="zk-thumb" onclick="swapImg('jaap-main-img', this.src)">
+            <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/PGuCXsynC4V6dtpgW3W3WBmj32n0uw53wfHeafqK.jpg?v=1791707182" class="zk-thumb" onclick="swapImg('jaap-main-img', this.src)">
+            <img src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/Helg1QpJWXHMc8JKAQSL2FABMTdKbOjigo9mUQzr.jpg?v=1791707182" class="zk-thumb" onclick="swapImg('jaap-main-img', this.src)">
+          </div>
+        </div>
+        <div class="zk-details">
+          <div class="zk-rating">
+            <span class="zk-stars">★★★★★</span>
+            <span class="zk-count">4.95 / 5.0 (2,180 Reviews)</span>
+          </div>
+          <h2 class="zk-title">Wooden Digital Mantra Jaap Counter & Compass</h2>
+          <div class="zk-price-row">
+            <span class="zk-price">₹499.00</span>
+            <span class="zk-compare">₹799.00</span>
+            <span class="zk-save-badge">SAVE 38%</span>
+          </div>
+          <p class="zk-desc">
+            Deepen your spiritual focus without losing count. Features a high-contrast LCD screen, integrated prayer direction compass, premium wood-grain finish, and a traditional silk tassel designed for quiet, mindful devotion.
+          </p>
+          <ul class="zk-perks">
+            <li><span class="zk-check">✓</span> <strong>Crystal Clear LCD Display:</strong> Accurate counts from 1 to 99,999 with one-touch reset.</li>
+            <li><span class="zk-check">✓</span> <strong>Built-In Prayer Compass:</strong> Effortlessly find prayer direction during travel or at home.</li>
+            <li><span class="zk-check">✓</span> <strong>Silent Smooth Scroll Wheel:</strong> Tactile thumb roller moves quietly with zero clicking noise.</li>
+            <li><span class="zk-check">✓</span> <strong>Sacred Silk Tassel:</strong> Hand-finished devotional red tassel for authentic spiritual beauty.</li>
+          </ul>
+          <a href="https://jbn7jn-pj.myshopify.com/products/wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc" target="_blank" class="zk-btn-order" style="background: linear-gradient(135deg, #059669 0%, #047857 100%); box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);">
+            Order Jaap Counter — ₹499.00 →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="zk-controls">
+      <button class="zk-ctrl-btn" onclick="prevSlide()">‹</button>
+      <div class="zk-tabs-pills">
+        <button class="zk-pill-tab active" id="pill-0" onclick="switchSlide(0)">🥟 Puri Press (₹599)</button>
+        <button class="zk-pill-tab" id="pill-1" onclick="switchSlide(1)">🕉️ Jaap Counter (₹499)</button>
+      </div>
+      <button class="zk-ctrl-btn" onclick="nextSlide()">›</button>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <section class="zk-trust-strip" id="guarantee">
+    <div class="zk-trust-grid">
+      <div class="zk-trust-col">
+        <div class="zk-trust-icon">🚚</div>
+        <div>
+          <strong>Free Express Shipping</strong>
+          <span>Dispatched within 24 hours across India</span>
+        </div>
+      </div>
+      <div class="zk-trust-col">
+        <div class="zk-trust-icon">🔒</div>
+        <div>
+          <strong>100% Secure Payments</strong>
+          <span>Encrypted UPI, Cards, NetBanking</span>
+        </div>
+      </div>
+      <div class="zk-trust-col">
+        <div class="zk-trust-icon">🔁</div>
+        <div>
+          <strong>7-Day Easy Replacement</strong>
+          <span>Hassle-free guarantee on all orders</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    let cur = 0;
+    function switchSlide(idx) {
+      document.querySelectorAll('.zk-slide-card').forEach((c, i) => c.classList.toggle('active', i === idx));
+      document.querySelectorAll('.zk-pill-tab').forEach((p, i) => p.classList.toggle('active', i === idx));
+      cur = idx;
+    }
+    function nextSlide() { switchSlide((cur + 1) % 2); }
+    function prevSlide() { switchSlide((cur + 1) % 2); }
+    function swapImg(targetId, src) {
+      document.getElementById(targetId).src = src;
+    }
+  </script>
+</body>
+</html>

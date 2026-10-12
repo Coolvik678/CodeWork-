@@ -1,0 +1,12 @@
+{
+  "name": "zenkart-shopify-theme",
+  "version": "1.0.0",
+  "description": "Production Shopify 2.0 Theme for Zenkart",
+  "scripts": {
+    "css": "npx tailwindcss -i ./src/tailwind.css -o ./assets/app.css --minify",
+    "css:watch": "npx tailwindcss -i ./src/tailwind.css -o ./assets/app.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

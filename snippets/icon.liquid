@@ -1,0 +1,20 @@
+{% comment %}
+  Zenkart Icon Snippet
+  Usage: {% render 'icon', name: 'cart' %}
+{% endcomment %}
+{% case name %}
+  {% when 'cart' %}
+    <svg class="{{ class | default: 'w-4 h-4' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+    </svg>
+  {% when 'close' %}
+    <svg class="{{ class | default: 'w-4 h-4' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  {% when 'check' %}
+    <svg class="{{ class | default: 'w-4 h-4' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+    </svg>
+  {% else %}
+    <!-- Icon {{ name }} -->
+{% endcase %}

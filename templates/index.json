@@ -1,11 +1,34 @@
 {
   "sections": {
-    "zenkart_home": {
-      "type": "zenkart-home",
-      "settings": {}
+    "hero": {
+      "type": "hero"
+    },
+    "puri_press": {
+      "type": "product-puri-press"
+    },
+    "jaap_counter": {
+      "type": "product-jaap-counter"
+    },
+    "demonstration": {
+      "type": "demonstration"
+    },
+    "features": {
+      "type": "features"
+    },
+    "guarantees": {
+      "type": "guarantees"
+    },
+    "reviews": {
+      "type": "reviews"
     }
   },
   "order": [
-    "zenkart_home"
+    "hero",
+    "puri_press",
+    "jaap_counter",
+    "demonstration",
+    "features",
+    "guarantees",
+    "reviews"
   ]
 }

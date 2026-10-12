@@ -1,3 +1,158 @@
+/* ==========================================================================
+   ZENKART HIGH-END THEME RUNTIME
+   Atmospheric Lenis Smooth Scroll, Embers, Fluid Reveals & AJAX Cart
+   ========================================================================== */
+
+// 1. STANDALONE SMOOTH SCROLL RUNTIME
+(function() {
+  class ZenkartSmoothScroll {
+    constructor(options = {}) {
+      this.duration = options.duration || 1.2;
+      this.targetY = window.scrollY;
+      this.currentY = window.scrollY;
+      this.isRafActive = false;
+      this.init();
+    }
+
+    init() {
+      // Smooth wheel physics
+      window.addEventListener('wheel', (e) => {
+        // Allow ctrl+wheel for browser zoom
+        if (e.ctrlKey || e.metaKey) return;
+        
+        // Prevent default native stepped jump
+        e.preventDefault();
+        
+        const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        this.targetY = Math.max(0, Math.min(this.targetY + e.deltaY, maxScroll));
+        
+        if (!this.isRafActive) {
+          this.isRafActive = true;
+          requestAnimationFrame(() => this.loop());
+        }
+      }, { passive: false });
+
+      // Keep target aligned on normal scroll / resize
+      window.addEventListener('scroll', () => {
+        if (!this.isRafActive) {
+          this.targetY = window.scrollY;
+          this.currentY = window.scrollY;
+        }
+      }, { passive: true });
+
+      // Anchor smooth glide
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href^="#"]');
+        if (link && link.getAttribute('href').length > 1) {
+          const target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            const top = target.getBoundingClientRect().top + window.scrollY - 80;
+            this.scrollTo(top);
+          }
+        }
+      });
+    }
+
+    loop() {
+      const delta = this.targetY - this.currentY;
+      if (Math.abs(delta) < 0.6) {
+        this.currentY = this.targetY;
+        window.scrollTo(0, this.currentY);
+        this.isRafActive = false;
+        return;
+      }
+
+      // Smooth exponential easing
+      this.currentY += delta * 0.085;
+      window.scrollTo(0, this.currentY);
+      requestAnimationFrame(() => this.loop());
+    }
+
+    scrollTo(targetPos) {
+      this.targetY = Math.max(0, Math.min(targetPos, document.documentElement.scrollHeight - window.innerHeight));
+      if (!this.isRafActive) {
+        this.isRafActive = true;
+        requestAnimationFrame(() => this.loop());
+      }
+    }
+
+    raf() {
+      // Compatibility hook
+    }
+  }
+
+  window.Lenis = ZenkartSmoothScroll;
+  window.lenis = new ZenkartSmoothScroll();
+})();
+
+// 2. EMBER PARTICLES GENERATOR
+function initEmberParticles() {
+  const containers = document.querySelectorAll('[data-embers]');
+  containers.forEach(container => {
+    // Ensure relative positioning
+    const count = parseInt(container.getAttribute('data-embers'), 10) || 16;
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < count; i++) {
+      const ember = document.createElement('span');
+      ember.className = 'ember-particle';
+      const left = (Math.random() * 96 + 2).toFixed(2);
+      const bottom = (Math.random() * 30 + 5).toFixed(2);
+      const delay = (Math.random() * 4.5).toFixed(2);
+      const duration = (Math.random() * 3.5 + 4).toFixed(2);
+      const size = (Math.random() * 2.5 + 2).toFixed(1);
+
+      ember.style.left = `${left}%`;
+      ember.style.bottom = `${bottom}px`;
+      ember.style.width = `${size}px`;
+      ember.style.height = `${size}px`;
+      ember.style.animationDelay = `${delay}s`;
+      ember.style.animationDuration = `${duration}s`;
+
+      fragment.appendChild(ember);
+    }
+
+    container.appendChild(fragment);
+  });
+}
+
+// 3. FLUID SCROLL REVEAL OBSERVER
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('[data-reveal]');
+  if (!revealElements.length) return;
+
+  revealElements.forEach(el => el.classList.add('is-pending'));
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('is-pending');
+          entry.target.classList.add('is-in');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.08
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add('is-in'));
+  }
+
+  // Safety fallback after 2s so content is guaranteed visible
+  setTimeout(() => {
+    document.querySelectorAll('[data-reveal].is-pending').forEach(el => {
+      el.classList.remove('is-pending');
+      el.classList.add('is-in');
+    });
+  }, 2000);
+}
+
+// 4. ZENKART CART DRAWER
 window.ZenkartCart = (function() {
   let items = JSON.parse(localStorage.getItem('zenkart_cart') || '[]');
 
@@ -82,14 +237,19 @@ window.ZenkartCart = (function() {
     }, 300);
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('cart-toggle-btn')?.addEventListener('click', openDrawer);
-    document.getElementById('cart-close-btn')?.addEventListener('click', closeDrawer);
-    document.getElementById('cart-drawer-overlay')?.addEventListener('click', (e) => {
-      if (e.target.id === 'cart-drawer-overlay') closeDrawer();
-    });
-    render();
+  return { add, remove, openDrawer, closeDrawer, render };
+})();
+
+// DOM BOOTSTRAP
+document.addEventListener('DOMContentLoaded', () => {
+  initEmberParticles();
+  initScrollReveal();
+
+  document.getElementById('cart-toggle-btn')?.addEventListener('click', ZenkartCart.openDrawer);
+  document.getElementById('cart-close-btn')?.addEventListener('click', ZenkartCart.closeDrawer);
+  document.getElementById('cart-drawer-overlay')?.addEventListener('click', (e) => {
+    if (e.target.id === 'cart-drawer-overlay') ZenkartCart.closeDrawer();
   });
 
-  return { add, remove, openDrawer, closeDrawer };
-})();
+  ZenkartCart.render();
+});

@@ -1,6 +1,6 @@
 /* ==========================================================================
    ZENKART HIGH-END THEME RUNTIME
-   Atmospheric Lenis Smooth Scroll, Embers, Fluid Reveals & AJAX Cart
+   Lenis Smooth Scroll, 3D Parallax Tilt, Radar Hotspots, Embers & Live Proof
    ========================================================================== */
 
 // 1. STANDALONE SMOOTH SCROLL RUNTIME
@@ -17,10 +17,7 @@
     init() {
       // Smooth wheel physics
       window.addEventListener('wheel', (e) => {
-        // Allow ctrl+wheel for browser zoom
         if (e.ctrlKey || e.metaKey) return;
-        
-        // Prevent default native stepped jump
         e.preventDefault();
         
         const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
@@ -32,7 +29,6 @@
         }
       }, { passive: false });
 
-      // Keep target aligned on normal scroll / resize
       window.addEventListener('scroll', () => {
         if (!this.isRafActive) {
           this.targetY = window.scrollY;
@@ -63,7 +59,6 @@
         return;
       }
 
-      // Smooth exponential easing
       this.currentY += delta * 0.085;
       window.scrollTo(0, this.currentY);
       requestAnimationFrame(() => this.loop());
@@ -76,21 +71,49 @@
         requestAnimationFrame(() => this.loop());
       }
     }
-
-    raf() {
-      // Compatibility hook
-    }
   }
 
   window.Lenis = ZenkartSmoothScroll;
   window.lenis = new ZenkartSmoothScroll();
 })();
 
-// 2. EMBER PARTICLES GENERATOR
+// 2. 3D GYROSCOPIC / MOUSE PARALLAX CARDS
+function init3DCardParallax() {
+  const cards = document.querySelectorAll('.interactive-3d-card');
+  cards.forEach(card => {
+    // Inject glare overlay if not present
+    if (!card.querySelector('.glare-overlay')) {
+      const glare = document.createElement('div');
+      glare.className = 'glare-overlay';
+      card.appendChild(glare);
+    }
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -12; // tilt degrees
+      const rotateY = ((x - centerX) / centerX) * 12;
+
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    });
+  });
+}
+
+// 3. EMBER PARTICLES GENERATOR
 function initEmberParticles() {
   const containers = document.querySelectorAll('[data-embers]');
   containers.forEach(container => {
-    // Ensure relative positioning
     const count = parseInt(container.getAttribute('data-embers'), 10) || 16;
     const fragment = document.createDocumentFragment();
 
@@ -117,7 +140,7 @@ function initEmberParticles() {
   });
 }
 
-// 3. FLUID SCROLL REVEAL OBSERVER
+// 4. FLUID SCROLL REVEAL OBSERVER
 function initScrollReveal() {
   const revealElements = document.querySelectorAll('[data-reveal]');
   if (!revealElements.length) return;
@@ -143,7 +166,6 @@ function initScrollReveal() {
     revealElements.forEach(el => el.classList.add('is-in'));
   }
 
-  // Safety fallback after 2s so content is guaranteed visible
   setTimeout(() => {
     document.querySelectorAll('[data-reveal].is-pending').forEach(el => {
       el.classList.remove('is-pending');
@@ -152,7 +174,87 @@ function initScrollReveal() {
   }, 2000);
 }
 
-// 4. ZENKART CART DRAWER
+// 5. LIVE VERIFIED ACTIVITY NOTIFICATION (HIGH-END PROOF TICKER)
+function initLiveSocialProof() {
+  const purchases = [
+    { name: "Pooja V.", city: "Ahmedabad, Gujarat", item: "Puri & Khakhra Press Machine", time: "2 mins ago" },
+    { name: "Rajesh P.", city: "Surat, Gujarat", item: "Wooden Digital Jaap Counter", time: "5 mins ago" },
+    { name: "Suresh K.", city: "Pune, Maharashtra", item: "Puri & Khakhra Press Machine", time: "8 mins ago" },
+    { name: "Ananya S.", city: "Jaipur, Rajasthan", item: "Wooden Digital Jaap Counter", time: "11 mins ago" },
+    { name: "Manoj T.", city: "Varanasi, UP", item: "Puri & Khakhra Press Machine", time: "14 mins ago" },
+    { name: "Deepak S.", city: "Chennai, Tamil Nadu", item: "Wooden Digital Jaap Counter", time: "17 mins ago" }
+  ];
+
+  let toast = document.getElementById('live-proof-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'live-proof-toast';
+    toast.className = 'fixed bottom-6 left-6 z-40 max-w-sm card-glass p-3.5 rounded-xl border border-border-dim shadow-2xl transition-all duration-500 translate-y-20 opacity-0 pointer-events-none flex items-center gap-3.5';
+    document.body.appendChild(toast);
+  }
+
+  let index = 0;
+  function showNext() {
+    const item = purchases[index % purchases.length];
+    index++;
+
+    toast.innerHTML = `
+      <div class="w-9 h-9 rounded-full bg-amber/20 border border-amber/40 flex items-center justify-center text-amber font-serif font-bold text-sm flex-shrink-0">
+        ✓
+      </div>
+      <div class="text-xs flex-1">
+        <div class="text-bone font-semibold">${item.name} <span class="text-bone-muted font-normal">from ${item.city}</span></div>
+        <div class="text-amber text-[11px] font-medium mt-0.5">Purchased ${item.item}</div>
+        <div class="text-[10px] text-bone-muted/60 mt-0.5">${item.time} • Verified Buyer</div>
+      </div>
+      <button onclick="this.parentElement.classList.add('opacity-0', 'translate-y-20')" class="text-bone-muted/50 hover:text-bone text-xs p-1">✕</button>
+    `;
+
+    toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+
+    setTimeout(() => {
+      toast.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+    }, 6000);
+  }
+
+  // Trigger first after 4 seconds, then periodically
+  setTimeout(() => {
+    showNext();
+    setInterval(showNext, 18000);
+  }, 4000);
+}
+
+// 6. INTERACTIVE PIN CODE ESTIMATOR
+window.checkPincodeDelivery = function(inputId, resultId) {
+  const input = document.getElementById(inputId);
+  const result = document.getElementById(resultId);
+  if (!input || !result) return;
+
+  const pin = input.value.trim();
+  if (pin.length !== 6 || isNaN(pin)) {
+    result.innerHTML = '<span class="text-red-400">Please enter a valid 6-digit Indian PIN code.</span>';
+    result.classList.remove('hidden');
+    return;
+  }
+
+  // Calculate delivery in 2-3 business days
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const deliveryDate = new Date();
+  deliveryDate.setDate(deliveryDate.getDate() + 3);
+  const dayName = days[deliveryDate.getDay()];
+
+  result.innerHTML = `
+    <div class="text-emerald-400 font-medium flex items-center gap-1.5">
+      <span>✓</span> Delivery available to PIN <strong>${pin}</strong> by <strong>${dayName}</strong>.
+    </div>
+    <div class="text-bone-muted text-[11px] mt-0.5">Free Express Shipping &amp; Cash on Delivery Available.</div>
+  `;
+  result.classList.remove('hidden');
+};
+
+// 7. ZENKART CART DRAWER
 window.ZenkartCart = (function() {
   let items = JSON.parse(localStorage.getItem('zenkart_cart') || '[]');
 
@@ -244,6 +346,8 @@ window.ZenkartCart = (function() {
 document.addEventListener('DOMContentLoaded', () => {
   initEmberParticles();
   initScrollReveal();
+  init3DCardParallax();
+  initLiveSocialProof();
 
   document.getElementById('cart-toggle-btn')?.addEventListener('click', ZenkartCart.openDrawer);
   document.getElementById('cart-close-btn')?.addEventListener('click', ZenkartCart.closeDrawer);

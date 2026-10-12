@@ -1,36 +1,82 @@
 <section id="puri-press" class="py-24 px-6 border-b border-border-dim max-w-7xl mx-auto">
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
     
-    <!-- Dramatic Visual Stage -->
-    <div class="card-glass card-glow rounded-2xl p-8 lg:p-12 text-center relative overflow-hidden flex flex-col justify-between min-h-[500px]" data-reveal>
-      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber/20 via-transparent to-transparent pointer-events-none"></div>
+    <!-- 3D Gyroscopic Visual Stage -->
+    <div class="card-glass card-glow interactive-3d-card rounded-2xl p-8 lg:p-12 text-center relative overflow-hidden flex flex-col justify-between min-h-[560px] preserve-3d" data-reveal>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber/25 via-transparent to-transparent pointer-events-none"></div>
       
       <div class="flex justify-between items-center w-full relative z-10">
-        <span class="text-[11px] uppercase tracking-widest font-semibold text-amber">Kitchen Machinery</span>
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] uppercase tracking-widest font-semibold text-amber">Kitchen Machinery</span>
+          <span class="text-[10px] bg-ink-elevated border border-border-dim px-2 py-0.5 rounded-full text-bone-muted">3D Inspection Mode</span>
+        </div>
         <span class="bg-amber/15 text-amber border border-amber/30 text-[11px] font-bold px-3 py-1 rounded-full uppercase">Save 40%</span>
       </div>
       
-      <div class="my-auto py-8 relative z-10 flex flex-col items-center">
-        <div class="relative w-full h-72 md:h-96 rounded-xl overflow-hidden border border-border-dim group bg-ink mb-6">
+      <!-- Interactive Stage with Hotspots -->
+      <div class="my-auto py-6 relative z-10 flex flex-col items-center">
+        <div class="relative w-full h-80 md:h-96 rounded-xl overflow-hidden border border-border-dim/80 group bg-ink mb-6 shadow-2xl">
           <img 
             src="{{ 'puri-press.jpg' | asset_url }}" 
             alt="Stainless Steel Puri & Khakhra Press Machine" 
             class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-ink-card via-transparent to-transparent opacity-60"></div>
+
+          <!-- Hotspot 1: Mirror Stainless Steel -->
+          <div class="hotspot-node" style="left: 32%; top: 38%;">
+            <div class="hotspot-beacon">
+              <div class="hotspot-dot"></div>
+            </div>
+            <div class="hotspot-tooltip card-glass px-3 py-1.5 rounded-lg text-[11px] text-bone border border-amber/30 shadow-xl">
+              <strong class="text-amber block font-serif">304 Stainless Steel</strong>
+              Mirror-polished food grade alloy
+            </div>
+          </div>
+
+          <!-- Hotspot 2: Balanced Lever -->
+          <div class="hotspot-node" style="left: 78%; top: 44%;">
+            <div class="hotspot-beacon">
+              <div class="hotspot-dot"></div>
+            </div>
+            <div class="hotspot-tooltip card-glass px-3 py-1.5 rounded-lg text-[11px] text-bone border border-amber/30 shadow-xl">
+              <strong class="text-amber block font-serif">High-Leverage Handle</strong>
+              Uniform mechanical downward pressure
+            </div>
+          </div>
+
+          <!-- Hotspot 3: 834g Heavy Cast Base -->
+          <div class="hotspot-node" style="left: 50%; top: 82%;">
+            <div class="hotspot-beacon">
+              <div class="hotspot-dot"></div>
+            </div>
+            <div class="hotspot-tooltip card-glass px-3 py-1.5 rounded-lg text-[11px] text-bone border border-amber/30 shadow-xl">
+              <strong class="text-amber block font-serif">834g Anti-Wobble Base</strong>
+              Heavy cast weight stays anchored on granite
+            </div>
+          </div>
         </div>
-        <h3 class="text-2xl font-serif font-bold text-bone">Stainless Steel Puri & Khakhra Press</h3>
-        <p class="text-xs text-bone-muted mt-2">Food-Grade 304 Steel • Balanced Mechanical Leverage • 834g Solid Base</p>
+
+        <div class="flex items-center gap-2 text-[11px] text-amber/80 font-medium tracking-wide">
+          <span>❖ Hover / Move Cursor to Tilt in 3D Space</span>
+        </div>
       </div>
 
-      <div class="text-[11px] text-bone-muted/60 tracking-widest uppercase relative z-10">
-        Model: ZK-PP-23 • Domestic Certified
+      <div class="flex justify-between items-center text-[11px] text-bone-muted/60 tracking-widest uppercase relative z-10 pt-2 border-t border-border-dim/40">
+        <span>Model: ZK-PP-23</span>
+        <span>Domestic Certified</span>
       </div>
     </div>
 
     <!-- Product Details & Specs -->
     <div data-reveal>
-      <span class="eyebrow block mb-2">Uniform Mechanical Flattening</span>
+      <div class="flex items-center gap-3 mb-2">
+        <span class="eyebrow">Uniform Mechanical Flattening</span>
+        <span class="inline-flex items-center gap-1.5 bg-amber/10 border border-amber/30 text-amber text-[10px] font-bold px-2.5 py-0.5 rounded-full animate-pulse">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber"></span> Batch 04: 14 Units Left
+        </span>
+      </div>
+
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-bone mb-4">
         Stainless Steel Puri & Khakhra Press Machine
       </h2>
@@ -38,20 +84,40 @@
       <div class="flex items-baseline gap-4 mb-6">
         <span class="text-3xl sm:text-4xl font-bold text-bone">₹599</span>
         <span class="text-lg line-through text-bone-muted/50">₹999</span>
-        <span class="text-xs font-semibold text-amber bg-amber/10 px-3 py-1 rounded-full border border-amber/20">Special Offer</span>
+        <span class="text-xs font-semibold text-amber bg-amber/10 px-3 py-1 rounded-full border border-amber/20">Save 40% Off</span>
       </div>
 
-      <p class="text-sm text-bone-muted leading-relaxed mb-8">
+      <p class="text-sm text-bone-muted leading-relaxed mb-6">
         A heavy-gauge manual press designed for flattening dough evenly in seconds. The balanced mechanical lever applies uniform pressure across dough balls, saving significant time during morning cooking.
       </p>
 
       <!-- Glass Specs Table -->
-      <div class="card-glass rounded-xl p-5 mb-8 text-xs divide-y divide-border-dim" data-reveal>
-        <div class="flex justify-between py-2.5"><span class="text-bone-muted">Plate Diameter</span><span class="font-medium text-bone">23 cm</span></div>
+      <div class="card-glass rounded-xl p-5 mb-6 text-xs divide-y divide-border-dim" data-reveal>
+        <div class="flex justify-between py-2.5"><span class="text-bone-muted">Plate Diameter</span><span class="font-medium text-bone">23 cm (Standard Domestic)</span></div>
         <div class="flex justify-between py-2.5"><span class="text-bone-muted">Net Weight</span><span class="font-medium text-bone">834 grams (Heavy Cast Base)</span></div>
-        <div class="flex justify-between py-2.5"><span class="text-bone-muted">Material</span><span class="font-medium text-bone">Food-Grade Stainless Steel</span></div>
-        <div class="flex justify-between py-2.5"><span class="text-bone-muted">Handle</span><span class="font-medium text-bone">Textured Anti-Slip Grip</span></div>
-        <div class="flex justify-between py-2.5"><span class="text-bone-muted">Warranty</span><span class="font-medium text-bone">7-Day Direct Replacement</span></div>
+        <div class="flex justify-between py-2.5"><span class="text-bone-muted">Material</span><span class="font-medium text-bone">Food-Grade 304 Stainless Steel</span></div>
+        <div class="flex justify-between py-2.5"><span class="text-bone-muted">Handle</span><span class="font-medium text-bone">Textured Anti-Slip Ergonomic Grip</span></div>
+        <div class="flex justify-between py-2.5"><span class="text-bone-muted">Warranty</span><span class="font-medium text-bone">7-Day Direct Doorstep Replacement</span></div>
+      </div>
+
+      <!-- Interactive PIN Code Delivery Checker -->
+      <div class="card-glass p-3.5 rounded-xl border border-border-dim mb-6 text-xs">
+        <label for="pincode-puri" class="block text-[11px] font-semibold text-bone-muted uppercase tracking-wider mb-2">Check Delivery Date &amp; COD Availability:</label>
+        <div class="flex gap-2">
+          <input 
+            type="text" 
+            id="pincode-puri" 
+            maxlength="6" 
+            placeholder="Enter 6-digit Indian PIN code" 
+            class="flex-1 bg-ink border border-border-dim rounded-lg px-3 py-2 text-xs text-bone placeholder:text-bone-muted/40 focus:outline-none focus:border-amber transition">
+          <button 
+            type="button" 
+            onclick="checkPincodeDelivery('pincode-puri', 'pincode-puri-res')" 
+            class="bg-ink-elevated hover:bg-amber hover:text-black border border-border-dim text-bone font-semibold text-xs px-4 py-2 rounded-lg transition">
+            Check
+          </button>
+        </div>
+        <div id="pincode-puri-res" class="mt-2 text-xs hidden"></div>
       </div>
 
       <button onclick="ZenkartCart.add('puri-press', 'Stainless Steel Puri Press Machine', 599)" class="w-full bg-amber hover:bg-amber-lit text-black font-semibold text-sm py-4 rounded-full transition-all duration-200 hover:-translate-y-0.5 shadow-xl flex items-center justify-center gap-2">

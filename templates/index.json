@@ -3,6 +3,9 @@
     "hero": {
       "type": "hero"
     },
+    "marquee_ribbon": {
+      "type": "marquee-ribbon"
+    },
     "puri_press": {
       "type": "product-puri-press"
     },
@@ -24,6 +27,7 @@
   },
   "order": [
     "hero",
+    "marquee_ribbon",
     "puri_press",
     "jaap_counter",
     "demonstration",

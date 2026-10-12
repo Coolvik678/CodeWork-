@@ -43,14 +43,13 @@
       </div>
       
       <div class="my-auto py-8 relative z-10 flex flex-col items-center">
-        <div class="w-64 h-64 mx-auto rounded-2xl bg-ink-elevated/80 border border-border-dim/60 p-4 flex items-center justify-center shadow-2xl mb-6 relative group overflow-hidden">
-          <div class="absolute inset-0 bg-gradient-to-tr from-amber/10 via-transparent to-white/5 opacity-50 group-hover:opacity-100 transition duration-500"></div>
+        <div class="relative w-full h-72 md:h-96 rounded-xl overflow-hidden border border-border-dim group bg-ink mb-6">
           <img 
-            src="https://cdn.shopify.com/s/files/1/0761/1793/4241/files/6uBFXzCzDtrNhGqsIh94CPd33FfxVCSfyaUBFnJX.jpg?v=1791707182" 
-            alt="Wooden Digital Mantra Jaap Counter" 
-            class="max-w-full max-h-full object-contain drop-shadow-2xl transition duration-500 group-hover:scale-105"
-            onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\"text-6xl text-amber\">📿</span>';"
-          >
+            src="{{ 'jaap-counter.jpg' | asset_url }}" 
+            alt="Wooden Digital Mantra Jaap Counter With Compass" 
+            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-card via-transparent to-transparent opacity-60"></div>
         </div>
         <h3 class="text-2xl font-serif font-bold text-bone">Wooden Digital Mantra Jaap Counter</h3>
         <p class="text-xs text-bone-muted mt-2">Silent Scroll Roller • Direction Compass • Handcrafted Finish</p>

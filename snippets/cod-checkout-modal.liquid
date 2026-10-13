@@ -171,42 +171,12 @@
     e.preventDefault();
     const btn = document.getElementById('cod-submit-btn');
     btn.disabled = true;
-    btn.innerHTML = '<span>Processing Order with Zenkart...</span>';
-
-    const name = document.getElementById('cod-name').value;
-    const phone = document.getElementById('cod-phone').value;
-    const address = document.getElementById('cod-address').value;
-    const pin = document.getElementById('cod-pincode').value;
-    const city = document.getElementById('cod-city').value;
-
-    const orderId = 'ZK-' + Math.floor(100000 + Math.random() * 900000);
-
-    const orderData = {
-      orderId,
-      name,
-      phone,
-      address,
-      pin,
-      city,
-      item: activeCodItem,
-      timestamp: new Date().toISOString()
-    };
-    
-    const existingOrders = JSON.parse(localStorage.getItem('zenkart_orders') || '[]');
-    existingOrders.push(orderData);
-    localStorage.setItem('zenkart_orders', JSON.stringify(existingOrders));
+    btn.innerHTML = '<span>Redirecting to Secure Shopify Checkout...</span>';
 
     if (window.ZenkartCart && activeCodItem) {
-      window.ZenkartCart.add(activeCodItem.handle, activeCodItem.title, activeCodItem.price);
+      window.ZenkartCart.buyNow(activeCodItem.handle, activeCodItem.qty || 1);
+    } else {
+      window.location.href = '/checkout';
     }
-
-    setTimeout(() => {
-      document.getElementById('cod-checkout-form').classList.add('hidden');
-      document.getElementById('cod-success-view').classList.remove('hidden');
-      document.getElementById('success-cust-name').textContent = name;
-      document.getElementById('success-order-id').textContent = '#' + orderId;
-      btn.disabled = false;
-      btn.innerHTML = '<span>Confirm Order with Cash on Delivery ➔</span>';
-    }, 800);
   };
 </script>

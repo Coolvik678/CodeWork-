@@ -282,13 +282,41 @@ window.checkPincodeDelivery = function(inputId, resultId) {
   result.classList.remove('hidden');
 };
 
-// 7. ZENKART CART DRAWER
+// 7. ZENKART REAL SHOPIFY CART & DIRECT CHECKOUT ENGINE (WUKUSY SYNCED)
 window.ZenkartCart = (function() {
-  let items = JSON.parse(localStorage.getItem('zenkart_cart') || '[]');
+  const VARIANT_MAP = {
+    'wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc': 48052588019873,
+    'jaap-counter': 48052588019873,
+    '22223_digital_tasbih_counter_1pc': 48052588019873,
+    '7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium': 48052590608545,
+    'puri-press': 48052590608545,
+    '7149a_steel_puri_press_medium': 48052590608545
+  };
 
-  function save() {
-    localStorage.setItem('zenkart_cart', JSON.stringify(items));
-    render();
+  let cartData = { items: [], total_price: 0, item_count: 0 };
+
+  function resolveVariantId(idOrHandle) {
+    if (!idOrHandle) return 48052588019873;
+    if (VARIANT_MAP[idOrHandle]) return VARIANT_MAP[idOrHandle];
+    const num = Number(idOrHandle);
+    if (!isNaN(num) && num > 1000000000) return num;
+    const str = String(idOrHandle).toLowerCase();
+    if (str.includes('jaap') || str.includes('tasbih') || str.includes('counter')) return 48052588019873;
+    if (str.includes('puri') || str.includes('press') || str.includes('roti')) return 48052590608545;
+    return 48052588019873;
+  }
+
+  function fetchCart() {
+    return fetch('/cart.js')
+      .then(r => r.json())
+      .then(data => {
+        cartData = data;
+        render();
+        return data;
+      })
+      .catch(err => {
+        console.warn('Cart fetch failed', err);
+      });
   }
 
   function render() {
@@ -296,53 +324,106 @@ window.ZenkartCart = (function() {
     const badge = document.getElementById('cart-count-badge');
     const subtotalEl = document.getElementById('cart-subtotal-price');
 
+    if (badge) badge.innerText = cartData.item_count || 0;
+    if (subtotalEl) {
+      const formatted = (cartData.total_price / 100).toLocaleString('en-IN');
+      subtotalEl.innerText = '₹' + formatted;
+    }
+
     if (!container) return;
 
-    if (items.length === 0) {
-      container.innerHTML = '<div class="py-12 text-center text-xs text-bone-muted">Your basket is empty.</div>';
-      if (badge) badge.innerText = '0';
-      if (subtotalEl) subtotalEl.innerText = '₹0';
+    if (!cartData.items || cartData.items.length === 0) {
+      container.innerHTML = '<div class="py-12 text-center text-xs text-white/50">Your basket is empty.</div>';
       return;
     }
 
-    let subtotal = 0;
-    let totalCount = 0;
-
-    container.innerHTML = items.map((item, index) => {
-      subtotal += item.price * item.quantity;
-      totalCount += item.quantity;
+    container.innerHTML = cartData.items.map((item) => {
+      const price = (item.final_price / 100).toLocaleString('en-IN');
+      const img = item.image ? `<img src="${item.image}" alt="${item.title}" class="w-12 h-12 object-cover rounded-lg border border-[#262626]">` : '';
       return `
-        <div class="flex items-center justify-between border-b border-border-dim pb-4">
-          <div>
-            <div class="text-xs font-bold text-bone">${item.title}</div>
-            <div class="text-[11px] text-amber mt-0.5">₹${item.price} each</div>
+        <div class="flex items-center justify-between border-b border-[#222] pb-4 gap-3">
+          <div class="flex items-center gap-3 truncate">
+            ${img}
+            <div class="truncate">
+              <div class="text-xs font-bold text-white truncate">${item.product_title || item.title}</div>
+              <div class="text-[11px] text-white/50 mt-0.5">₹${price} each • SKU: ${item.sku || 'Zenkart'}</div>
+            </div>
           </div>
-          <div class="flex items-center gap-3">
-            <span class="text-xs text-bone-muted">Qty: ${item.quantity}</span>
-            <button onclick="ZenkartCart.remove(${index})" class="text-[11px] text-red-400 hover:underline">Remove</button>
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <span class="text-xs text-white/70">Qty: ${item.quantity}</span>
+            <button onclick="window.ZenkartCart.changeItem('${item.key}', 0)" class="text-[11px] text-red-400 hover:text-red-300 underline">Remove</button>
           </div>
         </div>
       `;
     }).join('');
-
-    if (badge) badge.innerText = totalCount;
-    if (subtotalEl) subtotalEl.innerText = '₹' + subtotal;
   }
 
-  function add(id, title, price) {
-    const existing = items.find(i => i.id === id);
-    if (existing) {
-      existing.quantity += 1;
-    } else {
-      items.push({ id, title, price, quantity: 1 });
-    }
-    save();
-    openDrawer();
+  function add(idOrHandle, qty = 1) {
+    const variantId = resolveVariantId(idOrHandle);
+    return fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        items: [{ id: Number(variantId), quantity: Number(qty) }]
+      })
+    })
+    .then(r => r.json())
+    .then(item => {
+      fetchCart();
+      openDrawer();
+      return item;
+    })
+    .catch(err => {
+      console.error('Cart add error:', err);
+    });
   }
 
-  function remove(index) {
-    items.splice(index, 1);
-    save();
+  function changeItem(key, quantity) {
+    return fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: key, quantity: Number(quantity) })
+    })
+    .then(r => r.json())
+    .then(data => {
+      cartData = data;
+      render();
+    });
+  }
+
+  function buyNow(idOrHandle, qty = 1) {
+    const variantId = resolveVariantId(idOrHandle);
+    return fetch('/cart/clear.js', { method: 'POST' })
+      .then(() => fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: [{ id: Number(variantId), quantity: Number(qty) }]
+        })
+      }))
+      .then(() => {
+        window.location.href = '/checkout';
+      })
+      .catch(() => {
+        window.location.href = `/cart/${variantId}:${qty}`;
+      });
+  }
+
+  function bundleCheckout() {
+    return fetch('/cart/clear.js', { method: 'POST' })
+      .then(() => fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: [
+            { id: 48052588019873, quantity: 1 },
+            { id: 48052590608545, quantity: 1 }
+          ]
+        })
+      }))
+      .then(() => {
+        window.location.href = '/checkout';
+      });
   }
 
   function openDrawer() {
@@ -367,7 +448,7 @@ window.ZenkartCart = (function() {
     }, 300);
   }
 
-  return { add, remove, openDrawer, closeDrawer, render };
+  return { add, buyNow, bundleCheckout, changeItem, openDrawer, closeDrawer, render, fetchCart };
 })();
 
 // DOM BOOTSTRAP
@@ -383,5 +464,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.id === 'cart-drawer-overlay') ZenkartCart.closeDrawer();
   });
 
-  ZenkartCart.render();
+  ZenkartCart.fetchCart();
 });

@@ -648,18 +648,16 @@
   }
 
   function addCatalogToBasket(id, title, price) {
-    if (window.ZenkartCart) {
-      for (let i = 0; i < catalogQuantity; i++) {
-        window.ZenkartCart.add(id, title, price);
-      }
+    if (window.ZenkartCart && window.ZenkartCart.add) {
+      window.ZenkartCart.add('{{ product.handle }}' || id, catalogQuantity);
     }
   }
 
   function triggerCatalogBuyNow(title, price, img, handle) {
-    if (typeof openQuickCodModal === 'function') {
-      openQuickCodModal(title, price * catalogQuantity, img, handle, catalogQuantity);
-    } else if (window.ZenkartCart) {
-      addCatalogToBasket(handle, title, price);
+    const targetHandle = '{{ product.handle }}' || handle;
+    if (window.ZenkartCart && window.ZenkartCart.buyNow) {
+      window.ZenkartCart.buyNow(targetHandle, catalogQuantity);
+    } else {
       window.location.href = '/checkout';
     }
   }

@@ -1,0 +1,411 @@
+<div class="section"><style>
+    /* =========================================================
+       Scoped styles (no bleed)
+       ========================================================= */
+    .wave-product-features-wave-product-features_j4oazj{
+      --hp-blue-1: var(--color-gradient-1);
+      --hp-blue-2: var(--color-gradient-2);
+
+      --hp-card-bg: var(--color-card-gradient);
+      --hp-card-border: transparent;
+      --hp-card-shadow: none;
+
+      --hp-benefit-bg: var(--color-background);
+      --hp-benefit-border: rgba(255,255,255,0.12);
+      --hp-benefit-text: var(--color-foreground);
+
+      --hp-btn-bg: var(--color-gradient-1);
+      --hp-btn-bg-hover: var(--color-gradient-3);
+      --hp-btn-text: var(--color-gradient-text);
+
+      --hp-radius: var(--style-border-radius-cards);
+    }
+
+    /* Stars */
+    .wave-product-features-wave-product-features_j4oazj .stars-outer {
+      position: relative;
+      display: inline-block;
+    }
+    .wave-product-features-wave-product-features_j4oazj .stars-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0%;
+      transition: width var(--anim-reveal-duration, 750ms) var(--animation-timing-fade-in, ease-out);
+    }
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__content.is-visible .stars-inner {
+      width: var(--stars-fill-target);
+    }
+    .wave-product-features-wave-product-features_j4oazj .stars-outer::before,
+    .wave-product-features-wave-product-features_j4oazj .stars-inner::before {
+      content: "★★★★★";
+      font-family: "Arial", sans-serif;
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: 0;
+      font-weight: normal;
+      text-rendering: geometricPrecision;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .wave-product-features-wave-product-features_j4oazj .stars-outer::before { color: rgba(128,128,128,.25); }
+    .wave-product-features-wave-product-features_j4oazj .stars-inner::before { color: var(--color-gradient-text); }
+
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__reviews-text strong {
+      color: var(--color-gradient-text) !important;
+    }
+
+    
+      .wave-product-features-wave-product-features_j4oazj .wave-product-features__heading {
+        color: var(--color-gradient-text) !important;
+      }
+      .wave-product-features-wave-product-features_j4oazj .wave-product-features__subtext {
+        color: var(--color-gradient-text) !important;
+      }
+      .wave-product-features-wave-product-features_j4oazj .wave-product-features__reviews-text {
+        color: var(--color-gradient-text);
+      }
+      .wave-product-features-wave-product-features_j4oazj .wave-product-features__reviews-text strong {
+        color: var(--color-gradient-text) !important;
+      }
+      .wave-product-features-wave-product-features_j4oazj .wave-product-features__image-wrapper {
+        border-right: none;
+      }
+    
+
+    /* =========================================================
+       Layout
+       ========================================================= */
+    .wave-product-features-wave-product-features_j4oazj.wave-product-features{
+      padding: calc(72px * var(--section-spacing-scale, 1)) 0 calc(72px * var(--section-spacing-scale, 1));
+      background: rgb(var(--color-background-rgb));
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__container{
+      width: 100%;
+    }
+  
+    /* The "card" wrapper (this is where the huge shadow used to feel heavy) */
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: stretch;
+  
+      background: var(--hp-card-bg);
+      border: 1px solid var(--hp-card-border);
+      border-radius: var(--hp-radius);
+  
+      /* Controlled shadow (set to none by default in schema) */
+      box-shadow: var(--hp-card-shadow);
+  
+      overflow: hidden; /* keeps everything clean */
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__grid--right .wave-product-features__image-wrapper{ order: 2; }
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__grid--right .wave-product-features__content{ order: 1; }
+  
+    /* Image side */
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__image-wrapper{
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-right: 1px solid rgba(2, 6, 23, 0.06);
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__image{
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__video{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: var(--media-object-fit, cover);
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__media{
+      width: 100%;
+      height: 100%;
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__placeholder{
+      width: 100%;
+      aspect-ratio: 4/5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-border, #f3f3f3);
+      overflow: hidden;
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__placeholder-svg{
+      width: 50%;
+      height: auto;
+      opacity: 0.5;
+    }
+  
+    /* Content side */
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__content{
+      padding: 42px 42px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__reviews{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__reviews-text{
+      line-height: 1.4;
+      font-weight: 600;
+      opacity: .95;
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__heading{
+      font-weight: var(--font-h2--weight, 900);
+      line-height: 1.08;
+      margin: 0;
+      letter-spacing: var(--font-h2--letter-spacing, -0.02em);
+      color: rgb(var(--color-foreground-heading-rgb));
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__subtext{
+      line-height: 1.65;
+      margin: 0;
+      color: rgb(var(--color-foreground-rgb));
+      opacity: .9;
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__subtext p{ margin: 0 0 0.5em 0; }
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__subtext p:last-child{ margin-bottom: 0; }
+  
+    /* =========================================================
+       Benefit boxes (FAQ-style)
+       ========================================================= */
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__benefits{
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--style-gap-cards, 14px);
+    }
+
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__benefit{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+  
+      background: var(--hp-benefit-bg);
+      border: 1px solid var(--hp-benefit-border);
+      border-radius: var(--style-border-radius-global);
+  
+      padding: 14px 16px;
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__benefit-icon{
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      color: var(--hp-blue-1);
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__benefit-icon svg{
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__benefit-text{
+      font-weight: 800;
+      line-height: 1.35;
+      color: var(--hp-benefit-text);
+    }
+  
+    /* =========================================================
+       Button (custom colors)
+       ========================================================= */
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__button-wrapper{
+      margin-top: 10px;
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__button{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+  
+      text-decoration: none;
+      font-weight: var(--font-body--weight, 900);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+  
+      border: 0;
+      cursor: pointer;
+      text-align: center;
+  
+      background: var(--hp-btn-bg);
+      color: var(--hp-btn-text);
+  
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+      box-shadow: 0 10px 24px rgba(2, 6, 23, 0.14);
+    }
+  
+    .wave-product-features-wave-product-features_j4oazj .wave-product-features__button:hover{
+      transform: translateY(-1px);
+      background: var(--hp-btn-bg-hover);
+      box-shadow: 0 14px 30px rgba(2, 6, 23, 0.18);
+    }
+  
+    /* =========================================================
+       Responsive
+       ========================================================= */
+    @media screen and (max-width: 989px){
+      .wave-product-features-wave-product-features_j4oazj .wave-product-features__grid{
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+  
+      .wave-product-features-wave-product-features_j4oazj .wave-product-features__image-wrapper{
+        border-right: 0;
+        border-bottom: 1px solid rgba(2, 6, 23, 0.06);
+      }
+  
+      .wave-product-features-wave-product-features_j4oazj .wave-product-features__content{
+        padding: 28px 22px;
+      }
+  
+      .wave-product-features-wave-product-features_j4oazj .wave-product-features__button{
+        width: 100%;
+      }
+    }
+
+  </style>
+  
+  <div class="wave-product-features wave-product-features-wave-product-features_j4oazj forge-color-scheme-1">
+    <div class="wave-product-features__container page-width">
+      <div class="wave-product-features__grid wave-product-features__grid--left">
+  
+        <!-- Image Side -->
+        <div class="wave-product-features__image-wrapper" data-animate="scale-in" data-forge-slot-id="image" data-forge-slot-thumbnail="{{ 'forge-features.jpg' | asset_url }}">
+          
+            
+            <img src="{{ 'forge-features.jpg' | asset_url }}" srcset="{{ 'forge-features.jpg' | asset_url }}" sizes="(min-width: 990px) 50vw, 100vw" class="wave-product-features__image" loading="eager" fetchpriority="high" style="
+                
+              " alt="" width="" height="">
+          
+        </div>
+  
+        <!-- Content Side -->
+        <div class="wave-product-features__content" data-animate="fade-up">
+          
+            <div class="wave-product-features__reviews" style="justify-content: flex-start;">
+              <div class="stars-outer">
+                
+                
+                
+                
+                
+                <div class="stars-inner" style="--stars-fill-target: 100%"></div>
+              </div>
+  
+              
+                <span class="wave-product-features__reviews-text" style="font-size: 14px; color: var(--color-gradient-text);">
+                  Trusted by 15,000+ Happy Homes
+                </span>
+              
+            </div>
+          
+  
+          
+            <h1 class="wave-product-features__heading" style="font-size: clamp(1.75rem, 5vw, calc(var(--font-h2--size) * 1.2222222222222223));">
+              <p>Focus on the soul, not the labor</p>
+            </h1>
+          
+  
+          
+            <div class="wave-product-features__subtext" style="font-size: 16px;">
+              <p>Our tools compress repetitive actions into effortless seconds, keeping your hands free and your mind entirely present.</p>
+            </div>
+          
+  
+          
+            <ul class="wave-product-features__benefits" data-animate-group="">
+              
+                
+                  <li class="wave-product-features__benefit" data-animate="fade-up" data-forge-block-id="benefit_1" data-forge-block-type="benefit" style="--anim-child-index: 0;">
+                    <span class="wave-product-features__benefit-icon">
+                      
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path></svg>
+                      
+                    </span>
+                    <span class="wave-product-features__benefit-text" style="font-size: 16px;">
+                      Puri Press eliminates 15 minutes of manual rolling
+                    </span>
+                  </li>
+                
+              
+                
+                  <li class="wave-product-features__benefit" data-animate="fade-up" data-forge-block-id="benefit_2" data-forge-block-type="benefit" style="--anim-child-index: 1;">
+                    <span class="wave-product-features__benefit-icon">
+                      
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path></svg>
+                      
+                    </span>
+                    <span class="wave-product-features__benefit-text" style="font-size: 16px;">
+                      Digital Tasbih holds your place so you don't
+                    </span>
+                  </li>
+                
+              
+                
+                  <li class="wave-product-features__benefit" data-animate="fade-up" data-forge-block-id="benefit_3" data-forge-block-type="benefit" style="--anim-child-index: 2;">
+                    <span class="wave-product-features__benefit-icon">
+                      
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path></svg>
+                      
+                    </span>
+                    <span class="wave-product-features__benefit-text" style="font-size: 16px;">
+                      Stainless steel and wood built for decades
+                    </span>
+                  </li>
+                
+              
+            </ul>
+          
+  
+          
+            <div class="wave-product-features__button-wrapper">
+              <a href="#bundle" class="wave-product-features__button" style="
+                  border-radius: var(--style-border-radius-buttons-primary);
+                  font-size: 15px;
+                  padding: 16px 40px;
+                ">
+                Explore Rituals
+              </a>
+            </div>
+          
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  
+  </div>
+
+{% schema %}
+{
+  "name": "Wave Product Features",
+  "settings": []
+}
+{% endschema %}

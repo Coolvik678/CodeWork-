@@ -1,0 +1,323 @@
+<div class="section-wrapper"><section id="shopify-section-before-after-slider_o0bzrq" class="anchor-before-after forge-color-scheme-1">
+    <style>
+      #shopify-section-before-after-slider_o0bzrq{
+        --aba-radius: var(--style-border-radius-cards);
+        --aba-shadow: var(--style-shadow-card);
+  
+        --aba-text: var(--color-foreground);
+        --aba-muted: var(--color-foreground-muted, var(--color-foreground));
+
+        --aba-btn-bg: var(--color-primary-button-background);
+        --aba-btn-bg-hover: var(--color-primary-button-hover-background);
+        --aba-btn-text: var(--color-primary-button-text);
+
+        --aba-accent: var(--color-primary);
+        --aba-handle: var(--color-primary);
+        --aba-badge-bg: rgba(0,0,0,.70);
+        --aba-badge-text: #fff;
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .forge-section-background{ display:none !important; }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-wrap{
+        max-width: 980px;
+        margin: 0 auto;
+        padding: calc(72px * var(--section-spacing-scale, 1)) 20px calc(72px * var(--section-spacing-scale, 1));
+        box-sizing: border-box;
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-card{
+        border-radius: var(--aba-radius);
+        overflow: hidden;
+        box-shadow: var(--aba-shadow);
+        background: var(--color-card-background);
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-compare{
+        position: relative;
+        width: 100%;
+        aspect-ratio: 3/2;
+        background: var(--color-card-background);
+        user-select: none;
+        touch-action: pan-y pinch-zoom;
+        overflow: hidden;
+        --aba-pos: 50%;
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-img,
+      #shopify-section-before-after-slider_o0bzrq .aba-img img{
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-img img{
+        object-fit: cover;
+        display: block;
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-img--after{ z-index: 1; }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-img--before{
+        z-index: 2;
+        inset: auto;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--aba-pos, 50%);
+        height: 100%;
+        overflow: hidden;
+      }
+
+      #shopify-section-before-after-slider_o0bzrq .aba-img--before img{
+        inset: auto;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: var(--aba-img-width, 100%);
+        max-width: none;
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-badge{
+        position: absolute;
+        top: 14px;
+        padding: 6px 10px;
+        border-radius: var(--style-border-radius-global);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .02em;
+        background: var(--aba-badge-bg);
+        color: var(--aba-badge-text);
+        z-index: 5;
+      }
+      #shopify-section-before-after-slider_o0bzrq .aba-badge--before{ left: 14px; }
+      #shopify-section-before-after-slider_o0bzrq .aba-badge--after{ right: 14px; }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-divider{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 2px;
+        background: rgba(255,255,255,.75);
+        z-index: 6;
+        transform: translateX(-1px);
+        pointer-events: none;
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-handle{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: rgba(255,255,255,.92);
+        border: 1px solid rgba(255,255,255,.55);
+        box-shadow: 0 10px 30px rgba(0,0,0,.18);
+        transform: translate(-50%, -50%);
+        z-index: 7;
+        display: grid;
+        place-items: center;
+        pointer-events: none;
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-handle svg{
+        width: 22px;
+        height: 22px;
+        color: var(--aba-handle);
+        opacity: .95;
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-range{
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        opacity: 0;
+        z-index: 10;
+        cursor: ew-resize;
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-text{
+        text-align: center;
+        padding: 22px 18px 24px;
+        background: var(--color-background);
+        color: var(--aba-text);
+      }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-title{
+        margin: 0 0 10px;
+        font-weight: var(--font-h2--weight, 900);
+        line-height: 1.1;
+        letter-spacing: var(--font-h2--letter-spacing, -0.02em);
+        font-size: clamp(26px, 3vw, calc(var(--font-h2--size) * 1.2));
+        color: var(--aba-text);
+      }
+  
+      /* Accent word (reliable) */
+      #shopify-section-before-after-slider_o0bzrq .aba-accent{
+        color: var(--aba-accent) !important;
+        font-style: italic;
+      }
+
+      
+      #shopify-section-before-after-slider_o0bzrq .aba-accent {
+        background: var(--color-card-gradient) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        color: unset !important;
+      }
+      
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-desc{
+        margin: 0 auto 16px;
+        max-width: 58ch;
+        font-size: 15px;
+        line-height: 1.55;
+        color: var(--aba-muted);
+      }
+      #shopify-section-before-after-slider_o0bzrq .aba-desc p{ margin: 0; color: inherit; }
+  
+      #shopify-section-before-after-slider_o0bzrq .aba-btn{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 22px;
+        border-radius: var(--style-border-radius-buttons-primary);
+        text-decoration: none;
+        font-weight: var(--font-body--weight, 900);
+        font-size: 15px;
+        background: var(--aba-btn-bg);
+        color: var(--aba-btn-text);
+        border: 0;
+        transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+        box-shadow: var(--style-shadow-card);
+        cursor: pointer;
+        min-width: 220px;
+      }
+      #shopify-section-before-after-slider_o0bzrq .aba-btn:hover{
+        background: var(--aba-btn-bg-hover);
+        transform: translateY(-1px);
+      }
+  
+      @media (max-width: 749px){
+        #shopify-section-before-after-slider_o0bzrq .aba-wrap{
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        #shopify-section-before-after-slider_o0bzrq .aba-compare{
+          aspect-ratio: 1/1;
+        }
+        #shopify-section-before-after-slider_o0bzrq .aba-btn{
+          width: 100%;
+          min-width: 0;
+        }
+      }
+    </style>
+  
+    <div class="aba-wrap" data-animate="fade-up">
+      <div class="aba-card" data-aba="">
+        <div class="aba-compare" data-aba-compare="" style="--aba-pos: 50%; --aba-img-width: 940px;">
+          <div class="aba-img aba-img--after">
+            
+              
+              <img src="{{ 'forge-before.jpg' | asset_url }}" srcset="{{ 'forge-before.jpg' | asset_url }}" sizes="(min-width: 980px) 980px, 100vw" alt="After" loading="eager" width="" height="">
+            
+          </div>
+
+          <div class="aba-img aba-img--before" data-aba-before="">
+            
+              
+              <img src="{{ 'forge-transformation.jpg' | asset_url }}" srcset="{{ 'forge-transformation.jpg' | asset_url }}" sizes="(min-width: 980px) 980px, 100vw" alt="Before" loading="eager" width="" height="">
+            
+          </div>
+  
+          <div class="aba-badge aba-badge--before">Manual Friction</div>
+          <div class="aba-badge aba-badge--after">Zenkart Flow</div>
+  
+          <div class="aba-divider" data-aba-divider="" style="left: 50%;"></div>
+          <div class="aba-handle" data-aba-handle="" aria-hidden="true" style="left: 50%;">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M8 7L4 12L8 17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M16 7L20 12L16 17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+  
+          <input class="aba-range" type="range" min="0" max="100" value="50" aria-label="Before and after slider">
+          <div data-forge-slot-id="before" data-forge-slot-thumbnail="{{ 'forge-transformation.jpg' | asset_url }}" style="position:absolute;left:0;top:0;width:50%;height:60px;z-index:20;pointer-events:none;"></div>
+          <div data-forge-slot-id="after" data-forge-slot-thumbnail="{{ 'forge-before.jpg' | asset_url }}" style="position:absolute;right:0;top:0;width:50%;height:60px;z-index:20;pointer-events:none;"></div>
+        </div>
+  
+        <div class="aba-text">
+          
+    <div class="aba-title">
+      From frantic prep to 
+      <span class="aba-accent">Deep Stillness</span>
+    </div>
+  
+  
+          
+            <div class="aba-desc forge-rte"><p>I used to lose my count halfway through my mantra practice. Now the tasbih counter keeps pace while I stay present. And the puri press? I went from 25 minutes of rolling to 5 minutes pressing.</p></div>
+          
+  
+          
+            <a class="aba-btn" href="#bundle">Start Your Transformation</a>
+          
+        </div>
+      </div>
+    </div>
+  
+    <script>
+      (function(){
+        const root = document.querySelector('#shopify-section-before-after-slider_o0bzrq [data-aba]');
+        if(!root) return;
+
+        const range = root.querySelector('.aba-range');
+        const compare = root.querySelector('[data-aba-compare]');
+        const beforeLayer = root.querySelector('[data-aba-before]');
+        const beforeImg = beforeLayer && beforeLayer.querySelector('img');
+        const divider = root.querySelector('[data-aba-divider]');
+        const handle = root.querySelector('[data-aba-handle]');
+        if(!range || !compare || !beforeLayer || !divider || !handle) return;
+
+        const syncBeforeImgWidth = () => {
+          if(!beforeImg) return;
+          const w = compare.getBoundingClientRect().width;
+          if(w > 0) compare.style.setProperty('--aba-img-width', `${w}px`);
+        };
+
+        const setPos = (val) => {
+          const v = Math.max(0, Math.min(100, Number(val)));
+          compare.style.setProperty('--aba-pos', `${v}%`);
+          divider.style.left = `${v}%`;
+          handle.style.left = `${v}%`;
+          syncBeforeImgWidth();
+        };
+
+        setPos(range.value);
+        range.addEventListener('input', (e) => setPos(e.target.value));
+        range.addEventListener('change', (e) => setPos(e.target.value));
+
+        if(typeof ResizeObserver !== 'undefined'){
+          const ro = new ResizeObserver(syncBeforeImgWidth);
+          ro.observe(compare);
+        } else {
+          window.addEventListener('resize', syncBeforeImgWidth);
+        }
+      })();
+    </script>
+  </section>
+  
+  
+  </div>
+
+{% schema %}
+{
+  "name": "Before After Slider",
+  "settings": []
+}
+{% endschema %}

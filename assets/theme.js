@@ -140,12 +140,12 @@ function initEmberParticles() {
   });
 }
 
-// 4. FLUID SCROLL REVEAL OBSERVER
+// 4. FLUID SCROLL REVEAL & FORGE ANIMATION OBSERVER
 function initScrollReveal() {
   const revealElements = document.querySelectorAll('[data-reveal]');
-  if (!revealElements.length) return;
-
   revealElements.forEach(el => el.classList.add('is-pending'));
+
+  const animateElements = document.querySelectorAll('[data-animate]');
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries, obs) => {
@@ -153,25 +153,53 @@ function initScrollReveal() {
         if (entry.isIntersecting) {
           entry.target.classList.remove('is-pending');
           entry.target.classList.add('is-in');
+          entry.target.classList.add('is-visible');
           obs.unobserve(entry.target);
         }
       });
     }, {
-      rootMargin: '0px 0px -50px 0px',
-      threshold: 0.08
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.05
     });
 
     revealElements.forEach(el => observer.observe(el));
+    animateElements.forEach(el => observer.observe(el));
   } else {
     revealElements.forEach(el => el.classList.add('is-in'));
+    animateElements.forEach(el => el.classList.add('is-visible'));
   }
 
+  // Safety fallback
   setTimeout(() => {
     document.querySelectorAll('[data-reveal].is-pending').forEach(el => {
       el.classList.remove('is-pending');
       el.classList.add('is-in');
     });
-  }, 2000);
+    document.querySelectorAll('[data-animate]:not(.is-visible)').forEach(el => {
+      el.classList.add('is-visible');
+    });
+  }, 1200);
+
+  // Initialize countdown timer
+  initCountdownTimer();
+}
+
+function initCountdownTimer() {
+  const hoursEl = document.getElementById('ai-hours-discount-countdown-qq4jyf');
+  const minsEl = document.getElementById('ai-minutes-discount-countdown-qq4jyf');
+  const secsEl = document.getElementById('ai-seconds-discount-countdown-qq4jyf');
+  if (!hoursEl || !minsEl || !secsEl) return;
+
+  let totalSecs = 23 * 3600 + 42 * 60 + 15;
+  setInterval(() => {
+    if (totalSecs > 0) totalSecs--;
+    const h = Math.floor(totalSecs / 3600);
+    const m = Math.floor((totalSecs % 3600) / 60);
+    const s = totalSecs % 60;
+    hoursEl.textContent = String(h).padStart(2, '0');
+    minsEl.textContent = String(m).padStart(2, '0');
+    secsEl.textContent = String(s).padStart(2, '0');
+  }, 1000);
 }
 
 // 5. LIVE VERIFIED ACTIVITY NOTIFICATION (HIGH-END PROOF TICKER)

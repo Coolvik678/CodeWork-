@@ -1,97 +1,358 @@
-<section class="relative bg-[#565961] text-white overflow-hidden">
-  <div class="grid grid-cols-1 lg:grid-cols-2 items-stretch min-h-[580px] lg:min-h-[640px]">
-    
-    <!-- Left Column: Authentic Lifestyle Imagery -->
-    <div class="relative w-full h-[360px] sm:h-[460px] lg:h-auto overflow-hidden bg-ink">
-      <img 
-        src="{{ 'forge-hero-lifestyle.jpg' | asset_url }}" 
-        alt="Zenkart Sacred Kitchen & Devotional Rituals" 
-        class="w-full h-full object-cover object-center transition-transform duration-700 ease-out hover:scale-105"
-        loading="eager">
-      <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent lg:hidden"></div>
+<section id="shopify-section-hero-wave_loziue" class="anchor-hero-wave forge-color-scheme-1">
+    <style>
+      #shopify-section-hero-wave_loziue{
+        --ahw-wave-height: 120px;
+
+        --ahw-grad-1: #888888;
+        --ahw-grad-2: #555555;
+        --ahw-grad-3: #222222;
+
+        --ahw-text: #ffffff;--ahw-muted: rgba(255, 255, 255, 0.65);--ahw-button-bg: var(--color-background);
+        --ahw-button-text: var(--color-foreground);
+        --ahw-button-bg-hover: var(--color-background);
+
+        --ahw-shadow: 0 20px 60px rgba(0,0,0,.18);
+      }
+
+      /* No outer padding. Full bleed. */
+      #shopify-section-hero-wave_loziue .ahw-wrap{
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* No rounded edges. No outlines. */
+      #shopify-section-hero-wave_loziue .ahw-card{
+        border-radius: 0;
+        overflow: hidden;
+        position: relative;
+        background: var(--color-card-background);
+        border: 0 !important;
+        outline: none !important;
+        box-shadow: none; /* remove “outline-ish” shadow look */
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-grid{
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        min-height: 520px;
+        position: relative;
+        z-index: 1; /* keep content above background waves */
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-media{
+        position: relative;
+        overflow: hidden;
+        background: var(--color-card-background);
+        min-height: 520px;
+      }
+
+      /* Force picture/img to fill the column height (fixes black gap). */
+      #shopify-section-hero-wave_loziue .ahw-media picture{
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      #shopify-section-hero-wave_loziue .ahw-media img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transform: scale(1.01);
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-media::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        background: linear-gradient(90deg, rgba(0,0,0,.08), rgba(0,0,0,.18));
+        pointer-events:none;
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-content{
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 56px 56px;
+        color: var(--ahw-text);
+        background: linear-gradient(135deg, var(--ahw-grad-1), var(--ahw-grad-2) 55%, var(--ahw-grad-3));
+      }
+
+      /* subtle texture */
+      #shopify-section-hero-wave_loziue .ahw-content::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:
+          radial-gradient(1200px 600px at 10% 15%, rgba(255,255,255,.14), transparent 55%),
+          radial-gradient(900px 500px at 90% 80%, rgba(255,255,255,.10), transparent 60%);
+        opacity: .9;
+        pointer-events:none;
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-content-inner{
+        position: relative;
+        width: 100%;
+        max-width: 560px;
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-rating{
+        display:flex;
+        align-items:center;
+        gap: 10px;
+        margin-bottom: 14px;
+        font-size: 13px;
+        letter-spacing: .2px;
+        color: var(--ahw-muted);
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-stars{
+        display:flex;
+        gap: 2px;
+        line-height: 1;
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-stars svg{
+        width: 14px;
+        height: 14px;
+        fill:#ffffff;
+        opacity: .95;
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-eyebrow{
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+        color: var(--ahw-muted);
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-title{
+        margin: 0 0 14px 0;
+        font-weight: var(--font-h1--weight, 800);
+        letter-spacing: var(--font-h1--letter-spacing, -0.02em);
+        line-height: 1.06;
+        font-size: clamp(32px, 3.2vw, calc(var(--font-h1--size) * 1.4));
+        color: var(--ahw-text);
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-sub{
+        margin: 0 0 22px 0;
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--ahw-text);
+        opacity: .95;
+        max-width: 52ch;
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-actions{
+        display:flex;
+        align-items:center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: calc(var(--ahw-wave-height) * 0.35); /* keep text above waves */
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding: 14px 22px;
+        border-radius: var(--style-border-radius-buttons-primary);
+        text-decoration:none;
+        font-weight: var(--font-body--weight, 800);
+        font-size: 15px;
+        background: var(--ahw-button-bg);
+        color: var(--ahw-button-text);
+        border: 0;
+        transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+        box-shadow: 0 12px 30px rgba(0,0,0,.16);
+        cursor: pointer;
+      }
+      #shopify-section-hero-wave_loziue .ahw-btn:hover{
+        background: var(--ahw-button-bg-hover);
+        transform: translateY(-1px);
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-secondary{
+        font-size: 13px;
+        color: var(--ahw-muted);
+        opacity: .95;
+      }
+
+      /* FULL-WIDTH realistic multi-layer waves across entire hero */
+      #shopify-section-hero-wave_loziue .ahw-waves{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        height: var(--ahw-wave-height);
+        pointer-events: none;
+        z-index: 2; /* over both columns */
+        overflow: hidden;
+      }
+
+      /* Vertical bob only - no horizontal scroll. A side-to-side scroll needs the
+         wave path's left edge (x=0) and right edge (x=1440) to land on the exact
+         same y, or the tile boundary shows as a hard diagonal seam. Bobbing up/down
+         has no tile boundary to line up, so it can't seam. The svg overshoots the
+         container height (and sits bottom:-14px instead of 0) so the upward part
+         of the bob never uncovers a gap at the bottom edge. */
+      #shopify-section-hero-wave_loziue .ahw-waves svg{
+        position: absolute;
+        left: 0;
+        bottom: -14px;
+        width: 100%;
+        height: calc(100% + 14px);
+        display: block;
+        margin: 0;
+      }
+
+      #shopify-section-hero-wave_loziue .ahw-wave-1{ animation: ahw-wave-bob-hero-wave_loziue 7s ease-in-out infinite; }
+      #shopify-section-hero-wave_loziue .ahw-wave-2{ animation: ahw-wave-bob-hero-wave_loziue 5.5s ease-in-out infinite reverse; }
+      #shopify-section-hero-wave_loziue .ahw-wave-3{ animation: ahw-wave-bob-hero-wave_loziue 8.5s ease-in-out infinite; }
+
+      #shopify-section-hero-wave_loziue .ahw-wave-1 path{ fill: rgba(255,255,255,.20); }
+      #shopify-section-hero-wave_loziue .ahw-wave-2 path{ fill: rgba(255,255,255,.45); }
+      #shopify-section-hero-wave_loziue .ahw-wave-3 path{ fill: #000000; }
+
+      @keyframes ahw-wave-bob-hero-wave_loziue {
+        0%, 100%{ transform: translateY(0); }
+        50%{ transform: translateY(-7px); }
+      }
+
+      @media (prefers-reduced-motion: reduce){
+        #shopify-section-hero-wave_loziue .ahw-wave-1,
+        #shopify-section-hero-wave_loziue .ahw-wave-2,
+        #shopify-section-hero-wave_loziue .ahw-wave-3{
+          animation: none;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 989px){
+        #shopify-section-hero-wave_loziue .ahw-grid{
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+
+        #shopify-section-hero-wave_loziue .ahw-media{
+          min-height: auto;
+          height: 320px;
+        }
+
+        #shopify-section-hero-wave_loziue .ahw-content{
+          padding: 30px 20px 34px 20px;
+        }
+
+        /* Slightly taller waves on mobile to feel more “real” */
+        #shopify-section-hero-wave_loziue{
+          --ahw-wave-height: 140px;
+        }
+
+        #shopify-section-hero-wave_loziue .ahw-actions{
+          margin-bottom: calc(var(--ahw-wave-height) * 0.40);
+        }
+      }
+    </style>
+
+    <div class="ahw-wrap">
+      <div class="ahw-card">
+        <div class="ahw-grid">
+          <div class="ahw-media is-visible" data-animate="scale-in" data-forge-slot-id="image" data-forge-slot-thumbnail="{{ 'forge-hero.jpg' | asset_url }}">
+            
+              
+              
+
+              <picture>
+                <source media="(max-width: 989px)" srcset="{{ 'forge-hero.jpg' | asset_url }}">
+                <img src="{{ 'forge-hero.jpg' | asset_url }}" alt="Our product in use" loading="eager" width="" height="">
+              </picture>
+            
+          </div>
+
+          <div class="ahw-content">
+            <div class="ahw-content-inner is-visible" data-animate="fade-up">
+              
+                <div class="ahw-rating">
+                  <span class="ahw-stars" aria-hidden="true">
+                    
+                      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                        <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                      </svg>
+                    
+                      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                        <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                      </svg>
+                    
+                      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                        <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                      </svg>
+                    
+                      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                        <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                      </svg>
+                    
+                      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                        <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                      </svg>
+                    
+                  </span>
+                  <span>Excellent 4.9 | 2,300+ Practitioners</span>
+                </div>
+              
+
+              
+                <div class="ahw-eyebrow">ELEVATE YOUR ESSENTIALS</div>
+              
+
+              
+                <h1 class="ahw-title">Sacred rituals without the wasted minutes</h1>
+              
+
+              
+                <div class="ahw-sub"><p>Every practice deserves your full attention. Our kitchen and prayer tools strip away repetitive friction so you stay present, not distracted. Less prep noise. More inner stillness.</p></div>
+              
+
+              <div class="ahw-actions">
+                
+                  <a class="ahw-btn" href="#bundle">
+                    See the Flow
+                  </a>
+                
+
+                
+                  <div class="ahw-secondary">Free shipping on orders over $50</div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+          <div class="ahw-waves" aria-hidden="true">
+            <!-- back wave -->
+            <svg class="ahw-wave-1" viewBox="0 0 1440 120" preserveAspectRatio="none">
+              <path d="M0,80 C180,110 360,50 540,78 C720,106 900,66 1080,88 C1260,110 1350,98 1440,90 L1440,120 L0,120 Z"></path>
+            </svg>
+            <!-- mid wave -->
+            <svg class="ahw-wave-2" viewBox="0 0 1440 120" preserveAspectRatio="none">
+              <path d="M0,92 C200,70 380,110 560,92 C740,74 920,114 1100,90 C1280,66 1360,74 1440,86 L1440,120 L0,120 Z"></path>
+            </svg>
+            <!-- front wave -->
+            <svg class="ahw-wave-3" viewBox="0 0 1440 120" preserveAspectRatio="none">
+              <path d="M0,102 C240,122 420,82 600,102 C780,122 960,88 1140,104 C1320,120 1380,112 1440,106 L1440,120 L0,120 Z"></path>
+            </svg>
+          </div>
+        
+      </div>
     </div>
-
-    <!-- Right Column: Cloned Copy & Call to Action -->
-    <div class="flex flex-col justify-center px-8 sm:px-14 lg:px-16 py-12 lg:py-20 bg-[#565961] max-w-2xl">
-      
-      <!-- Rating Ticker -->
-      <div class="flex items-center gap-2 mb-4 text-xs font-semibold tracking-wide text-white/90">
-        <span class="text-amber-400 text-sm tracking-wider">★★★★★</span>
-        <span>Excellent 4.9 | 2,300+ Practitioners</span>
-      </div>
-
-      <!-- Eyebrow -->
-      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-white/70 mb-3 block">
-        Elevate Your Essentials
-      </span>
-
-      <!-- Primary Cloned Headline -->
-      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.04] mb-6">
-        Sacred Rituals Without The Wasted Minutes
-      </h1>
-
-      <!-- Cloned Subheadline -->
-      <p class="text-sm sm:text-base text-white/85 leading-relaxed mb-8 max-w-xl font-normal">
-        Every practice deserves your full attention. Our kitchen and prayer tools strip away repetitive friction so you stay present, not distracted. Less prep noise. More inner stillness.
-      </p>
-
-      <!-- CTA Action Button & Free Shipping Note -->
-      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-        <a href="#puri-press" class="inline-block bg-black hover:bg-neutral-900 text-white font-bold text-sm px-8 py-3.5 rounded-md transition duration-200 shadow-lg text-center">
-          See the Flow
-        </a>
-      </div>
-      
-      <p class="text-xs text-white/70 mt-3 font-medium">
-        Free express delivery on all orders across India
-      </p>
-
-    </div>
-
-  </div>
-
-  <!-- Organic Wave Divider into Secondary Story -->
-  <div class="w-full overflow-hidden leading-none -mt-1">
-    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-12 lg:h-16 text-[#0B0B0F] preserve-3d" preserveAspectRatio="none">
-      <path d="M0 0C240 60 480 80 720 70C960 60 1200 20 1440 40V80H0V0Z" fill="currentColor"/>
-    </svg>
-  </div>
-</section>
-
-<!-- SECTION 2: THE COST OF BUSYWORK -->
-<section class="bg-ink py-20 px-6 border-b border-border-dim text-center">
-  <div class="max-w-4xl mx-auto">
-    <span class="eyebrow block mb-3 text-amber">The Cost of Busywork</span>
-    <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-bone leading-[1.08] mb-6">
-      Presence Is Lost In <span class="text-bone-muted/40">Prep</span>
-    </h2>
-    <p class="text-sm sm:text-base text-bone-muted max-w-2xl mx-auto leading-relaxed mb-12">
-      Morning dough rolling shouldn't strain your wrists, and devotional chanting shouldn't be interrupted by manual counting distractions. We engineered tactile precision to restore your calm.
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left max-w-3xl mx-auto">
-      <div class="card-glass card-glow p-8 rounded-xl border border-border-dim">
-        <span class="text-xs font-bold text-red-400 uppercase tracking-wider block mb-2">The Daily Friction</span>
-        <h3 class="text-xl font-bold text-bone mb-2">Repetitive Effort &amp; Lost Focus</h3>
-        <p class="text-xs text-bone-muted leading-relaxed">
-          Tiring arm rolls for 40 minutes before family breakfasts, and miscounting mantras mid-prayer when your mind wanders.
-        </p>
-      </div>
-
-      <div class="card-glass card-glow p-8 rounded-xl border border-amber/30">
-        <span class="text-xs font-bold text-amber uppercase tracking-wider block mb-2">The Zenkart Flow</span>
-        <h3 class="text-xl font-bold text-bone mb-2">Instant Mechanical Ease</h3>
-        <p class="text-xs text-bone-muted leading-relaxed">
-          Uniform 2-second dough presses with heavy lever balance, and silent smooth-bearing count tallies that preserve meditative stillness.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
+  </section>
 {% schema %}
 {
-  "name": "Forge AI Hero & Story",
+  "name": "Hero Wave",
   "settings": []
 }
 {% endschema %}

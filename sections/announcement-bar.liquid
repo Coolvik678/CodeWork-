@@ -1,9 +1,274 @@
-<div class="bg-black text-white border-b border-white/10 py-2.5 px-4 text-center">
-  <p class="text-xs font-semibold tracking-widest uppercase">
-    Save 40% on Zenkart Bundles Today!
-  </p>
-</div>
+<div class="forge-section-background forge-color-scheme-1"></div>
+<aside class="announcement-bar forge-spacing-style forge-section forge-section--full-width forge-color-scheme-1" style="
+--padding-block-start: 15px; --padding-block-end:15px; 
+--padding-inline-start:0px; --padding-inline-end:0px; 
+; --border-bottom-width: 0px;">
+  
 
+  <forge-announcement-bar-component class="announcement-bar__slider">
+    
+
+    <div class="announcement-bar__slides announcement-bar__slides--no-controls">
+      <forge-slideshow-slide ref="slides[]" class="
+      announcement-bar__slide
+      forge-text-block
+      text-block--announcement_KMAGKG
+      text-block--align-center
+      text-block--full-width
+      forge-custom-typography
+      custom-font-size
+      
+    " style="
+      
+--color: ;--font-size: 0.75rem;      --font-weight: var(--font-accent--weight);--font-family: var(--font-accent--family);    --text-transform: uppercase;    --text-wrap: ;          --line-height: var(--line-height--body-);        --letter-spacing: var(--letter-spacing--body-loose);
+      --width: 100%;
+      --text-align: center;
+      --line-height: 1;
+    " data-forge-block-id="announcement_KMAGKG" data-forge-block-type="_announcement" aria-hidden="false">
+    
+      <p class="announcement-bar__text">
+        <strong>Free shipping</strong> on all ritual bundles today!
+      </p>
+    
+
+    
+  </forge-slideshow-slide><style>
+  .forge-text-block {
+    width: var(--width);
+    max-width: 100%;
+  }
+
+  .forge-text-block > * {
+    width: var(--width);
+    max-width: var(--max-width, 100%);
+    text-align: var(--text-align);
+  }
+
+  .forge-text-block:not(.text-block--full-width).forge-rte,
+  .forge-text-block:not(.text-block--full-width).forge-paragraph {
+    /* Safari doesn't support pretty, so fallback to balance */
+    text-wrap: balance;
+    text-wrap: pretty;
+  }
+
+  .forge-text-block:not(.text-block--full-width).h1,
+  .forge-text-block:not(.text-block--full-width).forge-h2,
+  .forge-text-block:not(.text-block--full-width).forge-h3,
+  .forge-text-block:not(.text-block--full-width).forge-h4,
+  .forge-text-block:not(.text-block--full-width).forge-h5,
+  .forge-text-block:not(.text-block--full-width).forge-h6 {
+    text-wrap: balance;
+  }
+
+  /* Hide underline unless text is using paragraph styles. */
+  .forge-text-block:is(.h1, .forge-h2, .forge-h3, .forge-h4, .forge-h5, .forge-h6) a {
+    text-decoration-color: transparent;
+  }
+
+  .forge-text-block h1,
+  .forge-text-block.h1 > * {
+    margin-block: var(--font-h1--spacing);
+  }
+
+  .forge-text-block h2,
+  .forge-text-block.forge-h2 > * {
+    margin-block: var(--font-h2--spacing);
+  }
+
+  .forge-text-block h3,
+  .forge-text-block.forge-h3 > * {
+    margin-block: var(--font-h3--spacing);
+  }
+
+  .forge-text-block h4,
+  .forge-text-block.forge-h4 > * {
+    margin-block: var(--font-h4--spacing);
+  }
+
+  .forge-text-block h5,
+  .forge-text-block.forge-h5 > * {
+    margin-block: var(--font-h5--spacing);
+  }
+
+  .forge-text-block h6,
+  .forge-text-block.forge-h6 > * {
+    margin-block: var(--font-h6--spacing);
+  }
+
+  .forge-text-block > *:first-child {
+    margin-block-start: 0;
+  }
+
+  .forge-text-block > *:last-child {
+    margin-block-end: 0;
+  }
+
+  .text-block--align-center,
+  .text-block--align-center > * {
+    margin-inline: auto;
+  }
+
+  .text-block--align-right,
+  .text-block--align-right > * {
+    margin-inline-start: auto;
+  }
+</style>
+
+
+
+    </div>
+  </forge-announcement-bar-component>
+</aside>
+
+<style>
+  .announcement-bar {
+    border-block-end: var(--border-bottom-width) solid var(--color-border);
+    background: var(--color-card-gradient) !important;
+    color: var(--color-gradient-text) !important;
+    overflow: hidden;
+  }
+
+  .announcement-bar a,
+  .announcement-bar .forge-button-unstyled {
+    color: var(--color-gradient-text) !important;
+  }
+
+  .announcement-bar__slider {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+
+    @media screen and (max-width: 749px) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .announcement-bar__slides {
+    display: grid;
+    grid: [stack] auto / [stack] auto;
+    flex: 1;
+    width: calc(100% - var(--button-size) * 2);
+    max-width: 100%;
+    min-width: 0;
+    margin-inline: auto;
+  }
+
+  .announcement-bar__slides--no-controls {
+    width: 100%;
+  }
+
+  .announcement-bar__slides > * {
+    grid-area: stack;
+  }
+
+  .announcement-bar__slide {
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+
+    &[aria-hidden='true'] {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  .announcement-bar__slider forge-slideshow-arrows {
+    padding: 0;
+    mix-blend-mode: normal;
+  }
+
+  .announcement-bar__slider forge-slideshow-arrows .forge-slideshow-control {
+    color: var(--color-foreground);
+  }
+
+  .announcement-bar__slider .forge-slideshow-control {
+    display: flex;
+    padding: 0;
+    width: var(--button-size);
+    height: var(--button-size);
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    animation: none;
+
+    @media screen and (min-width: 750px) {
+      --slideshow-control-offset: calc((var(--button-size) - var(--icon-size-xs)) / 2);
+
+      .forge-section--page-width &.slideshow-control--previous {
+        transform: translateX(var(--slideshow-control-offset));
+      }
+    }
+  }
+
+  .announcement-bar__slider .forge-slideshow-control .forge-svg-wrapper {
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
+  }
+
+  .announcement-bar__slide {
+    place-content: center;
+  }
+
+  .announcement-bar__text:first-child {
+    margin: 0;
+  }
+
+  .announcement-bar__marquee {
+    overflow: hidden;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .announcement-bar__marquee-track {
+    display: block;
+    width: max-content;
+    padding-inline-start: 100%;
+    animation: announcement-marquee-scroll linear infinite;
+    animation-duration: var(--announcement-marquee-duration, 20s);
+    will-change: transform;
+  }
+
+  .announcement-bar__marquee:hover .announcement-bar__marquee-track {
+    animation-play-state: paused;
+  }
+
+  .announcement-bar__slide[aria-hidden='true'] .announcement-bar__marquee-track {
+    animation-play-state: paused;
+  }
+
+  .announcement-bar__marquee-text {
+    margin: 0;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  @keyframes announcement-marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .announcement-bar__marquee-track {
+      animation: none;
+      transform: none;
+      padding-inline-start: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    .announcement-bar__marquee-text {
+      white-space: normal;
+    }
+  }
+
+  .announcement-bar__link {
+    position: absolute;
+    inset: 0;
+  }
+</style>
 {% schema %}
 {
   "name": "Announcement Bar",

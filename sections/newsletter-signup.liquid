@@ -1,0 +1,243 @@
+<style>
+  .ai-newsletter-signup-newsletter-signup-g88sts {
+    display: block;
+    width: 100%;
+    padding: calc(80px * var(--section-spacing-scale, 1)) 20px;
+    background-color: var(--color-background, #ffffff);
+  }
+
+  .ai-newsletter-container-newsletter-signup-g88sts {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--style-gap-cards);
+    align-items: center;
+  }
+
+  .ai-newsletter-image-wrapper-newsletter-signup-g88sts {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+  }
+
+  .ai-newsletter-image-newsletter-signup-g88sts {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--style-border-radius-images);
+  }
+
+  .ai-newsletter-image-placeholder-newsletter-signup-g88sts {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    background-color: var(--color-card-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--style-border-radius-images);
+    position: relative;
+  }
+
+  .ai-newsletter-image-placeholder-newsletter-signup-g88sts svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .ai-newsletter-empty-state-newsletter-signup-g88sts {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: var(--color-foreground-muted, #666);
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-newsletter-form-wrapper-newsletter-signup-g88sts {
+    padding: 20px;
+  }
+
+  .ai-newsletter-heading-newsletter-signup-g88sts {
+    font-size: calc(var(--font-h2--size) * 1);
+    color: var(--color-foreground-heading, #1a1a1a);
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  .ai-newsletter-subtext-newsletter-signup-g88sts {
+    font-size: 16px;
+    color: var(--color-foreground, #1a1a1a);
+    margin: 0 0 32px 0;
+    line-height: 1.5;
+  }
+
+  .ai-newsletter-form-newsletter-signup-g88sts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ai-newsletter-input-newsletter-signup-g88sts {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--style-border-radius-global);
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #1a1a1a;
+  }
+
+  .ai-newsletter-input-newsletter-signup-g88sts:focus {
+    outline: none;
+    border-color: var(--color-primary, #6c757d);
+  }
+
+  .ai-newsletter-input-newsletter-signup-g88sts::placeholder {
+    color: #1a1a1a;
+    opacity: 0.5;
+  }
+
+  .ai-newsletter-button-newsletter-signup-g88sts {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--color-primary-button-background, #6b4c9a);
+    color: var(--color-primary-button-text, #ffffff);
+    border: none;
+    border-radius: var(--style-border-radius-buttons-primary);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-newsletter-button-newsletter-signup-g88sts:hover {
+    background-color: var(--color-primary-button-hover-background, #6b4c9a);
+  }
+
+  
+  .ai-newsletter-button-newsletter-signup-g88sts {
+    background: var(--color-primary-button-background);
+    color: var(--color-primary-button-text);
+  }
+  .ai-newsletter-button-newsletter-signup-g88sts:hover {
+    background: var(--color-primary-button-background);
+    opacity: 0.9;
+  }
+  
+
+  .ai-newsletter-success-newsletter-signup-g88sts {
+    color: #008060;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+
+  .ai-newsletter-error-newsletter-signup-g88sts {
+    color: #d82c0d;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-newsletter-container-newsletter-signup-g88sts {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .ai-newsletter-image-wrapper-newsletter-signup-g88sts {
+      min-height: 300px;
+    }
+
+    .ai-newsletter-image-placeholder-newsletter-signup-g88sts {
+      min-height: 300px;
+    }
+
+    .ai-newsletter-form-wrapper-newsletter-signup-g88sts {
+      text-align: center;
+    }
+
+    .ai-newsletter-heading-newsletter-signup-g88sts {
+      font-size: calc(var(--font-h2--size) * 0.8);
+    }
+
+    .ai-newsletter-subtext-newsletter-signup-g88sts {
+      font-size: 14.4px;
+    }
+  }
+</style>
+
+<newsletter-signup-newsletter-signup-g88sts class="ai-newsletter-signup-newsletter-signup-g88sts forge-color-scheme-1">
+  <div class="ai-newsletter-container-newsletter-signup-g88sts">
+    <div class="ai-newsletter-image-wrapper-newsletter-signup-g88sts" data-animate="scale-in" data-forge-slot-id="image" data-forge-slot-thumbnail="{{ 'forge-newsletter-bg.jpg' | asset_url }}">
+      
+        
+        <img src="{{ 'forge-newsletter-bg.jpg' | asset_url }}" srcset="{{ 'forge-newsletter-bg.jpg' | asset_url }}" sizes="(min-width: 750px) 50vw, 100vw" alt="" loading="eager" width="" height="" class="ai-newsletter-image-newsletter-signup-g88sts">
+      
+    </div>
+
+    <div class="ai-newsletter-form-wrapper-newsletter-signup-g88sts" data-animate="fade-up"><form action="##" method="post"><input type="hidden" name="contact[tags]" value="newsletter">
+
+        
+          <h2 class="ai-newsletter-heading-newsletter-signup-g88sts"><p>Inner peace in your inbox.</p></h2>
+        
+
+        
+          <p class="ai-newsletter-subtext-newsletter-signup-g88sts">Sign up for mindful living tips and exclusive access to our newest ritual tools.</p>
+        
+
+        <div class="ai-newsletter-form-newsletter-signup-g88sts">
+          <input type="email" name="contact[email]" class="ai-newsletter-input-newsletter-signup-g88sts" value="mock@example.com" aria-required="true" autocorrect="off" autocapitalize="off" autocomplete="email" placeholder="your@email.com" required="">
+
+          <button type="submit" class="ai-newsletter-button-newsletter-signup-g88sts">
+            Join the Sanctuary
+          </button>
+
+          
+
+          
+        </div></form></div>
+  </div>
+</newsletter-signup-newsletter-signup-g88sts>
+
+<script>
+  (function() {
+    class NewsletterSignupnewslettersignupg88sts extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.form = this.querySelector('form');
+        if (this.form) {
+          this.form.addEventListener('submit', this.handleSubmit.bind(this));
+        }
+      }
+
+      handleSubmit(event) {
+        const emailInput = this.form.querySelector('input[type="email"]');
+        if (emailInput && !emailInput.value) {
+          event.preventDefault();
+        }
+      }
+    }
+
+    customElements.define('newsletter-signup-newsletter-signup-g88sts', NewsletterSignupnewslettersignupg88sts);
+  })();
+</script>
+
+
+
+    </main>
+
+    <div id="footer-group">
+
+{% schema %}
+{
+  "name": "Newsletter Signup",
+  "settings": []
+}
+{% endschema %}

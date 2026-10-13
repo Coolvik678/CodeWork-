@@ -1,0 +1,248 @@
+<div class="section-wrapper"><section id="shopify-section-faq-waves_q7cavl" class="anchor-faq forge-color-scheme-1">
+    <style>
+      #shopify-section-faq-waves_q7cavl.anchor-faq {
+        --afq-grad-1: #888888;
+        --afq-grad-2: #555555;
+        --afq-grad-3: #222222;
+        --afq-text: #ffffff;
+        --afq-radius: var(--style-border-radius-cards);
+        --afq-max: 980px;
+
+        background: var(--color-background) !important;
+      }
+
+      #shopify-section-faq-waves_q7cavl .afq-wrap {
+        max-width: var(--afq-max);
+        margin: 0 auto;
+        padding: calc(72px * var(--section-spacing-scale, 1)) 20px calc(72px * var(--section-spacing-scale, 1));
+        box-sizing: border-box;
+      }
+
+      #shopify-section-faq-waves_q7cavl .afq-head {
+        text-align: center;
+        margin-bottom: 18px;
+      }
+
+      #shopify-section-faq-waves_q7cavl .afq-title {
+        margin: 0 0 8px;
+        font-weight: var(--font-h2--weight, 900);
+        letter-spacing: var(--font-h2--letter-spacing, -0.02em);
+        line-height: 1.1;
+        font-size: clamp(28px, 3vw, calc(var(--font-h2--size) * 1.2));
+        color: var(--color-foreground-heading);
+      }
+
+      #shopify-section-faq-waves_q7cavl .afq-title em,
+      #shopify-section-faq-waves_q7cavl .afq-title strong {
+        color: var(--afq-grad-1);
+      }
+
+      #shopify-section-faq-waves_q7cavl .afq-sub {
+        margin: 0 auto;
+        max-width: 62ch;
+        color: var(--color-foreground-muted, var(--color-foreground));
+        line-height: 1.45;
+        font-size: 15px;
+        opacity: .75;
+      }
+      #shopify-section-faq-waves_q7cavl .afq-sub p { margin: 0; color: inherit; }
+
+      #shopify-section-faq-waves_q7cavl .afq-list {
+        display: grid;
+        gap: var(--style-gap-cards, 12px);
+        margin-top: 16px;
+      }
+
+      #shopify-section-faq-waves_q7cavl .afq-item {
+        border-radius: var(--afq-radius);
+        background: linear-gradient(135deg, var(--afq-grad-1), var(--afq-grad-2) 55%, var(--afq-grad-3));
+        box-shadow: 0 18px 45px rgba(0,0,0,.18);
+        overflow: hidden;
+        position: relative;
+      }
+
+      #shopify-section-faq-waves_q7cavl .afq-item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(1200px 700px at 10% 15%, rgba(255,255,255,.14), transparent 55%),
+          radial-gradient(1000px 600px at 90% 80%, rgba(255,255,255,.10), transparent 60%);
+        pointer-events: none;
+        opacity: .95;
+      }
+
+      #shopify-section-faq-waves_q7cavl details.afq-details {
+        width: 100%;
+        position: relative;
+        z-index: 1;
+      }
+
+      #shopify-section-faq-waves_q7cavl summary.afq-summary {
+        list-style: none;
+        cursor: pointer;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 14px;
+        align-items: center;
+        padding: 16px 16px;
+        user-select: none;
+      }
+
+      #shopify-section-faq-waves_q7cavl summary.afq-summary::-webkit-details-marker { display: none; }
+
+      #shopify-section-faq-waves_q7cavl .afq-num {
+        width: 34px;
+        height: 34px;
+        border-radius: var(--style-border-radius-pills, 999px);
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        font-size: 13px;
+        color: var(--afq-grad-1);
+        background: rgba(255,255,255,.92);
+        box-shadow: 0 4px 12px rgba(0,0,0,.18);
+        flex: none;
+      }
+
+      #shopify-section-faq-waves_q7cavl .afq-q {
+        font-weight: var(--font-h3--weight, 700);
+        letter-spacing: var(--font-h3--letter-spacing, -0.01em);
+        color: rgba(255,255,255,.95);
+        font-size: 16px;
+        line-height: 1.25;
+      }
+
+      #shopify-section-faq-waves_q7cavl .afq-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: var(--style-border-radius-global);
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(255,255,255,.30);
+        background: rgba(255,255,255,.15);
+      }
+
+      #shopify-section-faq-waves_q7cavl .afq-icon svg {
+        width: 18px;
+        height: 18px;
+        color: rgba(255,255,255,.90);
+        transition: transform .15s ease;
+      }
+
+      #shopify-section-faq-waves_q7cavl details[open] .afq-icon svg {
+        transform: rotate(180deg);
+      }
+
+      #shopify-section-faq-waves_q7cavl .afq-a {
+        padding: 0 16px 16px;
+        color: rgba(255,255,255,.82);
+        line-height: 1.55;
+        font-size: 15px;
+      }
+      #shopify-section-faq-waves_q7cavl .afq-a p { margin: 0; color: inherit; }
+
+      #shopify-section-faq-waves_q7cavl .afq-divider {
+        height: 1px;
+        background: rgba(255,255,255,.18);
+        margin: 0 16px 12px;
+      }
+
+      @media (max-width: 749px) {
+        #shopify-section-faq-waves_q7cavl .afq-wrap {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        #shopify-section-faq-waves_q7cavl summary.afq-summary {
+          padding: 14px 14px;
+        }
+        #shopify-section-faq-waves_q7cavl .afq-a {
+          padding: 0 14px 14px;
+        }
+        #shopify-section-faq-waves_q7cavl .afq-divider {
+          margin: 0 14px 12px;
+        }
+      }
+    </style>
+
+    
+
+    <div class="afq-wrap">
+      <div class="afq-head" data-animate="fade-up">
+        
+          <div class="afq-title forge-rte"><p>Your Questions, <em>Answered</em></p></div>
+        
+        
+          <div class="afq-sub forge-rte"><p>Everything you need to know about the Zenkart flow.</p></div>
+        
+      </div>
+
+      <div class="afq-list" data-animate-group=""><div class="afq-item" data-animate="fade-up" data-forge-block-id="faq_1" data-forge-block-type="faq" style="--anim-child-index: 0;">
+              <details class="afq-details" open="">
+                <summary class="afq-summary">
+                  <div class="afq-num">1</div>
+                  <div class="afq-q">How does the Puri Press save time?</div>
+                  <div class="afq-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="afq-divider"></div>
+                <div class="afq-a forge-rte"><p>It replaces manual rolling with a single, heavy-duty stainless steel press, cutting prep time by 75% for rotis, puris, and papads.</p></div>
+              </details>
+            </div><div class="afq-item" data-animate="fade-up" data-forge-block-id="faq_2" data-forge-block-type="faq" style="--anim-child-index: 1;">
+              <details class="afq-details">
+                <summary class="afq-summary">
+                  <div class="afq-num">2</div>
+                  <div class="afq-q">Is the Digital Tasbih counter easy to use?</div>
+                  <div class="afq-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="afq-divider"></div>
+                <div class="afq-a forge-rte"><p>Yes. It features a tactile scroll and an LCD display that holds your count, allowing you to focus on the prayer, not the number.</p></div>
+              </details>
+            </div><div class="afq-item" data-animate="fade-up" data-forge-block-id="faq_3" data-forge-block-type="faq" style="--anim-child-index: 2;">
+              <details class="afq-details">
+                <summary class="afq-summary">
+                  <div class="afq-num">3</div>
+                  <div class="afq-q">What materials are used in construction?</div>
+                  <div class="afq-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="afq-divider"></div>
+                <div class="afq-a forge-rte"><p>We use high-grade stainless steel for the Puri Press and natural wood for the Tasbih, ensuring durability that lasts for decades.</p></div>
+              </details>
+            </div><div class="afq-item" data-animate="fade-up" data-forge-block-id="faq_4" data-forge-block-type="faq" style="--anim-child-index: 3;">
+              <details class="afq-details">
+                <summary class="afq-summary">
+                  <div class="afq-num">4</div>
+                  <div class="afq-q">Does the Tasbih include a compass?</div>
+                  <div class="afq-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </div>
+                </summary>
+                <div class="afq-divider"></div>
+                <div class="afq-a forge-rte"><p>Yes, it includes a built-in compass to help you find your direction during meditation or prayer, no matter where you are.</p></div>
+              </details>
+            </div></div>
+    </div>
+  </section><script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the Puri Press save time?","acceptedAnswer":{"@type":"Answer","text":"It replaces manual rolling with a single, heavy-duty stainless steel press, cutting prep time by 75% for rotis, puris, and papads."}},{"@type":"Question","name":"Is the Digital Tasbih counter easy to use?","acceptedAnswer":{"@type":"Answer","text":"Yes. It features a tactile scroll and an LCD display that holds your count, allowing you to focus on the prayer, not the number."}},{"@type":"Question","name":"What materials are used in construction?","acceptedAnswer":{"@type":"Answer","text":"We use high-grade stainless steel for the Puri Press and natural wood for the Tasbih, ensuring durability that lasts for decades."}},{"@type":"Question","name":"Does the Tasbih include a compass?","acceptedAnswer":{"@type":"Answer","text":"Yes, it includes a built-in compass to help you find your direction during meditation or prayer, no matter where you are."}}]}
+</script>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ Waves",
+  "settings": []
+}
+{% endschema %}

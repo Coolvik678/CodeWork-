@@ -3,36 +3,48 @@
     "hero": {
       "type": "hero"
     },
-    "marquee_ribbon": {
-      "type": "marquee-ribbon"
+    "editorial_headline": {
+      "type": "editorial-headline"
     },
-    "puri_press": {
-      "type": "product-puri-press"
+    "wave_product_features": {
+      "type": "wave-product-features"
     },
-    "jaap_counter": {
-      "type": "product-jaap-counter"
+    "social_proof": {
+      "type": "social-proof"
     },
-    "demonstration": {
-      "type": "demonstration"
+    "before_after_slider": {
+      "type": "before-after-slider"
     },
-    "features": {
-      "type": "features"
+    "trust_icons_row": {
+      "type": "trust-icons-row"
     },
-    "guarantees": {
-      "type": "guarantees"
+    "comparison_waves": {
+      "type": "comparison-waves"
     },
-    "reviews": {
-      "type": "reviews"
+    "discount_countdown": {
+      "type": "discount-countdown"
+    },
+    "promotional_banners": {
+      "type": "promotional-banners"
+    },
+    "faq_waves": {
+      "type": "faq-waves"
+    },
+    "newsletter_signup": {
+      "type": "newsletter-signup"
     }
   },
   "order": [
     "hero",
-    "marquee_ribbon",
-    "puri_press",
-    "jaap_counter",
-    "demonstration",
-    "features",
-    "guarantees",
-    "reviews"
+    "editorial_headline",
+    "wave_product_features",
+    "social_proof",
+    "before_after_slider",
+    "trust_icons_row",
+    "comparison_waves",
+    "discount_countdown",
+    "promotional_banners",
+    "faq_waves",
+    "newsletter_signup"
   ]
 }

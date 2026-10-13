@@ -3,6 +3,9 @@
     "hero": {
       "type": "hero"
     },
+    "featured_catalog": {
+      "type": "featured-catalog"
+    },
     "editorial_headline": {
       "type": "editorial-headline"
     },
@@ -36,6 +39,7 @@
   },
   "order": [
     "hero",
+    "featured_catalog",
     "editorial_headline",
     "wave_product_features",
     "social_proof",

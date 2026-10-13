@@ -1,0 +1,641 @@
+<!-- sections/product-catalog-detail.liquid -->
+{%- liquid
+  assign is_puri = false
+  if product.handle contains 'puri' or product.handle contains 'roti'
+    assign is_puri = true
+  endif
+
+  if is_puri
+    assign current_title = product.title | default: "Stainless Steel Heavy Duty Puri & Khakhra Press Maker"
+    assign current_price_num = 599
+    assign compare_price_num = 1499
+    assign discount_pct = "60% OFF"
+    assign breadcrumb_cat = "Artisanal Kitchen Tools"
+    assign stock_left = 19
+    assign review_count = 241
+    assign rating_val = "4.8"
+    assign main_img = 'puri-wukusy-1.jpg' | asset_url
+  else
+    assign current_title = product.title | default: "Wooden Digital Jaap Counter With Compass (1 Pc)"
+    assign current_price_num = 499
+    assign compare_price_num = 1299
+    assign discount_pct = "62% OFF"
+    assign breadcrumb_cat = "Devotional & Meditation"
+    assign stock_left = 14
+    assign review_count = 184
+    assign rating_val = "4.9"
+    assign main_img = 'jaap-wukusy-1.jpg' | asset_url
+  endif
+-%}
+
+<div class="bg-black text-[#f5f5f5] min-h-screen py-10 px-4 sm:px-8 lg:px-12 border-b border-[#222222]">
+  <div class="max-w-[1400px] mx-auto">
+    
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs text-white/50 mb-8 overflow-x-auto whitespace-nowrap">
+      <a href="/" class="hover:text-white transition">Home</a>
+      <span>/</span>
+      <a href="/#featured-catalog" class="hover:text-white transition">Catalogue</a>
+      <span>/</span>
+      <span class="text-white/40">{{ breadcrumb_cat }}</span>
+      <span>/</span>
+      <span class="text-white font-medium truncate max-w-xs">{{ current_title }}</span>
+    </nav>
+
+    <!-- Main Product Grid: Gallery (Left) & Purchasing Funnel (Right) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start mb-20">
+      
+      <!-- LEFT: High-Res Interactive Gallery with ALL Available Images (7 cols on lg) -->
+      <div class="lg:col-span-7 space-y-4 lg:sticky lg:top-28">
+        
+        <!-- Main Preview Box -->
+        <div class="relative w-full aspect-square bg-[#0c0c0c] rounded-2xl overflow-hidden border border-[#222] group shadow-2xl">
+          <img 
+            id="main-catalog-image" 
+            src="{{ main_img }}" 
+            alt="{{ current_title }}" 
+            class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 cursor-zoom-in"
+            loading="eager">
+
+          <!-- Badges Overlay -->
+          <div class="absolute top-4 left-4 flex flex-col gap-2 pointer-events-none">
+            <span class="bg-white text-black font-bold text-[11px] uppercase tracking-wider px-3 py-1 rounded shadow">
+              {{ discount_pct }}
+            </span>
+            <span class="bg-black/80 backdrop-blur-md border border-[#333] text-white text-[11px] font-medium px-3 py-1 rounded-full flex items-center gap-1.5 shadow">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              In Stock: Only {{ stock_left }} Units Left
+            </span>
+          </div>
+
+          <div class="absolute bottom-4 right-4 bg-black/80 backdrop-blur-md border border-[#333] text-[11px] text-white/60 px-3 py-1 rounded-full flex items-center gap-2 pointer-events-none">
+            <span>🔍 Click thumbnail below to switch photo</span>
+          </div>
+        </div>
+
+        <!-- Thumbnail Strip With ALL Available Images -->
+        <div class="space-y-2">
+          <div class="text-[11px] text-white/50 font-medium tracking-wide">
+            AVAILABLE PRODUCT IMAGES &amp; ANGLES (<span id="thumb-count">{% if is_puri %}9{% else %}12{% endif %}</span> PHOTOS):
+          </div>
+
+          <div class="flex items-center gap-2.5 overflow-x-auto pb-3 scrollbar-thin">
+            {% if is_puri %}
+              <!-- Puri Press: All 9 Images -->
+              {% assign puri_images = "puri-wukusy-1.jpg,puri-wukusy-2.jpg,puri-wukusy-3.jpg,puri-wukusy-4.jpg,puri-wukusy-5.jpg,puri-wukusy-6.jpg,forge-puri-maker.jpg,forge-puri-press.jpg,puri-action.jpg" | split: "," %}
+              {% for img_name in puri_images %}
+                <button 
+                  type="button" 
+                  onclick="switchMainImage('{{ img_name | asset_url }}', this)" 
+                  class="catalog-thumb-btn flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border {% if forloop.first %}border-white opacity-100{% else %}border-[#2a2a2a] opacity-70 hover:opacity-100{% endif %} bg-[#111] transition-all">
+                  <img src="{{ img_name | asset_url }}" alt="Angle {{ forloop.index }}" class="w-full h-full object-cover">
+                </button>
+              {% endfor %}
+
+            {% else %}
+              <!-- Jaap Counter: All 12 Images -->
+              {% assign jaap_images = "jaap-wukusy-1.jpg,jaap-wukusy-2.jpg,jaap-wukusy-3.jpg,jaap-wukusy-4.jpg,jaap-wukusy-5.jpg,jaap-wukusy-6.jpg,jaap-wukusy-7.jpg,tally-counter-main.jpg,tally-counter-1.jpg,tally-counter-2.jpg,tally-counter-3.jpg,tally-counter-4.jpg" | split: "," %}
+              {% for img_name in jaap_images %}
+                <button 
+                  type="button" 
+                  onclick="switchMainImage('{{ img_name | asset_url }}', this)" 
+                  class="catalog-thumb-btn flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border {% if forloop.first %}border-white opacity-100{% else %}border-[#2a2a2a] opacity-70 hover:opacity-100{% endif %} bg-[#111] transition-all">
+                  <img src="{{ img_name | asset_url }}" alt="Angle {{ forloop.index }}" class="w-full h-full object-cover">
+                </button>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: E-Commerce Conversion Box (5 cols on lg) -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <!-- Wukusy Dropshipping Badge -->
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 bg-[#141414] border border-[#2a2a2a] text-white/90 text-[11px] font-semibold px-3 py-1 rounded-full">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            Wukusy Dropship Fulfilled
+          </span>
+          <span class="text-white/50 text-xs">Dispatch in 24–48 Hrs</span>
+        </div>
+
+        <!-- Title -->
+        <div>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-white leading-tight">
+            {{ current_title }}
+          </h1>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-2 mt-3 text-xs">
+            <div class="flex text-white">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <span class="font-bold text-white">{{ rating_val }}</span>
+            <span class="text-white/50">({{ review_count }} Verified Customer Deliveries)</span>
+          </div>
+        </div>
+
+        <!-- Pricing Card -->
+        <div class="bg-[#0f0f0f] p-4 rounded-xl border border-[#222]">
+          <div class="flex items-baseline gap-3">
+            <span class="text-3xl sm:text-4xl font-bold text-white">₹{{ current_price_num }}</span>
+            <span class="text-lg line-through text-white/40">₹{{ compare_price_num }}</span>
+            <span class="bg-emerald-950/40 border border-emerald-800/40 text-emerald-400 text-xs font-bold px-2.5 py-0.5 rounded">
+              {{ discount_pct }}
+            </span>
+          </div>
+          <div class="flex items-center justify-between mt-2 pt-2 border-t border-[#1e1e1e] text-[11px] text-white/50">
+            <span>Inclusive of all GST &amp; Taxes</span>
+            <span class="text-emerald-400 font-semibold">✓ Free Pan-India Delivery</span>
+          </div>
+        </div>
+
+        <!-- Special Deal Alert -->
+        <div class="bg-[#141414] border border-[#282828] rounded-xl p-3 flex items-center justify-between text-xs text-white">
+          <div class="flex items-center gap-2">
+            <span class="text-base">🏷️</span>
+            <span><strong>Special Offer:</strong> Buy 2, Get Extra 10% Off</span>
+          </div>
+          <span class="font-mono text-white text-[11px] bg-black px-2 py-0.5 rounded border border-[#333]">ZEN10</span>
+        </div>
+
+        <!-- PIN Code Estimator -->
+        <div class="bg-[#0f0f0f] p-4 rounded-xl border border-[#222] text-xs">
+          <label for="pincode-catalog" class="block text-[11px] font-semibold text-white/60 uppercase tracking-wider mb-2">
+            Check Express Delivery Date &amp; COD Availability:
+          </label>
+          <div class="flex gap-2">
+            <input 
+              type="text" 
+              id="pincode-catalog" 
+              maxlength="6" 
+              placeholder="Enter 6-Digit Indian PIN code" 
+              class="flex-1 bg-black border border-[#2a2a2a] rounded-lg px-3 py-2 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-white transition">
+            <button 
+              type="button" 
+              onclick="checkPincodeDelivery('pincode-catalog', 'pincode-catalog-res')" 
+              class="bg-[#1c1c1c] hover:bg-white hover:text-black border border-[#333] text-white font-medium text-xs px-4 py-2 rounded-lg transition">
+              Check PIN
+            </button>
+          </div>
+          <div id="pincode-catalog-res" class="mt-2.5 text-xs hidden"></div>
+        </div>
+
+        <!-- Quantity & Purchasing CTAs -->
+        <div class="space-y-4 pt-2">
+          
+          <!-- Quantity -->
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-white/60 font-medium">Quantity:</span>
+            <div class="inline-flex items-center bg-[#141414] border border-[#2a2a2a] rounded-lg">
+              <button 
+                type="button" 
+                onclick="changeQuantity(-1)" 
+                class="px-3.5 py-1.5 text-white/60 hover:text-white font-bold text-sm transition">
+                −
+              </button>
+              <span id="catalog-qty-val" class="px-4 py-1.5 font-bold text-white text-xs">1</span>
+              <button 
+                type="button" 
+                onclick="changeQuantity(1)" 
+                class="px-3.5 py-1.5 text-white/60 hover:text-white font-bold text-sm transition">
+                +
+              </button>
+            </div>
+          </div>
+
+          <!-- PRIMARY ACTION 1: Buy Now Cash on Delivery (Clean White CTA) -->
+          <button 
+            type="button" 
+            onclick="triggerCatalogBuyNow('{{ current_title }}', {{ current_price_num }}, '{{ main_img }}', '{{ product.handle }}')"
+            class="w-full bg-white hover:bg-neutral-200 text-black font-bold text-sm py-4 px-6 rounded-xl transition duration-200 shadow-xl flex items-center justify-center gap-2">
+            <span>⚡ BUY NOW — CASH ON DELIVERY (₹<span id="buy-now-price-display">{{ current_price_num }}</span>)</span>
+          </button>
+
+          <!-- SECONDARY ACTION 2: Add to Basket -->
+          <button 
+            type="button" 
+            onclick="addCatalogToBasket('{{ product.id | default: 'catalog-item' }}', '{{ current_title }}', {{ current_price_num }})"
+            class="w-full bg-[#161616] hover:bg-[#202020] border border-[#2e2e2e] text-white font-medium text-xs py-3.5 px-6 rounded-xl transition flex items-center justify-center gap-2">
+            <span>🛒 Add to Cart</span>
+          </button>
+
+          <p class="text-[11px] text-center text-white/40">
+            🔒 256-Bit SSL Secured • Zero Advance Payment Required for COD
+          </p>
+        </div>
+
+        <!-- Trust Badges 4-Grid -->
+        <div class="grid grid-cols-2 gap-3 pt-4 border-t border-[#222] text-xs">
+          <div class="bg-[#0f0f0f] p-3 rounded-xl border border-[#222] flex items-center gap-2.5">
+            <span class="text-white text-base">🚚</span>
+            <div>
+              <div class="font-semibold text-white text-[11px]">Free Shipping</div>
+              <div class="text-[10px] text-white/50">Pan-India express delivery</div>
+            </div>
+          </div>
+          <div class="bg-[#0f0f0f] p-3 rounded-xl border border-[#222] flex items-center gap-2.5">
+            <span class="text-white text-base">💵</span>
+            <div>
+              <div class="font-semibold text-white text-[11px]">Cash on Delivery</div>
+              <div class="text-[10px] text-white/50">Pay at your doorstep</div>
+            </div>
+          </div>
+          <div class="bg-[#0f0f0f] p-3 rounded-xl border border-[#222] flex items-center gap-2.5">
+            <span class="text-white text-base">🔄</span>
+            <div>
+              <div class="font-semibold text-white text-[11px]">7 Days Return</div>
+              <div class="text-[10px] text-white/50">Hassle-free replacement</div>
+            </div>
+          </div>
+          <div class="bg-[#0f0f0f] p-3 rounded-xl border border-[#222] flex items-center gap-2.5">
+            <span class="text-white text-base">🛡️</span>
+            <div>
+              <div class="font-semibold text-white text-[11px]">Wukusy Inspected</div>
+              <div class="text-[10px] text-white/50">100% Quality checked</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TABS SECTION -->
+    <div class="border-t border-[#222] pt-12">
+      <!-- Tabs Navigation -->
+      <div class="flex items-center gap-4 sm:gap-8 border-b border-[#222] overflow-x-auto pb-4 mb-8">
+        <button 
+          type="button" 
+          onclick="switchCatalogTab('tab-overview', this)" 
+          class="catalog-tab-btn text-sm font-semibold text-white border-b-2 border-white pb-2 transition whitespace-nowrap">
+          Detailed Description &amp; Features
+        </button>
+        <button 
+          type="button" 
+          onclick="switchCatalogTab('tab-specs', this)" 
+          class="catalog-tab-btn text-sm font-semibold text-white/50 hover:text-white border-b-2 border-transparent pb-2 transition whitespace-nowrap">
+          Technical Specifications
+        </button>
+        <button 
+          type="button" 
+          onclick="switchCatalogTab('tab-reviews', this)" 
+          class="catalog-tab-btn text-sm font-semibold text-white/50 hover:text-white border-b-2 border-transparent pb-2 transition whitespace-nowrap">
+          Verified Reviews ({{ review_count }})
+        </button>
+        <button 
+          type="button" 
+          onclick="switchCatalogTab('tab-shipping', this)" 
+          class="catalog-tab-btn text-sm font-semibold text-white/50 hover:text-white border-b-2 border-transparent pb-2 transition whitespace-nowrap">
+          Wukusy Dropship Shipping Policy
+        </button>
+      </div>
+
+      <!-- TAB 1: Product Overview -->
+      <div id="tab-overview" class="catalog-tab-content space-y-10">
+        
+        {% if is_puri %}
+          <div class="max-w-4xl mx-auto space-y-6 text-sm text-white/70 leading-relaxed">
+            <h3 class="text-2xl font-serif font-bold text-white">
+              Heavy Duty Food-Grade Stainless Steel Manual Press Machine
+            </h3>
+            <p>
+              Transform your Indian kitchen workflow with our premium manual puri, khakhra, and roti press machine. Fabricated from commercial-weight stainless steel, it eliminates the uneven manual rolling pin process, giving you uniform, thin, and ready-to-fry flatbreads in less than 3 seconds per press.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+              <div class="bg-[#0f0f0f] p-5 rounded-xl border border-[#222]">
+                <div class="text-white text-xl mb-2">⚡</div>
+                <h4 class="font-bold text-white text-sm mb-1">Instant 3-Second Press</h4>
+                <p class="text-xs text-white/60">Place the dough ball, apply gentle leverage with the ergonomic handle, and achieve perfect circular discs.</p>
+              </div>
+              <div class="bg-[#0f0f0f] p-5 rounded-xl border border-[#222]">
+                <div class="text-white text-xl mb-2">⚖️</div>
+                <h4 class="font-bold text-white text-sm mb-1">Heavy Anti-Skid Base</h4>
+                <p class="text-xs text-white/60">Weighted base with non-slip industrial silicone grip ensures zero slipping during high-pressure pressing.</p>
+              </div>
+              <div class="bg-[#0f0f0f] p-5 rounded-xl border border-[#222]">
+                <div class="text-white text-xl mb-2">✨</div>
+                <h4 class="font-bold text-white text-sm mb-1">Mirror Rust-Proof Steel</h4>
+                <p class="text-xs text-white/60">100% Food-grade SUS-304 alloy resists turmeric, oil stains, and moisture. Effortless clean with a damp cloth.</p>
+              </div>
+            </div>
+
+            <div class="rounded-2xl overflow-hidden border border-[#222] my-8 max-w-2xl mx-auto">
+              <img src="{{ 'puri-wukusy-2.jpg' | asset_url }}" alt="Puri Press Maker Details" class="w-full h-auto">
+            </div>
+          </div>
+
+        {% else %}
+          <div class="max-w-4xl mx-auto space-y-8 text-sm text-white/70 leading-relaxed">
+            <div class="text-center max-w-2xl mx-auto">
+              <h3 class="text-2xl sm:text-3xl font-serif font-bold text-white mb-3">
+                Manual Finger Tally Counter — Digital Counting Made Effortless!
+              </h3>
+              <p class="text-white/60">
+                Keep precise counts with this <strong>5-digit mechanical tally counter</strong> featuring an <strong>adjustable finger ring</strong> for secure, hands-free operation — perfect for naam jaap, meditation, tasbih, gym tracking, or inventory management.
+              </p>
+            </div>
+
+            <!-- Infographic 1 -->
+            <div class="rounded-2xl overflow-hidden border border-[#222] max-w-xl mx-auto shadow-2xl bg-[#0c0c0c] p-2">
+              <img 
+                src="{{ 'tally-infographic-1.webp' | asset_url }}" 
+                alt="Manual Tally Counter Machine Features" 
+                class="w-full h-auto rounded-xl"
+                loading="lazy">
+            </div>
+
+            <!-- Key Features List -->
+            <div class="bg-[#0f0f0f] p-6 sm:p-8 rounded-2xl border border-[#222]">
+              <h4 class="text-lg font-serif font-bold text-white mb-4 text-center">
+                Key Product Capabilities
+              </h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div class="flex items-start gap-3 bg-black/60 p-3 rounded-xl border border-[#222]">
+                  <span class="text-white font-bold text-sm">✓</span>
+                  <div>
+                    <strong class="text-white block">5-Channel Digital Counting:</strong>
+                    Tracks up to 99,999 counts without lag or count skipping.
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 bg-black/60 p-3 rounded-xl border border-[#222]">
+                  <span class="text-white font-bold text-sm">✓</span>
+                  <div>
+                    <strong class="text-white block">Battery-Free Mechanical Scroll:</strong>
+                    Micro-roller tactile wheel designed for silent, infinite rotation.
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 bg-black/60 p-3 rounded-xl border border-[#222]">
+                  <span class="text-white font-bold text-sm">✓</span>
+                  <div>
+                    <strong class="text-white block">Secure Adjustable Finger Ring:</strong>
+                    Ergonomic snap-fit silicon band sits gently on any finger size.
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 bg-black/60 p-3 rounded-xl border border-[#222]">
+                  <span class="text-white font-bold text-sm">✓</span>
+                  <div>
+                    <strong class="text-white block">Instant One-Touch Reset:</strong>
+                    Recessed reset button prevents accidental zeroing during prayer.
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 bg-black/60 p-3 rounded-xl border border-[#222]">
+                  <span class="text-white font-bold text-sm">✓</span>
+                  <div>
+                    <strong class="text-white block">Integrated Prayer Compass:</strong>
+                    Built-in directional magnetic indicator for sacred alignment.
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 bg-black/60 p-3 rounded-xl border border-[#222]">
+                  <span class="text-white block">Organic Wood Finish &amp; Sacred Tassel:</strong>
+                  Warm rosewood feel with durable lightweight structure (150g).
+                </div>
+              </div>
+            </div>
+
+            <!-- Infographic 2 -->
+            <div class="rounded-2xl overflow-hidden border border-[#222] max-w-xl mx-auto shadow-2xl bg-[#0c0c0c] p-2">
+              <img 
+                src="{{ 'tally-infographic-2.webp' | asset_url }}" 
+                alt="Manual Tally Counter Operation Guide" 
+                class="w-full h-auto rounded-xl"
+                loading="lazy">
+            </div>
+
+            <!-- Bottom summary -->
+            <div class="text-center p-6 bg-[#111] rounded-2xl border border-[#222]">
+              <h4 class="text-lg font-serif font-bold text-white mb-2">Count with Devotional Confidence!</h4>
+              <p class="text-xs text-white/50 max-w-lg mx-auto">
+                Simply Scroll • Count • Reset. Designed for spiritual mindfulness, daily mantra chanting, and serene prayer rituals.
+              </p>
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+
+      <!-- TAB 2: Technical Specifications -->
+      <div id="tab-specs" class="catalog-tab-content hidden max-w-3xl mx-auto">
+        <div class="bg-[#0f0f0f] rounded-2xl p-6 sm:p-8 border border-[#222]">
+          <h3 class="text-xl font-serif font-bold text-white mb-6">Technical Specifications Sheet</h3>
+          
+          <div class="divide-y divide-[#222] text-xs">
+            {% if is_puri %}
+              <div class="py-3 flex justify-between"><span class="text-white/50">Product Name</span><span class="font-medium text-white">Stainless Steel Manual Puri &amp; Khakhra Press Machine</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Material Alloy</span><span class="font-medium text-white">SUS-304 Heavy Gauge Food Grade Stainless Steel</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Disc Diameter</span><span class="font-medium text-white">6.5 Inches (Medium Household Standard)</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Base Construction</span><span class="font-medium text-white">Anti-Skid High Grip Molded Base</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Leverage Ratio</span><span class="font-medium text-white">High Ergonomic Pressure Ratio (Requires Minimal Force)</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Gross Weight</span><span class="font-medium text-white">980 Grams</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">DropShip Supplier</span><span class="font-medium text-white">Wukusy India Central Depot (SKU: 7149a_puri_press)</span></div>
+            {% else %}
+              <div class="py-3 flex justify-between"><span class="text-white/50">Product Name</span><span class="font-medium text-white">Wooden Digital Tasbih Counter With Compass &amp; Tassel</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Display Type</span><span class="font-medium text-white">5-Digit Sunlight Readable Digital LCD</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Counting Limit</span><span class="font-medium text-white">0 to 99,999 Chants</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Compass Integration</span><span class="font-medium text-white">360-Degree Magnetic Fluid Prayer Alignment Compass</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Dimensions</span><span class="font-medium text-white">10 cm x 7 cm x 3 cm</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Net Weight</span><span class="font-medium text-white">87 Grams (150g Packed)</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Power Source</span><span class="font-medium text-white">Long Life Button Cell (Pre-installed &amp; Replaceable)</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">Finish</span><span class="font-medium text-white">Rosewood Textured Body with Ceremonial Red Silk Tassel</span></div>
+              <div class="py-3 flex justify-between"><span class="text-white/50">DropShip Supplier</span><span class="font-medium text-white">Wukusy India (SKU: 22223_digital_tasbih_counter_1pc)</span></div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Customer Reviews -->
+      <div id="tab-reviews" class="catalog-tab-content hidden max-w-4xl mx-auto space-y-6">
+        <div class="bg-[#0f0f0f] p-6 sm:p-8 rounded-2xl border border-[#222] flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div class="text-center sm:text-left">
+            <div class="text-4xl font-serif font-bold text-white">{{ rating_val }} <span class="text-lg text-white/50">/ 5.0</span></div>
+            <div class="flex text-white text-lg my-1">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <div class="text-xs text-white/50">Based on {{ review_count }} Verified Dropship Deliveries</div>
+          </div>
+          <div class="w-full sm:w-auto">
+            <button 
+              type="button" 
+              onclick="triggerCatalogBuyNow('{{ current_title }}', {{ current_price_num }}, '{{ main_img }}', '{{ product.handle }}')"
+              class="bg-white hover:bg-neutral-200 text-black font-bold text-xs py-3 px-6 rounded-xl transition shadow">
+              Order Yours with COD Today
+            </button>
+          </div>
+        </div>
+
+        <!-- Verified Reviews List -->
+        <div class="space-y-4">
+          <div class="bg-[#0f0f0f] p-5 rounded-xl border border-[#222]">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-full bg-white/10 text-white font-bold text-xs flex items-center justify-center">R</span>
+                <div>
+                  <div class="font-semibold text-xs text-white">Rajeshwar Patil</div>
+                  <div class="text-[10px] text-white/50">Pune, Maharashtra • Verified Buyer</div>
+                </div>
+              </div>
+              <div class="flex text-white text-xs">★★★★★</div>
+            </div>
+            <p class="text-xs text-white/60 leading-relaxed">
+              "Delivered in just 3 days via BlueDart COD. The wood grain finish feels very serene in the hand. The roller click is completely noiseless, so I can do jaap even during night meditation without disturbing anyone. 10/10 product."
+            </p>
+          </div>
+
+          <div class="bg-[#0f0f0f] p-5 rounded-xl border border-[#222]">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-full bg-white/10 text-white font-bold text-xs flex items-center justify-center">A</span>
+                <div>
+                  <div class="font-semibold text-xs text-white">Ananya Sharma</div>
+                  <div class="text-[10px] text-white/50">Varanasi, UP • Verified Buyer</div>
+                </div>
+              </div>
+              <div class="flex text-white text-xs">★★★★★</div>
+            </div>
+            <p class="text-xs text-white/60 leading-relaxed">
+              "Gifted this to my mother for her daily Gayatri Mantra jaap. She found the LCD digits very clear to read and the compass is a thoughtful addition. Packaging from Wukusy was neat and secure."
+            </p>
+          </div>
+
+          <div class="bg-[#0f0f0f] p-5 rounded-xl border border-[#222]">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-7 h-7 rounded-full bg-white/10 text-white font-bold text-xs flex items-center justify-center">G</span>
+                <div>
+                  <div class="font-semibold text-xs text-white">Gurpreet Singh</div>
+                  <div class="text-[10px] text-white/50">Amritsar, Punjab • Verified Buyer</div>
+                </div>
+              </div>
+              <div class="flex text-white text-xs">★★★★★</div>
+            </div>
+            <p class="text-xs text-white/60 leading-relaxed">
+              "High quality build and very prompt Cash on Delivery service. Paid cash when the courier boy arrived at my doorstep. Tested the counter reset and scroll wheel, works like a charm."
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: Shipping Policy -->
+      <div id="tab-shipping" class="catalog-tab-content hidden max-w-3xl mx-auto">
+        <div class="bg-[#0f0f0f] rounded-2xl p-6 sm:p-8 border border-[#222] space-y-4 text-xs text-white/60 leading-relaxed">
+          <h3 class="text-xl font-serif font-bold text-white mb-2">Wukusy Dropshipping &amp; Delivery Terms</h3>
+          <p>
+            All Zenkart orders are processed and fulfilled via our verified Indian supply network on <strong>Wukusy Dropshipping</strong>.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4">
+            <div class="bg-black p-4 rounded-xl border border-[#222]">
+              <strong class="text-white block mb-1">⏱️ Dispatch Time:</strong>
+              Orders are packaged and dispatched within 24–48 hours from the regional hub.
+            </div>
+            <div class="bg-black p-4 rounded-xl border border-[#222]">
+              <strong class="text-white block mb-1">🚚 Courier Partners:</strong>
+              Shipped via BlueDart, Delhivery, Xpressbees, and Shadowfax with live SMS tracking.
+            </div>
+            <div class="bg-black p-4 rounded-xl border border-[#222]">
+              <strong class="text-white block mb-1">💵 Cash on Delivery:</strong>
+              Pay 100% of the invoice upon physical arrival of the package.
+            </div>
+            <div class="bg-black p-4 rounded-xl border border-[#222]">
+              <strong class="text-white block mb-1">🔄 7-Day Replacement:</strong>
+              Damaged in transit? Instant replacement dispatched upon WhatsApp verification.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Mobile Sticky Bottom Buy Bar -->
+<div class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0f0f0f]/95 backdrop-blur-lg border-t border-[#222] p-3 flex items-center justify-between gap-3 shadow-2xl">
+  <div class="flex items-center gap-2.5 overflow-hidden">
+    <img src="{{ main_img }}" alt="{{ current_title }}" class="w-11 h-11 rounded-lg object-cover border border-[#222] flex-shrink-0">
+    <div class="truncate">
+      <div class="text-xs font-bold text-white truncate">{{ current_title }}</div>
+      <div class="text-xs text-white font-semibold">₹{{ current_price_num }} <span class="text-[10px] line-through text-white/40">₹{{ compare_price_num }}</span></div>
+    </div>
+  </div>
+  <button 
+    type="button" 
+    onclick="triggerCatalogBuyNow('{{ current_title }}', {{ current_price_num }}, '{{ main_img }}', '{{ product.handle }}')"
+    class="bg-white hover:bg-neutral-200 text-black font-bold text-xs py-3 px-4 rounded-xl whitespace-nowrap shadow-md flex-shrink-0">
+    ⚡ Buy COD
+  </button>
+</div>
+
+<!-- Client Runtime Scripts for Catalog Page -->
+<script>
+  let catalogQuantity = 1;
+
+  function switchMainImage(src, btn) {
+    const mainImg = document.getElementById('main-catalog-image');
+    if (mainImg) mainImg.src = src;
+
+    document.querySelectorAll('.catalog-thumb-btn').forEach(b => {
+      b.classList.remove('border-white', 'opacity-100');
+      b.classList.add('border-[#2a2a2a]', 'opacity-70');
+    });
+
+    if (btn) {
+      btn.classList.add('border-white', 'opacity-100');
+      btn.classList.remove('border-[#2a2a2a]', 'opacity-70');
+    }
+  }
+
+  function changeQuantity(delta) {
+    catalogQuantity = Math.max(1, catalogQuantity + delta);
+    const qtyEl = document.getElementById('catalog-qty-val');
+    const priceDisplay = document.getElementById('buy-now-price-display');
+    const basePrice = {{ current_price_num }};
+
+    if (qtyEl) qtyEl.textContent = catalogQuantity;
+    if (priceDisplay) priceDisplay.textContent = (basePrice * catalogQuantity);
+  }
+
+  function switchCatalogTab(tabId, btn) {
+    document.querySelectorAll('.catalog-tab-content').forEach(content => {
+      content.classList.add('hidden');
+    });
+    document.querySelectorAll('.catalog-tab-btn').forEach(b => {
+      b.classList.remove('text-white', 'border-white');
+      b.classList.add('text-white/50', 'border-transparent');
+    });
+
+    const activeContent = document.getElementById(tabId);
+    if (activeContent) activeContent.classList.remove('hidden');
+
+    if (btn) {
+      btn.classList.add('text-white', 'border-white');
+      btn.classList.remove('text-white/50', 'border-transparent');
+    }
+  }
+
+  function addCatalogToBasket(id, title, price) {
+    if (window.ZenkartCart) {
+      for (let i = 0; i < catalogQuantity; i++) {
+        window.ZenkartCart.add(id, title, price);
+      }
+    }
+  }
+
+  function triggerCatalogBuyNow(title, price, img, handle) {
+    if (typeof openQuickCodModal === 'function') {
+      openQuickCodModal(title, price * catalogQuantity, img, handle, catalogQuantity);
+    } else if (window.ZenkartCart) {
+      addCatalogToBasket(handle, title, price);
+      window.location.href = '/checkout';
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Product Catalog Detail",
+  "settings": []
+}
+{% endschema %}

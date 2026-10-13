@@ -1,59 +1,97 @@
-<section class="relative py-24 lg:py-32 px-6 border-b border-border-dim overflow-hidden lightpool" data-embers="16">
-  <!-- Full-bleed background video container -->
-  <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none -z-10">
-    <video 
-      autoplay 
-      loop 
-      muted 
-      playsinline 
-      preload="auto" 
-      class="w-full h-full object-cover opacity-60 scale-[1.02]">
-      <source src="{{ 'hero-bg.mp4' | asset_url }}" type="video/mp4">
-    </video>
-    <!-- Ambient gradient overlays so headline & CTAs stay 100% legible -->
-    <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/65 to-ink/40"></div>
-    <div class="absolute inset-0 bg-radial-vignette opacity-80"></div>
-  </div>
-
-  <div class="max-w-4xl mx-auto text-center relative z-10">
-    <span class="eyebrow inline-block mb-4">Everyday Household Craft & Devotional Essentials</span>
+<section class="relative bg-[#565961] text-white overflow-hidden">
+  <div class="grid grid-cols-1 lg:grid-cols-2 items-stretch min-h-[580px] lg:min-h-[640px]">
     
-    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold tracking-tight text-bone leading-[1.08] mb-6">
-      <span class="hero-word" style="--i: 0">Enduring</span>
-      <span class="hero-word" style="--i: 1">Craft.</span><br>
-      <span class="text-amber">
-        <span class="hero-word" style="--i: 2">Engineered</span>
-        <span class="hero-word" style="--i: 3">for</span>
-        <span class="hero-word" style="--i: 4">Daily</span>
-        <span class="hero-word" style="--i: 5">Life.</span>
-      </span>
-    </h1>
-
-    <p class="text-base sm:text-lg text-bone-muted max-w-2xl mx-auto leading-relaxed mb-10" data-reveal>
-      Heavy-gauge culinary machinery and tactile devotionals. Built with heavy stainless steel and natural wood grain for lifelong Indian domestic use.
-    </p>
-
-    <div class="flex flex-wrap justify-center gap-4 mb-14" data-reveal>
-      <a href="#puri-press" class="bg-amber hover:bg-amber-lit text-black font-semibold text-sm px-8 py-4 rounded-full shadow-lg transition-all duration-200 hover:-translate-y-0.5">
-        Order Puri Press — ₹599
-      </a>
-      <a href="#jaap-counter" class="card-glass hover:border-amber text-bone font-semibold text-sm px-8 py-4 rounded-full transition-all duration-200 hover:-translate-y-0.5">
-        Order Jaap Counter — ₹499
-      </a>
+    <!-- Left Column: Authentic Lifestyle Imagery -->
+    <div class="relative w-full h-[360px] sm:h-[460px] lg:h-auto overflow-hidden bg-ink">
+      <img 
+        src="{{ 'forge-hero-lifestyle.jpg' | asset_url }}" 
+        alt="Zenkart Sacred Kitchen & Devotional Rituals" 
+        class="w-full h-full object-cover object-center transition-transform duration-700 ease-out hover:scale-105"
+        loading="eager">
+      <div class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent lg:hidden"></div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-medium text-bone-muted max-w-3xl mx-auto" data-reveal>
-      <div class="card-glass card-glow p-3.5 rounded-lg text-center">✓ Dispatched in 24 Hours</div>
-      <div class="card-glass card-glow p-3.5 rounded-lg text-center">✓ Cash on Delivery (COD)</div>
-      <div class="card-glass card-glow p-3.5 rounded-lg text-center">✓ 7-Day Free Replacement</div>
-      <div class="card-glass card-glow p-3.5 rounded-lg text-center">✓ 100% Quality Inspected</div>
+    <!-- Right Column: Cloned Copy & Call to Action -->
+    <div class="flex flex-col justify-center px-8 sm:px-14 lg:px-16 py-12 lg:py-20 bg-[#565961] max-w-2xl">
+      
+      <!-- Rating Ticker -->
+      <div class="flex items-center gap-2 mb-4 text-xs font-semibold tracking-wide text-white/90">
+        <span class="text-amber-400 text-sm tracking-wider">★★★★★</span>
+        <span>Excellent 4.9 | 2,300+ Practitioners</span>
+      </div>
+
+      <!-- Eyebrow -->
+      <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-white/70 mb-3 block">
+        Elevate Your Essentials
+      </span>
+
+      <!-- Primary Cloned Headline -->
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[1.04] mb-6">
+        Sacred Rituals Without The Wasted Minutes
+      </h1>
+
+      <!-- Cloned Subheadline -->
+      <p class="text-sm sm:text-base text-white/85 leading-relaxed mb-8 max-w-xl font-normal">
+        Every practice deserves your full attention. Our kitchen and prayer tools strip away repetitive friction so you stay present, not distracted. Less prep noise. More inner stillness.
+      </p>
+
+      <!-- CTA Action Button & Free Shipping Note -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a href="#puri-press" class="inline-block bg-black hover:bg-neutral-900 text-white font-bold text-sm px-8 py-3.5 rounded-md transition duration-200 shadow-lg text-center">
+          See the Flow
+        </a>
+      </div>
+      
+      <p class="text-xs text-white/70 mt-3 font-medium">
+        Free express delivery on all orders across India
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Organic Wave Divider into Secondary Story -->
+  <div class="w-full overflow-hidden leading-none -mt-1">
+    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-12 lg:h-16 text-[#0B0B0F] preserve-3d" preserveAspectRatio="none">
+      <path d="M0 0C240 60 480 80 720 70C960 60 1200 20 1440 40V80H0V0Z" fill="currentColor"/>
+    </svg>
+  </div>
+</section>
+
+<!-- SECTION 2: THE COST OF BUSYWORK -->
+<section class="bg-ink py-20 px-6 border-b border-border-dim text-center">
+  <div class="max-w-4xl mx-auto">
+    <span class="eyebrow block mb-3 text-amber">The Cost of Busywork</span>
+    <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-bone leading-[1.08] mb-6">
+      Presence Is Lost In <span class="text-bone-muted/40">Prep</span>
+    </h2>
+    <p class="text-sm sm:text-base text-bone-muted max-w-2xl mx-auto leading-relaxed mb-12">
+      Morning dough rolling shouldn't strain your wrists, and devotional chanting shouldn't be interrupted by manual counting distractions. We engineered tactile precision to restore your calm.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left max-w-3xl mx-auto">
+      <div class="card-glass card-glow p-8 rounded-xl border border-border-dim">
+        <span class="text-xs font-bold text-red-400 uppercase tracking-wider block mb-2">The Daily Friction</span>
+        <h3 class="text-xl font-bold text-bone mb-2">Repetitive Effort &amp; Lost Focus</h3>
+        <p class="text-xs text-bone-muted leading-relaxed">
+          Tiring arm rolls for 40 minutes before family breakfasts, and miscounting mantras mid-prayer when your mind wanders.
+        </p>
+      </div>
+
+      <div class="card-glass card-glow p-8 rounded-xl border border-amber/30">
+        <span class="text-xs font-bold text-amber uppercase tracking-wider block mb-2">The Zenkart Flow</span>
+        <h3 class="text-xl font-bold text-bone mb-2">Instant Mechanical Ease</h3>
+        <p class="text-xs text-bone-muted leading-relaxed">
+          Uniform 2-second dough presses with heavy lever balance, and silent smooth-bearing count tallies that preserve meditative stillness.
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Hero Section",
+  "name": "Forge AI Hero & Story",
   "settings": []
 }
 {% endschema %}

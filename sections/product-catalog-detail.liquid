@@ -14,7 +14,11 @@
     assign stock_left = 19
     assign review_count = 241
     assign rating_val = "4.8"
-    assign main_img = 'puri-wukusy-1.jpg' | asset_url
+    if product.featured_image
+      assign main_img = product.featured_image | image_url: width: 1200
+    else
+      assign main_img = 'forge-puri-maker.jpg' | asset_url
+    endif
   else
     assign current_title = product.title | default: "Wooden Digital Jaap Counter With Compass (1 Pc)"
     assign current_price_num = 499
@@ -24,7 +28,11 @@
     assign stock_left = 14
     assign review_count = 184
     assign rating_val = "4.9"
-    assign main_img = 'jaap-wukusy-1.jpg' | asset_url
+    if product.featured_image
+      assign main_img = product.featured_image | image_url: width: 1200
+    else
+      assign main_img = 'forge-jaap-counter.jpg' | asset_url
+    endif
   endif
 -%}
 
@@ -76,33 +84,53 @@
         <!-- Thumbnail Strip With ALL Available Images -->
         <div class="space-y-2">
           <div class="text-[11px] text-white/50 font-medium tracking-wide">
-            AVAILABLE PRODUCT IMAGES &amp; ANGLES (<span id="thumb-count">{% if is_puri %}9{% else %}12{% endif %}</span> PHOTOS):
+            AVAILABLE PRODUCT IMAGES &amp; ANGLES:
           </div>
 
           <div class="flex items-center gap-2.5 overflow-x-auto pb-3 scrollbar-thin">
-            {% if is_puri %}
-              <!-- Puri Press: All 9 Images -->
-              {% assign puri_images = "puri-wukusy-1.jpg,puri-wukusy-2.jpg,puri-wukusy-3.jpg,puri-wukusy-4.jpg,puri-wukusy-5.jpg,puri-wukusy-6.jpg,forge-puri-maker.jpg,forge-puri-press.jpg,puri-action.jpg" | split: "," %}
-              {% for img_name in puri_images %}
+            {% if product.images.size > 0 %}
+              {% for p_image in product.images %}
                 <button 
                   type="button" 
-                  onclick="switchMainImage('{{ img_name | asset_url }}', this)" 
+                  onclick="switchMainImage('{{ p_image | image_url: width: 1200 }}', this)" 
                   class="catalog-thumb-btn flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border {% if forloop.first %}border-white opacity-100{% else %}border-[#2a2a2a] opacity-70 hover:opacity-100{% endif %} bg-[#111] transition-all">
-                  <img src="{{ img_name | asset_url }}" alt="Angle {{ forloop.index }}" class="w-full h-full object-cover">
+                  <img src="{{ p_image | image_url: width: 240 }}" alt="Angle {{ forloop.index }}" class="w-full h-full object-cover">
                 </button>
               {% endfor %}
+            {% endif %}
 
+            {% if is_puri %}
+              <button 
+                type="button" 
+                onclick="switchMainImage('{{ 'forge-puri-maker.jpg' | asset_url }}', this)" 
+                class="catalog-thumb-btn flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border border-[#2a2a2a] opacity-70 hover:opacity-100 bg-[#111] transition-all">
+                <img src="{{ 'forge-puri-maker.jpg' | asset_url }}" alt="Kitchen Studio View" class="w-full h-full object-cover">
+              </button>
+              <button 
+                type="button" 
+                onclick="switchMainImage('{{ 'forge-puri-press.jpg' | asset_url }}', this)" 
+                class="catalog-thumb-btn flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border border-[#2a2a2a] opacity-70 hover:opacity-100 bg-[#111] transition-all">
+                <img src="{{ 'forge-puri-press.jpg' | asset_url }}" alt="Press Angle View" class="w-full h-full object-cover">
+              </button>
+              <button 
+                type="button" 
+                onclick="switchMainImage('{{ 'puri-action.jpg' | asset_url }}', this)" 
+                class="catalog-thumb-btn flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border border-[#2a2a2a] opacity-70 hover:opacity-100 bg-[#111] transition-all">
+                <img src="{{ 'puri-action.jpg' | asset_url }}" alt="Action View" class="w-full h-full object-cover">
+              </button>
             {% else %}
-              <!-- Jaap Counter: All 12 Images -->
-              {% assign jaap_images = "jaap-wukusy-1.jpg,jaap-wukusy-2.jpg,jaap-wukusy-3.jpg,jaap-wukusy-4.jpg,jaap-wukusy-5.jpg,jaap-wukusy-6.jpg,jaap-wukusy-7.jpg,tally-counter-main.jpg,tally-counter-1.jpg,tally-counter-2.jpg,tally-counter-3.jpg,tally-counter-4.jpg" | split: "," %}
-              {% for img_name in jaap_images %}
-                <button 
-                  type="button" 
-                  onclick="switchMainImage('{{ img_name | asset_url }}', this)" 
-                  class="catalog-thumb-btn flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border {% if forloop.first %}border-white opacity-100{% else %}border-[#2a2a2a] opacity-70 hover:opacity-100{% endif %} bg-[#111] transition-all">
-                  <img src="{{ img_name | asset_url }}" alt="Angle {{ forloop.index }}" class="w-full h-full object-cover">
-                </button>
-              {% endfor %}
+              <button 
+                type="button" 
+                onclick="switchMainImage('{{ 'forge-jaap-counter.jpg' | asset_url }}', this)" 
+                class="catalog-thumb-btn flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border border-[#2a2a2a] opacity-70 hover:opacity-100 bg-[#111] transition-all">
+                <img src="{{ 'forge-jaap-counter.jpg' | asset_url }}" alt="Devotional Studio View" class="w-full h-full object-cover">
+              </button>
+              <button 
+                type="button" 
+                onclick="switchMainImage('{{ 'jaap-action.jpg' | asset_url }}', this)" 
+                class="catalog-thumb-btn flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border border-[#2a2a2a] opacity-70 hover:opacity-100 bg-[#111] transition-all">
+                <img src="{{ 'jaap-action.jpg' | asset_url }}" alt="Jaap Action View" class="w-full h-full object-cover">
+              </button>
             {% endif %}
           </div>
         </div>

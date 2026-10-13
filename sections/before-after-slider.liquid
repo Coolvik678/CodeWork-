@@ -39,9 +39,15 @@
         aspect-ratio: 3/2;
         background: var(--color-card-background);
         user-select: none;
-        touch-action: pan-y pinch-zoom;
+        -webkit-user-select: none;
+        touch-action: pan-y;
         overflow: hidden;
+        cursor: col-resize;
         --aba-pos: 50%;
+      }
+
+      #shopify-section-before-after-slider_o0bzrq .aba-compare.is-dragging {
+        cursor: grabbing;
       }
   
       #shopify-section-before-after-slider_o0bzrq .aba-img,
@@ -50,46 +56,43 @@
         inset: 0;
         width: 100%;
         height: 100%;
+        pointer-events: none;
       }
   
       #shopify-section-before-after-slider_o0bzrq .aba-img img{
         object-fit: cover;
         display: block;
+        user-select: none;
+        -webkit-user-drag: none;
       }
   
-      #shopify-section-before-after-slider_o0bzrq .aba-img--after{ z-index: 1; }
+      #shopify-section-before-after-slider_o0bzrq .aba-img--after{
+        z-index: 1;
+      }
   
       #shopify-section-before-after-slider_o0bzrq .aba-img--before{
         z-index: 2;
-        inset: auto;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: var(--aba-pos, 50%);
-        height: 100%;
-        overflow: hidden;
-      }
-
-      #shopify-section-before-after-slider_o0bzrq .aba-img--before img{
-        inset: auto;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: var(--aba-img-width, 100%);
-        max-width: none;
+        clip-path: inset(0 calc(100% - var(--aba-pos, 50%)) 0 0);
+        -webkit-clip-path: inset(0 calc(100% - var(--aba-pos, 50%)) 0 0);
+        will-change: clip-path;
       }
   
       #shopify-section-before-after-slider_o0bzrq .aba-badge{
         position: absolute;
         top: 14px;
-        padding: 6px 10px;
-        border-radius: var(--style-border-radius-global);
-        font-size: 12px;
-        font-weight: 800;
-        letter-spacing: .02em;
+        padding: 6px 12px;
+        border-radius: 9999px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        text-transform: uppercase;
         background: var(--aba-badge-bg);
         color: var(--aba-badge-text);
         z-index: 5;
+        pointer-events: none;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       }
       #shopify-section-before-after-slider_o0bzrq .aba-badge--before{ left: 14px; }
       #shopify-section-before-after-slider_o0bzrq .aba-badge--after{ right: 14px; }
@@ -98,36 +101,44 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        left: 50%;
+        left: var(--aba-pos, 50%);
         width: 2px;
-        background: rgba(255,255,255,.75);
+        background: rgba(255,255,255,.9);
+        box-shadow: 0 0 10px rgba(0,0,0,.5);
         z-index: 6;
-        transform: translateX(-1px);
+        transform: translateX(-50%);
         pointer-events: none;
+        will-change: left;
       }
   
       #shopify-section-before-after-slider_o0bzrq .aba-handle{
         position: absolute;
         top: 50%;
-        left: 50%;
-        width: 44px;
-        height: 44px;
+        left: var(--aba-pos, 50%);
+        width: 48px;
+        height: 48px;
         border-radius: 999px;
-        background: rgba(255,255,255,.92);
-        border: 1px solid rgba(255,255,255,.55);
-        box-shadow: 0 10px 30px rgba(0,0,0,.18);
+        background: rgba(255,255,255,.96);
+        border: 2px solid rgba(255,255,255,.8);
+        box-shadow: 0 4px 20px rgba(0,0,0,.35), 0 0 0 3px rgba(0,0,0,.15);
         transform: translate(-50%, -50%);
         z-index: 7;
         display: grid;
         place-items: center;
         pointer-events: none;
+        will-change: left;
+        transition: transform .12s ease, box-shadow .12s ease;
+      }
+
+      #shopify-section-before-after-slider_o0bzrq .aba-compare.is-dragging .aba-handle {
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 6px 25px rgba(0,0,0,.5), 0 0 0 5px rgba(255,255,255,.3);
       }
   
       #shopify-section-before-after-slider_o0bzrq .aba-handle svg{
-        width: 22px;
-        height: 22px;
-        color: var(--aba-handle);
-        opacity: .95;
+        width: 20px;
+        height: 20px;
+        color: #111111;
       }
   
       #shopify-section-before-after-slider_o0bzrq .aba-range{
@@ -137,8 +148,8 @@
         height: 100%;
         margin: 0;
         opacity: 0;
-        z-index: 10;
-        cursor: ew-resize;
+        z-index: 0;
+        pointer-events: none;
       }
   
       #shopify-section-before-after-slider_o0bzrq .aba-text{
@@ -221,20 +232,20 @@
   
     <div class="aba-wrap" data-animate="fade-up">
       <div class="aba-card" data-aba="">
-        <div class="aba-compare" data-aba-compare="" style="--aba-pos: 50%; --aba-img-width: 940px;">
+        <div class="aba-compare" data-aba-compare="" style="--aba-pos: 50%;">
           <div class="aba-img aba-img--after">
-            <img src="{{ 'zenkart-slider-after.jpg' | asset_url }}" srcset="{{ 'zenkart-slider-after.jpg' | asset_url }}" sizes="(min-width: 980px) 980px, 100vw" alt="Zenkart Flow - Effortless Perfection" loading="eager" width="980" height="653">
+            <img src="{{ 'zenkart-slider-after.jpg' | asset_url }}" srcset="{{ 'zenkart-slider-after.jpg' | asset_url }}" sizes="(min-width: 980px) 980px, 100vw" alt="Zenkart Flow - Effortless Perfection" loading="eager" width="980" height="653" draggable="false">
           </div>
 
           <div class="aba-img aba-img--before" data-aba-before="">
-            <img src="{{ 'zenkart-slider-before.jpg' | asset_url }}" srcset="{{ 'zenkart-slider-before.jpg' | asset_url }}" sizes="(min-width: 980px) 980px, 100vw" alt="Manual Friction - Frantic Prep" loading="eager" width="980" height="653">
+            <img src="{{ 'zenkart-slider-before.jpg' | asset_url }}" srcset="{{ 'zenkart-slider-before.jpg' | asset_url }}" sizes="(min-width: 980px) 980px, 100vw" alt="Manual Friction - Frantic Prep" loading="eager" width="980" height="653" draggable="false">
           </div>
   
           <div class="aba-badge aba-badge--before">Manual Friction</div>
           <div class="aba-badge aba-badge--after">Zenkart Flow</div>
   
-          <div class="aba-divider" data-aba-divider="" style="left: 50%;"></div>
-          <div class="aba-handle" data-aba-handle="" aria-hidden="true" style="left: 50%;">
+          <div class="aba-divider" data-aba-divider=""></div>
+          <div class="aba-handle" data-aba-handle="" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M8 7L4 12L8 17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
               <path d="M16 7L20 12L16 17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -242,8 +253,6 @@
           </div>
   
           <input class="aba-range" type="range" min="0" max="100" value="50" aria-label="Before and after slider">
-          <div data-forge-slot-id="before" data-forge-slot-thumbnail="{{ 'zenkart-slider-before.jpg' | asset_url }}" style="position:absolute;left:0;top:0;width:50%;height:60px;z-index:20;pointer-events:none;"></div>
-          <div data-forge-slot-id="after" data-forge-slot-thumbnail="{{ 'zenkart-slider-after.jpg' | asset_url }}" style="position:absolute;right:0;top:0;width:50%;height:60px;z-index:20;pointer-events:none;"></div>
         </div>
   
         <div class="aba-text">
@@ -270,38 +279,70 @@
         const root = document.querySelector('#shopify-section-before-after-slider_o0bzrq [data-aba]');
         if(!root) return;
 
-        const range = root.querySelector('.aba-range');
         const compare = root.querySelector('[data-aba-compare]');
-        const beforeLayer = root.querySelector('[data-aba-before]');
-        const beforeImg = beforeLayer && beforeLayer.querySelector('img');
-        const divider = root.querySelector('[data-aba-divider]');
-        const handle = root.querySelector('[data-aba-handle]');
-        if(!range || !compare || !beforeLayer || !divider || !handle) return;
+        const range = root.querySelector('.aba-range');
+        if(!compare) return;
 
-        const syncBeforeImgWidth = () => {
-          if(!beforeImg) return;
-          const w = compare.getBoundingClientRect().width;
-          if(w > 0) compare.style.setProperty('--aba-img-width', `${w}px`);
-        };
+        let isDragging = false;
+        let activePointerId = null;
 
-        const setPos = (val) => {
-          const v = Math.max(0, Math.min(100, Number(val)));
-          compare.style.setProperty('--aba-pos', `${v}%`);
-          divider.style.left = `${v}%`;
-          handle.style.left = `${v}%`;
-          syncBeforeImgWidth();
-        };
-
-        setPos(range.value);
-        range.addEventListener('input', (e) => setPos(e.target.value));
-        range.addEventListener('change', (e) => setPos(e.target.value));
-
-        if(typeof ResizeObserver !== 'undefined'){
-          const ro = new ResizeObserver(syncBeforeImgWidth);
-          ro.observe(compare);
-        } else {
-          window.addEventListener('resize', syncBeforeImgWidth);
+        function updatePosition(clientX) {
+          const rect = compare.getBoundingClientRect();
+          if(!rect.width) return;
+          const offsetX = Math.max(0, Math.min(rect.width, clientX - rect.left));
+          const pct = Math.round((offsetX / rect.width) * 1000) / 10;
+          compare.style.setProperty('--aba-pos', pct + '%');
+          if(range) range.value = pct;
         }
+
+        compare.addEventListener('pointerdown', function(e) {
+          isDragging = true;
+          activePointerId = e.pointerId;
+          compare.classList.add('is-dragging');
+          if (compare.setPointerCapture) {
+            try { compare.setPointerCapture(e.pointerId); } catch(_) {}
+          }
+          updatePosition(e.clientX);
+          e.preventDefault();
+        }, { passive: false });
+
+        compare.addEventListener('pointermove', function(e) {
+          if (!isDragging) return;
+          updatePosition(e.clientX);
+        }, { passive: true });
+
+        function stopDrag(e) {
+          if (!isDragging) return;
+          isDragging = false;
+          compare.classList.remove('is-dragging');
+          if (compare.releasePointerCapture && activePointerId !== null) {
+            try { compare.releasePointerCapture(activePointerId); } catch(_) {}
+          }
+          activePointerId = null;
+        }
+
+        compare.addEventListener('pointerup', stopDrag, { passive: true });
+        compare.addEventListener('pointercancel', stopDrag, { passive: true });
+
+        // Keyboard arrow support
+        compare.setAttribute('tabindex', '0');
+        compare.addEventListener('keydown', function(e) {
+          let cur = parseFloat(compare.style.getPropertyValue('--aba-pos')) || 50;
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+            const next = Math.max(0, cur - (e.shiftKey ? 10 : 2));
+            compare.style.setProperty('--aba-pos', next + '%');
+            if(range) range.value = next;
+            e.preventDefault();
+          } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+            const next = Math.min(100, cur + (e.shiftKey ? 10 : 2));
+            compare.style.setProperty('--aba-pos', next + '%');
+            if(range) range.value = next;
+            e.preventDefault();
+          }
+        });
+
+        // Sync initial state
+        compare.style.setProperty('--aba-pos', '50%');
       })();
     </script>
   </section>

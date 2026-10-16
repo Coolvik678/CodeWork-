@@ -36,6 +36,47 @@
   endif
 -%}
 
+<style>
+  @keyframes diwaliPulse {
+    0%, 100% {
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.45), 0 0 25px rgba(217, 119, 6, 0.2), 0 4px 12px rgba(0, 0, 0, 0.7);
+      border-color: rgba(251, 191, 36, 0.6);
+    }
+    50% {
+      box-shadow: 0 0 28px rgba(245, 158, 11, 0.9), 0 0 50px rgba(251, 191, 36, 0.5), 0 6px 20px rgba(0, 0, 0, 0.9);
+      border-color: rgba(254, 243, 199, 1);
+    }
+  }
+
+  .btn-diwali-glow {
+    position: relative !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid rgba(251, 191, 36, 0.7) !important;
+    animation: diwaliPulse 1.8s ease-in-out infinite !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  }
+  .btn-diwali-glow:hover {
+    transform: scale(1.02) !important;
+  }
+
+  .bundle-tier-card {
+    cursor: pointer;
+    border: 1px solid #2a2a2a;
+    background: #141414;
+    transition: all 0.2s ease;
+  }
+  .bundle-tier-card:hover {
+    border-color: #444;
+    background: #191919;
+  }
+  .bundle-tier-card.is-selected {
+    border-color: #f59e0b !important;
+    background: rgba(245, 158, 11, 0.08) !important;
+    box-shadow: 0 0 18px rgba(245, 158, 11, 0.25) !important;
+  }
+</style>
+
 <div class="bg-black text-[#f5f5f5] min-h-screen py-10 px-4 sm:px-8 lg:px-12 border-b border-[#222222]">
   <div class="max-w-[1400px] mx-auto">
     
@@ -211,35 +252,140 @@
           <div id="pincode-catalog-res" class="mt-2.5 text-xs hidden"></div>
         </div>
 
-        <!-- Quantity & Purchasing CTAs -->
-        <div class="space-y-4 pt-2">
+        <!-- Quantity & Special Bundle Offers -->
+        <div class="space-y-3.5 pt-2">
           
-          <!-- Quantity -->
           <div class="flex items-center justify-between text-xs">
-            <span class="text-white/60 font-medium">Quantity:</span>
-            <div class="inline-flex items-center bg-[#141414] border border-[#2a2a2a] rounded-lg">
-              <button 
-                type="button" 
-                onclick="changeQuantity(-1)" 
-                class="px-3.5 py-1.5 text-white/60 hover:text-white font-bold text-sm transition">
-                −
-              </button>
-              <span id="catalog-qty-val" class="px-4 py-1.5 font-bold text-white text-xs">1</span>
-              <button 
-                type="button" 
-                onclick="changeQuantity(1)" 
-                class="px-3.5 py-1.5 text-white/60 hover:text-white font-bold text-sm transition">
-                +
-              </button>
-            </div>
+            <span class="text-white/80 font-bold uppercase tracking-wider text-[11px]">Choose Your Value Bundle:</span>
+            <span class="text-emerald-400 font-semibold text-[11px]">Free Air Delivery</span>
           </div>
 
-          <!-- PRIMARY ACTION 1: Buy Now Cash on Delivery (Clean White CTA) -->
+          <!-- 3-Tier Multi-Pack Selection Cards -->
+          <div class="space-y-2.5">
+            {% if product.handle contains 'puri' %}
+              <!-- Puri Maker: Tier 1 (1 pc @ ₹599) -->
+              <div id="detail-tier-1" onclick="selectDetailTier(1, 599)" class="bundle-tier-card p-3 rounded-xl flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="detail-bundle-tier" id="detail-radio-1" class="accent-amber w-4 h-4">
+                  <div>
+                    <div class="font-bold text-white text-xs">Buy 1 Piece (Standard)</div>
+                    <div class="text-[10px] text-white/50">Personal kitchen use</div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-white text-sm">₹599</div>
+                  <div class="text-[10px] text-white/40">Free Express Delivery</div>
+                </div>
+              </div>
+
+              <!-- Puri Maker: Tier 2 (2 pcs @ ₹999) - PRESELECTED & HIGHLIGHTED -->
+              <div id="detail-tier-2" onclick="selectDetailTier(2, 999)" class="bundle-tier-card is-selected p-3 rounded-xl flex items-center justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-gradient-to-r from-amber to-amber-lit text-black font-extrabold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-bl-lg shadow">
+                  🔥 Most Bought • Best Value
+                </div>
+                <div class="flex items-center gap-3 mt-1">
+                  <input type="radio" name="detail-bundle-tier" id="detail-radio-2" checked class="accent-amber w-4 h-4">
+                  <div>
+                    <div class="font-bold text-white text-xs flex items-center gap-1.5">
+                      <span>Buy 2 Pieces</span>
+                      <span class="text-[10px] text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/60 px-1.5 py-0.2 rounded">Save Extra ₹199</span>
+                    </div>
+                    <div class="text-[10px] text-amber mt-0.5 font-medium">Recommended for Home &amp; Gifting</div>
+                  </div>
+                </div>
+                <div class="text-right mt-1">
+                  <div class="font-bold text-amber text-base">₹999</div>
+                  <div class="text-[10px] text-white/40 line-through">₹1,198</div>
+                </div>
+              </div>
+
+              <!-- Puri Maker: Tier 3 (3 pcs @ ₹1,399) -->
+              <div id="detail-tier-3" onclick="selectDetailTier(3, 1399)" class="bundle-tier-card p-3 rounded-xl flex items-center justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-[#252525] border-b border-l border-[#3a3a3a] text-emerald-400 font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-bl-lg">
+                  Max Savings
+                </div>
+                <div class="flex items-center gap-3 mt-1">
+                  <input type="radio" name="detail-bundle-tier" id="detail-radio-3" class="accent-amber w-4 h-4">
+                  <div>
+                    <div class="font-bold text-white text-xs flex items-center gap-1.5">
+                      <span>Buy 3 Pieces</span>
+                      <span class="text-[10px] text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/60 px-1.5 py-0.2 rounded">Save Extra ₹398</span>
+                    </div>
+                    <div class="text-[10px] text-white/50 mt-0.5">Joint Family &amp; Festival Prep</div>
+                  </div>
+                </div>
+                <div class="text-right mt-1">
+                  <div class="font-bold text-white text-sm">₹1,399</div>
+                  <div class="text-[10px] text-white/40 line-through">₹1,797</div>
+                </div>
+              </div>
+
+            {% else %}
+              <!-- Jaap Counter: Tier 1 (1 pc @ ₹499) -->
+              <div id="detail-tier-1" onclick="selectDetailTier(1, 499)" class="bundle-tier-card p-3 rounded-xl flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="detail-bundle-tier" id="detail-radio-1" class="accent-amber w-4 h-4">
+                  <div>
+                    <div class="font-bold text-white text-xs">Buy 1 Piece (Standard)</div>
+                    <div class="text-[10px] text-white/50">Personal mantra jaap practice</div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-white text-sm">₹499</div>
+                  <div class="text-[10px] text-white/40">Free Express Delivery</div>
+                </div>
+              </div>
+
+              <!-- Jaap Counter: Tier 2 (2 pcs @ ₹899) - PRESELECTED & HIGHLIGHTED -->
+              <div id="detail-tier-2" onclick="selectDetailTier(2, 899)" class="bundle-tier-card is-selected p-3 rounded-xl flex items-center justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-gradient-to-r from-amber to-amber-lit text-black font-extrabold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-bl-lg shadow">
+                  🔥 Most Bought • Best Value
+                </div>
+                <div class="flex items-center gap-3 mt-1">
+                  <input type="radio" name="detail-bundle-tier" id="detail-radio-2" checked class="accent-amber w-4 h-4">
+                  <div>
+                    <div class="font-bold text-white text-xs flex items-center gap-1.5">
+                      <span>Buy 2 Pieces</span>
+                      <span class="text-[10px] text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/60 px-1.5 py-0.2 rounded">Save Extra ₹99</span>
+                    </div>
+                    <div class="text-[10px] text-amber mt-0.5 font-medium">For You &amp; Devotional Gifting</div>
+                  </div>
+                </div>
+                <div class="text-right mt-1">
+                  <div class="font-bold text-amber text-base">₹899</div>
+                  <div class="text-[10px] text-white/40 line-through">₹998</div>
+                </div>
+              </div>
+
+              <!-- Jaap Counter: Tier 3 (3 pcs @ ₹1,199) -->
+              <div id="detail-tier-3" onclick="selectDetailTier(3, 1199)" class="bundle-tier-card p-3 rounded-xl flex items-center justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-[#252525] border-b border-l border-[#3a3a3a] text-emerald-400 font-bold text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-bl-lg">
+                  Max Savings
+                </div>
+                <div class="flex items-center gap-3 mt-1">
+                  <input type="radio" name="detail-bundle-tier" id="detail-radio-3" class="accent-amber w-4 h-4">
+                  <div>
+                    <div class="font-bold text-white text-xs flex items-center gap-1.5">
+                      <span>Buy 3 Pieces</span>
+                      <span class="text-[10px] text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/60 px-1.5 py-0.2 rounded">Save Extra ₹298</span>
+                    </div>
+                    <div class="text-[10px] text-white/50 mt-0.5">Family &amp; Temple Sacred Set</div>
+                  </div>
+                </div>
+                <div class="text-right mt-1">
+                  <div class="font-bold text-white text-sm">₹1,199</div>
+                  <div class="text-[10px] text-white/40 line-through">₹1,497</div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- PRIMARY ACTION 1: Buy Now Cash on Delivery (Flashing Diwali Glow CTA) -->
           <button 
             type="button" 
-            onclick="triggerCatalogBuyNow('{{ current_title }}', {{ current_price_num }}, '{{ main_img }}', '{{ product.handle }}')"
-            class="w-full bg-white hover:bg-neutral-200 text-black font-bold text-sm py-4 px-6 rounded-xl transition duration-200 shadow-xl flex items-center justify-center gap-2">
-            <span>⚡ BUY NOW — CASH ON DELIVERY (₹<span id="buy-now-price-display">{{ current_price_num }}</span>)</span>
+            onclick="triggerCatalogBuyNow('{{ current_title }}', activeDetailPrice, '{{ main_img }}', '{{ product.handle }}')"
+            class="w-full btn-diwali-glow font-bold text-sm py-4 px-6 rounded-xl transition duration-200 shadow-2xl flex items-center justify-center gap-2 cursor-pointer">
+            <span>⚡ BUY NOW — CASH ON DELIVERY (₹<span id="buy-now-price-display">{% if product.handle contains 'puri' %}999{% else %}899{% endif %}</span>)</span>
           </button>
 
           <!-- SECONDARY ACTION 2: Add to Basket -->
@@ -602,31 +748,29 @@
 
 <!-- Client Runtime Scripts for Catalog Page -->
 <script>
-  let catalogQuantity = 1;
+  let catalogQuantity = 2; // Default to Most Bought (2 Pcs)
+  let activeDetailPrice = {% if product.handle contains 'puri' %}999{% else %}899{% endif %};
 
-  function switchMainImage(src, btn) {
-    const mainImg = document.getElementById('main-catalog-image');
-    if (mainImg) mainImg.src = src;
+  function selectDetailTier(qty, price) {
+    catalogQuantity = qty;
+    activeDetailPrice = price;
 
-    document.querySelectorAll('.catalog-thumb-btn').forEach(b => {
-      b.classList.remove('border-white', 'opacity-100');
-      b.classList.add('border-[#2a2a2a]', 'opacity-70');
-    });
-
-    if (btn) {
-      btn.classList.add('border-white', 'opacity-100');
-      btn.classList.remove('border-[#2a2a2a]', 'opacity-70');
+    for (let i = 1; i <= 3; i++) {
+      const card = document.getElementById('detail-tier-' + i);
+      const radio = document.getElementById('detail-radio-' + i);
+      if (card && radio) {
+        if (i === qty) {
+          card.classList.add('is-selected');
+          radio.checked = true;
+        } else {
+          card.classList.remove('is-selected');
+          radio.checked = false;
+        }
+      }
     }
-  }
 
-  function changeQuantity(delta) {
-    catalogQuantity = Math.max(1, catalogQuantity + delta);
-    const qtyEl = document.getElementById('catalog-qty-val');
     const priceDisplay = document.getElementById('buy-now-price-display');
-    const basePrice = {{ current_price_num }};
-
-    if (qtyEl) qtyEl.textContent = catalogQuantity;
-    if (priceDisplay) priceDisplay.textContent = (basePrice * catalogQuantity);
+    if (priceDisplay) priceDisplay.textContent = price;
   }
 
   function switchCatalogTab(tabId, btn) {

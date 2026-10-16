@@ -6,7 +6,7 @@
     right: 24px !important;
     z-index: 999999 !important;
     display: block !important;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
   }
 
   #zenkart-ai-launcher {
@@ -15,19 +15,19 @@
     gap: 10px !important;
     background: #0e0e0e !important;
     color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
     padding: 12px 20px !important;
     border-radius: 9999px !important;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85), 0 0 20px rgba(255, 255, 255, 0.08) !important;
     cursor: pointer !important;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease !important;
     user-select: none !important;
   }
 
   #zenkart-ai-launcher:hover {
     transform: translateY(-2px) scale(1.02) !important;
-    border-color: rgba(255, 255, 255, 0.7) !important;
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.95), 0 0 25px rgba(255, 255, 255, 0.18) !important;
   }
 
   .zenkart-ai-pulse-dot {
@@ -56,19 +56,19 @@
     position: fixed !important;
     bottom: 84px !important;
     right: 24px !important;
-    width: 380px !important;
+    width: 390px !important;
     max-width: calc(100vw - 32px) !important;
-    height: 560px !important;
+    height: 590px !important;
     max-height: calc(100vh - 110px) !important;
     background: #0c0c0c !important;
     border: 1px solid #282828 !important;
-    border-radius: 20px !important;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.95), 0 0 30px rgba(0,0,0,0.8) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 25px 65px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 0, 0, 0.8) !important;
     z-index: 999999 !important;
     display: flex !important;
     flex-direction: column !important;
     overflow: hidden !important;
-    transition: opacity 0.25s ease, transform 0.25s ease !important;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
   #zenkart-ai-window.is-closed {
@@ -90,6 +90,52 @@
     background: #262626;
     border-radius: 4px;
   }
+
+  /* Typing animation dots */
+  .zenkart-typing-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #888;
+    margin: 0 2px;
+    animation: zenkartTyping 1.4s infinite ease-in-out both;
+  }
+  .zenkart-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+  .zenkart-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+  @keyframes zenkartTyping {
+    0%, 80%, 100% { transform: scale(0.4); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; background: #fff; }
+  }
+
+  .zenkart-chip-btn {
+    background: #181818;
+    border: 1px solid #2a2a2a;
+    color: #ccc;
+    padding: 5px 11px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .zenkart-chip-btn:hover {
+    background: #252525;
+    color: #fff;
+    border-color: #555;
+    transform: translateY(-1px);
+  }
+
+  .zenkart-msg-bubble {
+    animation: zenkartFadeIn 0.25s ease-out forwards;
+  }
+  @keyframes zenkartFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 </style>
 
 <div id="zenkart-ai-wrapper">
@@ -98,7 +144,7 @@
     id="zenkart-ai-launcher" 
     type="button" 
     onclick="toggleZenkartAiChat()" 
-    aria-label="Open AI Concierge">
+    aria-label="Open Zen-AI Assistant">
     <span class="zenkart-ai-pulse-dot">
       <span class="zenkart-ai-pulse-ring"></span>
     </span>
@@ -111,54 +157,61 @@
   <!-- Chat Window -->
   <div id="zenkart-ai-window" class="is-closed">
     <!-- Header -->
-    <div style="padding: 16px 20px; border-bottom: 1px solid #222; background: #000; display: flex; align-items: center; justify-content: space-between;">
+    <div style="padding: 14px 18px; border-bottom: 1px solid #222; background: #000; display: flex; align-items: center; justify-content: space-between;">
       <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="width: 32px; height: 32px; border-radius: 50%; background: #1a1a1a; border: 1px solid #333; display: grid; place-items: center; font-size: 15px;">
+        <div style="width: 34px; height: 34px; border-radius: 50%; background: #181818; border: 1px solid #333; display: grid; place-items: center; font-size: 16px;">
           ✨
         </div>
         <div>
           <div style="font-weight: 700; color: #fff; font-size: 14px; display: flex; align-items: center; gap: 8px;">
             <span>Zen-AI</span>
-            <span style="font-size: 9px; font-weight: 800; background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); padding: 2px 6px; border-radius: 999px;">ONLINE</span>
+            <span style="font-size: 9px; font-weight: 800; background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); padding: 2px 6px; border-radius: 999px;">ACTIVE</span>
           </div>
-          <div style="font-size: 11px; color: #888; margin-top: 1px;">Instant Answers &amp; Order Support</div>
+          <div style="font-size: 11px; color: #888; margin-top: 1px;">Smart Assistant • Zenkart Store</div>
         </div>
       </div>
-      <button 
-        type="button" 
-        onclick="toggleZenkartAiChat()" 
-        style="background: transparent; border: none; color: #888; font-size: 18px; cursor: pointer; padding: 4px 8px; line-height: 1;">
-        ✕
-      </button>
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <button 
+          type="button" 
+          onclick="clearZenkartAiChat()" 
+          title="Restart Chat"
+          style="background: transparent; border: 1px solid #282828; color: #777; font-size: 11px; border-radius: 6px; padding: 3px 8px; cursor: pointer; transition: all 0.15s;">
+          ↺ Clear
+        </button>
+        <button 
+          type="button" 
+          onclick="toggleZenkartAiChat()" 
+          aria-label="Close Chat"
+          style="background: transparent; border: none; color: #888; font-size: 18px; cursor: pointer; padding: 4px 6px; line-height: 1;">
+          ✕
+        </button>
+      </div>
     </div>
 
     <!-- Messages Container -->
-    <div id="zenkart-ai-messages" class="zenkart-scrollbar" style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; font-size: 12px; line-height: 1.55;">
-      <div style="display: flex; align-items: flex-start; gap: 10px;">
-        <div style="width: 24px; height: 24px; border-radius: 50%; background: #222; display: grid; place-items: center; font-size: 11px; flex-shrink: 0; margin-top: 2px;">✨</div>
+    <div id="zenkart-ai-messages" class="zenkart-scrollbar" style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; font-size: 12.5px; line-height: 1.55;">
+      
+      <!-- Welcome Message -->
+      <div class="zenkart-msg-bubble" style="display: flex; align-items: flex-start; gap: 10px;">
+        <div style="width: 26px; height: 26px; border-radius: 50%; background: #222; display: grid; place-items: center; font-size: 12px; flex-shrink: 0; margin-top: 2px;">✨</div>
         <div style="background: #151515; border: 1px solid #282828; padding: 12px 14px; border-radius: 14px; border-top-left-radius: 2px; max-width: 86%; color: #e5e5e5;">
-          <p style="margin: 0 0 8px;">Namaste! I am <strong>Zen-AI</strong>, your mindful shopping and kitchen ritual assistant. How can I assist you today?</p>
-          <div style="font-size: 10px; color: #888; border-top: 1px solid #252525; padding-top: 6px;">
-            Ask about our Jaap counter, Puri press, Cash on Delivery (COD), or tracking.
+          <p style="margin: 0 0 8px; font-weight: 500;">Namaste! I am <strong>Zen-AI</strong>, your intelligent assistant at Zenkart.</p>
+          <p style="margin: 0 0 10px; color: #aaa; font-size: 11.5px;">I'm here to answer product questions, share kitchen pro-tips, explain our exclusive <strong>Buy 2 &amp; Buy 3 combo savings</strong>, or confirm Cash on Delivery to your PIN code.</p>
+          <div style="font-size: 10.5px; color: #777; border-top: 1px solid #242424; padding-top: 6px;">
+            💡 Tap any topic below or type anything naturally:
           </div>
         </div>
       </div>
+
     </div>
 
-    <!-- Quick Prompt Pills -->
-    <div style="padding: 8px 12px; border-top: 1px solid #202020; background: #080808; display: flex; gap: 6px; overflow-x: auto; white-space: nowrap; font-size: 11px;">
-      <button onclick="sendQuickPrompt('How does the Jaap counter work?')" style="background: #181818; border: 1px solid #2a2a2a; color: #bbb; padding: 4px 10px; border-radius: 999px; cursor: pointer; flex-shrink: 0;">
-        📿 Jaap Counter
-      </button>
-      <button onclick="sendQuickPrompt('Tell me about the Puri Press')" style="background: #181818; border: 1px solid #2a2a2a; color: #bbb; padding: 4px 10px; border-radius: 999px; cursor: pointer; flex-shrink: 0;">
-        🥟 Puri Press
-      </button>
-      <button onclick="sendQuickPrompt('What are your COD and shipping terms?')" style="background: #181818; border: 1px solid #2a2a2a; color: #bbb; padding: 4px 10px; border-radius: 999px; cursor: pointer; flex-shrink: 0;">
-        🚚 Free COD Delivery
-      </button>
-      <button onclick="sendQuickPrompt('What is the replacement policy?')" style="background: #181818; border: 1px solid #2a2a2a; color: #bbb; padding: 4px 10px; border-radius: 999px; cursor: pointer; flex-shrink: 0;">
-        🔄 7-Day Guarantee
-      </button>
+    <!-- Live Contextual Quick Chips -->
+    <div id="zenkart-chips-container" style="padding: 8px 12px; border-top: 1px solid #1c1c1c; background: #080808; display: flex; gap: 6px; overflow-x: auto; white-space: nowrap;">
+      <button class="zenkart-chip-btn" onclick="sendQuickPrompt('Tell me about the Jaap Counter')">📿 Jaap Counter</button>
+      <button class="zenkart-chip-btn" onclick="sendQuickPrompt('How does the Puri Press work?')">🥟 Puri Press</button>
+      <button class="zenkart-chip-btn" onclick="sendQuickPrompt('What are the best bundle discounts?')">🎁 Combo Deals</button>
+      <button class="zenkart-chip-btn" onclick="sendQuickPrompt('Is Cash on Delivery available?')">🚚 Free COD</button>
+      <button class="zenkart-chip-btn" onclick="sendQuickPrompt('What is the replacement guarantee?')">🛡️ 7-Day Guarantee</button>
     </div>
 
     <!-- Chat Input Form -->
@@ -167,11 +220,15 @@
         id="zenkart-ai-input" 
         type="text" 
         autocomplete="off" 
-        placeholder="Type a question (e.g. Is COD available?)..." 
-        style="flex: 1; background: #141414; border: 1px solid #2a2a2a; border-radius: 10px; padding: 10px 14px; font-size: 12px; color: #fff; outline: none;">
+        placeholder="Ask me anything (e.g. 'Can it make rotis?' or 'Best offer')..." 
+        style="flex: 1; background: #141414; border: 1px solid #2a2a2a; border-radius: 12px; padding: 11px 14px; font-size: 12.5px; color: #fff; outline: none; transition: border-color 0.2s;"
+        onfocus="this.style.borderColor='#555'"
+        onblur="this.style.borderColor='#2a2a2a'">
       <button 
         type="submit" 
-        style="background: #fff; color: #000; font-weight: 700; border: none; border-radius: 10px; padding: 10px 14px; font-size: 13px; cursor: pointer;">
+        style="background: #ffffff; color: #000000; font-weight: 700; border: none; border-radius: 12px; padding: 11px 16px; font-size: 13px; cursor: pointer; transition: transform 0.15s ease;"
+        onmousedown="this.style.transform='scale(0.95)'"
+        onmouseup="this.style.transform='scale(1)'">
         ➔
       </button>
     </form>
@@ -180,58 +237,343 @@
 
 <script>
   (function(){
-    const KNOWLEDGE_BASE = [
-      {
-        keywords: ['tasbih', 'jaap', 'counter', 'mantra', 'bead', 'zikr', 'compass', 'tassel', 'finger', 'scroll', 'wood'],
-        reply: "The <strong>Wooden Digital Jaap Counter</strong> (₹499) features an LCD screen supporting 0 to 99,999 chants, a silent tactile roller wheel, a 360° prayer alignment compass, and a sacred red ceremonial silk tassel. Pre-installed long-life button battery included.",
-        productCard: {
-          title: "Wooden Digital Jaap Counter",
-          price: "₹499",
-          handle: "wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc"
-        }
-      },
-      {
-        keywords: ['puri', 'press', 'roti', 'chapati', 'khakhra', 'papad', 'steel', 'machine', 'kitchen', 'rolling'],
-        reply: "The <strong>Stainless Steel Puri & Khakhra Press Maker</strong> (₹599) is crafted from heavy-gauge food-grade SUS-304 stainless steel with a 6.5-inch mirror-polished plate, silicone non-slip rubber base, and ergonomic leverage handle. Cuts preparation from 25 minutes to under 5 minutes.",
-        productCard: {
-          title: "Stainless Steel Puri & Khakhra Press",
-          price: "₹599",
-          handle: "7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium"
-        }
-      },
-      {
-        keywords: ['bundle', 'both', 'deal', 'combo', 'ritual'],
-        reply: "You can order the complete <strong>Zenkart Ritual Bundle</strong> (Both the Digital Jaap Counter + Stainless Steel Puri Press) with combined free priority air shipping for ₹1,098.",
-        action: 'bundle'
-      },
-      {
-        keywords: ['cod', 'cash', 'delivery', 'pay', 'doorstep'],
-        reply: "Yes! <strong>100% Cash on Delivery (COD)</strong> is available across all Indian PIN codes. You pay ₹0 advance right now and hand cash to the courier boy only when the physical box arrives."
-      },
-      {
-        keywords: ['shipping', 'delivery', 'charge', 'cost', 'fee', 'free', 'time', 'days', 'track', 'courier'],
-        reply: "All Zenkart orders enjoy <strong>100% Free Express Shipping</strong> pan-India with zero threshold. Orders are dispatched from our central hub within 24–48 hours via BlueDart, Delhivery, or Xpressbees with live SMS tracking (3–5 business days delivery)."
-      },
-      {
-        keywords: ['return', 'refund', 'replace', 'broken', 'damage', 'guarantee', 'warranty'],
-        reply: "Every purchase includes a <strong>7-Day Hassle-Free Replacement Guarantee</strong>. If your item arrives damaged or defective in transit, simply share a quick WhatsApp photo and we dispatch an immediate brand-new replacement."
-      }
-    ];
+    // Context memory for ongoing conversation
+    const CONTEXT = {
+      lastTopic: null, // 'jaap', 'puri', 'bundle', 'cod', 'shipping', 'guarantee'
+      turnCount: 0
+    };
 
+    // Product specifications catalog
+    const PRODUCTS = {
+      jaap: {
+        title: "Wooden Digital Jaap Counter",
+        handle: "wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc",
+        priceSingle: "₹499",
+        bundle2: "₹899",
+        bundle3: "₹1,199",
+        badge: "Spiritual Best Seller • 184 Verified Reviews (4.9★)"
+      },
+      puri: {
+        title: "Stainless Steel Puri & Khakhra Press",
+        handle: "7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium",
+        priceSingle: "₹599",
+        bundle2: "₹999",
+        bundle3: "₹1,399",
+        badge: "Kitchen Favorite • 241 Verified Reviews (4.8★)"
+      }
+    };
+
+    // Conversation intents & smart NLP parser
+    function generateSmartResponse(rawQuery) {
+      const q = rawQuery.toLowerCase().trim();
+      const tokens = q.replace(/[^\w\s]/g, ' ').split(/\s+/).filter(Boolean);
+
+      function hasAny(...words) {
+        return words.some(w => q.includes(w));
+      }
+      function hasAll(...words) {
+        return words.every(w => q.includes(w));
+      }
+
+      // 1. GREETINGS & PLEASANTRIES (Fixes the "hello gives prompted message" issue!)
+      if (hasAny('hello', 'hi', 'hey', 'namaste', 'pranam', 'pranaam', 'good morning', 'good afternoon', 'good evening', 'yo', 'wassup', 'hola', 'kem cho', 'salaam', 'ram ram', 'radhe radhe', 'hare krishna')) {
+        const hour = new Date().getHours();
+        const timeGreeting = hour < 12 ? "Good morning" : (hour < 17 ? "Good afternoon" : "Good evening");
+        
+        const greetings = [
+          `Namaste & ${timeGreeting}! 🙏 Wonderful to have you at Zenkart. How can I help you today? Looking for our <strong>Wooden Jaap Counter</strong>, our <strong>Stainless Steel Puri Press</strong>, or our exclusive combo bundle deals?`,
+          `Hello! Welcome to Zenkart. ✨ I'm Zen-AI. Whether you're curious about daily meditation rituals, quick kitchen tools, or want to check Cash on Delivery to your PIN code, I'm here to help. What's on your mind?`,
+          `Hey there! Hope you're having a blessed day. 🌸 How may I assist your shopping today? Feel free to ask about product specs, customer reviews, or our Buy 2/Buy 3 special offers!`
+        ];
+        
+        return {
+          text: greetings[Math.floor(Math.random() * greetings.length)],
+          chips: ['📿 Jaap Counter Specs', '🥟 Puri Press Details', '🎁 View Best Offers', '🚚 COD & Shipping']
+        };
+      }
+
+      // 2. ASSISTANT IDENTITY / CAPABILITIES
+      if (hasAny('who are you', 'what are you', 'your name', 'are you ai', 'are you a bot', 'are you human', 'what can you do', 'what do you do', 'help me')) {
+        return {
+          text: "I am <strong>Zen-AI</strong>, an intelligent assistant built specifically for Zenkart shoppers! 🤖✨<br><br>Here is what I can do for you:<br>• <strong>Product Guidance:</strong> Explain dimensions, materials, and usage tips for our Jaap Counter and Puri Press.<br>• <strong>Smart Pricing &amp; Bundles:</strong> Show you how to save up to ₹398 with our Buy 2 &amp; Buy 3 combos.<br>• <strong>COD &amp; Pin Code Check:</strong> Confirm zero-advance Cash on Delivery terms.<br>• <strong>Chef &amp; Ritual Pro-Tips:</strong> Provide tips on non-stick puri pressing and silent meditation chanting.<br><br>What would you like to explore first?",
+          chips: ['🥟 How to use Puri Press', '📿 Jaap Counter battery', '🎁 Combo savings', '💬 WhatsApp Support']
+        };
+      }
+
+      // 3. SMALL TALK / MOOD
+      if (hasAny('how are you', 'how r u', 'how do you do', 'how is it going', 'whats up', 'what\'s up', 'sup')) {
+        return {
+          text: "I'm doing fantastic, thank you for asking! 😊 Fully ready to assist your spiritual and kitchen needs. Are you looking to pick up a single item or take advantage of our multi-item combo discounts today?",
+          chips: ['🎁 Show Combo Deals', '📿 Jaap Counter ₹499', '🥟 Puri Press ₹599']
+        };
+      }
+
+      // 4. GRATITUDE / POSITIVE FEEDBACK
+      if (hasAny('thank', 'thanks', 'thx', 'dhanyawad', 'shukriya', 'great', 'awesome', 'nice', 'perfect', 'super', 'mast', 'cool', 'good job')) {
+        return {
+          text: "You're very welcome! Glad I could help. 🙏 Is there anything else you'd like to check—such as our 7-day replacement guarantee or delivery timelines?",
+          chips: ['🚚 Delivery time', '🛡️ Replacement guarantee', '🎁 View Best Offers']
+        };
+      }
+
+      // 5. FAREWELL
+      if (hasAny('bye', 'goodbye', 'see you', 'cya', 'tata', 'good night', 'gn')) {
+        return {
+          text: "Goodbye! Wishing you a peaceful, joyful, and prosperous day ahead. Whenever you need assistance with Zenkart orders, I'll be right here. Take care! 🙏✨",
+          chips: ['✨ Reopen Chat', '🎁 View Combos']
+        };
+      }
+
+      // 6. BUNDLE / OFFERS / DISCOUNTS / COMBO / PRICING TIERS
+      if (hasAny('bundle', 'combo', 'offer', 'offers', 'deal', 'deals', 'discount', 'discounts', 'coupon', 'promo', 'code', 'buy 2', 'buy 3', 'saving', 'savings', 'best offer', 'best deal', 'cheap')) {
+        CONTEXT.lastTopic = 'bundle';
+        return {
+          text: `🎉 <strong>Exclusive Zenkart Value Bundles:</strong><br><br>
+          <strong>🕉️ Wooden Digital Jaap Counter:</strong><br>
+          • Buy 1: ₹499<br>
+          • Buy 2: <strong>₹899</strong> (🔥 <em>Most Bought &amp; Best Option — Save ₹99</em>)<br>
+          • Buy 3: <strong>₹1,199</strong> (<em>Max Savings — Save ₹298</em>)<br><br>
+          <strong>🥟 Stainless Steel Puri Press:</strong><br>
+          • Buy 1: ₹599<br>
+          • Buy 2: <strong>₹999</strong> (🔥 <em>Most Bought &amp; Best Option — Save ₹199</em>)<br>
+          • Buy 3: <strong>₹1,399</strong> (<em>Max Savings — Save ₹398</em>)<br><br>
+          <strong>✨ Ritual Duo (1 Jaap Counter + 1 Puri Press):</strong> ₹1,098<br><br>
+          <em>All bundles include 100% Free Express Shipping and Cash on Delivery!</em>`,
+          action: 'open_bundle_modal',
+          chips: ['🎁 Open Bundle Selector Modal', '🕉️ Jaap Counter 2 for ₹899', '🥟 Puri Press 2 for ₹999']
+        };
+      }
+
+      // 7. SPECIFIC PURI MAKER QUESTIONS
+      if (hasAny('puri', 'poori', 'chapati', 'roti', 'khakhra', 'papad', 'paratha', 'press', 'maker', 'dough', 'belan', 'rolling')) {
+        CONTEXT.lastTopic = 'puri';
+
+        // Check if asking about sticking or how to use
+        if (hasAny('stick', 'sticking', 'how to use', 'use', 'technique', 'tips', 'oil', 'paper', 'plastic')) {
+          return {
+            text: `👨‍🍳 <strong>Chef Pro-Tip for 100% Non-Stick, Round Puris:</strong><br><br>
+            1. <strong>Light Grease:</strong> Dab just 1 tiny drop of cooking oil onto both steel plates (or place a small sheet of plastic wrap / butter paper).<br>
+            2. <strong>Placement:</strong> Roll a small dough ball and place it slightly off-centre toward the handle hinge.<br>
+            3. <strong>Press:</strong> Bring down the top plate and press the handle down firmly for 2 seconds.<br>
+            4. <strong>Result:</strong> Perfectly circular, uniform thickness puri that peels off effortlessly and puffs like a balloon in hot oil!`,
+            productCard: PRODUCTS.puri,
+            chips: ['🥟 Buy 2 for ₹999', '🚚 Free COD Delivery', '🛡️ 7-Day Guarantee']
+          };
+        }
+
+        // Check if asking about making rotis/chapatis
+        if (hasAny('roti', 'chapati', 'phulka', 'fulka', 'paratha')) {
+          return {
+            text: `Yes! You can definitely press raw dough for <strong>Rotis, Chapatis, Puris, and Khakhras</strong> with this SUS-304 Stainless Steel Press. 👍<br><br>
+            <em>Please note:</em> This is a heavy-duty mechanical cold press to shape dough quickly in seconds without a rolling pin (belan). After pressing the thin round shape, you cook/puff it on your standard kitchen tawa or frying pan!`,
+            productCard: PRODUCTS.puri,
+            chips: ['🥟 Order Puri Press (₹599)', '🎁 Buy 2 at ₹999 Deal', '🚚 Check COD']
+          };
+        }
+
+        // Check if asking about material/rust/cleaning
+        if (hasAny('rust', 'clean', 'wash', 'steel', 'material', 'grade', 'weight', 'size', 'diameter', 'inch')) {
+          return {
+            text: `The <strong>Zenkart Puri &amp; Khakhra Press</strong> is engineered with:<br>
+            • <strong>Food-Grade SUS-304 Stainless Steel:</strong> 100% rust-proof, non-toxic, and hygienic.<br>
+            • <strong>6.5-Inch Mirror Plates:</strong> Ideal diameter for standard Indian puris, tacos, and papads.<br>
+            • <strong>Silicone Anti-Slip Base:</strong> Sturdy grip that stays planted on marble and granite kitchen countertops.<br>
+            • <strong>Maintenance:</strong> Simple rinse with warm soapy water and wipe dry with a soft cloth.`,
+            productCard: PRODUCTS.puri,
+            chips: ['🥟 Buy 2 for ₹999', '🎁 View Combos', '🚚 Delivery Details']
+          };
+        }
+
+        // General puri overview
+        return {
+          text: `The <strong>Stainless Steel Puri &amp; Khakhra Press Maker</strong> (₹599) cuts preparation time from 30 minutes down to under 5 minutes! Crafted from mirror-polished heavy SUS-304 stainless steel with an ergonomic leverage handle and anti-slip silicone rubber base.<br><br>
+          🔥 <strong>Best Offer:</strong> Buy 2 for only <strong>₹999</strong> (Save ₹199) with Free Cash on Delivery!`,
+          productCard: PRODUCTS.puri,
+          chips: ['🥟 Buy 2 for ₹999 (Most Popular)', '🥟 Buy 1 for ₹599', '👨‍🍳 Non-stick tips']
+        };
+      }
+
+      // 8. SPECIFIC JAAP COUNTER QUESTIONS
+      if (hasAny('jaap', 'jap', 'tasbih', 'tasbeeh', 'counter', 'mantra', 'chant', 'chanting', 'zikr', 'compass', 'tassel', 'mala', 'bead', 'beads')) {
+        CONTEXT.lastTopic = 'jaap';
+
+        // Check battery/charging questions
+        if (hasAny('battery', 'cell', 'charge', 'charging', 'power', 'replace battery', 'how long')) {
+          return {
+            text: `🔋 <strong>Battery &amp; Power Specs:</strong><br><br>
+            • <strong>Pre-installed Battery:</strong> Comes with a long-life high-grade AG13 button battery already installed inside.<br>
+            • <strong>Lifespan:</strong> Runs for 12+ months with regular daily chanting (ultra-low power LCD circuitry).<br>
+            • <strong>Replacement:</strong> When needed, the battery hatch opens easily with a standard coin or small screwdriver, and uses widely available replacement cells.`,
+            productCard: PRODUCTS.jaap,
+            chips: ['📿 Buy 2 for ₹899', '🔇 Is it silent?', '🧭 Compass calibration']
+          };
+        }
+
+        // Check sound / silent questions
+        if (hasAny('sound', 'noise', 'silent', 'click', 'beep', 'quiet', 'loud', 'disturb')) {
+          return {
+            text: `🔇 <strong>100% Completely Silent Operation:</strong><br><br>
+            Unlike mechanical clickers that make a loud "click-clack" noise, our Digital Jaap Counter features an <strong>ultra-smooth silent rubberized roller wheel</strong>. You can chant peacefully in quiet temples, bedtime meditation, trains, or family rooms with zero distraction or clicking sounds.`,
+            productCard: PRODUCTS.jaap,
+            chips: ['📿 Buy 2 for ₹899', '🎁 View Combos', '🚚 Check Free COD']
+          };
+        }
+
+        // Check compass or reset
+        if (hasAny('compass', 'direction', 'qibla', 'reset', 'how to count', 'screen', 'lcd')) {
+          return {
+            text: `📿 <strong>Features &amp; Controls:</strong><br><br>
+            • <strong>LCD Digital Screen:</strong> Tracks up to 99,999 chants with a single touch.<br>
+            • <strong>Recessed Reset Button:</strong> One-press instant reset to 00000 designed so it won't accidentally reset in your pocket.<br>
+            • <strong>Integrated Compass:</strong> Located on the side for orientation and sacred prayer alignment.<br>
+            • <strong>Sacred Red Silk Tassel:</strong> Traditional aesthetic finish for secure grip during long prayer sessions.`,
+            productCard: PRODUCTS.jaap,
+            chips: ['📿 Buy 2 for ₹899 (Best Value)', '📿 Buy 1 for ₹499', '🚚 Free COD']
+          };
+        }
+
+        // General jaap overview
+        return {
+          text: `The <strong>Wooden Digital Jaap Counter</strong> (₹499) brings serene mindfulness to your daily sadhana. Features a smooth silent roller, high-contrast LCD (0–99,999 counts), built-in prayer direction compass, and rich carved wood grain finish.<br><br>
+          🔥 <strong>Best Offer:</strong> Buy 2 for only <strong>₹899</strong> (Save ₹99) — great gift for parents and elders!`,
+          productCard: PRODUCTS.jaap,
+          chips: ['📿 Buy 2 for ₹899 (Most Bought)', '📿 Buy 1 for ₹499', '🔇 Is it silent?']
+        };
+      }
+
+      // 9. PRICE INQUIRY (WITH CONTEXT AWARENESS)
+      if (hasAny('price', 'cost', 'rate', 'how much', 'kitna', 'kitne', 'paisa', 'charges')) {
+        if (CONTEXT.lastTopic === 'jaap') {
+          return {
+            text: `The <strong>Wooden Digital Jaap Counter</strong> is ₹499 for 1 pc.<br><br>
+            💡 <strong>Special Combo:</strong> Buy 2 for <strong>₹899</strong> (Save ₹99) or Buy 3 for <strong>₹1,199</strong> (Save ₹298). Includes Free Express Shipping &amp; Cash on Delivery!`,
+            productCard: PRODUCTS.jaap,
+            chips: ['📿 Buy 2 for ₹899', '🥟 What about Puri Press?', '🎁 Open All Combos']
+          };
+        } else if (CONTEXT.lastTopic === 'puri') {
+          return {
+            text: `The <strong>Stainless Steel Puri Press Maker</strong> is ₹599 for 1 pc.<br><br>
+            💡 <strong>Special Combo:</strong> Buy 2 for <strong>₹999</strong> (Save ₹199) or Buy 3 for <strong>₹1,399</strong> (Save ₹398). Includes Free Express Shipping &amp; Cash on Delivery!`,
+            productCard: PRODUCTS.puri,
+            chips: ['🥟 Buy 2 for ₹999', '📿 What about Jaap Counter?', '🎁 Open All Combos']
+          };
+        } else {
+          return {
+            text: `Here is our complete transparent pricing:<br><br>
+            • <strong>Wooden Digital Jaap Counter:</strong> ₹499 (or <strong>2 for ₹899</strong>)<br>
+            • <strong>Stainless Steel Puri Press:</strong> ₹599 (or <strong>2 for ₹999</strong>)<br>
+            • <strong>Ritual Combo (Both Products):</strong> ₹1,098<br><br>
+            Zero shipping charges, zero COD fees across India!`,
+            chips: ['🎁 Open Bundle Modal', '📿 Order Jaap Counter', '🥟 Order Puri Press']
+          };
+        }
+      }
+
+      // 10. CASH ON DELIVERY (COD) & PAYMENT
+      if (hasAny('cod', 'cash on delivery', 'pay on delivery', 'advance', 'payment', 'upi', 'gpay', 'paytm', 'card', 'how to pay')) {
+        CONTEXT.lastTopic = 'cod';
+        return {
+          text: `✅ <strong>100% Cash on Delivery (COD) is available across all Indian PIN codes!</strong><br><br>
+          • <strong>₹0 Advance Payment:</strong> You don't need to enter card details or pay a single rupee online right now.<br>
+          • <strong>Inspect &amp; Pay:</strong> Simply hand cash or UPI scan to the courier delivery partner when the sealed parcel reaches your doorstep.<br>
+          • <strong>Online Options:</strong> We also accept UPI (Google Pay, PhonePe, Paytm) and Cards at checkout if you prefer cashless prepaid delivery.`,
+          chips: ['🚚 Delivery timeline', '🎁 View Best Offers', '🛡️ 7-Day Guarantee']
+        };
+      }
+
+      // 11. SHIPPING & DELIVERY TIMELINE
+      if (hasAny('shipping', 'delivery', 'time', 'how long', 'days', 'courier', 'charge', 'fee', 'free delivery', 'when will i get', 'fast', 'express', 'pincode')) {
+        CONTEXT.lastTopic = 'shipping';
+        return {
+          text: `🚚 <strong>Pan-India Express Shipping Policy:</strong><br><br>
+          • <strong>Free Shipping:</strong> 100% Free Express Air Delivery on every single order (no minimum purchase limit).<br>
+          • <strong>Fast Dispatch:</strong> Packed and dispatched from our central warehouse within 24 to 48 hours.<br>
+          • <strong>Delivery Time:</strong> Usually takes <strong>3 to 5 business days</strong> to reach metro cities and tier-2/tier-3 towns.<br>
+          • <strong>Courier Partners:</strong> Shipped via premium insured couriers: BlueDart, Delhivery, and Xpressbees.`,
+          chips: ['📍 Track order', '🚚 Free COD available?', '🎁 Combo Deals']
+        };
+      }
+
+      // 12. RETURNS, REPLACEMENT & WARRANTY
+      if (hasAny('return', 'refund', 'replace', 'replacement', 'broken', 'damaged', 'defect', 'guarantee', 'warranty', 'fake', 'original', 'legit', 'trust')) {
+        CONTEXT.lastTopic = 'guarantee';
+        return {
+          text: `🛡️ <strong>7-Day Hassle-Free Replacement Guarantee:</strong><br><br>
+          • <strong>Transit Protection:</strong> Every parcel is packed with multi-layer bubble wrap. If your item arrives defective, damaged, or broken in transit, we've got you covered.<br>
+          • <strong>Quick Process:</strong> Just send a 10-second WhatsApp video or photo to our support team within 7 days of delivery.<br>
+          • <strong>Zero Questions Replacement:</strong> We immediately dispatch a brand-new replacement parcel to your address at ₹0 extra cost.`,
+          chips: ['💬 Contact Support', '🚚 Shipping details', '🎁 View Offers']
+        };
+      }
+
+      // 13. TRACK ORDER
+      if (hasAny('track', 'tracking', 'status', 'where is my order', 'awb', 'consignment')) {
+        return {
+          text: `📦 <strong>Order Tracking:</strong><br><br>
+          As soon as your parcel is dispatched from our warehouse, you will receive an automated <strong>SMS and WhatsApp message containing your live tracking link</strong> and AWB courier number.<br><br>
+          Need an update on an existing order? Simply share your Order Number or phone number with our WhatsApp support desk!`,
+          chips: ['💬 WhatsApp Support', '🚚 Delivery timelines', '🎁 View Products']
+        };
+      }
+
+      // 14. TALK TO HUMAN / WHATSAPP / CONTACT
+      if (hasAny('human', 'agent', 'person', 'whatsapp', 'call', 'contact', 'phone', 'support', 'customer care', 'email')) {
+        return {
+          text: `📞 <strong>Direct Human Customer Support:</strong><br><br>
+          Our friendly customer care team is available on WhatsApp and phone Monday through Saturday (10 AM – 7 PM IST).<br><br>
+          • <strong>WhatsApp Helpline:</strong> Instant order assistance and replacements.<br>
+          • <strong>Email:</strong> support@zenkart.in`,
+          action: 'whatsapp_support',
+          chips: ['💬 Open WhatsApp Chat', '🚚 Delivery info', '🎁 View Combos']
+        };
+      }
+
+      // 15. REVIEWS & CUSTOMER SATISFACTION
+      if (hasAny('review', 'reviews', 'rating', 'ratings', 'feedback', 'people say', 'customer')) {
+        return {
+          text: `⭐ <strong>Verified Indian Shopper Ratings:</strong><br><br>
+          • <strong>Wooden Digital Jaap Counter:</strong> 4.9★ from <strong>184 verified reviews</strong>. Customers praise the silent roller and rich wood finish.<br>
+          • <strong>Stainless Steel Puri Press:</strong> 4.8★ from <strong>241 verified reviews</strong>. Loved for cutting morning cooking time to under 5 minutes.<br><br>
+          You can read all reviews with customer locations and dates directly on our catalog page!`,
+          chips: ['📿 Jaap Counter Reviews', '🥟 Puri Press Reviews', '🎁 Combo Offers']
+        };
+      }
+
+      // 16. CONVERSATIONAL FALLBACK (SMART & EMPATHETIC)
+      const suggestions = [
+        `I want to make sure I get you the exact details you need! Are you looking for specs on our <strong>Wooden Jaap Counter</strong> (₹499), the <strong>Stainless Steel Puri Maker</strong> (₹599), our <strong>Buy 2/Buy 3 Combo Savings</strong>, or <strong>Free Cash on Delivery</strong>?`,
+        `I'm here to assist! Could you tell me if you'd like to explore our spiritual meditation tools, kitchen essentials, or check our delivery times and discount bundles?`,
+        `Got it! Feel free to ask me anything specific—like <em>"Can the puri maker make rotis?"</em>, <em>"How long does the Jaap counter battery last?"</em>, or <em>"What are the combo offers?"</em>`
+      ];
+
+      return {
+        text: suggestions[Math.floor(Math.random() * suggestions.length)],
+        chips: ['📿 Jaap Counter Specs', '🥟 Puri Press Details', '🎁 View Combo Savings', '🚚 Free COD & Shipping']
+      };
+    }
+
+    // Window toggle
     window.toggleZenkartAiChat = function() {
       const win = document.getElementById('zenkart-ai-window');
       if(!win) return;
       if (win.classList.contains('is-closed')) {
         win.classList.remove('is-closed');
         win.classList.add('is-open');
-        setTimeout(() => document.getElementById('zenkart-ai-input')?.focus(), 200);
+        setTimeout(() => document.getElementById('zenkart-ai-input')?.focus(), 250);
       } else {
         win.classList.remove('is-open');
         win.classList.add('is-closed');
       }
     };
 
+    // Quick prompt sender
     window.sendQuickPrompt = function(text) {
+      if (text === '🎁 Open Bundle Selector Modal' || text === '🎁 Open Bundle Deals Modal') {
+        if (typeof window.openBundleSelectorModal === 'function') {
+          window.openBundleSelectorModal();
+          return;
+        }
+      }
       const input = document.getElementById('zenkart-ai-input');
       if(input) {
         input.value = text;
@@ -239,51 +581,97 @@
       }
     };
 
-    function appendMessage(sender, html, productCard = null, isBundle = false) {
+    // Clear chat
+    window.clearZenkartAiChat = function() {
+      const container = document.getElementById('zenkart-ai-messages');
+      if(!container) return;
+      container.innerHTML = `
+        <div class="zenkart-msg-bubble" style="display: flex; align-items: flex-start; gap: 10px;">
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: #222; display: grid; place-items: center; font-size: 12px; flex-shrink: 0; margin-top: 2px;">✨</div>
+          <div style="background: #151515; border: 1px solid #282828; padding: 12px 14px; border-radius: 14px; border-top-left-radius: 2px; max-width: 86%; color: #e5e5e5;">
+            <p style="margin: 0 0 6px;">Chat cleared! How can I assist you right now?</p>
+            <div style="font-size: 10.5px; color: #777;">Ask about products, bundles, or delivery.</div>
+          </div>
+        </div>
+      `;
+      updateChips(['📿 Jaap Counter', '🥟 Puri Press', '🎁 Combo Deals', '🚚 Free COD']);
+    };
+
+    // Dynamic chips updater
+    function updateChips(chipsArray) {
+      const chipsContainer = document.getElementById('zenkart-chips-container');
+      if (!chipsContainer || !chipsArray || !chipsArray.length) return;
+      chipsContainer.innerHTML = '';
+      chipsArray.forEach(chip => {
+        const btn = document.createElement('button');
+        btn.className = 'zenkart-chip-btn';
+        btn.textContent = chip;
+        btn.onclick = () => window.sendQuickPrompt(chip);
+        chipsContainer.appendChild(btn);
+      });
+    }
+
+    // Append message with animation
+    function appendMessage(sender, html, productCard = null, action = null) {
       const container = document.getElementById('zenkart-ai-messages');
       if (!container) return;
 
       const msgDiv = document.createElement('div');
+      msgDiv.className = 'zenkart-msg-bubble';
       msgDiv.style.display = 'flex';
       msgDiv.style.alignItems = 'flex-start';
 
       let cardHtml = '';
       if (productCard) {
         cardHtml = `
-          <div style="margin-top: 10px; padding: 10px; border-radius: 12px; background: #000; border: 1px solid #333; display: flex; flex-direction: column; gap: 8px;">
+          <div style="margin-top: 10px; padding: 12px; border-radius: 12px; background: #000; border: 1px solid #333; display: flex; flex-direction: column; gap: 8px;">
             <div style="display: flex; align-items: center; justify-content: space-between;">
-              <span style="font-weight: 700; color: #fff; font-size: 11px;">${productCard.title}</span>
-              <span style="color: #10b981; font-weight: 700; font-size: 12px;">${productCard.price}</span>
+              <span style="font-weight: 700; color: #fff; font-size: 12px;">${productCard.title}</span>
+              <span style="color: #10b981; font-weight: 800; font-size: 13px;">${productCard.priceSingle}</span>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div style="font-size: 10px; color: #999;">${productCard.badge}</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 2px;">
               <button 
                 type="button" 
-                onclick="window.ZenkartCart.buyNow('${productCard.handle}', 1)" 
-                style="background: #fff; color: #000; font-weight: 700; padding: 6px 10px; border-radius: 8px; font-size: 10px; border: none; cursor: pointer;">
+                onclick="if(window.openBundleSelectorModal){window.openBundleSelectorModal('${productCard.handle}');}else if(window.ZenkartCart){window.ZenkartCart.buyNow('${productCard.handle}', 1);}" 
+                style="background: #ffffff; color: #000000; font-weight: 700; padding: 8px 10px; border-radius: 8px; font-size: 11px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;">
                 ⚡ 1-Click Buy
               </button>
               <button 
                 type="button" 
-                onclick="window.ZenkartCart.add('${productCard.handle}', 1)" 
-                style="background: #202020; color: #fff; border: 1px solid #333; padding: 6px 10px; border-radius: 8px; font-size: 10px; cursor: pointer;">
+                onclick="if(window.ZenkartCart){window.ZenkartCart.add('${productCard.handle}', 1);}" 
+                style="background: #1c1c1c; color: #fff; border: 1px solid #3a3a3a; padding: 8px 10px; border-radius: 8px; font-size: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;">
                 🛒 Add Basket
               </button>
             </div>
           </div>
         `;
-      } else if (isBundle) {
+      } else if (action === 'open_bundle_modal') {
         cardHtml = `
-          <div style="margin-top: 10px; padding: 10px; border-radius: 12px; background: #000; border: 1px solid #333; display: flex; flex-direction: column; gap: 8px;">
+          <div style="margin-top: 10px; padding: 12px; border-radius: 12px; background: #141414; border: 1px solid #f59e0b; display: flex; flex-direction: column; gap: 8px;">
             <div style="display: flex; align-items: center; justify-content: space-between;">
-              <span style="font-weight: 700; color: #fff; font-size: 11px;">Zenkart Ritual Bundle (Both)</span>
-              <span style="color: #10b981; font-weight: 700; font-size: 12px;">₹1,098</span>
+              <span style="font-weight: 700; color: #f59e0b; font-size: 11.5px;">🎁 Combo Savings Activated</span>
+              <span style="font-size: 10px; background: rgba(245, 158, 11, 0.2); color: #fbbf24; padding: 2px 6px; border-radius: 999px; font-weight: 700;">SAVE UP TO ₹398</span>
             </div>
             <button 
               type="button" 
-              onclick="window.ZenkartCart.bundleCheckout()" 
-              style="width: 100%; background: #fff; color: #000; font-weight: 700; padding: 8px 12px; border-radius: 8px; font-size: 11px; border: none; cursor: pointer;">
-              ⚡ Order Complete Bundle (COD)
+              onclick="if(window.openBundleSelectorModal){window.openBundleSelectorModal();}" 
+              style="width: 100%; background: #ffffff; color: #000; font-weight: 800; padding: 9px 14px; border-radius: 8px; font-size: 11.5px; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);">
+              ✨ Open Interactive Bundle Selector
             </button>
+          </div>
+        `;
+      } else if (action === 'whatsapp_support') {
+        cardHtml = `
+          <div style="margin-top: 10px;">
+            <a 
+              href="https://wa.me/919876543210?text=Hello%20Zenkart%20Support,%20I%20need%20help%20with%20an%20order" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: #25d366; color: #000; font-weight: 700; padding: 9px 14px; border-radius: 8px; font-size: 11.5px; text-decoration: none;">
+              <span>💬</span>
+              <span>Open WhatsApp Support Chat</span>
+            </a>
           </div>
         `;
       }
@@ -291,7 +679,7 @@
       if (sender === 'user') {
         msgDiv.style.justifyContent = 'flex-end';
         msgDiv.innerHTML = `
-          <div style="background: #ffffff; color: #000000; padding: 10px 14px; border-radius: 14px; border-top-right-radius: 2px; max-width: 84%; font-weight: 500;">
+          <div style="background: #ffffff; color: #000000; padding: 10px 14px; border-radius: 14px; border-top-right-radius: 2px; max-width: 84%; font-weight: 500; font-size: 12.5px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
             ${html}
           </div>
         `;
@@ -299,7 +687,7 @@
         msgDiv.style.justifyContent = 'flex-start';
         msgDiv.style.gap = '10px';
         msgDiv.innerHTML = `
-          <div style="width: 24px; height: 24px; border-radius: 50%; background: #222; display: grid; place-items: center; font-size: 11px; flex-shrink: 0; margin-top: 2px;">✨</div>
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: #222; display: grid; place-items: center; font-size: 12px; flex-shrink: 0; margin-top: 2px;">✨</div>
           <div style="background: #151515; border: 1px solid #282828; padding: 12px 14px; border-radius: 14px; border-top-left-radius: 2px; max-width: 86%; color: #e5e5e5;">
             <div style="margin: 0;">${html}</div>
             ${cardHtml}
@@ -311,32 +699,61 @@
       container.scrollTop = container.scrollHeight;
     }
 
+    // Show / Hide Typing Indicator
+    function showTypingIndicator() {
+      const container = document.getElementById('zenkart-ai-messages');
+      if (!container) return;
+
+      const typingDiv = document.createElement('div');
+      typingDiv.id = 'zenkart-ai-typing-indicator';
+      typingDiv.style.display = 'flex';
+      typingDiv.style.alignItems = 'center';
+      typingDiv.style.gap = '10px';
+      typingDiv.innerHTML = `
+        <div style="width: 26px; height: 26px; border-radius: 50%; background: #222; display: grid; place-items: center; font-size: 12px; flex-shrink: 0;">✨</div>
+        <div style="background: #151515; border: 1px solid #282828; padding: 8px 14px; border-radius: 14px; border-top-left-radius: 2px; display: inline-flex; align-items: center;">
+          <span class="zenkart-typing-dot"></span>
+          <span class="zenkart-typing-dot"></span>
+          <span class="zenkart-typing-dot"></span>
+        </div>
+      `;
+      container.appendChild(typingDiv);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const el = document.getElementById('zenkart-ai-typing-indicator');
+      if (el) el.remove();
+    }
+
+    // Form submission handler
     window.handleUserMessage = function(e) {
       e.preventDefault();
       const input = document.getElementById('zenkart-ai-input');
       const query = input?.value.trim();
       if (!query) return;
 
+      // 1. Render User message
       appendMessage('user', query);
       input.value = '';
+      CONTEXT.turnCount++;
 
-      const lower = query.toLowerCase();
-      let matched = null;
+      // 2. Show realistic typing delay
+      showTypingIndicator();
 
-      for (const item of KNOWLEDGE_BASE) {
-        if (item.keywords.some(k => lower.includes(k))) {
-          matched = item;
-          break;
-        }
-      }
+      // Dynamic thinking delay (350ms - 650ms) for natural conversational feel
+      const delay = Math.min(650, Math.max(350, query.length * 15));
 
       setTimeout(() => {
-        if (matched) {
-          appendMessage('ai', matched.reply, matched.productCard || null, matched.action === 'bundle');
-        } else {
-          appendMessage('ai', "Both our <strong>Wooden Digital Jaap Counter</strong> (₹499) and <strong>Stainless Steel Puri Press</strong> (₹599) are in stock with 100% Free Express Shipping and Cash on Delivery. Would you like to review specs or place a direct order?", null, true);
+        removeTypingIndicator();
+        const response = generateSmartResponse(query);
+        appendMessage('ai', response.text, response.productCard || null, response.action || null);
+
+        // Update live contextual chips
+        if (response.chips && response.chips.length) {
+          updateChips(response.chips);
         }
-      }, 300);
+      }, delay);
     };
   })();
 </script>

@@ -1,377 +1,148 @@
-<style>
-  .ai-black-friday-banner-discount-countdown-qq4jyf {
-    position: relative;
-    width: 100%;
-    background: var(--color-card-gradient);
-    background-color: var(--color-card-background);
-    padding: calc(40px * var(--section-spacing-scale, 1)) 40px;
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .ai-black-friday-banner--full-width-discount-countdown-qq4jyf {
-    width: 100%;
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-black-friday-banner-discount-countdown-qq4jyf {
-      padding: calc(30px * var(--section-spacing-scale, 1)) 20px;
-    }
-  }
-
-  .ai-black-friday-banner__content-discount-countdown-qq4jyf {
-    position: relative;
-    z-index: 2;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .ai-black-friday-banner__eyebrow-discount-countdown-qq4jyf {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    color: var(--color-primary);
-    background: var(--color-background);
-    padding: 6px 14px;
-    border-radius: 100px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
-    font-weight: 600;
-    backdrop-filter: blur(20px) saturate(180%);
-    border: 0.5px solid rgba(255, 255, 255, 0.18);
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-black-friday-banner__eyebrow-discount-countdown-qq4jyf {
-      font-size: 9.9px;
-      padding: 5px 12px;
-    }
-  }
-
-  .ai-black-friday-banner__heading-discount-countdown-qq4jyf {
-    font-size: calc(var(--font-h2--size) * 1.3333333333333333);
-    color: var(--color-gradient-text);
-    margin: 0 0 8px;
-    font-weight: var(--font-h2--weight, 700);
-    line-height: 1.1;
-    text-transform: var(--font-h2--case, uppercase);
-    letter-spacing: var(--font-h2--letter-spacing, -0.5px);
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-black-friday-banner__heading-discount-countdown-qq4jyf {
-      font-size: calc(var(--font-h2--size) * 0.7999999999999999);
-    }
-  }
-
-  .ai-black-friday-banner__subheading-discount-countdown-qq4jyf {
-    font-size: 16px;
-    color: var(--color-gradient-text);
-    margin: 0 0 20px;
-    line-height: 1.4;
-    font-weight: var(--font-body--weight, 500);
-    opacity: 0.9;
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-black-friday-banner__subheading-discount-countdown-qq4jyf {
-      font-size: 14.4px;
-      margin-bottom: 16px;
-    }
-  }
-
-  .ai-black-friday-banner__countdown-discount-countdown-qq4jyf {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-
-  .ai-black-friday-banner__countdown-item-discount-countdown-qq4jyf {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 64px;
-    background: var(--color-background);
-    border-radius: var(--style-border-radius-cards);
-    padding: 12px 10px;
-    backdrop-filter: blur(20px) saturate(180%);
-    border: 0.5px solid rgba(255, 255, 255, 0.18);
-    box-shadow: var(--style-shadow-card);
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-black-friday-banner__countdown-item-discount-countdown-qq4jyf {
-      min-width: 56px;
-      padding: 10px 8px;
-    }
-  }
-
-  .ai-black-friday-banner__countdown-number-discount-countdown-qq4jyf {
-    font-size: 32px;
-    color: var(--color-primary);
-    font-weight: 600;
-    line-height: 1;
-    margin-bottom: 4px;
-    font-variant-numeric: tabular-nums;
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-black-friday-banner__countdown-number-discount-countdown-qq4jyf {
-      font-size: 24px;
-    }
-  }
-
-  .ai-black-friday-banner__countdown-label-discount-countdown-qq4jyf {
-    font-size: 10px;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 500;
-  }
-
-  .ai-black-friday-banner__button-discount-countdown-qq4jyf {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 14px 32px;
-    background: var(--color-background);
-    color: var(--color-primary);
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: var(--font-body--weight, 600);
-    letter-spacing: -0.2px;
-    border-radius: var(--style-border-radius-buttons-primary, 100px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: none;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(20px) saturate(180%);
-  }
-
-  .ai-black-friday-banner__button-discount-countdown-qq4jyf::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .ai-black-friday-banner__button-discount-countdown-qq4jyf:hover::before {
-    opacity: 1;
-  }
-
-  .ai-black-friday-banner__button-discount-countdown-qq4jyf:hover {
-    background: var(--color-background);
-    color: var(--color-primary);
-    opacity: 0.88;
-    transform: scale(1.02);
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
-  }
-
-  .ai-black-friday-banner__button-discount-countdown-qq4jyf:active {
-    transform: scale(0.98);
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-black-friday-banner__button-discount-countdown-qq4jyf {
-      padding: 12px 28px;
-      font-size: 14.25px;
-    }
-  }
-
-  .ai-black-friday-banner__overlay-discount-countdown-qq4jyf {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000000;
-    opacity: 0.2;
-    z-index: 1;
-  }
-
-  .ai-black-friday-banner__blur-circle-discount-countdown-qq4jyf {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.3;
-    z-index: 0;
-  }
-
-  .ai-black-friday-banner__blur-circle-1-discount-countdown-qq4jyf {
-    width: 300px;
-    height: 300px;
-    background: #8b6bb8;
-    top: -100px;
-    right: 10%;
-  }
-
-  .ai-black-friday-banner__blur-circle-2-discount-countdown-qq4jyf {
-    width: 250px;
-    height: 250px;
-    background: #4a3a6b;
-    bottom: -80px;
-    left: 15%;
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-black-friday-banner__blur-circle-1-discount-countdown-qq4jyf {
-      width: 200px;
-      height: 200px;
-      top: -60px;
-    }
-
-    .ai-black-friday-banner__blur-circle-2-discount-countdown-qq4jyf {
-      width: 180px;
-      height: 180px;
-      bottom: -50px;
-    }
-  }
-</style>
-
-<black-friday-countdown-discount-countdown-qq4jyf><div class="ai-black-friday-banner-discount-countdown-qq4jyf ai-black-friday-banner--full-width-discount-countdown-qq4jyf forge-color-scheme-1">
+<!-- sections/discount-countdown.liquid -->
+<!-- Replaces legacy countdown with Interactive Best Offers & Value Bundles Banner -->
+<section id="best-offers-banner" class="relative py-14 sm:py-20 px-4 sm:px-8 lg:px-12 bg-gradient-to-b from-[#0a0a0a] via-[#11131a] to-[#0a0a0a] text-white border-y border-[#262626] overflow-hidden">
   
-    <div class="ai-black-friday-banner__blur-circle-discount-countdown-qq4jyf ai-black-friday-banner__blur-circle-1-discount-countdown-qq4jyf"></div>
-    <div class="ai-black-friday-banner__blur-circle-discount-countdown-qq4jyf ai-black-friday-banner__blur-circle-2-discount-countdown-qq4jyf"></div>
-  
+  <!-- Ambient Warm Gold Diwali Lighting Orbs -->
+  <div class="absolute -top-24 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-24 right-1/4 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-  
-    <div class="ai-black-friday-banner__overlay-discount-countdown-qq4jyf"></div>
-  
+  <div class="relative z-10 max-w-5xl mx-auto text-center">
+    
+    <!-- Eyebrow Badge -->
+    <div class="inline-flex items-center gap-2 bg-[#1a1813] border border-amber-500/40 text-amber-300 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5 shadow-lg shadow-amber-500/5">
+      <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+      🎉 BEST OFFERS &amp; VALUE BUNDLES • SAVE UP TO ₹400
+    </div>
 
-  <div class="ai-black-friday-banner__content-discount-countdown-qq4jyf" data-animate="fade-up">
-    
-      <div class="ai-black-friday-banner__eyebrow-discount-countdown-qq4jyf">
-        <span>LIMITED TIME BUNDLE</span>
-      </div>
-    
+    <!-- Main Title -->
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-white tracking-tight mb-4 leading-tight">
+      Upgrade Your Home &amp; Rituals For Less
+    </h2>
 
-    
-      <h2 class="ai-black-friday-banner__heading-discount-countdown-qq4jyf">
-        Streamline Your Sanctuary
-      </h2>
-    
+    <!-- Subtitle -->
+    <p class="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
+      Why buy single when you can get massive family savings? Click below to unlock exclusive <strong>2-Piece &amp; 3-Piece Factory-Direct Deals</strong> with 100% Free Express Delivery &amp; Cash on Delivery.
+    </p>
 
-    
-      <div class="ai-black-friday-banner__subheading-discount-countdown-qq4jyf">
-        Get 15% off when you upgrade both your kitchen and prayer rituals today.
-      </div>
-    
+    <!-- 2 Interactive Bundle Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-10">
+      
+      <!-- Deal Card 1: Jaap Counter -->
+      <div 
+        onclick="openBundleSelectorModal('wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc')"
+        class="group relative bg-[#121318] hover:bg-[#181a22] border border-white/10 hover:border-amber-400/80 rounded-2xl p-6 transition-all duration-300 cursor-pointer shadow-xl hover:shadow-amber-500/10 flex flex-col justify-between">
+        <span class="absolute -top-3 right-6 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-black text-[10px] uppercase tracking-wider px-3 py-0.5 rounded-full shadow-md">
+          🔥 Most Bought: 2 Pcs @ ₹899
+        </span>
+        
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl">🕉️</span>
+            <div>
+              <h3 class="font-serif font-bold text-lg text-white group-hover:text-amber-300 transition-colors">Wooden Digital Jaap Counter</h3>
+              <p class="text-xs text-gray-400">LCD Display • Compass • Silent Micro-Wheel</p>
+            </div>
+          </div>
 
-    
-      <div class="ai-black-friday-banner__countdown-discount-countdown-qq4jyf" id="ai-countdown-discount-countdown-qq4jyf">
-        <div class="ai-black-friday-banner__countdown-item-discount-countdown-qq4jyf">
-          <div class="ai-black-friday-banner__countdown-number-discount-countdown-qq4jyf" data-hours="">23</div>
-          <div class="ai-black-friday-banner__countdown-label-discount-countdown-qq4jyf">Hours</div>
+          <div class="space-y-2 mt-4 text-xs">
+            <div class="flex items-center justify-between p-2 rounded-lg bg-black/40 border border-white/5">
+              <span class="text-gray-300 font-medium">Buy 1 Pc (Standard)</span>
+              <span class="font-bold text-white">₹499</span>
+            </div>
+            <div class="flex items-center justify-between p-2.5 rounded-lg bg-amber-400/10 border border-amber-400/30">
+              <span class="text-amber-200 font-bold flex items-center gap-1.5">
+                <span>Buy 2 Pcs (Pack of 2)</span>
+                <span class="text-[9px] bg-amber-400 text-black px-1.5 py-0.2 rounded font-black">SAVE ₹99</span>
+              </span>
+              <span class="font-extrabold text-amber-400 text-sm">₹899</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-lg bg-black/40 border border-white/5">
+              <span class="text-gray-300 font-medium flex items-center gap-1.5">
+                <span>Buy 3 Pcs (Mega Pack)</span>
+                <span class="text-[9px] text-emerald-400 bg-emerald-950/60 px-1.5 py-0.2 rounded font-bold">SAVE ₹298</span>
+              </span>
+              <span class="font-bold text-white">₹1,199</span>
+            </div>
+          </div>
         </div>
-        <div class="ai-black-friday-banner__countdown-item-discount-countdown-qq4jyf">
-          <div class="ai-black-friday-banner__countdown-number-discount-countdown-qq4jyf" data-minutes="">18</div>
-          <div class="ai-black-friday-banner__countdown-label-discount-countdown-qq4jyf">Mins</div>
-        </div>
-        <div class="ai-black-friday-banner__countdown-item-discount-countdown-qq4jyf">
-          <div class="ai-black-friday-banner__countdown-number-discount-countdown-qq4jyf" data-seconds="">37</div>
-          <div class="ai-black-friday-banner__countdown-label-discount-countdown-qq4jyf">Secs</div>
+
+        <div class="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-amber-400 group-hover:translate-x-1 transition-transform">
+          <span>⚡ Click to Claim Jaap Bundle Offers</span>
+          <span>→</span>
         </div>
       </div>
-    
 
-    
-      <a href="#bundle" class="ai-black-friday-banner__button-discount-countdown-qq4jyf">
-        <span>Claim Bundle Discount</span>
-      </a>
-    
+      <!-- Deal Card 2: Puri Press -->
+      <div 
+        onclick="openBundleSelectorModal('7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium')"
+        class="group relative bg-[#121318] hover:bg-[#181a22] border border-white/10 hover:border-amber-400/80 rounded-2xl p-6 transition-all duration-300 cursor-pointer shadow-xl hover:shadow-amber-500/10 flex flex-col justify-between">
+        <span class="absolute -top-3 right-6 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-black text-[10px] uppercase tracking-wider px-3 py-0.5 rounded-full shadow-md">
+          🔥 Most Bought: 2 Pcs @ ₹999
+        </span>
+        
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl">🥟</span>
+            <div>
+              <h3 class="font-serif font-bold text-lg text-white group-hover:text-amber-300 transition-colors">Stainless Steel Puri Press Maker</h3>
+              <p class="text-xs text-gray-400">Heavy Food-Grade Steel • Anti-Skid Grip Handle</p>
+            </div>
+          </div>
+
+          <div class="space-y-2 mt-4 text-xs">
+            <div class="flex items-center justify-between p-2 rounded-lg bg-black/40 border border-white/5">
+              <span class="text-gray-300 font-medium">Buy 1 Pc (Standard)</span>
+              <span class="font-bold text-white">₹599</span>
+            </div>
+            <div class="flex items-center justify-between p-2.5 rounded-lg bg-amber-400/10 border border-amber-400/30">
+              <span class="text-amber-200 font-bold flex items-center gap-1.5">
+                <span>Buy 2 Pcs (Pack of 2)</span>
+                <span class="text-[9px] bg-amber-400 text-black px-1.5 py-0.2 rounded font-black">SAVE ₹199</span>
+              </span>
+              <span class="font-extrabold text-amber-400 text-sm">₹999</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-lg bg-black/40 border border-white/5">
+              <span class="text-gray-300 font-medium flex items-center gap-1.5">
+                <span>Buy 3 Pcs (Mega Pack)</span>
+                <span class="text-[9px] text-emerald-400 bg-emerald-950/60 px-1.5 py-0.2 rounded font-bold">SAVE ₹398</span>
+              </span>
+              <span class="font-bold text-white">₹1,399</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-amber-400 group-hover:translate-x-1 transition-transform">
+          <span>⚡ Click to Claim Puri Bundle Offers</span>
+          <span>→</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Master Interactive Button with Diwali Glow Pulse -->
+    <div class="max-w-md mx-auto">
+      <button 
+        type="button" 
+        onclick="openBundleSelectorModal()"
+        class="w-full btn-diwali-glow py-4 px-8 rounded-xl font-black text-sm uppercase tracking-wider text-black flex items-center justify-center gap-3 cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-2xl">
+        <span class="text-lg">⚡</span>
+        <span>VIEW BEST OFFERS &amp; BUNDLE DEALS</span>
+      </button>
+      <div class="flex items-center justify-center gap-4 text-xs text-gray-400 mt-4">
+        <span>📦 100% Free Shipping</span>
+        <span>•</span>
+        <span>💵 Cash on Delivery</span>
+        <span>•</span>
+        <span>🔄 7-Day Replacement</span>
+      </div>
+    </div>
+
   </div>
-</div></black-friday-countdown-discount-countdown-qq4jyf>
-
-
-  <script>
-    (function() {
-      var tagName = 'black-friday-countdown-discount-countdown-qq4jyf';
-
-      class BlackFridayCountdowndiscountcountdownqq4jyf extends HTMLElement {
-        constructor() {
-          super();
-          this.countdownElement = document.getElementById('ai-countdown-discount-countdown-qq4jyf');
-        }
-
-        connectedCallback() {
-          if (this.countdownElement) {
-            this.updateCountdown();
-            this.interval = setInterval(() => this.updateCountdown(), 1000);
-          }
-        }
-
-        disconnectedCallback() {
-          if (this.interval) {
-            clearInterval(this.interval);
-          }
-        }
-
-        getNextTarget() {
-          var configuredEnd = "2026-10-13 08:42:47";
-          if (configuredEnd) {
-            var parsed = new Date(String(configuredEnd).replace(' ', 'T'));
-            if (!isNaN(parsed.getTime()) && parsed.getTime() > Date.now()) {
-              return parsed.getTime();
-            }
-          }
-
-          /* Fallback when no valid future end date is configured: count down to today/tomorrow's 6 PM. */
-          var now = new Date();
-          var target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 0, 0, 0);
-
-          if (now.getTime() >= target.getTime()) {
-            target.setDate(target.getDate() + 1);
-          }
-
-          return target.getTime();
-        }
-
-        updateCountdown() {
-          var now = new Date().getTime();
-          var distance = this.getNextTarget() - now;
-
-          if (distance < 0) {
-            distance = 0;
-          }
-
-          var hours = Math.floor(distance / (1000 * 60 * 60));
-          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-          this.countdownElement.querySelector('[data-hours]').textContent = String(hours).padStart(2, '0');
-          this.countdownElement.querySelector('[data-minutes]').textContent = String(minutes).padStart(2, '0');
-          this.countdownElement.querySelector('[data-seconds]').textContent = String(seconds).padStart(2, '0');
-        }
-      }
-
-      if (!customElements.get(tagName)) {
-        customElements.define(tagName, BlackFridayCountdowndiscountcountdownqq4jyf);
-      }
-
-      var banner = document.querySelector('.ai-black-friday-banner-discount-countdown-qq4jyf');
-      if (banner) {
-        var wrapper = document.createElement(tagName);
-        banner.parentNode.insertBefore(wrapper, banner);
-        wrapper.appendChild(banner);
-      }
-    })();
-  </script>
+</section>
 
 {% schema %}
 {
-  "name": "Discount Countdown",
+  "name": "Best Offers Banner",
   "settings": []
 }
 {% endschema %}

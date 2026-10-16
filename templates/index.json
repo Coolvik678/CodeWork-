@@ -27,9 +27,6 @@
     "discount_countdown": {
       "type": "discount-countdown"
     },
-    "promotional_banners": {
-      "type": "promotional-banners"
-    },
     "faq_waves": {
       "type": "faq-waves"
     },
@@ -47,7 +44,6 @@
     "trust_icons_row",
     "comparison_waves",
     "discount_countdown",
-    "promotional_banners",
     "faq_waves",
     "newsletter_signup"
   ]

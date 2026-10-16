@@ -1,139 +1,60 @@
 <!-- sections/discount-countdown.liquid -->
-<!-- Replaces legacy countdown with Interactive Best Offers & Value Bundles Banner -->
-<section id="best-offers-banner" class="relative py-14 sm:py-20 px-4 sm:px-8 lg:px-12 bg-gradient-to-b from-[#0a0a0a] via-[#11131a] to-[#0a0a0a] text-white border-y border-[#262626] overflow-hidden">
+<!-- Clean, High-Converting Best Offers & Deals Banner -->
+<section id="best-offers-banner" class="relative py-12 sm:py-16 px-4 sm:px-8 lg:px-12 bg-[#0c0d12] text-white border-y border-[#262626] overflow-hidden">
   
-  <!-- Ambient Warm Gold Diwali Lighting Orbs -->
-  <div class="absolute -top-24 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-  <div class="absolute -bottom-24 right-1/4 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
+  <!-- Subtle Festive Diwali Light Backdrop -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-black to-black pointer-events-none"></div>
 
-  <div class="relative z-10 max-w-5xl mx-auto text-center">
+  <div class="relative z-10 max-w-4xl mx-auto text-center cursor-pointer" onclick="openBundleSelectorModal()">
     
-    <!-- Eyebrow Badge -->
-    <div class="inline-flex items-center gap-2 bg-[#1a1813] border border-amber-500/40 text-amber-300 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5 shadow-lg shadow-amber-500/5">
+    <!-- Eyebrow Pill -->
+    <div class="inline-flex items-center gap-2 bg-[#1a1711] border border-amber-500/40 text-amber-400 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4 shadow-lg shadow-amber-500/5 hover:border-amber-400 transition">
       <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-      🎉 BEST OFFERS &amp; VALUE BUNDLES • SAVE UP TO ₹400
+      <span>⚡ LIMITED TIME BEST OFFERS • SAVE UP TO ₹400</span>
     </div>
 
     <!-- Main Title -->
-    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-extrabold text-white tracking-tight mb-4 leading-tight">
-      Upgrade Your Home &amp; Rituals For Less
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-white tracking-tight mb-3 leading-tight">
+      Best Offers &amp; Value Bundles
     </h2>
 
     <!-- Subtitle -->
-    <p class="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
-      Why buy single when you can get massive family savings? Click below to unlock exclusive <strong>2-Piece &amp; 3-Piece Factory-Direct Deals</strong> with 100% Free Express Delivery &amp; Cash on Delivery.
+    <p class="text-sm sm:text-base text-gray-300 max-w-xl mx-auto mb-8 leading-relaxed font-sans">
+      Tap here to view our exclusive <strong>Buy 2 &amp; Buy 3 combo savings</strong> on Jaap Counters &amp; Puri Makers. Direct factory rates + 100% Free Express Delivery &amp; Cash on Delivery.
     </p>
 
-    <!-- 2 Interactive Bundle Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-10">
-      
-      <!-- Deal Card 1: Jaap Counter -->
-      <div 
-        onclick="openBundleSelectorModal('wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc')"
-        class="group relative bg-[#121318] hover:bg-[#181a22] border border-white/10 hover:border-amber-400/80 rounded-2xl p-6 transition-all duration-300 cursor-pointer shadow-xl hover:shadow-amber-500/10 flex flex-col justify-between">
-        <span class="absolute -top-3 right-6 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-black text-[10px] uppercase tracking-wider px-3 py-0.5 rounded-full shadow-md">
-          🔥 Most Bought: 2 Pcs @ ₹899
-        </span>
-        
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl">🕉️</span>
-            <div>
-              <h3 class="font-serif font-bold text-lg text-white group-hover:text-amber-300 transition-colors">Wooden Digital Jaap Counter</h3>
-              <p class="text-xs text-gray-400">LCD Display • Compass • Silent Micro-Wheel</p>
-            </div>
-          </div>
-
-          <div class="space-y-2 mt-4 text-xs">
-            <div class="flex items-center justify-between p-2 rounded-lg bg-black/40 border border-white/5">
-              <span class="text-gray-300 font-medium">Buy 1 Pc (Standard)</span>
-              <span class="font-bold text-white">₹499</span>
-            </div>
-            <div class="flex items-center justify-between p-2.5 rounded-lg bg-amber-400/10 border border-amber-400/30">
-              <span class="text-amber-200 font-bold flex items-center gap-1.5">
-                <span>Buy 2 Pcs (Pack of 2)</span>
-                <span class="text-[9px] bg-amber-400 text-black px-1.5 py-0.2 rounded font-black">SAVE ₹99</span>
-              </span>
-              <span class="font-extrabold text-amber-400 text-sm">₹899</span>
-            </div>
-            <div class="flex items-center justify-between p-2 rounded-lg bg-black/40 border border-white/5">
-              <span class="text-gray-300 font-medium flex items-center gap-1.5">
-                <span>Buy 3 Pcs (Mega Pack)</span>
-                <span class="text-[9px] text-emerald-400 bg-emerald-950/60 px-1.5 py-0.2 rounded font-bold">SAVE ₹298</span>
-              </span>
-              <span class="font-bold text-white">₹1,199</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-amber-400 group-hover:translate-x-1 transition-transform">
-          <span>⚡ Click to Claim Jaap Bundle Offers</span>
-          <span>→</span>
-        </div>
+    <!-- Quick Offer Highlights Pill Bar -->
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-8 text-xs">
+      <div class="bg-black/60 border border-white/10 px-4 py-2 rounded-xl flex items-center gap-2">
+        <span>🕉️</span>
+        <span class="text-gray-300">Jaap Counter:</span>
+        <strong class="text-amber-400">Buy 2 @ ₹899</strong>
+        <span class="text-[10px] bg-amber-400/20 text-amber-300 px-1.5 py-0.5 rounded font-bold">Save ₹99</span>
       </div>
-
-      <!-- Deal Card 2: Puri Press -->
-      <div 
-        onclick="openBundleSelectorModal('7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium')"
-        class="group relative bg-[#121318] hover:bg-[#181a22] border border-white/10 hover:border-amber-400/80 rounded-2xl p-6 transition-all duration-300 cursor-pointer shadow-xl hover:shadow-amber-500/10 flex flex-col justify-between">
-        <span class="absolute -top-3 right-6 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-black text-[10px] uppercase tracking-wider px-3 py-0.5 rounded-full shadow-md">
-          🔥 Most Bought: 2 Pcs @ ₹999
-        </span>
-        
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl">🥟</span>
-            <div>
-              <h3 class="font-serif font-bold text-lg text-white group-hover:text-amber-300 transition-colors">Stainless Steel Puri Press Maker</h3>
-              <p class="text-xs text-gray-400">Heavy Food-Grade Steel • Anti-Skid Grip Handle</p>
-            </div>
-          </div>
-
-          <div class="space-y-2 mt-4 text-xs">
-            <div class="flex items-center justify-between p-2 rounded-lg bg-black/40 border border-white/5">
-              <span class="text-gray-300 font-medium">Buy 1 Pc (Standard)</span>
-              <span class="font-bold text-white">₹599</span>
-            </div>
-            <div class="flex items-center justify-between p-2.5 rounded-lg bg-amber-400/10 border border-amber-400/30">
-              <span class="text-amber-200 font-bold flex items-center gap-1.5">
-                <span>Buy 2 Pcs (Pack of 2)</span>
-                <span class="text-[9px] bg-amber-400 text-black px-1.5 py-0.2 rounded font-black">SAVE ₹199</span>
-              </span>
-              <span class="font-extrabold text-amber-400 text-sm">₹999</span>
-            </div>
-            <div class="flex items-center justify-between p-2 rounded-lg bg-black/40 border border-white/5">
-              <span class="text-gray-300 font-medium flex items-center gap-1.5">
-                <span>Buy 3 Pcs (Mega Pack)</span>
-                <span class="text-[9px] text-emerald-400 bg-emerald-950/60 px-1.5 py-0.2 rounded font-bold">SAVE ₹398</span>
-              </span>
-              <span class="font-bold text-white">₹1,399</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-amber-400 group-hover:translate-x-1 transition-transform">
-          <span>⚡ Click to Claim Puri Bundle Offers</span>
-          <span>→</span>
-        </div>
+      <div class="bg-black/60 border border-white/10 px-4 py-2 rounded-xl flex items-center gap-2">
+        <span>🥟</span>
+        <span class="text-gray-300">Puri Press:</span>
+        <strong class="text-amber-400">Buy 2 @ ₹999</strong>
+        <span class="text-[10px] bg-amber-400/20 text-amber-300 px-1.5 py-0.5 rounded font-bold">Save ₹199</span>
       </div>
-
     </div>
 
-    <!-- Master Interactive Button with Diwali Glow Pulse -->
+    <!-- Pulsing Diwali Button -->
     <div class="max-w-md mx-auto">
       <button 
         type="button" 
-        onclick="openBundleSelectorModal()"
-        class="w-full btn-diwali-glow py-4 px-8 rounded-xl font-black text-sm uppercase tracking-wider text-black flex items-center justify-center gap-3 cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-2xl">
-        <span class="text-lg">⚡</span>
+        onclick="event.stopPropagation(); openBundleSelectorModal()"
+        class="w-full btn-diwali-glow py-4 px-8 rounded-xl font-black text-sm uppercase tracking-wider text-black flex items-center justify-center gap-2.5 cursor-pointer shadow-2xl transition hover:scale-105 active:scale-95">
+        <span class="text-base">⚡</span>
         <span>VIEW BEST OFFERS &amp; BUNDLE DEALS</span>
+        <span class="text-base">→</span>
       </button>
-      <div class="flex items-center justify-center gap-4 text-xs text-gray-400 mt-4">
-        <span>📦 100% Free Shipping</span>
+      <div class="flex items-center justify-center gap-3 text-[11px] text-gray-400 mt-3">
+        <span>✓ Cash on Delivery</span>
         <span>•</span>
-        <span>💵 Cash on Delivery</span>
+        <span>✓ 100% Free Delivery</span>
         <span>•</span>
-        <span>🔄 7-Day Replacement</span>
+        <span>✓ 7-Day Replacement</span>
       </div>
     </div>
 

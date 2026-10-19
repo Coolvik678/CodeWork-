@@ -23,7 +23,11 @@
     {% section 'header' %}
     
     <main id="MainContent" role="main">
-      {{ content_for_layout }}
+      {%- if request.path contains '/offers' or request.path contains '/pages/offers' or template.suffix == 'offers' -%}
+        {% section 'offers-page' %}
+      {%- else -%}
+        {{ content_for_layout }}
+      {%- endif -%}
     </main>
   </div>
 

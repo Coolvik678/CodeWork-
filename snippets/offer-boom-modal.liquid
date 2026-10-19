@@ -136,7 +136,7 @@
         type="button" 
         onclick="claimSaleOffer()" 
         style="width: 100%; background: #ffffff; color: #000000; font-weight: 800; font-size: 13px; padding: 13px 16px; border-radius: 12px; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 0.03em;">
-        ⚡ Claim Offer &amp; View Combos
+        ⚡ VIEW ₹50 OFF OFFERS PAGE →
       </button>
       <div style="display: flex; justify-content: space-between; font-size: 11px; color: #777; padding: 0 4px;">
         <span>✓ 100% Free Express Shipping</span>
@@ -232,12 +232,7 @@
 
     window.claimSaleOffer = function() {
       closeSaleOfferModal();
-      if (typeof window.openBundleSelectorModal === 'function') {
-        window.openBundleSelectorModal();
-      } else {
-        const catalog = document.getElementById('featured-catalog') || document.getElementById('best-offers-banner');
-        if (catalog) catalog.scrollIntoView({ behavior: 'smooth' });
-      }
+      window.location.href = '/pages/offers';
     };
 
     // Close on Escape
@@ -247,9 +242,16 @@
 
     // Automatically trigger confetti & reveal offers when store is opened!
     window.addEventListener('DOMContentLoaded', function() {
-      setTimeout(() => {
-        openSaleOfferModal();
-      }, 350);
+      const isOffersPage = window.location.pathname.indexOf('/offers') !== -1;
+      if (isOffersPage) {
+        // On the dedicated offers page, shower celebratory confetti on load!
+        setTimeout(runConfetti, 250);
+      } else {
+        // On home/catalog, pop up the offer modal with confetti
+        setTimeout(() => {
+          openSaleOfferModal();
+        }, 350);
+      }
     });
   })();
 </script>

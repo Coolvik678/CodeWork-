@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "offers": {
+      "type": "offers-page"
+    }
+  },
+  "order": [
+    "offers"
+  ]
+}

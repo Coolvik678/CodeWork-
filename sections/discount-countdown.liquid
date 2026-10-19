@@ -47,7 +47,7 @@
     <div class="max-w-md mx-auto">
       <button 
         type="button" 
-        onclick="event.stopPropagation(); window.location.href='/pages/offers';"
+        onclick="event.stopPropagation(); if(window.openBundleSelectorModal){window.openBundleSelectorModal();}else{window.location.href='/collections/all';}"
         class="w-full btn-diwali-glow py-4 px-8 rounded-xl font-black text-sm uppercase tracking-wider text-black flex items-center justify-center gap-2.5 cursor-pointer shadow-2xl transition hover:scale-105 active:scale-95">
         <span class="text-base">⚡</span>
         <span>VIEW ₹50 OFF OFFERS &amp; VALUE COMBOS</span>

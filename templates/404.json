@@ -1,10 +1,14 @@
 {
   "sections": {
-    "main": {
-      "type": "main-404"
+    "discount_countdown": {
+      "type": "discount-countdown"
+    },
+    "featured_catalog": {
+      "type": "featured-catalog"
     }
   },
   "order": [
-    "main"
+    "discount_countdown",
+    "featured_catalog"
   ]
 }

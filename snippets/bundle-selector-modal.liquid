@@ -77,18 +77,21 @@
     <!-- Modal Body: Tiers -->
     <div class="p-4 sm:p-5 overflow-y-auto space-y-3.5 flex-1 text-xs">
       
-      <!-- Tier 1: 1 Pc -->
+      <!-- Tier 1: 1 Pc (Flat ₹50 OFF) -->
       <div id="modal-tier-1" onclick="selectModalTier(1)" class="bundle-tier-card p-3.5 rounded-xl flex items-center justify-between">
         <div class="flex items-center gap-3">
           <input type="radio" name="modal-bundle-opt" id="modal-radio-1" class="accent-amber-400 w-4 h-4 cursor-pointer">
           <div>
-            <div class="font-bold text-white text-xs">Buy 1 Piece (Standard)</div>
+            <div class="font-bold text-white text-xs flex items-center gap-1.5">
+              <span>Buy 1 Piece</span>
+              <span class="text-[9px] text-amber-400 font-bold bg-amber-400/10 border border-amber-400/30 px-1.5 py-0.2 rounded">💥 ₹50 OFF</span>
+            </div>
             <div class="text-[10px] text-white/50 mt-0.5">Regular single unit order</div>
           </div>
         </div>
         <div class="text-right">
-          <div id="modal-price-1" class="font-bold text-white text-sm">₹499</div>
-          <div class="text-[10px] text-white/40">Free Delivery</div>
+          <div id="modal-price-1" class="font-bold text-white text-sm">₹449</div>
+          <div id="modal-retail-1" class="text-[10px] text-white/40 line-through">₹499</div>
         </div>
       </div>
 
@@ -168,13 +171,13 @@
     const PRODUCT_BUNDLES = {
       'wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc': {
         name: 'Wooden Digital Jaap Counter',
-        tier1: { price: 499, retail: 499, save: 0 },
+        tier1: { price: 449, retail: 499, save: 50 },
         tier2: { price: 899, retail: 998, save: 99 },
         tier3: { price: 1199, retail: 1497, save: 298 }
       },
       '7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium': {
         name: 'Stainless Steel Puri Press Maker',
-        tier1: { price: 599, retail: 599, save: 0 },
+        tier1: { price: 549, retail: 599, save: 50 },
         tier2: { price: 999, retail: 1198, save: 199 },
         tier3: { price: 1399, retail: 1797, save: 398 }
       }
@@ -203,6 +206,8 @@
 
       // Populate Tier 1
       document.getElementById('modal-price-1').textContent = '₹' + data.tier1.price;
+      const retail1 = document.getElementById('modal-retail-1');
+      if (retail1) retail1.textContent = '₹' + data.tier1.retail;
 
       // Populate Tier 2 (Most Bought)
       document.getElementById('modal-price-2').textContent = '₹' + data.tier2.price;

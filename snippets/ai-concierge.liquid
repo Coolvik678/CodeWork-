@@ -248,18 +248,18 @@
       jaap: {
         title: "Wooden Digital Jaap Counter",
         handle: "wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc",
-        priceSingle: "₹499",
+        priceSingle: "₹449",
         bundle2: "₹899",
         bundle3: "₹1,199",
-        badge: "Spiritual Best Seller • 184 Verified Reviews (4.9★)"
+        badge: "Spiritual Best Seller • 184 Verified Reviews (4.9★) • 💥 ₹50 OFF"
       },
       puri: {
         title: "Stainless Steel Puri & Khakhra Press",
         handle: "7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium",
-        priceSingle: "₹599",
+        priceSingle: "₹549",
         bundle2: "₹999",
         bundle3: "₹1,399",
-        badge: "Kitchen Favorite • 241 Verified Reviews (4.8★)"
+        badge: "Kitchen Favorite • 241 Verified Reviews (4.8★) • 💥 ₹50 OFF"
       }
     };
 
@@ -325,22 +325,22 @@
       }
 
       // 6. BUNDLE / OFFERS / DISCOUNTS / COMBO / PRICING TIERS
-      if (hasAny('bundle', 'combo', 'offer', 'offers', 'deal', 'deals', 'discount', 'discounts', 'coupon', 'promo', 'code', 'buy 2', 'buy 3', 'saving', 'savings', 'best offer', 'best deal', 'cheap')) {
+      if (hasAny('bundle', 'combo', 'offer', 'offers', 'deal', 'deals', 'discount', 'discounts', '50 off', 'coupon', 'promo', 'code', 'buy 2', 'buy 3', 'saving', 'savings', 'best offer', 'best deal', 'cheap')) {
         CONTEXT.lastTopic = 'bundle';
         return {
-          text: `🎉 <strong>Exclusive Zenkart Value Bundles:</strong><br><br>
+          text: `💥 <strong>Boom Festive Offer Active: FLAT ₹50 OFF on Both Products!</strong><br><br>
           <strong>🕉️ Wooden Digital Jaap Counter:</strong><br>
-          • Buy 1: ₹499<br>
-          • Buy 2: <strong>₹899</strong> (🔥 <em>Most Bought &amp; Best Option — Save ₹99</em>)<br>
-          • Buy 3: <strong>₹1,199</strong> (<em>Max Savings — Save ₹298</em>)<br><br>
+          • Buy 1: <strong>₹449</strong> (was <del>₹499</del> — <em>Save ₹50</em>)<br>
+          • Buy 2: <strong>₹899</strong> (🔥 <em>Most Bought &amp; Best Option</em>)<br>
+          • Buy 3: <strong>₹1,199</strong> (<em>Max Savings</em>)<br><br>
           <strong>🥟 Stainless Steel Puri Press:</strong><br>
-          • Buy 1: ₹599<br>
-          • Buy 2: <strong>₹999</strong> (🔥 <em>Most Bought &amp; Best Option — Save ₹199</em>)<br>
-          • Buy 3: <strong>₹1,399</strong> (<em>Max Savings — Save ₹398</em>)<br><br>
+          • Buy 1: <strong>₹549</strong> (was <del>₹599</del> — <em>Save ₹50</em>)<br>
+          • Buy 2: <strong>₹999</strong> (🔥 <em>Most Bought &amp; Best Option</em>)<br>
+          • Buy 3: <strong>₹1,399</strong> (<em>Max Savings</em>)<br><br>
           <strong>✨ Ritual Duo (1 Jaap Counter + 1 Puri Press):</strong> ₹1,098<br><br>
-          <em>All bundles include 100% Free Express Shipping and Cash on Delivery!</em>`,
+          <em>All orders include 100% Free Express Shipping and Cash on Delivery!</em>`,
           action: 'open_bundle_modal',
-          chips: ['🎁 Open Bundle Selector Modal', '🕉️ Jaap Counter 2 for ₹899', '🥟 Puri Press 2 for ₹999']
+          chips: ['🎁 Open Bundle Selector Modal', '🕉️ Jaap Counter @ ₹449', '🥟 Puri Press @ ₹549']
         };
       }
 
@@ -445,26 +445,26 @@
       if (hasAny('price', 'cost', 'rate', 'how much', 'kitna', 'kitne', 'paisa', 'charges')) {
         if (CONTEXT.lastTopic === 'jaap') {
           return {
-            text: `The <strong>Wooden Digital Jaap Counter</strong> is ₹499 for 1 pc.<br><br>
-            💡 <strong>Special Combo:</strong> Buy 2 for <strong>₹899</strong> (Save ₹99) or Buy 3 for <strong>₹1,199</strong> (Save ₹298). Includes Free Express Shipping &amp; Cash on Delivery!`,
+            text: `The <strong>Wooden Digital Jaap Counter</strong> is on offer for <strong>₹449</strong> (was <del>₹499</del> — <em>Flat ₹50 OFF</em>).<br><br>
+            💡 <strong>Special Combo:</strong> Buy 2 for <strong>₹899</strong> or Buy 3 for <strong>₹1,199</strong>. Includes Free Express Air Shipping &amp; Cash on Delivery!`,
             productCard: PRODUCTS.jaap,
-            chips: ['📿 Buy 2 for ₹899', '🥟 What about Puri Press?', '🎁 Open All Combos']
+            chips: ['📿 Buy 1 for ₹449', '📿 Buy 2 for ₹899', '🥟 What about Puri Press?']
           };
         } else if (CONTEXT.lastTopic === 'puri') {
           return {
-            text: `The <strong>Stainless Steel Puri Press Maker</strong> is ₹599 for 1 pc.<br><br>
-            💡 <strong>Special Combo:</strong> Buy 2 for <strong>₹999</strong> (Save ₹199) or Buy 3 for <strong>₹1,399</strong> (Save ₹398). Includes Free Express Shipping &amp; Cash on Delivery!`,
+            text: `The <strong>Stainless Steel Puri Press Maker</strong> is on offer for <strong>₹549</strong> (was <del>₹599</del> — <em>Flat ₹50 OFF</em>).<br><br>
+            💡 <strong>Special Combo:</strong> Buy 2 for <strong>₹999</strong> or Buy 3 for <strong>₹1,399</strong>. Includes Free Express Air Shipping &amp; Cash on Delivery!`,
             productCard: PRODUCTS.puri,
-            chips: ['🥟 Buy 2 for ₹999', '📿 What about Jaap Counter?', '🎁 Open All Combos']
+            chips: ['🥟 Buy 1 for ₹549', '🥟 Buy 2 for ₹999', '📿 What about Jaap Counter?']
           };
         } else {
           return {
-            text: `Here is our complete transparent pricing:<br><br>
-            • <strong>Wooden Digital Jaap Counter:</strong> ₹499 (or <strong>2 for ₹899</strong>)<br>
-            • <strong>Stainless Steel Puri Press:</strong> ₹599 (or <strong>2 for ₹999</strong>)<br>
-            • <strong>Ritual Combo (Both Products):</strong> ₹1,098<br><br>
-            Zero shipping charges, zero COD fees across India!`,
-            chips: ['🎁 Open Bundle Modal', '📿 Order Jaap Counter', '🥟 Order Puri Press']
+            text: `💥 <strong>Active Boom Offer: Flat ₹50 OFF on Both Products!</strong><br><br>
+            • <strong>Wooden Digital Jaap Counter:</strong> <strong>₹449</strong> (was <del>₹499</del>)<br>
+            • <strong>Stainless Steel Puri Press:</strong> <strong>₹549</strong> (was <del>₹599</del>)<br>
+            • <strong>Combos:</strong> 2 Jaap for ₹899 | 2 Puri for ₹999<br><br>
+            Zero shipping charges, 100% Free Cash on Delivery across India!`,
+            chips: ['🎁 Open Bundle Modal', '📿 Order Jaap Counter @ ₹449', '🥟 Order Puri Press @ ₹549']
           };
         }
       }

@@ -1,0 +1,439 @@
+<!-- snippets/offer-boom-modal.liquid -->
+<!-- High-Impact BOOM Festive Offer Modal & Animation -->
+<style>
+  /* Shockwave blast rings */
+  @keyframes boomShockwave {
+    0% {
+      transform: scale(0.1);
+      opacity: 0.95;
+      box-shadow: 0 0 20px #f59e0b, 0 0 40px #ef4444;
+    }
+    50% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(3.5);
+      opacity: 0;
+      box-shadow: 0 0 100px #f59e0b, 0 0 160px #ef4444;
+    }
+  }
+
+  /* Explosive particle sparks */
+  @keyframes sparkBurst {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--tx), var(--ty)) scale(0);
+      opacity: 0;
+    }
+  }
+
+  /* Card entrance punch */
+  @keyframes boomCardPop {
+    0% {
+      transform: scale(0.2) rotate(-4deg);
+      opacity: 0;
+      filter: brightness(2.5);
+    }
+    60% {
+      transform: scale(1.05) rotate(1deg);
+      opacity: 1;
+      filter: brightness(1.3);
+    }
+    85% {
+      transform: scale(0.97) rotate(0deg);
+      filter: brightness(1.1);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+      filter: brightness(1);
+    }
+  }
+
+  /* Diwali golden aura */
+  @keyframes diwaliAura {
+    0%, 100% {
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.35), 0 0 60px rgba(239, 68, 68, 0.2), 0 20px 50px rgba(0, 0, 0, 0.95);
+      border-color: rgba(251, 191, 36, 0.6);
+    }
+    50% {
+      box-shadow: 0 0 50px rgba(245, 158, 11, 0.75), 0 0 100px rgba(239, 68, 68, 0.45), 0 25px 60px rgba(0, 0, 0, 1);
+      border-color: rgba(254, 243, 199, 1);
+    }
+  }
+
+  /* Floating trigger pill pulse */
+  @keyframes boomFloatingPulse {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.35);
+    }
+    50% {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 35px rgba(245, 158, 11, 0.65);
+    }
+  }
+
+  .boom-card-anim {
+    animation: boomCardPop 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  .boom-shockwave-ring {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid rgba(245, 158, 11, 0.85);
+    pointer-events: none;
+    animation: boomShockwave 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  }
+  .boom-shockwave-ring:nth-child(2) {
+    animation-delay: 0.15s;
+    border-color: rgba(239, 68, 68, 0.75);
+  }
+  .boom-shockwave-ring:nth-child(3) {
+    animation-delay: 0.3s;
+    border-color: rgba(251, 191, 36, 0.9);
+  }
+
+  .boom-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkBurst 0.9s ease-out forwards;
+  }
+
+  #boom-floating-trigger {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 999998;
+    background: #0e0e0e;
+    color: #fff;
+    border: 1px solid rgba(245, 158, 11, 0.7);
+    padding: 10px 18px;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    animation: boomFloatingPulse 2.4s ease-in-out infinite;
+    transition: all 0.2s ease;
+  }
+  #boom-floating-trigger:hover {
+    transform: scale(1.06);
+    background: #181818;
+    border-color: #fbbf24;
+  }
+</style>
+
+<!-- BOOM Modal Overlay -->
+<div 
+  id="boom-modal-overlay" 
+  class="fixed inset-0 z-[999999] bg-black/90 backdrop-blur-md hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+  
+  <!-- Shockwave Ring Containers (Created dynamically on boom trigger) -->
+  <div id="boom-shockwave-layer" class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"></div>
+
+  <!-- The BOOM Modal Card -->
+  <div 
+    id="boom-modal-card" 
+    class="relative bg-[#0c0c0c] border border-amber-500/60 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl flex flex-col text-[#f5f5f5] my-auto scale-90 transition-transform duration-300" 
+    style="animation: diwaliAura 3s ease-in-out infinite;">
+    
+    <!-- Top Explosive Header Banner -->
+    <div class="relative bg-gradient-to-r from-amber-600 via-orange-600 to-amber-600 p-4 sm:p-5 text-center text-black overflow-hidden">
+      <!-- Background spark patterns -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle,_rgba(255,255,255,0.3)_10%,_transparent_10%)] bg-[size:12px_12px] opacity-25"></div>
+      
+      <div class="relative z-10">
+        <div class="inline-flex items-center gap-1.5 bg-black/85 text-amber-300 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-2 border border-amber-400/40 shadow">
+          <span class="animate-bounce">💥</span>
+          <span>LIMITED TIME STORE OFFER UNLOCKED</span>
+          <span class="animate-bounce">💥</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight leading-none drop-shadow-md">
+          BOOM! FLAT ₹50 OFF
+        </h2>
+        <p class="text-xs sm:text-[13px] text-white/95 font-medium mt-1 drop-shadow">
+          ₹50 Discount Applied on Both Bestsellers Today!
+        </p>
+      </div>
+
+      <!-- Close Button -->
+      <button 
+        type="button" 
+        onclick="closeBoomOfferModal()" 
+        class="absolute top-3 right-3 text-white/80 hover:text-white bg-black/40 hover:bg-black/70 rounded-full w-8 h-8 flex items-center justify-center text-sm transition">
+        ✕
+      </button>
+    </div>
+
+    <!-- Product Deal Highlights -->
+    <div class="p-4 sm:p-6 space-y-3.5 text-xs">
+      
+      <!-- PRODUCT 1: Wooden Digital Jaap Counter -->
+      <div class="bg-[#141414] border border-[#2a2a2a] hover:border-amber-500/50 rounded-2xl p-3.5 flex items-center gap-3.5 transition group">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-black border border-[#333] flex-shrink-0 relative">
+          <img 
+            src="{{ 'forge-jaap-counter.jpg' | asset_url }}" 
+            alt="Wooden Digital Jaap Counter" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute top-1 left-1 bg-amber-500 text-black font-extrabold text-[8px] px-1 py-0.2 rounded">
+            -₹50
+          </div>
+        </div>
+        
+        <div class="flex-1 min-w-0">
+          <div class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">Devotional Bestseller • 184 Reviews</div>
+          <h4 class="font-serif font-bold text-white text-sm truncate mt-0.5">Wooden Digital Jaap Counter</h4>
+          
+          <div class="flex items-baseline gap-2 mt-1">
+            <span class="text-amber-400 font-extrabold text-lg">₹449</span>
+            <span class="text-white/40 line-through text-xs">₹499</span>
+            <span class="text-[9px] font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-1.5 py-0.2 rounded">
+              SAVE ₹50
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2 mt-2">
+            <button 
+              type="button" 
+              onclick="triggerBoomBuy('wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc', 1)" 
+              class="bg-white hover:bg-white/90 text-black font-bold text-[11px] py-1.5 px-3 rounded-lg transition shadow">
+              ⚡ Buy @ ₹449
+            </button>
+            <button 
+              type="button" 
+              onclick="triggerBoomBundle('wooden-digital-tasbih-counter-handheld-lcd-mantra-jaap-counter-with-compass-1-pc')" 
+              class="text-amber-400 hover:text-amber-300 text-[10px] underline font-medium">
+              or 2 for ₹899 →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 2: Stainless Steel Puri Press Maker -->
+      <div class="bg-[#141414] border border-[#2a2a2a] hover:border-amber-500/50 rounded-2xl p-3.5 flex items-center gap-3.5 transition group">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-black border border-[#333] flex-shrink-0 relative">
+          <img 
+            src="{{ 'forge-puri-maker.jpg' | asset_url }}" 
+            alt="Stainless Steel Puri Press Maker" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute top-1 left-1 bg-amber-500 text-black font-extrabold text-[8px] px-1 py-0.2 rounded">
+            -₹50
+          </div>
+        </div>
+        
+        <div class="flex-1 min-w-0">
+          <div class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">Kitchen Favorite • 241 Reviews</div>
+          <h4 class="font-serif font-bold text-white text-sm truncate mt-0.5">Stainless Steel Puri &amp; Khakhra Press</h4>
+          
+          <div class="flex items-baseline gap-2 mt-1">
+            <span class="text-amber-400 font-extrabold text-lg">₹549</span>
+            <span class="text-white/40 line-through text-xs">₹599</span>
+            <span class="text-[9px] font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-1.5 py-0.2 rounded">
+              SAVE ₹50
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2 mt-2">
+            <button 
+              type="button" 
+              onclick="triggerBoomBuy('7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium', 1)" 
+              class="bg-white hover:bg-white/90 text-black font-bold text-[11px] py-1.5 px-3 rounded-lg transition shadow">
+              ⚡ Buy @ ₹549
+            </button>
+            <button 
+              type="button" 
+              onclick="triggerBoomBundle('7149a-puri-press-maker-stainless-steel-puri-maker-press-machine-roti-chapati-presser-for-home-papad-khakhra-puri-maker-press-machine-with-handle-manual-puri-maker-medium')" 
+              class="text-amber-400 hover:text-amber-300 text-[10px] underline font-medium">
+              or 2 for ₹999 →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combo Value Callout Box -->
+      <div class="bg-gradient-to-r from-amber-950/40 to-black border border-amber-500/30 rounded-xl p-3 flex items-center gap-2.5">
+        <span class="text-lg">🎁</span>
+        <div class="text-[11px] leading-tight text-white/80">
+          <strong class="text-amber-300">Want Bigger Savings?</strong> Buy 2 Jaap Counters for <strong>₹899</strong> or 2 Puri Presses for <strong>₹999</strong>!
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Modal Footer Actions -->
+    <div class="p-4 sm:p-6 border-t border-[#222] bg-black flex flex-col gap-2.5">
+      <button 
+        type="button" 
+        onclick="triggerBoomBundle()" 
+        class="w-full btn-diwali-glow font-black text-xs sm:text-sm py-4 px-6 rounded-xl flex items-center justify-center gap-2 shadow-2xl cursor-pointer">
+        <span class="text-base">⚡</span>
+        <span>CLAIM ₹50 OFF &amp; VIEW VALUE COMBOS</span>
+        <span class="text-base">→</span>
+      </button>
+
+      <div class="flex items-center justify-between text-[11px] text-white/50 px-1 pt-1">
+        <span>✓ 100% Free Express Delivery</span>
+        <span>•</span>
+        <span>✓ Cash on Delivery</span>
+        <span>•</span>
+        <button type="button" onclick="closeBoomOfferModal()" class="text-white/60 hover:text-white underline">
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Floating Re-Trigger Pill (Always accessible on bottom-left) -->
+<button 
+  id="boom-floating-trigger" 
+  type="button" 
+  onclick="openBoomOfferModal(true)" 
+  aria-label="View ₹50 OFF Boom Offers">
+  <span class="animate-bounce">💥</span>
+  <span>Flat ₹50 OFF Offer</span>
+  <span class="bg-amber-400 text-black text-[10px] px-1.5 py-0.2 rounded font-extrabold ml-0.5">ACTIVE</span>
+</button>
+
+<script>
+  (function(){
+    // Sound synth for celebratory subtle boom pop (silent if blocked by autoplay)
+    function playSubtleBoomSound() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        if (ctx.state === 'suspended') {
+          // Autoplay policy: do not force
+          return;
+        }
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(140, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.35);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.35);
+      } catch(e){}
+    }
+
+    // Spawn explosive particles & shockwaves
+    function spawnBoomParticles() {
+      const layer = document.getElementById('boom-shockwave-layer');
+      if (!layer) return;
+      layer.innerHTML = '';
+
+      // 3 expanding concentric shockwave rings
+      for (let i = 0; i < 3; i++) {
+        const ring = document.createElement('div');
+        ring.className = 'boom-shockwave-ring';
+        layer.appendChild(ring);
+      }
+
+      // 16 radial spark particles
+      const colors = ['#f59e0b', '#fbbf24', '#ef4444', '#ffffff', '#10b981'];
+      for (let i = 0; i < 16; i++) {
+        const p = document.createElement('div');
+        p.className = 'boom-particle';
+        const angle = (i / 16) * 2 * Math.PI;
+        const dist = 140 + Math.random() * 120;
+        const tx = Math.cos(angle) * dist + 'px';
+        const ty = Math.sin(angle) * dist + 'px';
+        p.style.setProperty('--tx', tx);
+        p.style.setProperty('--ty', ty);
+        p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        p.style.animationDelay = (Math.random() * 0.1) + 's';
+        layer.appendChild(p);
+      }
+    }
+
+    // Open BOOM Modal
+    window.openBoomOfferModal = function(forceSound = false) {
+      const overlay = document.getElementById('boom-modal-overlay');
+      const card = document.getElementById('boom-modal-card');
+      if (!overlay || !card) return;
+
+      spawnBoomParticles();
+      if (forceSound) playSubtleBoomSound();
+
+      overlay.classList.remove('hidden');
+      setTimeout(() => {
+        overlay.classList.remove('opacity-0');
+        card.classList.remove('scale-90');
+        card.classList.add('scale-100', 'boom-card-anim');
+      }, 20);
+    };
+
+    // Close BOOM Modal
+    window.closeBoomOfferModal = function() {
+      const overlay = document.getElementById('boom-modal-overlay');
+      const card = document.getElementById('boom-modal-card');
+      if (!overlay || !card) return;
+
+      card.classList.remove('scale-100', 'boom-card-anim');
+      card.classList.add('scale-90');
+      overlay.classList.add('opacity-0');
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+      }, 300);
+    };
+
+    // 1-Click Buy from Boom Modal
+    window.triggerBoomBuy = function(handle, qty) {
+      closeBoomOfferModal();
+      if (typeof window.openBundleSelectorModal === 'function') {
+        window.openBundleSelectorModal(handle);
+      } else if (window.ZenkartCart && window.ZenkartCart.buyNow) {
+        window.ZenkartCart.buyNow(handle, qty || 1);
+      }
+    };
+
+    // Open Combo Bundle Modal from Boom Modal
+    window.triggerBoomBundle = function(handle) {
+      closeBoomOfferModal();
+      if (typeof window.openBundleSelectorModal === 'function') {
+        window.openBundleSelectorModal(handle);
+      } else {
+        const catalog = document.getElementById('featured-catalog') || document.getElementById('best-offers-banner');
+        if (catalog) catalog.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    // Close on backdrop click
+    document.getElementById('boom-modal-overlay')?.addEventListener('click', function(e) {
+      if (e.target.id === 'boom-modal-overlay') {
+        closeBoomOfferModal();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeBoomOfferModal();
+    });
+
+    // Automatically trigger BOOM animation when store is opened!
+    window.addEventListener('DOMContentLoaded', function() {
+      // Small 450ms delay for crisp first paint, then BOOM!
+      setTimeout(() => {
+        openBoomOfferModal(false);
+      }, 450);
+    });
+  })();
+</script>
